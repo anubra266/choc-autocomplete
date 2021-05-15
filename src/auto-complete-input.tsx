@@ -46,7 +46,7 @@ export const AutoCompleteInput = React.forwardRef<
     resetActive();
   }, [inputValue]);
 
-  const { active: activeOption, filteredOptions } = useStoreState(
+  const { active: activeIndex, activeOption, filteredOptions } = useStoreState(
     ({ options }) => options
   );
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -56,26 +56,26 @@ export const AutoCompleteInput = React.forwardRef<
 
   const { rollNavigation } = useStoreState(({ list }) => list);
   const handleKeyboardNavigation = (e: KeyboardEvent) => {
-    const activeValue = filteredOptions[activeOption]?.value;
+    const activeValue = activeOption?.value;
     if (e.key === 'Enter') {
       setValue(activeValue);
       isControlled &&
         onChange({ ...e, target: { ...e.target, value: activeValue } });
       onSelectOption(activeValue, 'keyboard');
     } else if (e.key === 'ArrowUp') {
-      if (activeOption === 0) {
+      if (activeIndex === 0) {
         if (rollNavigation) resetActive(true);
         e.preventDefault();
         return;
       }
-      setActive(activeOption - 1);
+      setActive(activeIndex - 1);
       e.preventDefault();
     } else if (e.key === 'ArrowDown') {
-      if (activeOption === filteredOptions.length - 1) {
+      if (activeIndex === filteredOptions.length - 1) {
         if (rollNavigation) resetActive();
         return;
       }
-      setActive(activeOption + 1);
+      setActive(activeIndex + 1);
     }
   };
 

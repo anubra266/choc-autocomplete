@@ -13,6 +13,7 @@ interface AutoComplete {
     optionValue: string,
     selectMethod: 'click' | 'keyboard'
   ) => void;
+  onOptionHighlight?: (optionValue: string) => void;
 }
 
 const AutoCompleteBody = (props: AutoComplete) => {
@@ -21,6 +22,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
     highlightFirstOption,
     onChange,
     onSelectOption,
+    onOptionHighlight,
   } = props;
   const { children } = props;
   const { setActive } = useStoreActions(actions => actions.options);
@@ -28,6 +30,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
     ({ autocomplete }) => autocomplete
   );
   const { value: inputValue } = useStoreState(state => state.input);
+  const { activeOption } = useStoreState(({ options }) => options);
 
   useEffect(() => {
     setActive(highlightFirstOption ? 0 : -1);
@@ -38,6 +41,10 @@ const AutoCompleteBody = (props: AutoComplete) => {
   useEffect(() => {
     onChange && onChange(inputValue);
   }, [inputValue]);
+
+  useEffect(() => {
+    onOptionHighlight && onOptionHighlight(activeOption?.value);
+  }, [activeOption]);
 
   return <Box>{children}</Box>;
 };

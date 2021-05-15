@@ -35,7 +35,7 @@ const App = () => {
         </Flex>
         <AutoComplete
           highlightFirstOption
-          onSelectOption={(value, method) => console.log(value, method)}
+          onOptionHighlight={value => console.log(value)}
         >
           <InputGroup>
             <InputLeftElement

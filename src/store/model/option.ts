@@ -11,6 +11,7 @@ export interface OptionModel {
   set: Action<OptionModel, Item[]>;
   setFilteredOptions: Action<OptionModel, Item[]>;
   active: number;
+  activeOption: Computed<OptionModel, Item>;
   setActive: Action<OptionModel, number>;
   setActiveKey: Action<OptionModel, string>;
   resetActive: Action<OptionModel, true | void>;
@@ -27,6 +28,7 @@ export const optionModel: OptionModel = {
     state.filteredOptions = payload;
   }),
   active: -1,
+  activeOption: computed(state => state.filteredOptions[state.active]),
   setActive: action((state, payload) => {
     state.active = payload;
   }),

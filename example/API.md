@@ -5,6 +5,7 @@
 - highlightFirstOption &mdash; boolean - if first option should be highlighted by default -- false
 - focusInputOnSelect &mdash; boolean - if Input should be focused after Select -- true
 - onSelectOption &mdash; - Will be called every time suggestion is selected via mouse or keyboard. (optionValue, selectMethod:'click'|'keyboard')=>void
+- onOptionHighlight &mdash; Will be called every time the highlighted option changes. (optionValue)=>void
 
 ## AutoCompleteInput
     
