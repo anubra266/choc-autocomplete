@@ -10,6 +10,7 @@ import {
 import {
   Box,
   Flex,
+  Input,
   InputGroup,
   InputLeftElement,
   useColorModeValue,
@@ -20,7 +21,7 @@ const App = () => {
   const iconColor = useColorModeValue('gray.800', 'gray.300');
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
   const options2 = ['clap', 'rape', 'trap'];
-
+  const [value, setValue] = React.useState('');
   return (
     <Box pos="fixed" boxSize="full" top="0" left="0">
       <Box
@@ -32,7 +33,10 @@ const App = () => {
         <Flex justify="center" mb="6">
           <ToggleColorMode />
         </Flex>
-        <AutoComplete>
+        <AutoComplete
+          highlightFirstOption
+          onSelectOption={(value, method) => console.log(value, method)}
+        >
           <InputGroup>
             <InputLeftElement
               pointerEvents="none"
@@ -45,9 +49,12 @@ const App = () => {
               placeholder="Search..."
               pl="10"
               defaultValue="ap"
+              autoFocus
+              value={value}
+              onChange={e => setValue(e.target.value)}
             />
           </InputGroup>
-          <AutoCompleteList>
+          <AutoCompleteList rollNavigation>
             {options.map((option, oid) => (
               <AutoCompleteItem
                 key={`option-${oid}`}
@@ -71,6 +78,7 @@ const App = () => {
             </AutoCompleteGroup>
           </AutoCompleteList>
         </AutoComplete>
+        <Input variant="filled" placeholder="Search..." mt="4" />
       </Box>
     </Box>
   );

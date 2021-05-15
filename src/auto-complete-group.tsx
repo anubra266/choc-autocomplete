@@ -1,4 +1,4 @@
-import { Stack, StackProps, Text } from '@chakra-ui/react';
+import { Box, Stack, StackProps, Text } from '@chakra-ui/react';
 import React from 'react';
 
 interface AutoCompleteGroup extends StackProps {
@@ -18,11 +18,11 @@ export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
       >
         {title}
       </Text>
-      <Stack spacing="1">
+      <Box spacing="1">
         {React.Children.map(children, (child: any) => {
           return React.cloneElement(child, { optionKey: child.key });
         })}
-      </Stack>
+      </Box>
     </Stack>
   );
 };

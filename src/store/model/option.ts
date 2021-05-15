@@ -11,8 +11,9 @@ export interface OptionModel {
   set: Action<OptionModel, Item[]>;
   setFilteredOptions: Action<OptionModel, Item[]>;
   active: number;
-  setActive: Action<OptionModel, string>;
-  resetActive: Action<OptionModel>;
+  setActive: Action<OptionModel, number>;
+  setActiveKey: Action<OptionModel, string>;
+  resetActive: Action<OptionModel, true | void>;
   activeKey: Computed<OptionModel, string>;
 }
 
@@ -25,14 +26,17 @@ export const optionModel: OptionModel = {
   setFilteredOptions: action((state, payload) => {
     state.filteredOptions = payload;
   }),
-  active: 0,
+  active: -1,
   setActive: action((state, payload) => {
+    state.active = payload;
+  }),
+  setActiveKey: action((state, payload) => {
     state.active = state.filteredOptions.findIndex(
       ({ key }) => key === payload
     );
   }),
-  resetActive: action(state => {
-    state.active = 0;
+  resetActive: action((state, payload) => {
+    state.active = payload ? state.filteredOptions.length - 1 : 0;
   }),
   activeKey: computed(state => state.filteredOptions[state.active]?.key),
 };

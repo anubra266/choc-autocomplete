@@ -1,24 +1,35 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
-import { useStoreState } from './store/hooks';
+import { useStoreActions, useStoreState } from './store/hooks';
 
 interface AutoCompleteItem extends FlexProps {
   value: string;
   _focus?: FlexProps;
-  optionKey?: string;
+  optionKey?: any;
 }
 
 export const AutoCompleteItem = (props: AutoCompleteItem) => {
-  const { value: _value, optionKey, _focus, ...rest } = props;
+  const { value, optionKey, _focus, ...rest } = props;
 
-  const activeOption = useStoreState(state => state.options.activeKey);
+  const { setActiveKey } = useStoreActions(({ options }) => options);
+  const { activeKey: activeOption } = useStoreState(({ options }) => options);
   const isActive = activeOption === optionKey;
 
   const activeStyles: FlexProps = _focus || {
     bg: useColorModeValue('gray.200', 'whiteAlpha.100'),
   };
+  const { setValue } = useStoreActions(actions => actions.input);
+  const { ref } = useStoreState(state => state.input);
+  const { focusInputOnSelect, onSelectOption } = useStoreState(
+    state => state.autocomplete
+  );
 
-  const hoverStyles = activeStyles;
+  const setOption = (e: MouseEvent) => {
+    setValue(value);
+    ref.current.onChange({ ...e, target: { ...e.target, value: value } });
+    if (focusInputOnSelect) ref.current.focus();
+    onSelectOption(value, 'click');
+  };
 
   return (
     <Flex
@@ -27,9 +38,10 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
       py="2"
       rounded="md"
       cursor="pointer"
-      _hover={hoverStyles}
+      onMouseOver={() => setActiveKey(optionKey)}
       {...(isActive && activeStyles)}
       {...rest}
+      onClick={setOption}
     />
   );
 };

@@ -1,16 +1,20 @@
-import { Stack, StackProps, useColorModeValue } from '@chakra-ui/react';
+import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useStoreActions } from './store/hooks';
 
-interface AutoCompleteList extends StackProps {}
+interface AutoCompleteList extends BoxProps {
+  rollNavigation?: boolean;
+}
 
 export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
   const bg = useColorModeValue('#ffffff', '#232934');
-  const { children, ...rest } = props;
+
+  const { children, rollNavigation, ...rest } = props;
 
   const { set: setOptions, setFilteredOptions } = useStoreActions(
     actions => actions.options
   );
+  const { setRollNavigation } = useStoreActions(({ list }) => list);
 
   useEffect(() => {
     const optionValues: any[] = [];
@@ -29,12 +33,14 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
       }
     });
     setOptions(optionValues);
+    setRollNavigation(rollNavigation);
+
     // TODO remove this after styling
     setFilteredOptions(optionValues);
   }, []);
 
   return (
-    <Stack
+    <Box
       mt="4"
       py="4"
       bg={bg}
@@ -42,6 +48,9 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
       rounded="md"
       spacing="1"
       {...rest}
+      pos="absolute"
+      w="full"
+      zIndex="popover"
     >
       {React.Children.map(children, (child: any) => {
         if (child.type.displayName === 'AutoCompleteItem') {
@@ -49,7 +58,7 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
         }
         return child;
       })}
-    </Stack>
+    </Box>
   );
 };
 
