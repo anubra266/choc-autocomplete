@@ -342,7 +342,8 @@ No
 **Description**
 
 > By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input
-> **e.g.**
+
+> **e.g.** The following function is to show the suggestions only if the input has more than **two** characters. 
 
 ```ts
 function shouldRenderSuggestions(value) {
