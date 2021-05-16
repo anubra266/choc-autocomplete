@@ -1,7 +1,6 @@
 import * as React from 'react';
 import {
   AutoComplete,
-  AutoCompleteDivider,
   AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,

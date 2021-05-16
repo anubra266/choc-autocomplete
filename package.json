@@ -34,7 +34,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "autocomplete",
+  "name": "@choc-ui/autocomplete",
   "author": "anubra266",
   "module": "dist/autocomplete.esm.js",
   "size-limit": [

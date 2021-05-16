@@ -12,6 +12,16 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
   const { children, rollNavigation, ...rest } = props;
 
   const { filteredOptions } = useStoreState(state => state.options);
+  const { value: inputValue } = useStoreState(state => state.input);
+  const { shouldRenderSuggestions, isVisible } = useStoreState(
+    state => state.autocomplete
+  );
+
+  const visibleStyles: BoxProps = {
+    opacity: 1,
+    visibility: 'visible',
+  };
+
   const { set: setOptions } = useStoreActions(actions => actions.options);
   const { setRollNavigation } = useStoreActions(({ list }) => list);
 
@@ -37,6 +47,11 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
 
   const isValidSuggestion = (child: any) =>
     filteredOptions.findIndex(i => i.key === child.key) > -1;
+
+  const shouldRender = shouldRenderSuggestions
+    ? shouldRenderSuggestions(inputValue) !== false
+    : true;
+
   return (
     <Box
       mt="4"
@@ -51,6 +66,10 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
       pos="absolute"
       w="full"
       zIndex="popover"
+      opacity="0"
+      visibility="hidden"
+      transition=".3s ease"
+      {...(isVisible && shouldRender && visibleStyles)}
     >
       {React.Children.map(children, (child: any) => {
         if (child.type.displayName === 'AutoCompleteItem') {

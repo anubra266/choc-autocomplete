@@ -21,8 +21,9 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     bg: useColorModeValue('gray.200', 'whiteAlpha.100'),
   };
   const { setValue } = useStoreActions(actions => actions.input);
+  const { setIsVisible } = useStoreActions(actions => actions.autocomplete);
   const { ref } = useStoreState(state => state.input);
-  const { focusInputOnSelect, onSelectOption } = useStoreState(
+  const { focusInputOnSelect, onSelectOption, closeOnSelect } = useStoreState(
     state => state.autocomplete
   );
 
@@ -31,6 +32,7 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     ref.current.onChange({ ...e, target: { ...e.target, value: value } });
     if (focusInputOnSelect) ref.current.focus();
     onSelectOption && onSelectOption(value, 'click');
+    if (closeOnSelect) setIsVisible(false);
   };
 
   const handleMouseOver = (e: MouseEvent) => {

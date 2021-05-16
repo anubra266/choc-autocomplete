@@ -1,6 +1,7 @@
+import { useOutsideClick } from '@chakra-ui/hooks';
 import { Box } from '@chakra-ui/layout';
 import { StoreProvider } from 'easy-peasy';
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 import store from './store';
 import { useStoreActions, useStoreState } from './store/hooks';
 
@@ -14,28 +15,44 @@ interface AutoComplete {
     selectMethod: 'click' | 'keyboard'
   ) => void;
   onOptionHighlight?: (optionValue: string) => void;
+  shouldRenderSuggestions?: (value: string) => void;
+  suggestWhenEmpty?: boolean;
+  closeOnSelect?: boolean;
+  closeOnBlur?: boolean;
 }
 
 const AutoCompleteBody = (props: AutoComplete) => {
   const {
-    focusInputOnSelect = true,
+    children,
+    focusInputOnSelect,
     highlightFirstOption,
     onChange,
     onSelectOption,
     onOptionHighlight,
+    shouldRenderSuggestions,
+    suggestWhenEmpty,
+    closeOnSelect,
+    closeOnBlur,
+    ...rest
   } = props;
-  const { children } = props;
   const { setActive } = useStoreActions(actions => actions.options);
-  const { setAutoCompleteState } = useStoreActions(
+  const { setAutoCompleteState, setIsVisible } = useStoreActions(
     ({ autocomplete }) => autocomplete
   );
   const { value: inputValue } = useStoreState(state => state.input);
   const { activeOption } = useStoreState(({ options }) => options);
+  const { closeOnBlur: shouldCloseOnBlur } = useStoreState(
+    ({ autocomplete }) => autocomplete
+  );
 
   useEffect(() => {
     setActive(highlightFirstOption ? 0 : -1);
     setAutoCompleteState({ focusInputOnSelect });
     setAutoCompleteState({ onSelectOption });
+    setAutoCompleteState({ shouldRenderSuggestions });
+    setAutoCompleteState({ suggestWhenEmpty });
+    setAutoCompleteState({ closeOnSelect });
+    setAutoCompleteState({ closeOnBlur });
   }, []);
 
   useEffect(() => {
@@ -46,7 +63,19 @@ const AutoCompleteBody = (props: AutoComplete) => {
     onOptionHighlight && onOptionHighlight(activeOption()?.value);
   }, [activeOption()]);
 
-  return <Box>{children}</Box>;
+  const ref = useRef();
+  useOutsideClick({
+    ref,
+    handler: () => {
+      if (shouldCloseOnBlur) setIsVisible(false);
+    },
+  });
+
+  return (
+    <Box {...rest} ref={ref}>
+      {children}
+    </Box>
+  );
 };
 
 export const AutoComplete = (props: AutoComplete) => {
