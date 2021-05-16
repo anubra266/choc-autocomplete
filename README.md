@@ -3,27 +3,27 @@
     <br/>
     🥵
     <br />
-    ab-hooks
+    @choc-ui/autocomplete
     <br />
     <br />
   </h1>
   <sup>
     <br />
     <br />
-    <a href="https://www.npmjs.com/package/ab-hooks">
-       <img src="https://img.shields.io/npm/v/ab-hooks.svg" alt="npm package" />
+    <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">
+       <img src="https://img.shields.io/npm/v/@choc-ui/autocomplete.svg" alt="npm package" />
     </a>
-    <a href="https://www.npmjs.com/package/ab-hooks">
-      <img src="https://img.shields.io/npm/dw/ab-hooks.svg" alt="npm downloads" />
+    <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">
+      <img src="https://img.shields.io/npm/dw/@choc-ui/autocomplete.svg" alt="npm downloads" />
     </a>
 <a>
-    <img alt="NPM" src="https://img.shields.io/npm/l/ab-hooks">
+    <img alt="NPM" src="https://img.shields.io/npm/l/@choc-ui/autocomplete">
 </a>
 
-<a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/ab-hooks?style=social">
+<a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 </a>
-    <!-- <a href="http://anubra266.github.io/ab-hooks">
+    <!-- <a href="http://anubra266.github.io/@choc-ui/autocomplete">
       <img src="https://img.shields.io/badge/demos-🚀-yellow.svg" alt="demos" />
     </a> -->
     <br />
@@ -34,7 +34,7 @@
   <br />
   <br />
   <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/ab-hooks">ab-hooks</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">@choc-ui/autocomplete</a></pre>
   <br />
   <br />
   <br />
