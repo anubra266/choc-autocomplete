@@ -28,7 +28,7 @@ const App = () => {
         {/* <Flex justify="center" mb="6">
           <ToggleColorMode />
         </Flex> */}
-        <AutoComplete highlightFirstOption renderEmpty={null}>
+        <AutoComplete highlightFirstOption>
           {/* <InputGroup>
             <InputLeftElement
               pointerEvents="none"

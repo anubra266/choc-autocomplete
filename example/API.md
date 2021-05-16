@@ -9,7 +9,7 @@
 - closeOnSelect - If true, the menu will close when an item is selected, by mouse or keyboard - default(true)
 - shouldRenderSuggestions &mdash; By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input. - (value:string)=>void
 
-    ```js 
+    ```js   
     function shouldRenderSuggestions(value) {
     return value.trim().length > 2;
     }

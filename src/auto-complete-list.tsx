@@ -68,6 +68,10 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
     fontWeight: 'bold',
   };
 
+  // if (filteredOptions.length < 1 && renderEmpty === null) setIsVisible(false);
+
+  const noRenderOnEmpty = filteredOptions.length < 1 && renderEmpty === null;
+
   return (
     <Box
       mt="4"
@@ -86,6 +90,7 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
       visibility="hidden"
       transition=".3s ease"
       {...(isVisible && shouldRender && visibleStyles)}
+      {...(noRenderOnEmpty && { transition: 'none', visibility: 'hidden' })}
     >
       {React.Children.map(children, (child: any) => {
         if (child.type.displayName === 'AutoCompleteItem') {
