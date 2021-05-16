@@ -27,13 +27,18 @@ export const AutoCompleteInput = React.forwardRef<
   }));
 
   const { setValue, setRef } = useStoreActions(({ input }) => input);
-  const { value: autoCompleteValue } = useStoreState(state => state.input);
+  const autoCompleteValue = useStoreState(state => state.input.value);
   const { resetActive, setActive } = useStoreActions(({ options }) => options);
-  const { onSelectOption, suggestWhenEmpty, closeOnSelect } = useStoreState(
-    state => state.autocomplete
-  );
-  const { active: activeIndex, activeOption, filteredOptions } = useStoreState(
-    ({ options }) => options
+  const {
+    onSelectOption,
+    suggestWhenEmpty,
+    closeOnSelect,
+    renderEmpty,
+  } = useStoreState(state => state.autocomplete);
+  const activeIndex = useStoreState(({ options }) => options.active);
+  const activeOption = useStoreState(({ options }) => options.activeOption);
+  const filteredOptions = useStoreState(
+    ({ options }) => options.filteredOptions
   );
   const { setIsVisible } = useStoreActions(({ autocomplete }) => autocomplete);
 
@@ -56,6 +61,7 @@ export const AutoCompleteInput = React.forwardRef<
     if (!isEmpty || (isEmpty && suggestWhenEmpty)) {
       setIsVisible(true);
     } else setIsVisible(false);
+    if (filteredOptions.length < 1 && renderEmpty === null) setIsVisible(false);
   };
 
   const handleFocus = (e: FocusEvent) => {

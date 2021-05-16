@@ -12,6 +12,7 @@ interface AutoCompleteProps {
   suggestWhenEmpty: boolean;
   closeOnSelect: boolean;
   closeOnBlur: boolean;
+  renderEmpty: any;
 }
 
 export interface AutoComplete extends AutoCompleteProps {
@@ -28,6 +29,7 @@ export const autoCompleteModel: AutoComplete = {
   suggestWhenEmpty: false,
   closeOnSelect: true,
   closeOnBlur: true,
+  renderEmpty: undefined,
   setAutoCompleteState: action((state, payload: any) => {
     const key = Object.keys(payload)[0];
     const value: any = payload[key];

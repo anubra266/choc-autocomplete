@@ -15,6 +15,7 @@
     }
     ```
 - suggestWhenEmpty &mdash; If the suggestions shoud show when the input is Empty. - It is used when the input is focused. default(false)
+- renderEmpty &mdash; Component to render when no match is found. Pass null, to just close the menu 
 
 ## AutoCompleteList
 

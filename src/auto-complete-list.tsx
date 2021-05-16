@@ -1,4 +1,10 @@
-import { Box, BoxProps, useColorModeValue } from '@chakra-ui/react';
+import {
+  Box,
+  BoxProps,
+  Flex,
+  FlexProps,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import React, { FunctionComponent, useEffect } from 'react';
 import { useStoreActions, useStoreState } from './store/hooks';
 
@@ -11,11 +17,13 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
 
   const { children, rollNavigation, ...rest } = props;
 
-  const { filteredOptions } = useStoreState(state => state.options);
-  const { value: inputValue } = useStoreState(state => state.input);
-  const { shouldRenderSuggestions, isVisible } = useStoreState(
-    state => state.autocomplete
+  const filteredOptions = useStoreState(state => state.options.filteredOptions);
+  const inputValue = useStoreState(state => state.input.value);
+  const shouldRenderSuggestions = useStoreState(
+    state => state.autocomplete.shouldRenderSuggestions
   );
+  const isVisible = useStoreState(state => state.autocomplete.isVisible);
+  const renderEmpty = useStoreState(state => state.autocomplete.renderEmpty);
 
   const visibleStyles: BoxProps = {
     opacity: 1,
@@ -52,6 +60,14 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
     ? shouldRenderSuggestions(inputValue) !== false
     : true;
 
+  const emptyStyles: FlexProps = {
+    justify: 'center',
+    align: 'center',
+    fontSize: 'sm',
+    fontStyle: 'italic',
+    fontWeight: 'bold',
+  };
+
   return (
     <Box
       mt="4"
@@ -84,6 +100,11 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
         }
         return child;
       })}
+      {filteredOptions.length < 1 && (
+        <Flex {...renderEmpty} {...(renderEmpty === undefined && emptyStyles)}>
+          No options found!
+        </Flex>
+      )}
     </Box>
   );
 };

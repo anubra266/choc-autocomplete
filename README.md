@@ -163,7 +163,7 @@ import {
 	AutoCompleteItem,
 	AutoCompleteList,
 } from "@choc-ui/autocomplete";
-import { Avatar, Box, Text, useColorModeValue } from '@chakra-ui/react';
+import { Avatar, Box, Text } from '@chakra-ui/react';
 
 export default () => {
 

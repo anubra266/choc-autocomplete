@@ -1,7 +1,7 @@
 import { useOutsideClick } from '@chakra-ui/hooks';
 import { Box } from '@chakra-ui/layout';
 import { StoreProvider } from 'easy-peasy';
-import React, { useEffect, useRef } from 'react';
+import React, { ReactNode, useEffect, useRef } from 'react';
 import store from './store';
 import { useStoreActions, useStoreState } from './store/hooks';
 
@@ -19,6 +19,7 @@ interface AutoComplete {
   suggestWhenEmpty?: boolean;
   closeOnSelect?: boolean;
   closeOnBlur?: boolean;
+  renderEmpty?: ReactNode;
 }
 
 const AutoCompleteBody = (props: AutoComplete) => {
@@ -33,6 +34,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
     suggestWhenEmpty,
     closeOnSelect,
     closeOnBlur,
+    renderEmpty,
     ...rest
   } = props;
   const { setActive } = useStoreActions(actions => actions.options);
@@ -53,6 +55,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
     setAutoCompleteState({ suggestWhenEmpty });
     setAutoCompleteState({ closeOnSelect });
     setAutoCompleteState({ closeOnBlur });
+    setAutoCompleteState({ renderEmpty });
   }, []);
 
   useEffect(() => {
