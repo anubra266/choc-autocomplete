@@ -390,6 +390,31 @@ boolean;
 
 No
 
+
+---
+
+`closeOnBlur`
+
+---
+
+**Description**
+
+> If true, the menu will close when the `AutoComplete` Component loses focus.
+
+**Type**
+
+```ts
+boolean;
+```
+
+**Default**
+
+`true`
+
+**Required**
+
+No
+
 ---
 
 `suggestWhenEmpty`
