@@ -106,9 +106,8 @@ import {
 } from "@choc-ui/autocomplete";
 
 export default () => {
-
-  const fruits = ['Apple', 'Grape', 'Pawpaw'];
-  const countries = ['Korea', 'Nigeria', 'India'];
+	const fruits = ["Apple", "Grape", "Pawpaw"];
+	const countries = ["Korea", "Nigeria", "India"];
 
 	return (
 		<AutoComplete highlightFirstOption>
@@ -121,32 +120,39 @@ export default () => {
 			/>
 			<AutoCompleteList rollNavigation>
 				<AutoCompleteGroup title="Fruits" showDivider>
-              {fruits.map((option, oid) => (
-                <AutoCompleteItem
-                  key={`fruits-${oid}`}
-                  value={option}
-                  textTransform="capitalize"
-                >
-                  {option}
-                </AutoCompleteItem>
-              ))}
-            </AutoCompleteGroup>
-            <AutoCompleteGroup title="countries" showDivider>
-              {countries.map((option, oid) => (
-                <AutoCompleteItem
-                  key={`countries-${oid}`}
-                  value={option}
-                  textTransform="capitalize"
-                >
-                  {option}
-                </AutoCompleteItem>
-              ))}
-            </AutoCompleteGroup>
+					{fruits.map((option, oid) => (
+						<AutoCompleteItem
+							key={`fruits-${oid}`}
+							value={option}
+							textTransform="capitalize"
+						>
+							{option}
+						</AutoCompleteItem>
+					))}
+				</AutoCompleteGroup>
+				<AutoCompleteGroup title="countries" showDivider>
+					{countries.map((option, oid) => (
+						<AutoCompleteItem
+							key={`countries-${oid}`}
+							value={option}
+							textTransform="capitalize"
+						>
+							{option}
+						</AutoCompleteItem>
+					))}
+				</AutoCompleteGroup>
 			</AutoCompleteList>
 		</AutoComplete>
 	);
 };
 
+
 ```
 
 ![](example/images/group.jpg)
+
+
+## Custom Rendering
+
+> You can Render whatever you want. The `AutoComplete` Items are regular `Chakra` Boxes.
+

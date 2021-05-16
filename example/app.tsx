@@ -53,7 +53,7 @@ const App = () => {
           />
           {/* </InputGroup> */}
           <AutoCompleteList rollNavigation>
-            {/* {options.map((option, oid) => (
+            {options.map((option, oid) => (
               <AutoCompleteItem
                 key={`option-${oid}`}
                 value={option}
@@ -61,8 +61,8 @@ const App = () => {
               >
                 {option}
               </AutoCompleteItem>
-            ))} */}
-            <AutoCompleteGroup title="Fruits" showDivider>
+            ))}
+            {/* <AutoCompleteGroup title="Fruits" showDivider>
               {fruits.map((option, oid) => (
                 <AutoCompleteItem
                   key={`fruits-${oid}`}
@@ -72,18 +72,7 @@ const App = () => {
                   {option}
                 </AutoCompleteItem>
               ))}
-            </AutoCompleteGroup>
-            <AutoCompleteGroup title="countries" showDivider>
-              {countries.map((option, oid) => (
-                <AutoCompleteItem
-                  key={`countries-${oid}`}
-                  value={option}
-                  textTransform="capitalize"
-                >
-                  {option}
-                </AutoCompleteItem>
-              ))}
-            </AutoCompleteGroup>
+            </AutoCompleteGroup> */}
           </AutoCompleteList>
         </AutoComplete>
         {/* <Input variant="filled" placeholder="Search..." mt="4" /> */}
