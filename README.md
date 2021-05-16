@@ -200,103 +200,90 @@ export default () => {
 
 ### **AutoComplete**
 
-Wrapper and Provider for other components
+Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
 **AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
-<table>
-	<tr>
-		<th>Prop</th>
-		<th>Type</th>
-		<th>Description</th>
-		<th>Required</th>
-		<th>Default</th>
-	</tr>
-	<tr>
-		<td>
-			`onChange`
-		</td>
-<td>
+---
+
+`onChange`
+
+---
+
+**Description**
+
+> Function that provides current Input value and is called anytime, suggestion is selected- useful for uncontrolled Input, but wants to use Value
+
+**Type**
 
 ```ts
 (value: string) => void
-
 ```
 
-</td>
+**Default**
 
-<td>
-Function that provides current Input value and is called anytime, suggestion is selected- useful for uncontrolled Input, but wants to use Value
-		</td>
-		<td>
-false
-		</td>
-		<td>
- &mdash;&mdash;&mdash;
-		</td>
-	</tr>
+`null`
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `onSelectOption`
-    	</td>
-<td>
+
+---
+
+**Description**
+
+> Will be called every time suggestion is selected via mouse or keyboard.
+
+**Type**
 
 ```ts
-
-(optionValue: string, selectMethod: 'click'|'keyboard') => void`
+(optionValue: string, selectMethod: 'click'|'keyboard') => void;
 ```
 
-</td>
-		<td>
-Will be called every time suggestion is selected via mouse or keyboard.
-		</td>
-		<td>
-No
-		</td>
-		<td>
-`null`
-		</td>
-    </tr>
+**Default**
 
-<tr>
-		<td>
-`onOptionHighlight`
-		</td>
-<td>
+`null`
+
+**Required**
+
+No
+
+---
+
+## `onOptionHighlight`
+
+**Description**
+
+> Will be called every time the highlighted option changes.
+
+**Type**
 
 ```ts
 (optionValue: string) => void
 ```
 
-</td>
+**Default**
 
-<td>
-Will be called every time the highlighted option changes.
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `null`
-		</td>
-	</tr>
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `shouldRenderSuggestions`
-		</td>
-<td>
 
-```ts
-(value: string) => void
-```
+---
 
-</td>
+**Description**
 
-<td>
-By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input
-**e.g.**
+> By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input
+> **e.g.**
 
 ```ts
 function shouldRenderSuggestions(value) {
@@ -304,128 +291,151 @@ function shouldRenderSuggestions(value) {
 }
 ```
 
-</td>
-		<td>
-No
-		</td>
-		<td>
+**Type**
+
+```ts
+(value: string) => void
+```
+
+**Default**
+
 `null`
-		</td>
-	</tr>
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `highlightFirstOption`
-		</td>
-<td>
+
+---
+
+**Description**
+
+> Determines if the first option should be highlighted by default
+
+**Type**
 
 ```ts
 boolean;
 ```
 
-</td>
+**Default**
 
-<td>
-Determines if the first option should be highlighted by default
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `false`
-		</td>
-	</tr>
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `focusInputOnSelect`
-		</td>
-<td>
+
+---
+
+**Description**
+
+> Determines if Input should be focused after Select
+
+**Type**
 
 ```ts
 boolean;
 ```
 
-</td>
+**Default**
 
-<td>
-Determines if Input should be focused after Select
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `true`
-		</td>
-	</tr>
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `closeOnSelect`
-		</td>
-<td>
+
+---
+
+**Description**
+
+> If true, the menu will close when an item is selected, by mouse or keyboard.
+
+**Type**
 
 ```ts
 boolean;
 ```
 
-</td>
+**Default**
 
-<td>
-If true, the menu will close when an item is selected, by mouse or keyboard.
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `true`
-		</td>
-	</tr>
 
-<tr>
-		<td>
+**Required**
+
+No
+
+---
+
 `suggestWhenEmpty`
-		</td>
-<td>
+
+---
+
+**Description**
+
+> <td>
+> If the suggestions shoud show when the input is Empty. - It is used when the input is focused.
+
+**Type**
 
 ```ts
 boolean;
 ```
 
-</td>
+**Default**
 
-<td>
-If the suggestions shoud show when the input is Empty. - It is used when the input is focused.
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `false`
-		</td>
-	</tr>
 
-<tr>
-		<td>
-`renderEmpty`
-		</td>
-<td>
+**Required**
+
+No
+
+---
+
+`suggestWhenEmpty`
+
+---
+
+**Description**
+
+> Component to render when no match is found. Pass null, to just close the menu.
+
+**Type**
 
 ```ts
 ReactNode;
 ```
 
-</td>
+**Default**
 
-<td>
-Component to render when no match is found. Pass null, to just close the menu.
-		</td>
-		<td>
-No
-		</td>
-		<td>
 `null`
-		</td>
-	</tr>
 
-</table>
+**Required**
+
+No
+
+## AutoCompleteInput
+
+Input for `AutoComplete` value.
+
+**AutoComplete** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
+
+-
+
+### **AutoCompleteList**
+
+Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
+
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.

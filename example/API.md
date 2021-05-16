@@ -1,25 +1,28 @@
-<tr>
-		<td>
+
+---
 `Prop`
-		</td>
-<td>
+
+---
+
+**Description**
+
+> Description
+
+**Type**
 
 ```ts
-boolean;
+boolean
 ```
 
-</td>
+**Default**
 
-<td>
-Description
-		</td>
-		<td>
+`default`
+
+**Required**
+
 No
-		</td>
-		<td>
-`null`
-		</td>
-	</tr>
+
+
 
 ### **AutoComplete**
 
@@ -27,14 +30,17 @@ Wrapper and Provider for other components
 
 **AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
-## AutoCompleteList
 
-- rollNavigation &mdash; if keyboardnavigation should roll after getting to either ends. default &mdash; false
+
 
 ## AutoCompleteInput
 
 - onChange &mdash; in Controlled form it's a function that returns, the event and the value - required(no)
 - value &mdash; set Input's value in controlled form
+## AutoCompleteList
+
+- rollNavigation &mdash; if keyboardnavigation should roll after getting to either ends. default &mdash; false
+
 
 ## AutoCompleteGroup
 
@@ -44,4 +50,4 @@ Wrapper and Provider for other components
 
 ## AutoCompleteItem
 
-- \_focus prop overrides the styling for highlighted suggestions
+- _focus prop overrides the styling for highlighted suggestions
