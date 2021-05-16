@@ -201,3 +201,5 @@ export default () => {
 	);
 };
 ```
+
+![](example/images/render.jpg)
