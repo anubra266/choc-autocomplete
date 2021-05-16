@@ -1,15 +1,30 @@
-import { Box, Flex, Stack, StackProps, Text } from '@chakra-ui/react';
+import {
+  Box,
+  Flex,
+  Stack,
+  StackProps,
+  Text,
+  TextProps,
+} from '@chakra-ui/react';
 import React from 'react';
 import { useStoreState } from './store/hooks';
 
 interface AutoCompleteGroup extends StackProps {
   title: string;
+  titleStyles?: TextProps;
   showDivider?: boolean;
   dividerColor?: string;
 }
 
 export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
-  const { title, children, showDivider, dividerColor, ...rest } = props;
+  const {
+    title,
+    titleStyles,
+    children,
+    showDivider,
+    dividerColor,
+    ...rest
+  } = props;
   const { filteredOptions } = useStoreState(state => state.options);
   const firstResult = filteredOptions[0].key;
   const containsFirstResult = React.Children.map(
@@ -35,6 +50,7 @@ export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
           fontWeight="extrabold"
           letterSpacing="wider"
           ml="5"
+          {...titleStyles}
         >
           {title}
         </Text>

@@ -22,12 +22,14 @@
 
 ## AutoCompleteInput
     
-- onChange &mdash; in Controlled formit's a function that returns, the event and the value - required(no)
+- onChange &mdash; in Controlled form it's a function that returns, the event and the value - required(no)
+- value &mdash; set Input's value in controlled form 
 
 ## AutoCompleteGroup
 
 - showDivider &mdash; if divider should be shown
 - dividerColor &mdash; color for divider
+- titleStyles &mdash; Styles for group title- extends TextProps
 
 ## AutoCompleteItem
 
