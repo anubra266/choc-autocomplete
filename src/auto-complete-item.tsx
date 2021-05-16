@@ -1,7 +1,7 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { useStoreActions, useStoreState } from './store/hooks';
-
+// import ReactHtmlParser from 'react-html-parser';
 interface AutoCompleteItem extends FlexProps {
   value: string;
   _focus?: FlexProps;
@@ -16,6 +16,7 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     onMouseOver,
     onClick,
     children,
+    sx,
     ...rest
   } = props;
 
@@ -31,9 +32,14 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
   const { setValue } = useStoreActions(actions => actions.input);
   const { setIsVisible } = useStoreActions(actions => actions.autocomplete);
   const ref = useStoreState(state => state.input.ref);
-  const { focusInputOnSelect, onSelectOption, closeOnSelect } = useStoreState(
-    state => state.autocomplete
-  );
+  const inputValue = useStoreState(state => state.input.value);
+
+  const {
+    focusInputOnSelect,
+    onSelectOption,
+    closeOnSelect,
+    emphasize,
+  } = useStoreState(state => state.autocomplete);
 
   const setOption = (e: MouseEvent) => {
     setValue(value);
@@ -56,6 +62,24 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
   const isValidSuggestion =
     filteredOptions.findIndex(o => o.key === optionKey) > -1;
 
+  const emphasizedChildString = value.replace(
+    new RegExp(inputValue, 'gi'),
+    (match: any) => `<a class="emphasizedResult">${match}</a>`
+  );
+
+  const emphasizedChild = (
+    <span dangerouslySetInnerHTML={{ __html: emphasizedChildString }} />
+  );
+
+  const itemChild = emphasize ? emphasizedChild : children;
+
+  const emphasizeStyles =
+    typeof emphasize === 'object'
+      ? emphasize
+      : {
+          fontWeight: 'extrabold',
+        };
+
   return isValidSuggestion ? (
     <Flex
       mx="2"
@@ -65,9 +89,13 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
       cursor="pointer"
       onMouseOver={handleMouseOver}
       {...(isActive && activeStyles)}
-      {...rest}
-      children={children}
+      children={itemChild}
       onClick={setOption}
+      sx={{
+        ...sx,
+        '.emphasizedResult': emphasizeStyles,
+      }}
+      {...rest}
     />
   ) : null;
 };

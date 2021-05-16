@@ -73,7 +73,7 @@ export default () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
 
   return (
-    <AutoComplete highlightFirstOption>
+    <AutoComplete>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
@@ -116,7 +116,7 @@ export default () => {
   const countries = ['Korea', 'Nigeria', 'India'];
 
   return (
-    <AutoComplete highlightFirstOption>
+    <AutoComplete>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
@@ -178,7 +178,7 @@ export default () => {
   ];
 
   return (
-    <AutoComplete highlightFirstOption>
+    <AutoComplete>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
@@ -285,6 +285,49 @@ No
 **Default**
 
 `null`
+
+**Required**
+
+No
+
+---
+
+`emphasize`
+
+---
+
+**Description**
+
+> The parts of the option string that match the `AutoCompleteInput` value are emphasized. Pass boolean to bolden it, or a Chakra `CSSObject` for custom styling.
+> e.g.
+
+```html
+<AutoComplete emphasize>
+  ...
+</AutoComplete>
+
+<!--Or-->
+
+<AutoComplete emphasize={{ color: 'blue.400', fontWeight: 'bold' }}>
+  ...
+</AutoComplete>
+```
+
+![](example/images/emphasize.gif)
+
+**Type**
+
+```ts
+boolean | CSSObject;
+```
+
+**Default**
+
+```ts
+const emphasizeStyles = {
+  fontWeight: 'extrabold',
+};
+```
 
 **Required**
 

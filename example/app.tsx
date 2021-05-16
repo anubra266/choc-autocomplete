@@ -6,7 +6,14 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
 } from '../.';
-import { Avatar, Box, Flex, Text, useColorModeValue } from '@chakra-ui/react';
+import {
+  Avatar,
+  Box,
+  Flex,
+  Stack,
+  Text,
+  useColorModeValue,
+} from '@chakra-ui/react';
 import ToggleColorMode from './toggle-color-mode';
 
 const App = () => {
@@ -30,47 +37,60 @@ const App = () => {
         <Flex justify="center" mb="6">
           <ToggleColorMode />
         </Flex>
-        <AutoComplete highlightFirstOption id="1" suggestWhenEmpty>
-          <AutoCompleteInput
-            variant="filled"
-            placeholder="Search..."
-            autoFocus
-          />
-          <AutoCompleteList rollNavigation>
-            {nigerians.map((person, oid) => (
-              <AutoCompleteItem
-                key={`nigeria-${oid}`}
-                value={person.name}
-                textTransform="capitalize"
-                align="center"
-              >
-                <Avatar size="sm" name={person.name} src={person.image} />
-                <Text ml="4">{person.name}</Text>
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteList>
-        </AutoComplete>
+        <Stack spacing="150px" mt="150px">
+          <AutoComplete
+            id="1"
+            renderEmpty={null}
+            emphasize={{ color: 'blue.400', fontWeight: 'bold' }}
+          >
+            <AutoCompleteInput variant="filled" placeholder="Search..." />
+            <AutoCompleteList rollNavigation>
+              {options.map((option, oid) => (
+                <AutoCompleteItem
+                  key={`optio-${oid}`}
+                  value={option}
+                  textTransform="capitalize"
+                  align="center"
+                >
+                  {option}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </AutoComplete>
+          {/* <AutoComplete id="1" suggestWhenEmpty>
+            <AutoCompleteInput variant="filled" placeholder="Search..." />
+            <AutoCompleteList rollNavigation>
+              {nigerians.map((person, oid) => (
+                <AutoCompleteItem
+                  key={`nigeria-${oid}`}
+                  value={person.name}
+                  textTransform="capitalize"
+                  align="center"
+                >
+                  <Avatar size="sm" name={person.name} src={person.image} />
+                  <Text ml="4">{person.name}</Text>
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </AutoComplete>
 
-        <AutoComplete highlightFirstOption mt="200px" id="2">
-          <AutoCompleteInput
-            variant="filled"
-            placeholder="Search..."
-            autoFocus
-          />
-          <AutoCompleteList rollNavigation>
-            {europeans.map((person, oid) => (
-              <AutoCompleteItem
-                key={`nigeria-${oid}`}
-                value={person.name}
-                textTransform="capitalize"
-                align="center"
-              >
-                <Avatar size="sm" name={person.name} src={person.image} />
-                <Text ml="4">{person.name}</Text>
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteList>
-        </AutoComplete>
+          <AutoComplete id="2">
+            <AutoCompleteInput variant="filled" placeholder="Search..." />
+            <AutoCompleteList rollNavigation>
+              {europeans.map((person, oid) => (
+                <AutoCompleteItem
+                  key={`nigeria-${oid}`}
+                  value={person.name}
+                  textTransform="capitalize"
+                  align="center"
+                >
+                  <Avatar size="sm" name={person.name} src={person.image} />
+                  <Text ml="4">{person.name}</Text>
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </AutoComplete> */}
+        </Stack>
       </Box>
     </Box>
   );

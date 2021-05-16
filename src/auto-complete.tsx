@@ -5,6 +5,7 @@ import React, { ReactNode, useEffect, useRef } from 'react';
 import { useStoreActions, useStoreState } from './store/hooks';
 import { createStore } from 'easy-peasy';
 import storeModel from './store/model';
+import { CSSObject } from '@chakra-ui/styled-system';
 
 interface AutoComplete extends BoxProps {
   children: React.ReactNode;
@@ -20,20 +21,18 @@ interface AutoComplete extends BoxProps {
   closeOnSelect?: boolean;
   closeOnBlur?: boolean;
   renderEmpty?: ReactNode;
+  emphasize?: boolean | CSSObject;
 }
 
 const AutoCompleteBody = (props: AutoComplete) => {
   const {
     children,
-    focusInputOnSelect,
     onChange,
     onSelectOption,
     onOptionHighlight,
     shouldRenderSuggestions,
-    suggestWhenEmpty,
     closeOnSelect,
     closeOnBlur,
-    renderEmpty,
     ...rest
   } = props;
   const { setAutoCompleteState, setIsVisible } = useStoreActions(
@@ -46,13 +45,10 @@ const AutoCompleteBody = (props: AutoComplete) => {
   );
 
   useEffect(() => {
-    setAutoCompleteState({ focusInputOnSelect });
     setAutoCompleteState({ onSelectOption });
     setAutoCompleteState({ shouldRenderSuggestions });
-    setAutoCompleteState({ suggestWhenEmpty });
     setAutoCompleteState({ closeOnSelect });
     setAutoCompleteState({ closeOnBlur });
-    setAutoCompleteState({ renderEmpty });
   }, []);
 
   useEffect(() => {
@@ -79,13 +75,29 @@ const AutoCompleteBody = (props: AutoComplete) => {
 };
 
 export const AutoComplete = (props: AutoComplete) => {
+  const {
+    emphasize,
+    suggestWhenEmpty,
+    focusInputOnSelect,
+    renderEmpty,
+    ...rest
+  } = props;
+
   const store = createStore(storeModel, {
     name: `AutoComplete${props.id}`,
+    initialState: {
+      autocomplete: {
+        emphasize,
+        suggestWhenEmpty,
+        focusInputOnSelect,
+        renderEmpty,
+      },
+    },
   });
 
   return (
     <StoreProvider store={store} key={`autocomplete-provider${props.key}`}>
-      <AutoCompleteBody {...props} />
+      <AutoCompleteBody {...rest} />
     </StoreProvider>
   );
 };
