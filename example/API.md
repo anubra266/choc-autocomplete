@@ -1,30 +1,40 @@
+<tr>
+		<td>
+`Prop`
+		</td>
+<td>
 
-## AutoComplete - extends BoxProps
+```ts
+boolean;
+```
 
-- onChange &mdash; function that provides current Input value and is called anytime, suggestion is selected- useful for uncontrolled Input, but wants to use Value  - (value:string)=>void gives array for tags, autocomplete
-- highlightFirstOption &mdash; boolean - if first option should be highlighted by default -- false
-- focusInputOnSelect &mdash; boolean - if Input should be focused after Select -- true
-- onSelectOption &mdash; - Will be called every time suggestion is selected via mouse or keyboard. (optionValue, selectMethod:'click'|'keyboard')=>void
-- onOptionHighlight &mdash; Will be called every time the highlighted option changes. (optionValue)=>void
-- closeOnSelect - If true, the menu will close when an item is selected, by mouse or keyboard - default(true)
-- shouldRenderSuggestions &mdash; By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input. - (value:string)=>void
+</td>
 
-    ```js   
-    function shouldRenderSuggestions(value) {
-    return value.trim().length > 2;
-    }
-    ```
-- suggestWhenEmpty &mdash; If the suggestions shoud show when the input is Empty. - It is used when the input is focused. default(false)
-- renderEmpty &mdash; Component to render when no match is found. Pass null, to just close the menu 
+<td>
+Description
+		</td>
+		<td>
+No
+		</td>
+		<td>
+`null`
+		</td>
+	</tr>
+
+### **AutoComplete**
+
+Wrapper and Provider for other components
+
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
 ## AutoCompleteList
 
-- rollNavigation &mdash; if keyboardnavigation should roll after getting to either ends. default &mdash; false 
+- rollNavigation &mdash; if keyboardnavigation should roll after getting to either ends. default &mdash; false
 
 ## AutoCompleteInput
-    
+
 - onChange &mdash; in Controlled form it's a function that returns, the event and the value - required(no)
-- value &mdash; set Input's value in controlled form 
+- value &mdash; set Input's value in controlled form
 
 ## AutoCompleteGroup
 
@@ -34,4 +44,4 @@
 
 ## AutoCompleteItem
 
-- _focus prop overrides the styling for highlighted suggestions
+- \_focus prop overrides the styling for highlighted suggestions
