@@ -3,21 +3,21 @@
     <br/>
     🥵
     <br />
-    @choc-ui/autocomplete
+    @choc-ui/chakra-autocomplete
     <br />
     <br />
   </h1>
   <sup>
     <br />
     <br />
-    <a href="https://www.npmjs.com/package/@choc-ui/autocomplete?style=for-the-badge">
-       <img src="https://img.shields.io/npm/v/@choc-ui/autocomplete.svg?style=for-the-badge" alt="npm package" />
+    <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete?style=for-the-badge">
+       <img src="https://img.shields.io/npm/v/@choc-ui/chakra-autocomplete.svg?style=for-the-badge" alt="npm package" />
     </a>
-    <a href="https://www.npmjs.com/package/@choc-ui/autocomplete?style=for-the-badge">
-      <img src="https://img.shields.io/npm/dw/@choc-ui/autocomplete.svg?style=for-the-badge" alt="npm  downloads" />
+    <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete?style=for-the-badge">
+      <img src="https://img.shields.io/npm/dw/@choc-ui/chakra-autocomplete.svg?style=for-the-badge" alt="npm  downloads" />
     </a>
 <a>
-    <img alt="NPM" src="https://img.shields.io/npm/l/@choc-ui/autocomplete?style=for-the-badge">
+    <img alt="NPM" src="https://img.shields.io/npm/l/@choc-ui/chakra-autocomplete?style=for-the-badge">
 </a>
 
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
@@ -31,7 +31,7 @@
   <br />
   <br />
   <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">@choc-ui/autocomplete</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete">@choc-ui/chakra-autocomplete</a></pre>
   <br />
   <br />
   <br />
@@ -42,9 +42,9 @@
 ## Install
 
 ```bash
-npm i --save @choc-ui/autocomplete
+npm i --save @choc-ui/chakra-autocomplete
 #or
-yarn add @choc-ui/autocomplete
+yarn add @choc-ui/chakra-autocomplete
 ```
 
 ## Preview
@@ -67,7 +67,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-} from '@choc-ui/autocomplete';
+} from '@choc-ui/chakra-autocomplete';
 
 export default () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
@@ -109,7 +109,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-} from '@choc-ui/autocomplete';
+} from '@choc-ui/chakra-autocomplete';
 
 export default () => {
   const fruits = ['Apple', 'Grape', 'Pawpaw'];
@@ -165,7 +165,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-} from '@choc-ui/autocomplete';
+} from '@choc-ui/chakra-autocomplete';
 import { Avatar, Box, Text } from '@chakra-ui/react';
 
 export default () => {
