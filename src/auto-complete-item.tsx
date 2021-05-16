@@ -9,7 +9,15 @@ interface AutoCompleteItem extends FlexProps {
 }
 
 export const AutoCompleteItem = (props: AutoCompleteItem) => {
-  const { value, optionKey, _focus, onMouseOver, ...rest } = props;
+  const {
+    value,
+    optionKey,
+    _focus,
+    onMouseOver,
+    onClick,
+    children,
+    ...rest
+  } = props;
 
   const { setActiveKey } = useStoreActions(({ options }) => options);
   const { activeKey: activeOption, filteredOptions } = useStoreState(
@@ -33,6 +41,7 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     if (focusInputOnSelect) ref.current.focus();
     onSelectOption && onSelectOption(value, 'click');
     if (closeOnSelect) setIsVisible(false);
+    onClick && onClick(e);
   };
 
   const handleMouseOver = (e: MouseEvent) => {
@@ -53,6 +62,7 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
       onMouseOver={handleMouseOver}
       {...(isActive && activeStyles)}
       {...rest}
+      children={children}
       onClick={setOption}
     />
   ) : null;

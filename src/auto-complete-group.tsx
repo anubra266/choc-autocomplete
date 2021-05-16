@@ -54,7 +54,7 @@ export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
         >
           {title}
         </Text>
-        <Box spacing="1">
+        <Box>
           {React.Children.map(children, (child: any) => {
             if (child.type.displayName === 'AutoCompleteItem') {
               return React.cloneElement(child, { optionKey: child.key });
