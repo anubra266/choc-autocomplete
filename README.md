@@ -39,8 +39,7 @@
   <br />
 </div>
 
-
-## Install 
+## Install
 
 ```bash
 npm i --save @choc-ui/autocomplete
@@ -54,43 +53,40 @@ yarn add @choc-ui/autocomplete
 
 ```js
 import {
-	AutoComplete,
-	AutoCompleteInput,
-	AutoCompleteItem,
-	AutoCompleteList,
-} from "@choc-ui/autocomplete";
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/autocomplete';
 
 export default () => {
-
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
 
-	return (
-		<AutoComplete highlightFirstOption>
-			<AutoCompleteInput
-				variant="filled"
-				placeholder="Search..."
-				pl="10"
-				defaultValue="ap"
-				autoFocus
-			/>
-			<AutoCompleteList rollNavigation>
-				{options.map((option, oid) => (
-					<AutoCompleteItem
-						key={`option-${oid}`}
-						value={option}
-						textTransform="capitalize"
-					>
-						{option}
-					</AutoCompleteItem>
-				))}
-			</AutoCompleteList>
-		</AutoComplete>
-	);
+  return (
+    <AutoComplete highlightFirstOption>
+      <AutoCompleteInput
+        variant="filled"
+        placeholder="Search..."
+        defaultValue="ap"
+        autoFocus
+      />
+      <AutoCompleteList rollNavigation>
+        {options.map((option, oid) => (
+          <AutoCompleteItem
+            key={`option-${oid}`}
+            value={option}
+            textTransform="capitalize"
+          >
+            {option}
+          </AutoCompleteItem>
+        ))}
+      </AutoCompleteList>
+    </AutoComplete>
+  );
 };
-
 ```
-![](example/images/basic.jpg)
 
+![](example/images/basic.jpg)
 
 ### Creating Groups
 
@@ -98,59 +94,56 @@ export default () => {
 
 ```js
 import {
-	AutoComplete,
-	AutoCompleteGroup,
-	AutoCompleteInput,
-	AutoCompleteItem,
-	AutoCompleteList,
-} from "@choc-ui/autocomplete";
+  AutoComplete,
+  AutoCompleteGroup,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/autocomplete';
 
 export default () => {
-	const fruits = ["Apple", "Grape", "Pawpaw"];
-	const countries = ["Korea", "Nigeria", "India"];
+  const fruits = ['Apple', 'Grape', 'Pawpaw'];
+  const countries = ['Korea', 'Nigeria', 'India'];
 
-	return (
-		<AutoComplete highlightFirstOption>
-			<AutoCompleteInput
-				variant="filled"
-				placeholder="Search..."
-				pl="10"
-				defaultValue="ap"
-				autoFocus
-			/>
-			<AutoCompleteList rollNavigation>
-				<AutoCompleteGroup title="Fruits" showDivider>
-					{fruits.map((option, oid) => (
-						<AutoCompleteItem
-							key={`fruits-${oid}`}
-							value={option}
-							textTransform="capitalize"
-						>
-							{option}
-						</AutoCompleteItem>
-					))}
-				</AutoCompleteGroup>
-				<AutoCompleteGroup title="countries" showDivider>
-					{countries.map((option, oid) => (
-						<AutoCompleteItem
-							key={`countries-${oid}`}
-							value={option}
-							textTransform="capitalize"
-						>
-							{option}
-						</AutoCompleteItem>
-					))}
-				</AutoCompleteGroup>
-			</AutoCompleteList>
-		</AutoComplete>
-	);
+  return (
+    <AutoComplete highlightFirstOption>
+      <AutoCompleteInput
+        variant="filled"
+        placeholder="Search..."
+        pl="10"
+        defaultValue="ap"
+        autoFocus
+      />
+      <AutoCompleteList rollNavigation>
+        <AutoCompleteGroup title="Fruits" showDivider>
+          {fruits.map((option, oid) => (
+            <AutoCompleteItem
+              key={`fruits-${oid}`}
+              value={option}
+              textTransform="capitalize"
+            >
+              {option}
+            </AutoCompleteItem>
+          ))}
+        </AutoCompleteGroup>
+        <AutoCompleteGroup title="countries" showDivider>
+          {countries.map((option, oid) => (
+            <AutoCompleteItem
+              key={`countries-${oid}`}
+              value={option}
+              textTransform="capitalize"
+            >
+              {option}
+            </AutoCompleteItem>
+          ))}
+        </AutoCompleteGroup>
+      </AutoCompleteList>
+    </AutoComplete>
+  );
 };
-
-
 ```
 
 ![](example/images/group.jpg)
-
 
 ## Custom Rendering
 
@@ -158,15 +151,14 @@ export default () => {
 
 ```js
 import {
-	AutoComplete,
-	AutoCompleteInput,
-	AutoCompleteItem,
-	AutoCompleteList,
-} from "@choc-ui/autocomplete";
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/autocomplete';
 import { Avatar, Box, Text } from '@chakra-ui/react';
 
 export default () => {
-
   const people = [
     { name: 'Dan Abramov', image: 'https://bit.ly/dan-abramov' },
     { name: 'Kent Dodds', image: 'https://bit.ly/kent-c-dodds' },
@@ -175,30 +167,30 @@ export default () => {
     { name: 'Ryan Florence', image: 'https://bit.ly/ryan-florence' },
   ];
 
-	return (
-		<AutoComplete highlightFirstOption>
-			<AutoCompleteInput
-				variant="filled"
-				placeholder="Search..."
-				pl="10"
-				defaultValue="ap"
-				autoFocus
-			/>
-			<AutoCompleteList rollNavigation>
-				{people.map((person, oid) => (
-            <AutoCompleteItem
-              key={`option-${oid}`}
-              value={person.name}
-              textTransform="capitalize"
-              align="center"
-            >
-              <Avatar size="sm" name={person.name} src={person.image} />
-              <Text ml="4">{person.name}</Text>
-            </AutoCompleteItem>
-            ))}
-			</AutoCompleteList>
-		</AutoComplete>
-	);
+  return (
+    <AutoComplete highlightFirstOption>
+      <AutoCompleteInput
+        variant="filled"
+        placeholder="Search..."
+        pl="10"
+        defaultValue="ap"
+        autoFocus
+      />
+      <AutoCompleteList rollNavigation>
+        {people.map((person, oid) => (
+          <AutoCompleteItem
+            key={`option-${oid}`}
+            value={person.name}
+            textTransform="capitalize"
+            align="center"
+          >
+            <Avatar size="sm" name={person.name} src={person.image} />
+            <Text ml="4">{person.name}</Text>
+          </AutoCompleteItem>
+        ))}
+      </AutoCompleteList>
+    </AutoComplete>
+  );
 };
 ```
 
