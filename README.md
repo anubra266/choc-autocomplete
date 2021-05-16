@@ -47,6 +47,16 @@ npm i --save @choc-ui/autocomplete
 yarn add @choc-ui/autocomplete
 ```
 
+## Preview
+
+### With Mouse
+
+![](example/images/mousePreview.gif)
+
+### With Keyboard
+
+![](example/images/keyboardPreview.gif)
+
 ## Usage
 
 ### Basic Usage
@@ -512,6 +522,8 @@ boolean;
 
 No
 
+![](example/images/rollNavigation.gif)
+
 ### **AutoCompleteGroup**
 
 Wrapper for collections of `AutoCompleteItem`s
@@ -541,6 +553,8 @@ boolean;
 **Required**
 
 No
+
+![](example/images/divider.gif)
 
 ---
 

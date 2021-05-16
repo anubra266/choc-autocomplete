@@ -70,7 +70,7 @@ export const AutoCompleteInput = React.forwardRef<
 
   const { rollNavigation } = useStoreState(({ list }) => list);
   const handleKeyboardNavigation = (e: KeyboardEvent) => {
-    const activeValue = activeOption().value;
+    const activeValue = activeOption()?.value;
     if (e.key === 'Enter') {
       setValue(activeValue);
       isControlled &&

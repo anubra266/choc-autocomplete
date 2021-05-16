@@ -30,14 +30,18 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
   };
   const { setValue } = useStoreActions(actions => actions.input);
   const { setIsVisible } = useStoreActions(actions => actions.autocomplete);
-  const { ref } = useStoreState(state => state.input);
+  const ref = useStoreState(state => state.input.ref);
   const { focusInputOnSelect, onSelectOption, closeOnSelect } = useStoreState(
     state => state.autocomplete
   );
 
   const setOption = (e: MouseEvent) => {
     setValue(value);
-    ref.current.onChange({ ...e, target: { ...e.target, value: value } });
+    ref.current.onChange &&
+      ref.current.onChange({
+        ...e,
+        target: { ...e.target, value: value },
+      });
     if (focusInputOnSelect) ref.current.focus();
     onSelectOption && onSelectOption(value, 'click');
     if (closeOnSelect) setIsVisible(false);
