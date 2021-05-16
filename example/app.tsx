@@ -6,15 +6,7 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
 } from '../.';
-import {
-  Box,
-  Flex,
-  Icon,
-  Input,
-  InputGroup,
-  InputLeftElement,
-  useColorModeValue,
-} from '@chakra-ui/react';
+import { Avatar, Box, Text, useColorModeValue } from '@chakra-ui/react';
 import ToggleColorMode from './toggle-color-mode';
 
 const App = () => {
@@ -22,6 +14,13 @@ const App = () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
   const fruits = ['Apple', 'Grape', 'Pawpaw'];
   const countries = ['Korea', 'Nigeria', 'India'];
+  const people = [
+    { name: 'Dan Abramov', image: 'https://bit.ly/dan-abramov' },
+    { name: 'Kent Dodds', image: 'https://bit.ly/kent-c-dodds' },
+    { name: 'Segun Adebayo', image: 'https://bit.ly/sage-adebayo' },
+    { name: 'Prosper Otemuyiwa', image: 'https://bit.ly/prosper-baba' },
+    { name: 'Ryan Florence', image: 'https://bit.ly/ryan-florence' },
+  ];
   const [value, setValue] = React.useState('');
   return (
     <Box pos="fixed" boxSize="full" top="10" left="0">
@@ -53,13 +52,15 @@ const App = () => {
           />
           {/* </InputGroup> */}
           <AutoCompleteList rollNavigation>
-            {options.map((option, oid) => (
+            {people.map((person, oid) => (
               <AutoCompleteItem
                 key={`option-${oid}`}
-                value={option}
+                value={person.name}
                 textTransform="capitalize"
+                align="center"
               >
-                {option}
+                <Avatar size="sm" name={person.name} src={person.image} />
+                <Text ml="4">{person.name}</Text>
               </AutoCompleteItem>
             ))}
             {/* <AutoCompleteGroup title="Fruits" showDivider>
