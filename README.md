@@ -209,11 +209,14 @@ export default () => {
 ## API Reference
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
+
 ### **AutoComplete**
 
 Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
 **AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+**NB**: If you have more than one `AutoComplete` Component on a page, they must be assigned unique `id`s
 
 ---
 
@@ -320,30 +323,6 @@ No
 
 ---
 
-`highlightFirstOption`
-
----
-
-**Description**
-
-> Determines if the first option should be highlighted by default
-
-**Type**
-
-```ts
-boolean;
-```
-
-**Default**
-
-`false`
-
-**Required**
-
-No
-
----
-
 `focusInputOnSelect`
 
 ---
@@ -389,7 +368,6 @@ boolean;
 **Required**
 
 No
-
 
 ---
 
@@ -670,6 +648,3 @@ const _focus = {
 **Required**
 
 No
-
-
-

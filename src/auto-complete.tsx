@@ -1,13 +1,13 @@
 import { useOutsideClick } from '@chakra-ui/hooks';
-import { Box } from '@chakra-ui/layout';
+import { Box, BoxProps } from '@chakra-ui/layout';
 import { StoreProvider } from 'easy-peasy';
 import React, { ReactNode, useEffect, useRef } from 'react';
-import store from './store';
 import { useStoreActions, useStoreState } from './store/hooks';
+import { createStore } from 'easy-peasy';
+import storeModel from './store/model';
 
-interface AutoComplete {
+interface AutoComplete extends BoxProps {
   children: React.ReactNode;
-  highlightFirstOption?: boolean;
   focusInputOnSelect?: boolean;
   onChange?: (value: string) => void;
   onSelectOption?: (
@@ -26,7 +26,6 @@ const AutoCompleteBody = (props: AutoComplete) => {
   const {
     children,
     focusInputOnSelect,
-    highlightFirstOption,
     onChange,
     onSelectOption,
     onOptionHighlight,
@@ -37,7 +36,6 @@ const AutoCompleteBody = (props: AutoComplete) => {
     renderEmpty,
     ...rest
   } = props;
-  const { setActive } = useStoreActions(actions => actions.options);
   const { setAutoCompleteState, setIsVisible } = useStoreActions(
     ({ autocomplete }) => autocomplete
   );
@@ -48,7 +46,6 @@ const AutoCompleteBody = (props: AutoComplete) => {
   );
 
   useEffect(() => {
-    setActive(highlightFirstOption ? 0 : -1);
     setAutoCompleteState({ focusInputOnSelect });
     setAutoCompleteState({ onSelectOption });
     setAutoCompleteState({ shouldRenderSuggestions });
@@ -82,8 +79,12 @@ const AutoCompleteBody = (props: AutoComplete) => {
 };
 
 export const AutoComplete = (props: AutoComplete) => {
+  const store = createStore(storeModel, {
+    name: `AutoComplete${props.id}`,
+  });
+
   return (
-    <StoreProvider store={store}>
+    <StoreProvider store={store} key={`autocomplete-provider${props.key}`}>
       <AutoCompleteBody {...props} />
     </StoreProvider>
   );

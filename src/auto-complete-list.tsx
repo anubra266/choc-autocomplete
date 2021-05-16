@@ -68,8 +68,6 @@ export const AutoCompleteList: FunctionComponent<AutoCompleteList> = props => {
     fontWeight: 'bold',
   };
 
-  // if (filteredOptions.length < 1 && renderEmpty === null) setIsVisible(false);
-
   const noRenderOnEmpty = filteredOptions.length < 1 && renderEmpty === null;
 
   return (
