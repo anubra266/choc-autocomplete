@@ -9,11 +9,13 @@ interface AutoCompleteItem extends FlexProps {
 }
 
 export const AutoCompleteItem = (props: AutoCompleteItem) => {
-  const { value, optionKey, _focus, ...rest } = props;
+  const { value, optionKey, _focus, onMouseOver, ...rest } = props;
 
   const { setActiveKey } = useStoreActions(({ options }) => options);
-  const { activeKey: activeOption } = useStoreState(({ options }) => options);
-  const isActive = activeOption === optionKey;
+  const { activeKey: activeOption, filteredOptions } = useStoreState(
+    ({ options }) => options
+  );
+  const isActive = activeOption() === optionKey;
 
   const activeStyles: FlexProps = _focus || {
     bg: useColorModeValue('gray.200', 'whiteAlpha.100'),
@@ -28,22 +30,30 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     setValue(value);
     ref.current.onChange({ ...e, target: { ...e.target, value: value } });
     if (focusInputOnSelect) ref.current.focus();
-    onSelectOption(value, 'click');
+    onSelectOption && onSelectOption(value, 'click');
   };
 
-  return (
+  const handleMouseOver = (e: MouseEvent) => {
+    setActiveKey(optionKey);
+    onMouseOver && onMouseOver(e);
+  };
+
+  const isValidSuggestion =
+    filteredOptions.findIndex(o => o.key === optionKey) > -1;
+
+  return isValidSuggestion ? (
     <Flex
       mx="2"
       px="2"
       py="2"
       rounded="md"
       cursor="pointer"
-      onMouseOver={() => setActiveKey(optionKey)}
+      onMouseOver={handleMouseOver}
       {...(isActive && activeStyles)}
       {...rest}
       onClick={setOption}
     />
-  );
+  ) : null;
 };
 
 AutoCompleteItem.displayName = 'AutoCompleteItem';

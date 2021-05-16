@@ -1,4 +1,12 @@
-import { action, Action, Computed, computed } from 'easy-peasy';
+import {
+  action,
+  Action,
+  actionOn,
+  ActionOn,
+  Computed,
+  computed,
+} from 'easy-peasy';
+import { StoreModel } from '.';
 
 export interface Item {
   key: string;
@@ -7,31 +15,35 @@ export interface Item {
 
 export interface OptionModel {
   items: Item[];
-  filteredOptions: Item[];
+  filteredOptions: Computed<OptionModel, Item[], StoreModel>;
   set: Action<OptionModel, Item[]>;
-  setFilteredOptions: Action<OptionModel, Item[]>;
   active: number;
-  activeOption: Computed<OptionModel, Item>;
   setActive: Action<OptionModel, number>;
+  activeOption: Computed<OptionModel, () => Item>;
+  activeKey: Computed<OptionModel, () => string>;
   setActiveKey: Action<OptionModel, string>;
   resetActive: Action<OptionModel, true | void>;
-  activeKey: Computed<OptionModel, string>;
+  onValueChanged: ActionOn<OptionModel, StoreModel>;
 }
 
 export const optionModel: OptionModel = {
   items: [],
-  filteredOptions: [],
+  filteredOptions: computed(
+    [state => state.items, (_, storeState) => storeState.input.value],
+    (options, inputValue) =>
+      options.filter(
+        item => item.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+      )
+  ),
   set: action((state, payload) => {
     state.items = payload;
   }),
-  setFilteredOptions: action((state, payload) => {
-    state.filteredOptions = payload;
-  }),
   active: -1,
-  activeOption: computed(state => state.filteredOptions[state.active]),
   setActive: action((state, payload) => {
     state.active = payload;
   }),
+  activeOption: computed(state => () => state.filteredOptions[state.active]),
+  activeKey: computed(state => () => state.activeOption()?.key),
   setActiveKey: action((state, payload) => {
     state.active = state.filteredOptions.findIndex(
       ({ key }) => key === payload
@@ -40,5 +52,10 @@ export const optionModel: OptionModel = {
   resetActive: action((state, payload) => {
     state.active = payload ? state.filteredOptions.length - 1 : 0;
   }),
-  activeKey: computed(state => state.filteredOptions[state.active]?.key),
+  onValueChanged: actionOn(
+    (_, storeActions) => storeActions.input.setValue,
+    state => {
+      state.active = 0;
+    }
+  ),
 };

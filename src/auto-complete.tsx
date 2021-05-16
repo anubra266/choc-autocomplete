@@ -43,8 +43,8 @@ const AutoCompleteBody = (props: AutoComplete) => {
   }, [inputValue]);
 
   useEffect(() => {
-    onOptionHighlight && onOptionHighlight(activeOption?.value);
-  }, [activeOption]);
+    onOptionHighlight && onOptionHighlight(activeOption()?.value);
+  }, [activeOption()]);
 
   return <Box>{children}</Box>;
 };

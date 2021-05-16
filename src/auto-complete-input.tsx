@@ -14,7 +14,7 @@ export const AutoCompleteInput = React.forwardRef<
   HTMLInputElement,
   AutoCompleteInput
 >((props, ref) => {
-  const { value, onChange, defaultValue, ...rest } = props;
+  const { value, onChange, defaultValue, onKeyDown, ...rest } = props;
 
   const internalRef = useRef<any>();
   const focusRef = useRef<any>();
@@ -26,10 +26,13 @@ export const AutoCompleteInput = React.forwardRef<
     },
   }));
 
-  const { setValue, setRef } = useStoreActions(actions => actions.input);
-  const { value: autoCompleteValue } = useStoreState(({ input }) => input);
+  const { setValue, setRef } = useStoreActions(({ input }) => input);
+  const { value: autoCompleteValue } = useStoreState(state => state.input);
   const { resetActive, setActive } = useStoreActions(({ options }) => options);
   const { onSelectOption } = useStoreState(state => state.autocomplete);
+  const { active: activeIndex, activeOption, filteredOptions } = useStoreState(
+    ({ options }) => options
+  );
 
   const isControlled = value !== undefined;
 
@@ -42,26 +45,20 @@ export const AutoCompleteInput = React.forwardRef<
 
   const inputValue = isControlled ? value : autoCompleteValue;
 
-  useEffect(() => {
-    resetActive();
-  }, [inputValue]);
-
-  const { active: activeIndex, activeOption, filteredOptions } = useStoreState(
-    ({ options }) => options
-  );
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
-    setValue(e.target.value);
+    const inputValue = e.target.value;
+    setValue(inputValue);
     isControlled && onChange(e);
   };
 
   const { rollNavigation } = useStoreState(({ list }) => list);
   const handleKeyboardNavigation = (e: KeyboardEvent) => {
-    const activeValue = activeOption?.value;
+    const activeValue = activeOption().value;
     if (e.key === 'Enter') {
       setValue(activeValue);
       isControlled &&
         onChange({ ...e, target: { ...e.target, value: activeValue } });
-      onSelectOption(activeValue, 'keyboard');
+      onSelectOption && onSelectOption(activeValue, 'keyboard');
     } else if (e.key === 'ArrowUp') {
       if (activeIndex === 0) {
         if (rollNavigation) resetActive(true);
@@ -77,6 +74,7 @@ export const AutoCompleteInput = React.forwardRef<
       }
       setActive(activeIndex + 1);
     }
+    onKeyDown && onKeyDown(e);
   };
 
   return (
