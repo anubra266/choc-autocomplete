@@ -34,7 +34,7 @@
     "singleQuote": true,
     "trailingComma": "es5"
   },
-  "name": "@choc-ui/autocomplete",
+  "name": "@choc-ui/chakra-autocomplete",
   "author": "anubra266",
   "module": "dist/autocomplete.esm.js",
   "size-limit": [
