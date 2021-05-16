@@ -25,11 +25,11 @@ export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
     dividerColor,
     ...rest
   } = props;
-  const { filteredOptions } = useStoreState(state => state.options);
-  const firstResult = filteredOptions[0].key;
+  const filteredOptions = useStoreState(state => state.options.filteredOptions);
+
   const containsFirstResult = React.Children.map(
     children,
-    child => child.key === firstResult
+    child => child.key === filteredOptions[0].key
   ).includes(true);
 
   return (

@@ -23,11 +23,8 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 </a>
-    <!-- <a href="http://anubra266.github.io/@choc-ui/autocomplete">
-      <img src="https://img.shields.io/badge/demos-🚀-yellow.svg" alt="demos" />
-    </a> -->
     <br />
-    Collection of my frequently used <a href="https://reactjs.org/docs/hooks-intro.html">React Hooks</a>.</em>
+    AutoComplete Component for the <a href="https://chakra-ui.com">Chakra UI</a> Library.</em>
     
   </sup>
   <br />
@@ -42,3 +39,114 @@
   <br />
 </div>
 
+
+## Install 
+
+```bash
+npm i --save @choc-ui/autocomplete
+#or
+yarn add @choc-ui/autocomplete
+```
+
+## Usage
+
+### Basic Usage
+
+```js
+import {
+	AutoComplete,
+	AutoCompleteInput,
+	AutoCompleteItem,
+	AutoCompleteList,
+} from "@choc-ui/autocomplete";
+
+export default () => {
+
+  const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
+
+	return (
+		<AutoComplete highlightFirstOption>
+			<AutoCompleteInput
+				variant="filled"
+				placeholder="Search..."
+				pl="10"
+				defaultValue="ap"
+				autoFocus
+			/>
+			<AutoCompleteList rollNavigation>
+				{options.map((option, oid) => (
+					<AutoCompleteItem
+						key={`option-${oid}`}
+						value={option}
+						textTransform="capitalize"
+					>
+						{option}
+					</AutoCompleteItem>
+				))}
+			</AutoCompleteList>
+		</AutoComplete>
+	);
+};
+
+```
+![](example/images/basic.jpg)
+
+
+### Creating Groups
+
+> You can create groups with the `AutoCompleteGroup` Component
+
+```js
+import {
+	AutoComplete,
+	AutoCompleteGroup,
+	AutoCompleteInput,
+	AutoCompleteItem,
+	AutoCompleteList,
+} from "@choc-ui/autocomplete";
+
+export default () => {
+
+  const fruits = ['Apple', 'Grape', 'Pawpaw'];
+  const countries = ['Korea', 'Nigeria', 'India'];
+
+	return (
+		<AutoComplete highlightFirstOption>
+			<AutoCompleteInput
+				variant="filled"
+				placeholder="Search..."
+				pl="10"
+				defaultValue="ap"
+				autoFocus
+			/>
+			<AutoCompleteList rollNavigation>
+				<AutoCompleteGroup title="Fruits" showDivider>
+              {fruits.map((option, oid) => (
+                <AutoCompleteItem
+                  key={`fruits-${oid}`}
+                  value={option}
+                  textTransform="capitalize"
+                >
+                  {option}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteGroup>
+            <AutoCompleteGroup title="countries" showDivider>
+              {countries.map((option, oid) => (
+                <AutoCompleteItem
+                  key={`countries-${oid}`}
+                  value={option}
+                  textTransform="capitalize"
+                >
+                  {option}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteGroup>
+			</AutoCompleteList>
+		</AutoComplete>
+	);
+};
+
+```
+
+![](example/images/group.jpg)
