@@ -100,6 +100,8 @@ export default () => {
 
 ![](example/images/basic.jpg)
 
+---
+
 ### Creating Groups
 
 > You can create groups with the `AutoCompleteGroup` Component
@@ -157,6 +159,8 @@ export default () => {
 
 ![](example/images/group.jpg)
 
+---
+
 ## Accessing the internal state
 
 > To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen` and method `onClose`.
@@ -205,7 +209,11 @@ export default () => {
 };
 ```
 
+Watch the **Icon** on the **right**.
+
 ![](example/images/internalState.gif)
+
+---
 
 ## Custom Rendering
 
@@ -258,6 +266,12 @@ export default () => {
 
 ![](example/images/render.jpg)
 
+---
+
+## Multiple Selection
+
+> Add an `AutoCompleteTags` Component to enable multiple selections.
+
 ## API Reference
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
@@ -302,12 +316,12 @@ No
 
 **Description**
 
-> Will be called every time suggestion is selected via mouse or keyboard.
+> Will be called every time suggestion is selected via mouse or keyboard. It returns the `selectedValue`, the`selectionMethod` and a boolean specifying if the `input` is a new one; useFul when combined `creatable` mode.
 
 **Type**
 
 ```ts
-(optionValue: string, selectMethod: 'click'|'keyboard') => void;
+(optionValue: string, selectMethod: 'click'|'keyboard', isNewInput: boolean) => void;
 ```
 
 **Default**
@@ -337,6 +351,54 @@ No
 **Default**
 
 `null`
+
+**Required**
+
+No
+
+---
+
+`defaultValue`
+
+---
+
+**Description**
+
+> The default value of the autocomplete input.
+
+**Type**
+
+```ts
+string;
+```
+
+**Default**
+
+`''`
+
+**Required**
+
+No
+
+---
+
+`creatable`
+
+---
+
+**Description**
+
+> Allows user to add new Input, when no suggestions matches the input.
+
+**Type**
+
+```ts
+boolean;
+```
+
+**Default**
+
+`false`
 
 **Required**
 
@@ -545,47 +607,23 @@ Input for `AutoComplete` value.
 
 ---
 
-`onChange`
+`selectOnFocus`
 
 ---
 
 **Description**
 
-> When you want the AutoComplete in controlled mode, it's a function that returns, the change event anytime the input value changes.
+> Determines if input's text is selected, when the input is focused.
 
 **Type**
 
 ```ts
-(e: ChangeEVent) => void
+boolean;
 ```
 
 **Default**
 
-`undefined`
-
-**Required**
-
-No
-
----
-
-`value`
-
----
-
-**Description**
-
-> The value of the `AutoComplete` input in controlled mode. You should store this in state. And it must bes used with the `onChange` prop.
-
-**Type**
-
-```ts
-string;
-```
-
-**Default**
-
-`undefined`
+`false`
 
 **Required**
 
