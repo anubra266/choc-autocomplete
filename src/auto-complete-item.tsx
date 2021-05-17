@@ -1,7 +1,6 @@
 import { Flex, FlexProps, useColorModeValue } from '@chakra-ui/react';
 import React from 'react';
 import { useStoreActions, useStoreState } from './store/hooks';
-// import ReactHtmlParser from 'react-html-parser';
 interface AutoCompleteItem extends FlexProps {
   value: string;
   _focus?: FlexProps;
@@ -41,12 +40,12 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     emphasize,
   } = useStoreState(state => state.autocomplete);
 
-  const setOption = (e: MouseEvent) => {
+  const setOption = (e: any) => {
     setValue(value);
     ref.current.onChange &&
       ref.current.onChange({
         ...e,
-        target: { ...e.target, value: value },
+        target: { value },
       });
     if (focusInputOnSelect) ref.current.focus();
     onSelectOption && onSelectOption(value, 'click');
@@ -54,7 +53,7 @@ export const AutoCompleteItem = (props: AutoCompleteItem) => {
     onClick && onClick(e);
   };
 
-  const handleMouseOver = (e: MouseEvent) => {
+  const handleMouseOver = (e: any) => {
     setActiveKey(optionKey);
     onMouseOver && onMouseOver(e);
   };

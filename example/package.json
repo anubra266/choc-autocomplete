@@ -8,6 +8,9 @@
     "build": "parcel build index.html"
   },
   "dependencies": {
+    "@chakra-ui/icons": "^1.0.13",
+    "@chakra-ui/system": ">=1.0.0",
+    "react": ">=16.8.6",
     "react-app-polyfill": "^1.0.0"
   },
   "alias": {

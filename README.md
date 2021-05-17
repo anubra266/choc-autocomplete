@@ -57,6 +57,8 @@ yarn add @choc-ui/chakra-autocomplete
 
 ![](example/images/keyboardPreview.gif)
 
+## Demo [on Codesandbox](https://codesandbox.io/s/chakra-autocomplete-demo-elurs)
+
 ## Usage
 
 ### Basic Usage
@@ -154,6 +156,56 @@ export default () => {
 ```
 
 ![](example/images/group.jpg)
+
+## Accessing the internal state
+
+> To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen` and method `onClose`.
+
+```js
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '@choc-ui/chakra-autocomplete';
+import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
+import { Icon, InputGroup, InputRightElement } from '@chakra-ui/react';
+
+export default () => {
+  const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
+
+  return (
+    <AutoComplete>
+      {({ isOpen }) => (
+        <>
+          <InputGroup>
+            <AutoCompleteInput variant="filled" placeholder="Search..." />
+            <InputRightElement
+              children={
+                <Icon as={isOpen ? ChevronRightIcon : ChevronDownIcon} />
+              }
+            />
+          </InputGroup>
+          <AutoCompleteList rollNavigation>
+            {options.map((option, oid) => (
+              <AutoCompleteItem
+                key={`optio-${oid}`}
+                value={option}
+                textTransform="capitalize"
+                align="center"
+              >
+                {option}
+              </AutoCompleteItem>
+            ))}
+          </AutoCompleteList>
+        </>
+      )}
+    </AutoComplete>
+  );
+};
+```
+
+![](example/images/internalState.gif)
 
 ## Custom Rendering
 
@@ -343,7 +395,7 @@ No
 
 > By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input
 
-> **e.g.** The following function is to show the suggestions only if the input has more than **two** characters. 
+> **e.g.** The following function is to show the suggestions only if the input has more than **two** characters.
 
 ```ts
 function shouldRenderSuggestions(value) {

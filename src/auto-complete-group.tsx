@@ -14,6 +14,7 @@ interface AutoCompleteGroup extends StackProps {
   titleStyles?: TextProps;
   showDivider?: boolean;
   dividerColor?: string;
+  children: any;
 }
 
 export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
@@ -27,7 +28,7 @@ export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
   } = props;
   const filteredOptions = useStoreState(state => state.options.filteredOptions);
 
-  const containsFirstResult = React.Children.map(
+  const containsFirstResult: any = React.Children.map(
     children,
     child => child.key === filteredOptions[0].key
   ).includes(true);

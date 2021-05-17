@@ -7,8 +7,9 @@ import { createStore } from 'easy-peasy';
 import storeModel from './store/model';
 import { CSSObject } from '@chakra-ui/styled-system';
 
-interface AutoComplete extends BoxProps {
-  children: React.ReactNode;
+type ChildrenProps = { isOpen: boolean; onClose: () => void };
+interface AutoComplete extends Omit<BoxProps, 'onChange'> {
+  children: ((props: ChildrenProps) => ReactNode) | ReactNode;
   focusInputOnSelect?: boolean;
   onChange?: (value: string) => void;
   onSelectOption?: (
@@ -43,6 +44,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
   const { closeOnBlur: shouldCloseOnBlur } = useStoreState(
     ({ autocomplete }) => autocomplete
   );
+  const isVisible = useStoreState(({ autocomplete }) => autocomplete.isVisible);
 
   useEffect(() => {
     setAutoCompleteState({ onSelectOption });
@@ -59,7 +61,7 @@ const AutoCompleteBody = (props: AutoComplete) => {
     onOptionHighlight && onOptionHighlight(activeOption()?.value);
   }, [activeOption()]);
 
-  const ref = useRef();
+  const ref = useRef(null);
   useOutsideClick({
     ref,
     handler: () => {
@@ -69,7 +71,9 @@ const AutoCompleteBody = (props: AutoComplete) => {
 
   return (
     <Box {...rest} ref={ref}>
-      {children}
+      {typeof children === 'function'
+        ? children({ isOpen: isVisible, onClose: () => setIsVisible(false) })
+        : children}
     </Box>
   );
 };

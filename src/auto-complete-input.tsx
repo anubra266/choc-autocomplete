@@ -1,14 +1,11 @@
 import { Input, InputProps, useMergeRefs } from '@chakra-ui/react';
-import React, {
-  ChangeEvent,
-  KeyboardEvent,
-  useEffect,
-  useImperativeHandle,
-  useRef,
-} from 'react';
+import React, { useEffect, useImperativeHandle, useRef } from 'react';
 import { useStoreActions, useStoreState } from './store/hooks';
 
-type AutoCompleteInput = InputProps;
+interface AutoCompleteInput extends InputProps {
+  defaultValue: string;
+  value: string;
+}
 
 export const AutoCompleteInput = React.forwardRef<
   HTMLInputElement,
@@ -50,17 +47,17 @@ export const AutoCompleteInput = React.forwardRef<
 
   const inputValue = isControlled ? value : autoCompleteValue;
 
-  const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
+  const handleChange = (e: any) => {
     const newValue = e.target.value;
     const isEmpty = newValue.trim().length < 1;
     setValue(newValue);
-    isControlled && onChange(e);
+    isControlled && onChange && onChange(e);
     if (!isEmpty || (isEmpty && suggestWhenEmpty)) {
       setIsVisible(true);
     } else setIsVisible(false);
   };
 
-  const handleFocus = (e: FocusEvent) => {
+  const handleFocus = (e: any) => {
     const isEmpty = inputValue.trim().length < 1;
     if (!isEmpty || (isEmpty && suggestWhenEmpty)) {
       setIsVisible(true);
@@ -69,11 +66,12 @@ export const AutoCompleteInput = React.forwardRef<
   };
 
   const { rollNavigation } = useStoreState(({ list }) => list);
-  const handleKeyboardNavigation = (e: KeyboardEvent) => {
+  const handleKeyboardNavigation = (e: any) => {
     const activeValue = activeOption()?.value;
     if (e.key === 'Enter') {
       setValue(activeValue);
       isControlled &&
+        onChange &&
         onChange({ ...e, target: { ...e.target, value: activeValue } });
       onSelectOption && onSelectOption(activeValue, 'keyboard');
       if (closeOnSelect) setIsVisible(false);
