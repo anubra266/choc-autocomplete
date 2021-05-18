@@ -1,35 +1,43 @@
 import * as React from 'react';
-import { AutoComplete, AutoCompleteInput } from '../.';
 import {
-  Avatar,
-  Box,
-  Flex,
-  Icon,
-  InputGroup,
-  InputRightElement,
-  Stack,
-  Text,
-  useColorModeValue,
-} from '@chakra-ui/react';
-import ToggleColorMode from './toggle-color-mode';
-import { ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
-import { useEffect } from 'react';
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from '../.';
+import { Button, Flex } from '@chakra-ui/react';
+import { useTheme } from '@chakra-ui/system';
 
 const App = () => {
-  const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
-  const [state, setState] = React.useState(options);
-  const [value, setValue] = React.useState('');
-
+  const defOptions = ['apple', 'appoint', 'zap', 'cap', 'japan'];
+  const [options, setOptions] = React.useState(defOptions);
+  const [outValue, setOutValue] = React.useState('');
+  const handleChange = (e: any) => {
+    console.log(e.target.value);
+    setOutValue(e.target.value);
+  };
   return (
-    <Flex mt="150px" justify="center">
+    <Flex mt="150px" align="center" direction="column">
+      outValue: {outValue}
       <AutoComplete>
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
-          defaultValue="red"
-          onChange={e => console.log(e.target.value)}
+          // defaultValue="red"
+          value={outValue}
+          onChange={handleChange}
         />
+        <AutoCompleteList>
+          {options.map((option, oid) => (
+            <AutoCompleteItem value={option} key={`option-${oid}`}>
+              {option}{' '}
+            </AutoCompleteItem>
+          ))}
+        </AutoCompleteList>
       </AutoComplete>
+      <Button mt="150px" onClick={() => setOptions(o => [...o, 'new'])}>
+        Add Option
+      </Button>
     </Flex>
   );
 };

@@ -1,39 +1,20 @@
-import { Box, BoxProps } from '@chakra-ui/layout';
-import { StoreProvider } from 'easy-peasy';
-import React, { ReactNode } from 'react';
-import { createStore } from 'easy-peasy';
-import storeModel from './store/model';
+import React from 'react';
+import { Box, forwardRef } from '@chakra-ui/react';
+import { AutoComplete } from './auto-complete-provider';
+import { runIfFn } from './helpers/runIfFn';
 
-type ChildrenProps = { isOpen: boolean; onClose: () => void };
-interface AutoComplete extends Omit<BoxProps, 'onChange'> {
-  children: ((props?: ChildrenProps) => ReactNode) | ReactNode;
-}
+export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
+  (props, ref) => {
+    const {
+      children,
 
-const AutoCompleteBody = (props: AutoComplete) => {
-  const {
-    children,
+      ...rest
+    } = props;
 
-    ...rest
-  } = props;
-
-  return (
-    <Box {...rest}>
-      {typeof children === 'function' ? children() : children}
-    </Box>
-  );
-};
-
-export const AutoComplete = (props: AutoComplete) => {
-  const { ...rest } = props;
-
-  const store = createStore(storeModel, {
-    name: `AutoComplete${props.id || ''}Store`,
-    initialState: {},
-  });
-
-  return (
-    <StoreProvider store={store} key={`autocomplete-provider${props.key}`}>
-      <AutoCompleteBody {...rest} />
-    </StoreProvider>
-  );
-};
+    return (
+      <Box pos="relative" ref={ref} {...rest}>
+        {runIfFn(children, {})}
+      </Box>
+    );
+  }
+);
