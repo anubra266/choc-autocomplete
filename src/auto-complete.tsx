@@ -1,17 +1,31 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Box, forwardRef } from '@chakra-ui/react';
 import { AutoComplete } from './auto-complete-provider';
-import { runIfFn } from './utils/runIfFn';
+import { runIfFn } from './utils/operations';
 import { StoreContext } from './store';
+import { ListAction } from './store/reducers/list';
 
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
-    const { children, ...rest } = props;
-    const { state } = useContext(StoreContext);
+    const { children, onChange, ...rest } = props;
+    const {
+      state: {
+        autocomplete: { value: autoCompleteValue },
+        list: { visible },
+      },
+      dispatch,
+    } = useContext(StoreContext);
+
+    useEffect(() => {
+      runIfFn(onChange, autoCompleteValue);
+    }, [autoCompleteValue]);
 
     return (
       <Box pos="relative" ref={ref} {...rest}>
-        {runIfFn(children, { value: state.input.value })}
+        {runIfFn(children, {
+          isOpen: visible,
+          onClose: () => dispatch({ type: ListAction.Hide }),
+        })}
       </Box>
     );
   }

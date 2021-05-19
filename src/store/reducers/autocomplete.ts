@@ -1,11 +1,11 @@
 import { ActionMap, State } from '..';
 
 export enum AutoCompleteAction {
-  Set = 'SET_AutoComplete_VALUE',
+  Set = 'SET_AUTOCOMPLETE_VALUE',
 }
 
 type AutoCompletePayload = {
-  [AutoCompleteAction.Set]: string;
+  [AutoCompleteAction.Set]: State['autocomplete']['value'];
 };
 
 export type AutoCompleteActions = ActionMap<
@@ -17,8 +17,8 @@ export const AutoCompleteReducer = (
   action: AutoCompleteActions
 ) => {
   switch (action.type) {
-    // case AutoCompleteAction.Set:
-    //   return { ...state, value: action.payload };
+    case AutoCompleteAction.Set:
+      return { ...state, value: action.payload };
 
     default:
       return state;

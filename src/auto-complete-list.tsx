@@ -14,7 +14,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
 
     const filteredItems = state.item.filtered;
     const emptyState = state.autocomplete.emptyState;
-    const isVisible = true;
+    const isVisible = state.list.visible;
 
     const isEmpty = filteredItems.length < 1 && !emptyState;
 

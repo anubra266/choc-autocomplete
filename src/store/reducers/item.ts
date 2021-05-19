@@ -14,11 +14,11 @@ export enum ItemAction {
 }
 
 type ItemPayload = {
-  [ItemAction.Set]: number;
-  [ItemAction.SetAll]: Item[];
+  [ItemAction.Set]: State['item']['active'];
+  [ItemAction.SetAll]: State['item']['list'];
   [ItemAction.SetWithKey]: string;
-  [ItemAction.SetFiltered]: Item[];
-  [ItemAction.ResetActive]: undefined;
+  [ItemAction.SetFiltered]: State['item']['filtered'];
+  [ItemAction.ResetActive]: boolean;
 };
 
 export type ItemActions = ActionMap<ItemPayload>[keyof ActionMap<ItemPayload>];
@@ -39,7 +39,10 @@ export const itemReducer = (state: State['item'], action: ItemActions) => {
       return { ...state, filtered: action.payload };
 
     case ItemAction.ResetActive:
-      return { ...state, active: 0 };
+      return {
+        ...state,
+        active: action.payload ? state.filtered.length - 1 : 0,
+      };
 
     default:
       return state;

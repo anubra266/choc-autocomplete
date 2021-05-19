@@ -19,7 +19,7 @@ const App = () => {
   // };
   return (
     <Flex mt="50px" align="center" direction="column">
-      <AutoComplete>
+      <AutoComplete rollNavigation focusInputOnSelect>
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
