@@ -1,6 +1,7 @@
 import * as React from 'react';
 import {
   AutoComplete,
+  AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
@@ -31,6 +32,13 @@ const App = () => {
               {option}{' '}
             </AutoCompleteItem>
           ))}
+          <AutoCompleteGroup>
+            {fruits.map((fruit, fid) => (
+              <AutoCompleteItem value={fruit} key={`fruit-${fid}`}>
+                {fruit}{' '}
+              </AutoCompleteItem>
+            ))}
+          </AutoCompleteGroup>
         </AutoCompleteList>
       </AutoComplete>
       {/* <Button mt="150px" onClick={() => setOptions(o => [...o, 'new'])}>

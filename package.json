@@ -20,7 +20,7 @@
     "analyze": "size-limit --why"
   },
   "peerDependencies": {
-    "@chakra-ui/react": ">=1.6.1",
+    "@chakra-ui/react": ">=1.6.2",
     "react": ">=16"
   },
   "husky": {

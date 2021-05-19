@@ -1,7 +1,7 @@
 import { ActionMap, State } from '..';
 
 export enum InputAction {
-  Set = 'SET_INPUT',
+  Set = 'SET_INPUT_VALUE',
 }
 
 type InputPayload = {

@@ -1,8 +1,10 @@
 import React, { createContext, Dispatch, ProviderProps } from 'react';
 import { InputActions } from './reducers/input';
+import { ItemActions } from './reducers/item';
 
 export interface State {
   input: { value: string };
+  item: { active: number; list: string[] };
 }
 
 export type ActionMap<M extends Record<string, any>> = {
@@ -18,13 +20,13 @@ export type ActionMap<M extends Record<string, any>> = {
 
 type ContextValue = {
   state: State;
-  dispatch: Dispatch<InputActions>;
+  dispatch: Dispatch<InputActions | ItemActions>;
 };
 
-export const Store = createContext({} as ContextValue);
+export const StoreContext = createContext({} as ContextValue);
 
 const StoreProvider = (props: ProviderProps<ContextValue>) => (
-  <Store.Provider {...props} />
+  <StoreContext.Provider {...props} />
 );
 
 export default StoreProvider;
