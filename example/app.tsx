@@ -18,12 +18,10 @@ const App = () => {
   };
   return (
     <Flex mt="150px" align="center" direction="column">
-      outValue: {outValue}
       <AutoComplete>
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
-          // defaultValue="red"
           value={outValue}
           onChange={handleChange}
         />
@@ -35,9 +33,9 @@ const App = () => {
           ))}
         </AutoCompleteList>
       </AutoComplete>
-      <Button mt="150px" onClick={() => setOptions(o => [...o, 'new'])}>
+      {/* <Button mt="150px" onClick={() => setOptions(o => [...o, 'new'])}>
         Add Option
-      </Button>
+      </Button> */}
     </Flex>
   );
 };

@@ -11,6 +11,16 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
       pos: 'absolute',
       w: 'full',
       zIndex: 'popover',
+      mt: '4',
+      py: '4',
+      bg: 'blackAlpha.200',
+      shadow: 'base',
+      rounded: 'md',
+      maxH: '400px',
+      overflowY: 'auto',
+      // opacity: '0',
+      // visibility: 'hidden',
+      // transition: '.3s ease',
     };
 
     return (

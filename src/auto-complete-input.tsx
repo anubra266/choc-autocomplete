@@ -11,9 +11,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const { onChange, ...rest } = props;
     const inputRef = useMergeRefs(ref);
 
-    const { state, dispatch } = useContext(Store);
-
-    const value = state.input.value;
+    const { dispatch } = useContext(Store);
 
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
       runIfFn(onChange, e);
@@ -22,7 +20,6 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     return (
       <>
-        value:{value}
         <Input onChange={handleChange} ref={inputRef} {...rest} />
       </>
     );
