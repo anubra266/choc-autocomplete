@@ -1,8 +1,8 @@
-import { Box, BoxProps, forwardRef } from '@chakra-ui/react';
+import { Box, BoxProps, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 import React, { useContext, useEffect } from 'react';
-import { getItemKeys, setGroupItemKeys } from './helpers/list';
+import { getItemKeys, handleItemGroup } from './helpers/list';
 import { StoreContext } from './store';
-import { ItemAction } from './store/reducers/item';
+import { Item, ItemAction } from './store/reducers/item';
 import { isChild } from './utils/components';
 
 interface AutoCompleteList extends BoxProps {}
@@ -10,10 +10,12 @@ interface AutoCompleteList extends BoxProps {}
 export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
   (props, ref) => {
     const { children, ...rest } = props;
-    const { dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useContext(StoreContext);
+
+    const filteredItems = state.item.filtered;
 
     useEffect(() => {
-      const itemValues: string[] = getItemKeys(children);
+      const itemValues: Item[] = getItemKeys(children);
       dispatch({ type: ItemAction.SetAll, payload: itemValues });
     }, [children]);
 
@@ -22,7 +24,11 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
             ? React.cloneElement(child, { optionKey: child.key })
-            : setGroupItemKeys(child)
+            : handleItemGroup(child, state)
+        )}
+
+        {filteredItems.length < 1 && (
+          <Flex {...emptyStyles}>No options found!</Flex>
         )}
       </Box>
     );
@@ -48,4 +54,12 @@ const baseStyles: BoxProps = {
   // opacity: '0',
   // visibility: 'hidden',
   // transition: '.3s ease',
+};
+
+const emptyStyles: FlexProps = {
+  justify: 'center',
+  align: 'center',
+  fontSize: 'sm',
+  fontStyle: 'italic',
+  fontWeight: 'bold',
 };

@@ -3,6 +3,7 @@ import React, { useContext } from 'react';
 import { runIfFn } from './utils/runIfFn';
 import { StoreContext } from './store';
 import { InputAction } from './store/reducers/input';
+import { useOptionsFilter } from './helpers/input';
 
 interface AutoCompleteInput extends InputProps {}
 
@@ -13,9 +14,12 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     const { dispatch } = useContext(StoreContext);
 
+    useOptionsFilter();
+
     const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+      const newValue = e.target.value;
       runIfFn(onChange, e);
-      dispatch({ type: InputAction.Set, payload: e.target.value });
+      dispatch({ type: InputAction.Set, payload: newValue });
     };
 
     return (

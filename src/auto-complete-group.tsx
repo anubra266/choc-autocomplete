@@ -2,12 +2,15 @@ import {
   Box,
   Flex,
   FlexProps,
+  forwardRef,
   Stack,
   StackProps,
   Text,
   TextProps,
-} from '@chakra-ui/layout';
-import React from 'react';
+} from '@chakra-ui/react';
+import React, { useContext } from 'react';
+import { hasFirstOption } from './helpers/group';
+import { StoreContext } from './store';
 
 interface AutoCompleteGroup extends StackProps {
   children?: any;
@@ -17,32 +20,41 @@ interface AutoCompleteGroup extends StackProps {
   dividerColor?: string;
 }
 
-export const AutoCompleteGroup = (props: AutoCompleteGroup) => {
-  const {
-    title,
-    titleStyles: customTitleStyles,
-    children,
-    showDivider,
-    dividerColor,
-    ...rest
-  } = props;
+export const AutoCompleteGroup = forwardRef<AutoCompleteGroup, 'div'>(
+  (props, ref) => {
+    const {
+      title,
+      titleStyles: customTitleStyles,
+      children,
+      showDivider,
+      dividerColor,
+      ...rest
+    } = props;
 
-  return (
-    <>
-      {showDivider && (
-        <Flex {...baseDividerStyles} borderColor={dividerColor || 'inherit'} />
-      )}
-      <Stack spacing="1" {...rest}>
-        {title && (
-          <Text {...baseTitleStyles} {...customTitleStyles}>
-            {title}
-          </Text>
+    const { state } = useContext(StoreContext);
+
+    const noDivider = hasFirstOption(children, state);
+
+    return (
+      <div ref={ref}>
+        {showDivider && !noDivider && (
+          <Flex
+            {...baseDividerStyles}
+            borderColor={dividerColor || 'inherit'}
+          />
         )}
-        <Box>{children}</Box>
-      </Stack>
-    </>
-  );
-};
+        <Stack spacing="1" {...rest}>
+          {title && (
+            <Text {...baseTitleStyles} {...customTitleStyles}>
+              {title}
+            </Text>
+          )}
+          <Box>{children}</Box>
+        </Stack>
+      </div>
+    );
+  }
+);
 
 AutoCompleteGroup.displayName = 'AutoCompleteGroup';
 
@@ -55,6 +67,7 @@ const baseDividerStyles: FlexProps = {
 
 const baseTitleStyles: TextProps = {
   ml: '5',
+  mt: '0.5rem',
   fontSize: 'xs',
   letterSpacing: 'wider',
   fontWeight: 'extrabold',

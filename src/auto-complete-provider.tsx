@@ -21,6 +21,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     item: {
       active: -1,
       list: [],
+      filtered: [],
     },
   };
 

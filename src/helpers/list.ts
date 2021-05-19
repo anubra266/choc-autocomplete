@@ -1,9 +1,13 @@
 import React, { ReactNode } from 'react';
+import { State } from '../store';
+import { Item } from '../store/reducers/item';
 import { isChild } from '../utils/components';
 
-export const setGroupItemKeys = (group: any) => {
+export const handleItemGroup = (group: any, state: State) => {
+  const isValidItem = (child: any) =>
+    state.item.filtered.some(i => i.key === child.key);
+
   if (isChild(group, 'AutoCompleteGroup')) {
-    //TODO return null if there's no valid child here
     const children: any[] = group.props.children;
     const childrenWithKeys = children.reduce((acc, child) => {
       acc.push(
@@ -13,17 +17,30 @@ export const setGroupItemKeys = (group: any) => {
       );
       return acc;
     }, []);
-    return React.cloneElement(group, { children: childrenWithKeys });
+    return group.props.children.every(
+      (groupChild: any) => !isValidItem(groupChild)
+    )
+      ? null
+      : React.cloneElement(group, { children: childrenWithKeys });
   } else return group;
 };
 
 export const getItemKeys: string[] | any = (children: ReactNode) => {
-  return React.Children.map(children, (child: any) => {
-    return (
-      isChild(child, 'AutoCompleteItem') ||
-      child.props.children?.map((item: any) =>
-        isChild(item, 'AutoCompleteItem')
-      )
-    );
+  const items: Item[] = [];
+
+  React.Children.map(children, (child: any) => {
+    if (isChild(child, 'AutoCompleteItem')) items.push(getChildProps(child));
+    else
+      return child.props.children?.map((option: any) => {
+        if (isChild(option, 'AutoCompleteItem'))
+          items.push(getChildProps(option));
+        else return;
+      });
   });
+  return items;
 };
+
+const getChildProps = (child: any) => ({
+  key: child.key,
+  value: child.props.value,
+});

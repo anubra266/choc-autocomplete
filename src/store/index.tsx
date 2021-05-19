@@ -1,10 +1,10 @@
 import React, { createContext, Dispatch, ProviderProps } from 'react';
 import { InputActions } from './reducers/input';
-import { ItemActions } from './reducers/item';
+import { Item, ItemActions } from './reducers/item';
 
 export interface State {
   input: { value: string };
-  item: { active: number; list: string[] };
+  item: { active: number; list: Item[]; filtered: Item[] };
 }
 
 export type ActionMap<M extends Record<string, any>> = {

@@ -12,27 +12,31 @@ import { useTheme } from '@chakra-ui/system';
 const App = () => {
   const defOptions = ['apple', 'appoint', 'zap', 'cap', 'japan'];
   const [options, setOptions] = React.useState(defOptions);
-  const [outValue, setOutValue] = React.useState('');
-  const handleChange = (e: any) => {
-    console.log(e.target.value);
-    setOutValue(e.target.value);
-  };
+  // const [outValue, setOutValue] = React.useState('');
+  // const handleChange = (e: any) => {
+  //   console.log(e.target.value);
+  //   setOutValue(e.target.value);
+  // };
   return (
-    <Flex mt="150px" align="center" direction="column">
+    <Flex mt="50px" align="center" direction="column">
       <AutoComplete>
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
-          value={outValue}
-          onChange={handleChange}
+          // value={outValue}
+          // onChange={handleChange}
         />
         <AutoCompleteList>
           {options.map((option, oid) => (
-            <AutoCompleteItem value={option} key={`option-${oid}`}>
+            <AutoCompleteItem
+              textTransform="capitalize"
+              value={option}
+              key={`option-${oid}`}
+            >
               {option}{' '}
             </AutoCompleteItem>
           ))}
-          <AutoCompleteGroup>
+          <AutoCompleteGroup title="fruits" showDivider>
             {fruits.map((fruit, fid) => (
               <AutoCompleteItem value={fruit} key={`fruit-${fid}`}>
                 {fruit}{' '}
