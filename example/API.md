@@ -1,17 +1,13 @@
-
 ---
 `Prop`
-
----
-
-**Description**
+---**Description**
 
 > Description
 
 **Type**
 
 ```ts
-boolean
+boolean;
 ```
 
 **Default**
@@ -22,3 +18,17 @@ boolean
 
 No
 
+Autocomplete
+--
+emptyState
+
+Item
+--
+value:string;
+
+Group
+--
+title?: string;
+titleStyles?: TextProps;
+showDivider?: boolean;
+dividerColor?: string;

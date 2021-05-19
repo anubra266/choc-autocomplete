@@ -16,15 +16,24 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     useOptionsFilter();
 
-    const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
       const newValue = e.target.value;
       runIfFn(onChange, e);
       dispatch({ type: InputAction.Set, payload: newValue });
     };
 
+    const handleOnKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
+      
+    };
+
     return (
       <>
-        <Input onChange={handleChange} ref={inputRef} {...rest} />
+        <Input
+          onChange={handleChange}
+          onKeyDown={handleOnKeyDown}
+          ref={inputRef}
+          {...rest}
+        />
       </>
     );
   }

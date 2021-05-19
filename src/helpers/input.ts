@@ -12,5 +12,6 @@ export const useOptionsFilter = () => {
 
   useEffect(() => {
     dispatch({ type: ItemAction.SetFiltered, payload: filteredItems });
+    dispatch({ type: ItemAction.ResetActive });
   }, [inputValue, options]);
 };

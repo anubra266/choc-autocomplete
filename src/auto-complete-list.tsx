@@ -13,6 +13,10 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
     const { state, dispatch } = useContext(StoreContext);
 
     const filteredItems = state.item.filtered;
+    const emptyState = state.autocomplete.emptyState;
+    const isVisible = true;
+
+    const isEmpty = filteredItems.length < 1 && !emptyState;
 
     useEffect(() => {
       const itemValues: Item[] = getItemKeys(children);
@@ -20,16 +24,25 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
     }, [children]);
 
     return (
-      <Box {...baseStyles} ref={ref} {...rest}>
+      <Box
+        {...baseStyles}
+        {...(isVisible && !isEmpty && visibleStyles)}
+        ref={ref}
+        {...rest}
+      >
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
             ? React.cloneElement(child, { optionKey: child.key })
             : handleItemGroup(child, state)
         )}
 
-        {filteredItems.length < 1 && (
-          <Flex {...emptyStyles}>No options found!</Flex>
-        )}
+        {filteredItems.length < 1 &&
+          emptyState &&
+          (typeof emptyState === 'boolean' ? (
+            <Flex {...emptyStyles}>No options found!</Flex>
+          ) : (
+            emptyState
+          ))}
       </Box>
     );
   }
@@ -51,9 +64,14 @@ const baseStyles: BoxProps = {
   _light: {
     bg: '#ffffff',
   },
-  // opacity: '0',
-  // visibility: 'hidden',
-  // transition: '.3s ease',
+  opacity: '0',
+  visibility: 'hidden',
+  transition: '.3s ease',
+};
+
+const visibleStyles: BoxProps = {
+  opacity: 1,
+  visibility: 'visible',
 };
 
 const emptyStyles: FlexProps = {

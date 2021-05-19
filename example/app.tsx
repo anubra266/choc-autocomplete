@@ -45,7 +45,11 @@ const App = () => {
           </AutoCompleteGroup>
         </AutoCompleteList>
       </AutoComplete>
-      {/* <Button mt="150px" onClick={() => setOptions(o => [...o, 'new'])}>
+      {/* <Button
+        zIndex="tooltip"
+        mt="150px"
+        onClick={() => setOptions(o => [...o, 'new'])}
+      >
         Add Option
       </Button> */}
     </Flex>
@@ -53,7 +57,7 @@ const App = () => {
 };
 export default App;
 
-const fruits = ['Apple', 'Grape', 'Pawpaw'];
+const fruits = ['Banana', 'Grape', 'Pawpaw'];
 const countries = ['Korea', 'Nigeria', 'India'];
 const europeans = [
   { name: 'Dan Abramov', image: 'https://bit.ly/dan-abramov' },

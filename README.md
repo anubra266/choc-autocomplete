@@ -1,4 +1,4 @@
-# use [This](https://github.com/anubra266/old_chakra-autocomplete) for now !!!
+# Docs [here](https://github.com/anubra266/old_chakra-autocomplete) for now !!!
 
 <div align="center">
   <h1>
@@ -33,7 +33,7 @@
   <br />
   <br />
   <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">@choc-ui/autocomplete</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">@choc-ui/chakra-autocomplete</a></pre>
   <br />
   <br />
   <br />

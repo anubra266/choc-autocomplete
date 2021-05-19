@@ -12,13 +12,16 @@ interface AutoCompleteItem extends FlexProps {
 export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
   (props, ref) => {
     const { children, optionKey = '', onMouseOver, ...rest } = props;
-    const { state, dispatch } = useContext(StoreContext);
-    const activeItem = state.item.filtered[state.item.active];
+    const {
+      state: { item },
+      dispatch,
+    } = useContext(StoreContext);
+    const activeItem = item.filtered[item.active];
     const isActiveItem = activeItem?.key === optionKey;
-    const isValidSuggestion = state.item.filtered.some(
+    const isValidSuggestion =item.filtered.some(
       i => i.key === optionKey
     );
-
+ 
     const handleMouseOver: any = (e: MouseEventHandler<HTMLDivElement>) => {
       runIfFn(onMouseOver, e);
       dispatch({ type: ItemAction.SetWithKey, payload: optionKey });

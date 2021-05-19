@@ -1,8 +1,10 @@
 import React, { createContext, Dispatch, ProviderProps } from 'react';
+import { AutoComplete } from '../auto-complete-provider';
 import { InputActions } from './reducers/input';
 import { Item, ItemActions } from './reducers/item';
 
 export interface State {
+  autocomplete: Pick<AutoComplete, 'emptyState'>;
   input: { value: string };
   item: { active: number; list: Item[]; filtered: Item[] };
 }
