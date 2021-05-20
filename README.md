@@ -270,9 +270,9 @@ export default () => {
 
 ---
 
-## Multiple Selection
+<!-- ## Multiple Selection
 
-> Add an `AutoCompleteTags` Component to enable multiple selections.
+> Add an `AutoCompleteTags` Component to enable multiple selections. -->
 
 ## API Reference
 
