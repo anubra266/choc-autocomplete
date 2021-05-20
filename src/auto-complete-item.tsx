@@ -1,5 +1,6 @@
 import { CSSObject, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 import React, { MouseEventHandler, useContext } from 'react';
+import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { InputAction } from './store/reducers/input';
@@ -49,26 +50,18 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       dispatch({ type: AutoCompleteAction.Set, payload: itemValue });
       returnT(inputRef?.current).value = itemValue;
       if (focusInputOnSelect) inputRef?.current?.focus();
-      dispatch({ type: ListAction.Hide });
+      dispatch({ type: ListAction.Show });
     };
 
-    const emphasizer =
-      typeof children === 'string' ? children.toString() : itemValue;
-    const emphasizedChildString = emphasizer.replace(
-      new RegExp(inputValue, 'gi'),
-      (match: any) => `<a class="emphasizedResult">${match}</a>`
-    );
-    const emphasizedChild = (
-      <span dangerouslySetInnerHTML={{ __html: emphasizedChildString }} />
-    );
+    const { itemChild, emphasizeStyles } = useEmphasizer({
+      emphasize,
+      inputValue,
+      optionKey,
+      children,
+      itemValue,
+    });
+
     const isNewInput = optionKey === 'newInput';
-    const itemChild = isNewInput || !emphasize ? children : emphasizedChild;
-    const emphasizeStyles =
-      typeof emphasize === 'object'
-        ? emphasize
-        : {
-            fontWeight: 'extrabold',
-          };
 
     return isValidSuggestion ? (
       <Flex
@@ -79,12 +72,12 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
         {...(isActiveItem && (_focus || activeStyles))}
         sx={{
           ...sx,
-          '.emphasizedResult': emphasizeStyles,
+          '.emphasizedItem': emphasizeStyles,
         }}
         ref={ref}
         {...rest}
       >
-        {itemChild}
+        {isNewInput ? children : itemChild}
       </Flex>
     ) : null;
   }

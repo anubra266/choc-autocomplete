@@ -13,12 +13,16 @@ export const useOptionsFilter = () => {
   const { state, dispatch } = useContext(StoreContext);
   const inputValue = state.input.value;
   const options = state.item.list;
+  const creatable = state.autocomplete.creatable;
   const filteredItems = options.filter(
     item => item.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
   );
 
   useEffect(() => {
-    dispatch({ type: ItemAction.SetFiltered, payload: filteredItems });
+    const filterPayload = creatable
+      ? [...filteredItems, creatable && { key: 'newInput', value: inputValue }]
+      : filteredItems;
+    dispatch({ type: ItemAction.SetFiltered, payload: filterPayload });
     dispatch({ type: ItemAction.ResetActive, payload: false });
   }, [inputValue, options]);
 };

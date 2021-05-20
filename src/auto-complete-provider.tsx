@@ -21,6 +21,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   rollNavigation?: boolean;
   focusInputOnSelect?: boolean;
   freeSolo?: boolean;
+  creatable?: boolean;
   selectOnFocus?: boolean;
   openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;
@@ -32,6 +33,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     rollNavigation,
     focusInputOnSelect,
     freeSolo,
+    creatable,
     selectOnFocus,
     openOnFocus,
     emphasize,
@@ -48,6 +50,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
       rollNavigation,
       focusInputOnSelect,
       freeSolo,
+      creatable,
       selectOnFocus,
       openOnFocus,
       emphasize,

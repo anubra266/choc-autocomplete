@@ -1,5 +1,7 @@
-import { Box, BoxProps, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
+import { Box, BoxProps, chakra, forwardRef } from '@chakra-ui/react';
 import React, { useContext, useEffect } from 'react';
+import { AutoCompleteItem } from './auto-complete-item';
+import { EmptyState } from './components/empty-state';
 import { getItemKeys, handleItemGroup } from './helpers/list';
 import { StoreContext } from './store';
 import { Item, ItemAction } from './store/reducers/item';
@@ -11,17 +13,28 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
   (props, ref) => {
     const { children, ...rest } = props;
     const { state, dispatch } = useContext(StoreContext);
+    const { autocomplete, item, list, input } = state;
 
-    const filteredItems = state.item.filtered;
-    const emptyState = state.autocomplete.emptyState;
-    const isVisible = state.list.visible;
+    const filteredItems = item.filtered;
+    const emptyState = autocomplete.emptyState;
+    const emphasize = autocomplete.emphasize;
+    const isVisible = list.visible;
+    const inputValue = input.value;
 
     const isEmpty = filteredItems.length < 1 && !emptyState;
+    const itemExists = item.list.some(i => i.value === input.value);
 
     useEffect(() => {
       const itemValues: Item[] = getItemKeys(children);
       dispatch({ type: ItemAction.SetAll, payload: itemValues });
     }, [children]);
+
+    const emphasizeStyles =
+      typeof emphasize === 'object'
+        ? emphasize
+        : {
+            fontWeight: 'extrabold',
+          };
 
     return (
       <Box
@@ -36,13 +49,14 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
             : handleItemGroup(child, state)
         )}
 
-        {filteredItems.length < 1 &&
-          emptyState &&
-          (typeof emptyState === 'boolean' ? (
-            <Flex {...emptyStyles}>No options found!</Flex>
-          ) : (
-            emptyState
-          ))}
+        {!!inputValue.length && autocomplete.creatable && !itemExists && (
+          <AutoCompleteItem value={inputValue} optionKey="newInput">
+            Add &nbsp;
+            <chakra.span sx={emphasizeStyles}>"{inputValue}"</chakra.span>
+          </AutoCompleteItem>
+        )}
+
+        <EmptyState />
       </Box>
     );
   }
@@ -73,12 +87,4 @@ const baseStyles: BoxProps = {
 const visibleStyles: BoxProps = {
   opacity: 1,
   visibility: 'visible',
-};
-
-const emptyStyles: FlexProps = {
-  fontSize: 'sm',
-  align: 'center',
-  justify: 'center',
-  fontWeight: 'bold',
-  fontStyle: 'italic',
 };
