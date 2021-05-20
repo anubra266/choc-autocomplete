@@ -7,6 +7,7 @@ import {
 } from '../store/reducers/autocomplete';
 import { InputAction, InputActions } from '../store/reducers/input';
 import { returnT } from '../utils/operations';
+import { ListAction, ListActions } from '../store/reducers/list';
 
 export const useOptionsFilter = () => {
   const { state, dispatch } = useContext(StoreContext);
@@ -25,7 +26,9 @@ export const useOptionsFilter = () => {
 export const handleNavigation = (
   e: React.KeyboardEvent<HTMLInputElement>,
   state: State,
-  dispatch: React.Dispatch<AutoCompleteActions | InputActions | ItemActions>,
+  dispatch: React.Dispatch<
+    AutoCompleteActions | InputActions | ItemActions | ListActions
+  >,
   inputRef: React.RefObject<HTMLInputElement>
 ) => {
   const { autocomplete, item } = state;
@@ -35,6 +38,7 @@ export const handleNavigation = (
     dispatch({ type: InputAction.Set, payload: activeItem.value });
     dispatch({ type: AutoCompleteAction.Set, payload: activeItem.value });
     returnT(inputRef.current).value = activeItem.value;
+    dispatch({ type: ListAction.Hide });
   } else if (e.key === 'ArrowUp') {
     if (item.active === 0) {
       if (autocomplete.rollNavigation)

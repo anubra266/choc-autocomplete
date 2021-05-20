@@ -1,5 +1,10 @@
-import { BoxProps, forwardRef } from '@chakra-ui/react';
-import React, { ReactNode, useMemo, useReducer } from 'react';
+import {
+  BoxProps,
+  CSSObject,
+  forwardRef,
+  useMergeRefs,
+} from '@chakra-ui/react';
+import React, { ReactNode, useMemo, useReducer, useRef } from 'react';
 import { AutoCompleteBody } from './auto-complete';
 import StoreProvider, { State } from './store';
 import { AutoCompleteReducer } from './store/reducers/autocomplete';
@@ -11,14 +16,30 @@ type ChildrenProps = { isOpen: boolean; onClose: () => void };
 
 export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   children: ((props?: ChildrenProps) => ReactNode) | ReactNode;
-  onChange: (value: string) => void;
+  onChange?: (value: string) => void;
   emptyState?: boolean | ReactNode;
   rollNavigation?: boolean;
   focusInputOnSelect?: boolean;
+  freeSolo?: boolean;
+  selectOnFocus?: boolean;
+  openOnFocus?: boolean;
+  emphasize?: boolean | CSSObject;
 }
 
 export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
-  const { emptyState, rollNavigation, focusInputOnSelect, ...rest } = props;
+  const {
+    emptyState,
+    rollNavigation,
+    focusInputOnSelect,
+    freeSolo,
+    selectOnFocus,
+    openOnFocus,
+    emphasize,
+    ...rest
+  } = props;
+
+  const inRef = useRef<HTMLDivElement>(null);
+  const refs = useMergeRefs(inRef, ref);
 
   const initialState: State = {
     autocomplete: {
@@ -26,6 +47,10 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
       emptyState,
       rollNavigation,
       focusInputOnSelect,
+      freeSolo,
+      selectOnFocus,
+      openOnFocus,
+      emphasize,
     },
     input: {
       value: '',
@@ -63,7 +88,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
 
   return (
     <StoreProvider value={providerValue}>
-      <AutoCompleteBody ref={ref} {...rest} />
+      <AutoCompleteBody ref={refs} {...rest} />
     </StoreProvider>
   );
 });

@@ -1,3 +1,4 @@
+import { BoxProps } from '@chakra-ui/layout';
 import React, { createContext, Dispatch, ProviderProps } from 'react';
 import { AutoComplete } from '../auto-complete-provider';
 import { AutoCompleteActions } from './reducers/autocomplete';
@@ -6,10 +7,7 @@ import { Item, ItemActions } from './reducers/item';
 import { ListActions } from './reducers/list';
 
 export interface State {
-  autocomplete: { value: string } & Pick<
-    AutoComplete,
-    'emptyState' | 'rollNavigation' | 'focusInputOnSelect'
-  >;
+  autocomplete: { value: string } & Omit<AutoComplete, keyof BoxProps>;
   input: {
     value: string;
     ref: React.RefObject<HTMLInputElement> | undefined;

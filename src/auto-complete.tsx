@@ -8,6 +8,7 @@ import { ListAction } from './store/reducers/list';
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
     const { children, onChange, ...rest } = props;
+
     const {
       state: {
         autocomplete: { value: autoCompleteValue },

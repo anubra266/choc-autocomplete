@@ -18,7 +18,7 @@ export const listReducer = (state: State['list'], action: ListActions) => {
       return { ...state, visible: true };
 
     case ListAction.Hide:
-      return { ...state, visible: true };
+      return { ...state, visible: false };
 
     default:
       return state;

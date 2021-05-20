@@ -1,14 +1,16 @@
-import { Flex, FlexProps, forwardRef } from '@chakra-ui/react';
+import { CSSObject, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 import React, { MouseEventHandler, useContext } from 'react';
 import { StoreContext } from './store';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { InputAction } from './store/reducers/input';
 import { ItemAction } from './store/reducers/item';
+import { ListAction } from './store/reducers/list';
 import { returnT, runIfFn } from './utils/operations';
 
 interface AutoCompleteItem extends FlexProps {
   value: string;
-  optionKey?: never;
+  _focus?: CSSObject | any;
+  optionKey?: string;
 }
 
 export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
@@ -16,15 +18,18 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
     const {
       children,
       value: itemValue,
-      optionKey = '',
+      optionKey,
+      _hover,
+      _focus,
       onMouseOver,
       onClick,
+      sx,
       ...rest
     } = props;
     const {
       state: {
-        autocomplete: { focusInputOnSelect },
-        input: { ref: inputRef },
+        autocomplete: { focusInputOnSelect, emphasize },
+        input: { ref: inputRef, value: inputValue },
         item,
       },
       dispatch,
@@ -35,7 +40,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
 
     const handleMouseOver: MouseEventHandler<HTMLDivElement> = e => {
       runIfFn(onMouseOver, e);
-      dispatch({ type: ItemAction.SetWithKey, payload: optionKey });
+      dispatch({ type: ItemAction.SetWithKey, payload: optionKey || '' });
     };
 
     const handleOnClick: MouseEventHandler<HTMLDivElement> = e => {
@@ -44,18 +49,42 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       dispatch({ type: AutoCompleteAction.Set, payload: itemValue });
       returnT(inputRef?.current).value = itemValue;
       if (focusInputOnSelect) inputRef?.current?.focus();
+      dispatch({ type: ListAction.Hide });
     };
+
+    const emphasizer =
+      typeof children === 'string' ? children.toString() : itemValue;
+    const emphasizedChildString = emphasizer.replace(
+      new RegExp(inputValue, 'gi'),
+      (match: any) => `<a class="emphasizedResult">${match}</a>`
+    );
+    const emphasizedChild = (
+      <span dangerouslySetInnerHTML={{ __html: emphasizedChildString }} />
+    );
+    const isNewInput = optionKey === 'newInput';
+    const itemChild = isNewInput || !emphasize ? children : emphasizedChild;
+    const emphasizeStyles =
+      typeof emphasize === 'object'
+        ? emphasize
+        : {
+            fontWeight: 'extrabold',
+          };
 
     return isValidSuggestion ? (
       <Flex
         onMouseOver={handleMouseOver}
         onClick={handleOnClick}
         {...baseStyles}
-        {...(isActiveItem && activeStyles)}
+        _hover={_hover}
+        {...(isActiveItem && (_focus || activeStyles))}
+        sx={{
+          ...sx,
+          '.emphasizedResult': emphasizeStyles,
+        }}
         ref={ref}
         {...rest}
       >
-        {children}
+        {itemChild}
       </Flex>
     ) : null;
   }

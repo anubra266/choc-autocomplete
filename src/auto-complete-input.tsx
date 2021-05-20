@@ -1,9 +1,10 @@
 import { forwardRef, Input, InputProps, useMergeRefs } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef } from 'react';
-import { runIfFn } from './utils/operations';
+import { returnT, runIfFn } from './utils/operations';
 import { StoreContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
+import { ListAction } from './store/reducers/list';
 
 interface AutoCompleteInput extends InputProps {}
 
@@ -14,7 +15,8 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const inputRef = useMergeRefs(ref, internalRef);
 
     const { state, dispatch } = useContext(StoreContext);
-    const { autocomplete } = state;
+    const { autocomplete, item } = state;
+    const isEmpty = item.filtered.length < 1 && !autocomplete.emptyState;
 
     useOptionsFilter();
     useEffect(() => {
@@ -25,6 +27,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
       const newValue = e.target.value;
       runIfFn(onChange, e);
       dispatch({ type: InputAction.Set, payload: newValue });
+      if (!isEmpty) dispatch({ type: ListAction.Show });
     };
 
     const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
@@ -34,15 +37,19 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onFocus, e);
+      if (autocomplete.selectOnFocus) e.target.select();
+      if (autocomplete.openOnFocus) dispatch({ type: ListAction.Show });
     };
 
     const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onBlur, e);
       const newValue = e.target.value;
-      if (newValue !== autocomplete.value) {
+      if (newValue !== autocomplete.value && !autocomplete.freeSolo) {
         runIfFn(onChange, e);
-        dispatch({ type: InputAction.Set, payload: newValue });
+        dispatch({ type: InputAction.Set, payload: autocomplete.value });
+        returnT(internalRef.current).value = autocomplete.value;
       }
+      dispatch({ type: ListAction.Hide });
     };
 
     return (

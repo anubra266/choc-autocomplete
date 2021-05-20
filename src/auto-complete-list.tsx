@@ -51,22 +51,23 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
 AutoCompleteList.displayName = 'AutoCompleteList';
 
 const baseStyles: BoxProps = {
-  pos: 'absolute',
-  w: 'full',
-  zIndex: 'popover',
   mt: '4',
   py: '4',
+  w: 'full',
+  opacity: '0',
   bg: '#232934',
-  shadow: 'base',
   rounded: 'md',
   maxH: '400px',
+  shadow: 'base',
+  pos: 'absolute',
+  zIndex: 'popover',
   overflowY: 'auto',
+  visibility: 'hidden',
+  transition: '.3s ease',
+
   _light: {
     bg: '#ffffff',
   },
-  opacity: '0',
-  visibility: 'hidden',
-  transition: '.3s ease',
 };
 
 const visibleStyles: BoxProps = {
@@ -75,9 +76,9 @@ const visibleStyles: BoxProps = {
 };
 
 const emptyStyles: FlexProps = {
-  justify: 'center',
-  align: 'center',
   fontSize: 'sm',
-  fontStyle: 'italic',
+  align: 'center',
+  justify: 'center',
   fontWeight: 'bold',
+  fontStyle: 'italic',
 };
