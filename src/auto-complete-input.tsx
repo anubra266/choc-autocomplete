@@ -1,6 +1,6 @@
 import { forwardRef, Input, InputProps, useMergeRefs } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef } from 'react';
-import { returnT, runIfFn } from './utils/operations';
+import { runIfFn } from './utils/operations';
 import { StoreContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
@@ -10,7 +10,7 @@ interface AutoCompleteInput extends InputProps {}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
   (props, ref) => {
-    const { onChange, onKeyDown, onFocus, onBlur, ...rest } = props;
+    const { onChange, onKeyDown, onFocus, onClick, ...rest } = props;
     const internalRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs(ref, internalRef);
 
@@ -41,15 +41,9 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
       if (autocomplete.openOnFocus) dispatch({ type: ListAction.Show });
     };
 
-    const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
-      runIfFn(onBlur, e);
-      const newValue = e.target.value;
-      if (newValue !== autocomplete.value && !autocomplete.freeSolo) {
-        runIfFn(onChange, e);
-        dispatch({ type: InputAction.Set, payload: autocomplete.value });
-        returnT(internalRef.current).value = autocomplete.value;
-      }
-      dispatch({ type: ListAction.Hide });
+    const handleClick: React.MouseEventHandler<HTMLInputElement> = e => {
+      runIfFn(onClick, e);
+      e.stopPropagation();
     };
 
     return (
@@ -58,7 +52,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}
-          onBlur={handleBlur}
+          onClick={handleClick}
           ref={inputRef}
           {...rest}
         />

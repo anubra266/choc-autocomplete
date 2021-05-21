@@ -23,7 +23,7 @@ const App = () => {
         rollNavigation
         focusInputOnSelect
         openOnFocus
-        emphasize
+        emphasize freeSolo
         creatable
       >
         <AutoCompleteInput variant="filled" placeholder="Search..." />

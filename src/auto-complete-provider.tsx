@@ -1,11 +1,7 @@
-import {
-  BoxProps,
-  CSSObject,
-  forwardRef,
-  useMergeRefs,
-} from '@chakra-ui/react';
-import React, { ReactNode, useMemo, useReducer, useRef } from 'react';
+import { BoxProps, CSSObject, forwardRef } from '@chakra-ui/react';
+import React, { ReactNode, useMemo, useReducer } from 'react';
 import { AutoCompleteBody } from './auto-complete';
+import { useParseProps } from './helpers/provider';
 import StoreProvider, { State } from './store';
 import { AutoCompleteReducer } from './store/reducers/autocomplete';
 import { inputReducer } from './store/reducers/input';
@@ -39,9 +35,6 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     emphasize,
     ...rest
   } = props;
-
-  const inRef = useRef<HTMLDivElement>(null);
-  const refs = useMergeRefs(inRef, ref);
 
   const initialState: State = {
     autocomplete: {
@@ -89,9 +82,11 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     [state, dispatch]
   );
 
+  useParseProps(props);
+
   return (
     <StoreProvider value={providerValue}>
-      <AutoCompleteBody ref={refs} {...rest} />
+      <AutoCompleteBody ref={ref} {...rest} />
     </StoreProvider>
   );
 });

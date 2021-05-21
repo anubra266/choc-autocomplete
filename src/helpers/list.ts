@@ -1,4 +1,4 @@
-import React, { ReactNode } from 'react';
+import React, { ReactNode, useState } from 'react';
 import { State } from '../store';
 import { Item } from '../store/reducers/item';
 import { isChild } from '../utils/components';
@@ -44,3 +44,18 @@ const getChildProps = (child: any) => ({
   key: child.key,
   value: child.props.value,
 });
+
+export const useRefDimensions = (
+  ref: React.RefObject<HTMLInputElement> | undefined
+) => {
+  const [dimensions, setDimensions] = useState({ width: 1, height: 2 });
+  React.useEffect(() => {
+    if (ref?.current) {
+      const { current } = ref;
+      const boundingRect = current.getBoundingClientRect();
+      const { width, height } = boundingRect;
+      setDimensions({ width: Math.round(width), height: Math.round(height) });
+    }
+  }, [ref]);
+  return dimensions;
+};

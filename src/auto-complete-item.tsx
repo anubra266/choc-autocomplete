@@ -50,7 +50,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       dispatch({ type: AutoCompleteAction.Set, payload: itemValue });
       returnT(inputRef?.current).value = itemValue;
       if (focusInputOnSelect) inputRef?.current?.focus();
-      dispatch({ type: ListAction.Show });
+      dispatch({ type: ListAction.Hide });
     };
 
     const { itemChild, emphasizeStyles } = useEmphasizer({

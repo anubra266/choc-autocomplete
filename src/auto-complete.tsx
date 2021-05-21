@@ -1,9 +1,10 @@
 import React, { useContext, useEffect } from 'react';
-import { Box, forwardRef } from '@chakra-ui/react';
+import { Box, forwardRef, Popover } from '@chakra-ui/react';
 import { AutoComplete } from './auto-complete-provider';
-import { runIfFn } from './utils/operations';
+import { returnT, runIfFn } from './utils/operations';
 import { StoreContext } from './store';
 import { ListAction } from './store/reducers/list';
+import { InputAction } from './store/reducers/input';
 
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
@@ -11,8 +12,9 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
 
     const {
       state: {
-        autocomplete: { value: autoCompleteValue },
+        autocomplete: { value: autoCompleteValue, freeSolo },
         list: { visible },
+        input: { value: inputValue, ref: inputRef },
       },
       dispatch,
     } = useContext(StoreContext);
@@ -21,13 +23,31 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
       runIfFn(onChange, autoCompleteValue);
     }, [autoCompleteValue]);
 
+    const handleClose = () => {
+      dispatch({ type: ListAction.Hide });
+      if (inputValue !== autoCompleteValue && !freeSolo) {
+        dispatch({ type: InputAction.Set, payload: autoCompleteValue });
+        returnT(inputRef?.current).value = autoCompleteValue;
+      }
+    };
+
     return (
-      <Box pos="relative" ref={ref} {...rest}>
-        {runIfFn(children, {
-          isOpen: visible,
-          onClose: () => dispatch({ type: ListAction.Hide }),
-        })}
-      </Box>
+      <Popover
+        autoFocus={false}
+        closeOnBlur={true}
+        placement="bottom"
+        isOpen={visible}
+        onClose={handleClose}
+      >
+        {({ isOpen, onClose }) => (
+          <Box ref={ref} {...rest}>
+            {runIfFn(children, {
+              isOpen,
+              onClose,
+            })}
+          </Box>
+        )}
+      </Popover>
     );
   }
 );
