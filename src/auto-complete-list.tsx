@@ -1,11 +1,11 @@
 import {
-  chakra,
   forwardRef,
   PopoverContent,
   PopoverContentProps,
+  useMergeRefs,
 } from '@chakra-ui/react';
-import React, { useContext, useEffect } from 'react';
-import { AutoCompleteItem } from './auto-complete-item';
+import React, { useContext, useEffect, useRef } from 'react';
+import { CreateInput } from './components/create-input';
 import { EmptyState } from './components/empty-state';
 import { getItemKeys, handleItemGroup, useRefDimensions } from './helpers/list';
 import { StoreContext } from './store';
@@ -15,44 +15,35 @@ import { isChild } from './utils/components';
 interface AutoCompleteList extends PopoverContentProps {}
 
 export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
-  (props, ref) => {
+  (props, outRef) => {
+    const ref = useRef<HTMLDivElement>(null);
+    const refs = useMergeRefs(ref, outRef);
     const { children, ...rest } = props;
     const { state, dispatch } = useContext(StoreContext);
-    const { autocomplete, item, input } = state;
-
-    const emphasize = autocomplete.emphasize;
-    const inputValue = input.value;
-
-    const itemExists = item.list.some(i => i.value === input.value);
+    const { input } = state;
 
     useEffect(() => {
       const itemValues: Item[] = getItemKeys(children);
       dispatch({ type: ItemAction.SetAll, payload: itemValues });
     }, [children]);
 
-    const emphasizeStyles =
-      typeof emphasize === 'object'
-        ? emphasize
-        : {
-            fontWeight: 'extrabold',
-          };
-
     const { width } = useRefDimensions(input.ref);
 
     return (
-      <PopoverContent {...baseStyles} ref={ref} {...rest} w={width}>
+      <PopoverContent
+        {...baseStyles}
+        ref={refs}
+        {...rest}
+        w={width}
+        border="solid 1px red"
+      >
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
             ? React.cloneElement(child, { optionKey: child.key })
             : handleItemGroup(child, state)
         )}
 
-        {!!inputValue.length && autocomplete.creatable && !itemExists && (
-          <AutoCompleteItem value={inputValue} optionKey="newInput">
-            Add &nbsp;
-            <chakra.span sx={emphasizeStyles}>"{inputValue}"</chakra.span>
-          </AutoCompleteItem>
-        )}
+        <CreateInput />
 
         <EmptyState />
       </PopoverContent>

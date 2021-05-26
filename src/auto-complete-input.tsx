@@ -10,7 +10,7 @@ interface AutoCompleteInput extends InputProps {}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
   (props, ref) => {
-    const { onChange, onKeyDown, onFocus, onClick, ...rest } = props;
+    const { onChange, onKeyDown, onFocus, onBlur, onClick, ...rest } = props;
     const internalRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs(ref, internalRef);
 
@@ -24,9 +24,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     }, []);
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
-      const newValue = e.target.value;
       runIfFn(onChange, e);
-      dispatch({ type: InputAction.Set, payload: newValue });
       if (!isEmpty) dispatch({ type: ListAction.Show });
     };
 
@@ -43,7 +41,11 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     const handleClick: React.MouseEventHandler<HTMLInputElement> = e => {
       runIfFn(onClick, e);
-      e.stopPropagation();
+    };
+
+    const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
+      runIfFn(onBlur, e);
+      //TODO comeback if (!listIsFocused) dispatch({ type: ListAction.Hide });
     };
 
     return (
@@ -52,6 +54,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
           onChange={handleChange}
           onKeyDown={handleKeyDown}
           onFocus={handleFocus}
+          onBlur={handleBlur}
           onClick={handleClick}
           ref={inputRef}
           {...rest}

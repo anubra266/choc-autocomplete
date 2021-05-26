@@ -10,13 +10,20 @@ import { returnT } from '../utils/operations';
 import { ListAction, ListActions } from '../store/reducers/list';
 
 export const useOptionsFilter = () => {
-  const { state, dispatch } = useContext(StoreContext);
-  const inputValue = state.input.value;
-  const options = state.item.list;
-  const creatable = state.autocomplete.creatable;
+  const {
+    state: {
+      autocomplete: { creatable, freeSolo },
+      input,
+      item,
+    },
+    dispatch,
+  } = useContext(StoreContext);
+  const inputValue = input.value;
+  const options = item.list;
   const filteredItems = options.filter(
-    item => item.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+    i => i.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
   );
+  const rawInputValue = input.ref?.current?.value;
 
   useEffect(() => {
     const filterPayload = creatable
@@ -25,6 +32,14 @@ export const useOptionsFilter = () => {
     dispatch({ type: ItemAction.SetFiltered, payload: filterPayload });
     dispatch({ type: ItemAction.ResetActive, payload: false });
   }, [inputValue, options]);
+
+  useEffect(() => {
+    if (rawInputValue !== undefined) {
+      dispatch({ type: InputAction.Set, payload: rawInputValue });
+      if (freeSolo)
+        dispatch({ type: AutoCompleteAction.Set, payload: rawInputValue });
+    }
+  }, [rawInputValue]);
 };
 
 export const handleNavigation = (
@@ -64,6 +79,9 @@ export const handleNavigation = (
     e.preventDefault();
   } else if (e.key === 'End') {
     dispatch({ type: ItemAction.ResetActive, payload: true });
+    e.preventDefault();
+  } else if (e.key === 'Escape') {
+    dispatch({ type: ListAction.Hide });
     e.preventDefault();
   }
 };

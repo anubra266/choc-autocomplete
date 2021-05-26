@@ -3,7 +3,6 @@ import React, { MouseEventHandler, useContext } from 'react';
 import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
-import { InputAction } from './store/reducers/input';
 import { ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
 import { returnT, runIfFn } from './utils/operations';
@@ -29,7 +28,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
     } = props;
     const {
       state: {
-        autocomplete: { focusInputOnSelect, emphasize },
+        autocomplete: { emphasize },
         input: { ref: inputRef, value: inputValue },
         item,
       },
@@ -46,10 +45,8 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
 
     const handleOnClick: MouseEventHandler<HTMLDivElement> = e => {
       runIfFn(onClick, e);
-      dispatch({ type: InputAction.Set, payload: itemValue });
       dispatch({ type: AutoCompleteAction.Set, payload: itemValue });
       returnT(inputRef?.current).value = itemValue;
-      if (focusInputOnSelect) inputRef?.current?.focus();
       dispatch({ type: ListAction.Hide });
     };
 

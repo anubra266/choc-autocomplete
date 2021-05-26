@@ -13,7 +13,9 @@ export interface State {
     ref: React.RefObject<HTMLInputElement> | undefined;
   };
   item: { active: number; list: Item[]; filtered: Item[] };
-  list: { visible: boolean };
+  list: {
+    visible: boolean;
+  };
 }
 
 export type ActionMap<M extends Record<string, any>> = {

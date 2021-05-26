@@ -21,6 +21,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   selectOnFocus?: boolean;
   openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;
+  defaultIsOpen?: boolean;
 }
 
 export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
@@ -33,6 +34,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     selectOnFocus,
     openOnFocus,
     emphasize,
+    defaultIsOpen,
     ...rest
   } = props;
 
@@ -58,7 +60,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
       filtered: [],
     },
     list: {
-      visible: false,
+      visible: defaultIsOpen || false,
     },
   };
 

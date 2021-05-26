@@ -12,7 +12,11 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
 
     const {
       state: {
-        autocomplete: { value: autoCompleteValue, freeSolo },
+        autocomplete: {
+          value: autoCompleteValue,
+          freeSolo,
+          focusInputOnSelect,
+        },
         list: { visible },
         input: { value: inputValue, ref: inputRef },
       },
@@ -38,6 +42,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
         placement="bottom"
         isOpen={visible}
         onClose={handleClose}
+        returnFocusOnClose={!focusInputOnSelect}
       >
         {({ isOpen, onClose }) => (
           <Box ref={ref} {...rest}>

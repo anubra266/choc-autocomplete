@@ -23,10 +23,17 @@ const App = () => {
         rollNavigation
         focusInputOnSelect
         openOnFocus
-        emphasize freeSolo
+        emphasize
+        freeSolo
         creatable
+        defaultIsOpen
       >
-        <AutoCompleteInput variant="filled" placeholder="Search..." />
+        <AutoCompleteInput
+          variant="filled"
+          placeholder="Search..."
+          defaultValue="app"
+          autoFocus
+        />
         <AutoCompleteList>
           {options.map((option, oid) => (
             <AutoCompleteItem
