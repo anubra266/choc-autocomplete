@@ -1,7 +1,8 @@
 import React, { useContext, useEffect } from 'react';
 import { Box, forwardRef, Popover } from '@chakra-ui/react';
+import { runIfFn } from '@chakra-ui/utils';
 import { AutoComplete } from './auto-complete-provider';
-import { returnT, runIfFn } from './utils/operations';
+import { returnT } from './utils/operations';
 import { StoreContext } from './store';
 import { ListAction } from './store/reducers/list';
 import { InputAction } from './store/reducers/input';
@@ -17,7 +18,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
           freeSolo,
           focusInputOnSelect,
         },
-        list: { visible },
+        list: { visible: isOpen },
         input: { value: inputValue, ref: inputRef },
       },
       dispatch,
@@ -27,7 +28,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
       runIfFn(onChange, autoCompleteValue);
     }, [autoCompleteValue]);
 
-    const handleClose = () => {
+    const onClose = () => {
       dispatch({ type: ListAction.Hide });
       if (inputValue !== autoCompleteValue && !freeSolo) {
         dispatch({ type: InputAction.Set, payload: autoCompleteValue });
@@ -35,23 +36,34 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
       }
     };
 
+    const resetInput = () => {
+      if (inputRef?.current) {
+        inputRef.current.value = '';
+        inputRef.current.focus();
+      }
+    };
+
+    const inputIsEmpty = inputValue.length < 1;
+
+    const childProps = {
+      isOpen,
+      onClose,
+      inputIsEmpty,
+      resetInput,
+    };
+
     return (
       <Popover
         autoFocus={false}
         closeOnBlur={true}
         placement="bottom"
-        isOpen={visible}
-        onClose={handleClose}
+        isOpen={isOpen}
+        onClose={onClose}
         returnFocusOnClose={!focusInputOnSelect}
       >
-        {({ isOpen, onClose }) => (
-          <Box ref={ref} {...rest}>
-            {runIfFn(children, {
-              isOpen,
-              onClose,
-            })}
-          </Box>
-        )}
+        <Box ref={ref} {...rest}>
+          {runIfFn(children, childProps)}
+        </Box>
       </Popover>
     );
   }

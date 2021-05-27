@@ -1,11 +1,12 @@
 import { CSSObject, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
+import { runIfFn } from '@chakra-ui/utils';
 import React, { MouseEventHandler, useContext } from 'react';
 import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
-import { returnT, runIfFn } from './utils/operations';
+import { returnT } from './utils/operations';
 
 interface AutoCompleteItem extends FlexProps {
   value: string;

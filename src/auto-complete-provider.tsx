@@ -1,4 +1,6 @@
 import { BoxProps, CSSObject, forwardRef } from '@chakra-ui/react';
+import { MaybeRenderProp } from '@chakra-ui/react-utils';
+
 import React, { ReactNode, useMemo, useReducer } from 'react';
 import { AutoCompleteBody } from './auto-complete';
 import { useParseProps } from './helpers/provider';
@@ -8,10 +10,15 @@ import { inputReducer } from './store/reducers/input';
 import { itemReducer } from './store/reducers/item';
 import { listReducer } from './store/reducers/list';
 
-type ChildrenProps = { isOpen: boolean; onClose: () => void };
+type ChildrenProps = {
+  isOpen: boolean;
+  onClose: () => void;
+  inputIsEmpty: boolean;
+  resetInput: () => void;
+};
 
 export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
-  children: ((props?: ChildrenProps) => ReactNode) | ReactNode;
+  children?: MaybeRenderProp<ChildrenProps>;
   onChange?: (value: string) => void;
   emptyState?: boolean | ReactNode;
   rollNavigation?: boolean;

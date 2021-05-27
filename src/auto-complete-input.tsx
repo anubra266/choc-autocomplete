@@ -1,6 +1,6 @@
 import { forwardRef, Input, InputProps, useMergeRefs } from '@chakra-ui/react';
 import React, { useContext, useEffect, useRef } from 'react';
-import { runIfFn } from './utils/operations';
+import { runIfFn } from '@chakra-ui/utils';
 import { StoreContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
@@ -46,6 +46,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onBlur, e);
       //TODO comeback if (!listIsFocused) dispatch({ type: ListAction.Hide });
+      // console.log('document.activeElement :>> ', document.activeElement);
     };
 
     return (

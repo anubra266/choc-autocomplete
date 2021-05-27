@@ -6,7 +6,7 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
 } from '../.';
-import { Button, Flex } from '@chakra-ui/react';
+import { Button, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useTheme } from '@chakra-ui/system';
 
 const App = () => {
@@ -53,13 +53,58 @@ const App = () => {
           </AutoCompleteGroup>
         </AutoCompleteList>
       </AutoComplete>
-      {/* <Button
+      <Button
         zIndex="tooltip"
         mt="150px"
         onClick={() => setOptions(o => [...o, 'new'])}
       >
         Add Option
-      </Button> */}
+      </Button>
+      <AutoComplete
+        rollNavigation
+        focusInputOnSelect
+        openOnFocus
+        emphasize
+        freeSolo
+        creatable
+        defaultIsOpen
+      >
+        {({ inputIsEmpty, resetInput }) => (
+          <>
+            <InputGroup>
+              <AutoCompleteInput
+                variant="filled"
+                placeholder="Search..."
+                defaultValue="app"
+                autoFocus
+              />
+              {!inputIsEmpty && (
+                <InputRightElement cursor="pointer" onClick={resetInput}>
+                  ❌
+                </InputRightElement>
+              )}
+            </InputGroup>
+            <AutoCompleteList>
+              {options.map((option, oid) => (
+                <AutoCompleteItem
+                  textTransform="capitalize"
+                  value={option}
+                  key={`option-${oid}`}
+                >
+                  {option}{' '}
+                </AutoCompleteItem>
+              ))}
+              <AutoCompleteGroup title="fruits" showDivider>
+                {fruits.map((fruit, fid) => (
+                  <AutoCompleteItem value={fruit} key={`fruit-${fid}`}>
+                    {fruit}{' '}
+                  </AutoCompleteItem>
+                ))}
+              </AutoCompleteGroup>
+            </AutoCompleteList>
+          </>
+        )}
+      </AutoComplete>
     </Flex>
   );
 };

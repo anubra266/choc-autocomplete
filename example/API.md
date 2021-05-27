@@ -21,6 +21,8 @@ No
 
 ## Autocomplete
 
+children - Can be a function that provides `isOpen`,`onClose`, `inputIsEmpty`, `resetInput`
+
 onChange - Callback for when the autocomplete value changes, and when input changes if in `freeSolo` mode - returns the value
 emptyState - Component to display when no options are found. set to true to use default
 rollNavigation - set to true to allow keyboard navigation to restart on both ends

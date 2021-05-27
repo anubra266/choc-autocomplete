@@ -19,32 +19,25 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
     const ref = useRef<HTMLDivElement>(null);
     const refs = useMergeRefs(ref, outRef);
     const { children, ...rest } = props;
+    const childCount = React.Children.count(children);
     const { state, dispatch } = useContext(StoreContext);
     const { input } = state;
 
     useEffect(() => {
       const itemValues: Item[] = getItemKeys(children);
       dispatch({ type: ItemAction.SetAll, payload: itemValues });
-    }, [children]);
+    }, [childCount]);
 
     const { width } = useRefDimensions(input.ref);
 
     return (
-      <PopoverContent
-        {...baseStyles}
-        ref={refs}
-        {...rest}
-        w={width}
-        border="solid 1px red"
-      >
+      <PopoverContent {...baseStyles} ref={refs} w={width} {...rest}>
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
             ? React.cloneElement(child, { optionKey: child.key })
             : handleItemGroup(child, state)
         )}
-
         <CreateInput />
-
         <EmptyState />
       </PopoverContent>
     );
@@ -61,6 +54,7 @@ const baseStyles: PopoverContentProps = {
   bg: '#232934',
   rounded: 'md',
   maxH: '400px',
+  border: 'none',
   shadow: 'base',
   pos: 'absolute',
   zIndex: 'popover',

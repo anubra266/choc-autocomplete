@@ -1,5 +1,3 @@
-# Docs [here](https://github.com/anubra266/old_chakra-autocomplete) for now !!!
-
 <div align="center">
   <h1>
     <br/>
