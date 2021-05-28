@@ -18,7 +18,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const { state, dispatch } = useContext(StoreContext);
     const {
       autocomplete,
-      list: { ref: listRef },
+      list: { ref: listRef, visible: listIsVisible },
       item,
     } = state;
     const {
@@ -58,7 +58,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
       if (autocomplete.selectOnFocus) e.target.select();
       if (autocomplete.openOnFocus) dispatch({ type: ListAction.Show });
       const focusedFromList = e.relatedTarget === listRef?.current;
-      if (focusedFromList && closeOnselect) {
+      if (focusedFromList && closeOnselect && listIsVisible) {
         dispatch({ type: ListAction.Hide });
       }
     };

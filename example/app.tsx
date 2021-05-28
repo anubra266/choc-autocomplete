@@ -32,7 +32,7 @@ const App = () => {
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
-          defaultValue="app"
+          // defaultValue="app"
           autoFocus
         />
         <AutoCompleteList>
@@ -81,7 +81,6 @@ const App = () => {
                 variant="filled"
                 placeholder="Search..."
                 defaultValue="app"
-                autoFocus
               />
               {!inputIsEmpty && (
                 <InputRightElement cursor="pointer" onClick={resetInput}>
