@@ -17,9 +17,9 @@ defaultIsOpen - The suggestions menu is open by default
 onSelectOption - Will be called every time suggestion is selected via mouse or keyboard. It returns the selectedValue, theselectionMethod and a boolean specifying if the input is a new one; useFul when combined creatable mode. Return false to prevent selecting the option.
 suggestWhenEmpty -  If the suggestions shoud show when the input is Empty. - It is used when the input is focused.
 closeOnBlur - If true, the menu will close when the AutoComplete Component loses focus.
+closeOnselect - If true, the menu will close when an item is selected, by mouse or keyboard.
 
 
-closeOnselect - //TODO to be added when close on blur is working If true, the menu will close when an item is selected, by mouse or keyboard.
 
 ## Item
 

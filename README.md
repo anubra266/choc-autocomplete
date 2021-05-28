@@ -276,5 +276,68 @@ export default () => {
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
 
+### **AutoComplete**
 
+Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+### **AutoCompleteInput**
+
+Input for `AutoComplete` value.
+
+**AutoComplete** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
+
+### **AutoCompleteList**
+
+Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
+
+**AutoCompleteList** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+### **AutoCompleteGroup**
+
+Wrapper for collections of `AutoCompleteItem`s
+
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+### **AutoCompleteItem**
+
+This Composes your suggestions
+
+**AutoComplete** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>value</td>
+    <td>string</td>
+    <td>The value of the Option</td>
+    <td>yes<br></td>
+    <td>&amp;mdash;</td>
+  </tr>
+  <tr>
+    <td>_focus</td>
+    <td>CSSObjec</td>
+    <td>Styles for focused Item</td>
+    <td>No</td>
+    <td>
+
+```js
+{
+  fontWeight: 'extrabold',
+}
+```
+
+</td>
+  </tr>
+</tbody>
+</table>
