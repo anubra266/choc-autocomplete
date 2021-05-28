@@ -282,6 +282,167 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
 **AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
+<div class="tg-wrap"><table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>children</td>
+    <td>
+
+```ts
+type children =
+  |ReactNode
+  | (props: {
+      isOpen: boolean;
+      onClose: () => void;
+      inputIsEmpty: boolean;
+      resetInput: () => void;
+}) => ReactNode;
+```
+
+  </td>
+    <td>
+
+Children can be a function which is provided with the `isOpen`, `onClose`, `inputIsEmpty`, and `resetInput` props.
+
+  </td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>onChange</td>
+    <td>
+  
+```ts
+type onChange =  (value: string) => void;
+```
+
+  </td>
+    <td>
+    
+Callback for when the autocomplete value changes, and when input changes if in <br>`freeSolo`<br> mode - returns the value.
+    
+  </td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>emptyState</td>
+    <td>
+  
+```ts
+type emptyState = boolean | ReactNode;
+```
+
+  </td>
+    <td>Component to display when no options are found. set to true to use default.</td>
+    <td>No</td>
+    <td><b>No Options Found</b></td>
+  </tr>
+  <tr>
+    <td>rollNavigation</td>
+    <td>boolean</td>
+    <td>set to true to allow keyboard navigation to restart on both ends.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>focusInputOnSelect</td>
+    <td>boolean</td>
+    <td>Determines if Input should be focused after an option is selected.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>freeSolo</td>
+    <td>boolean</td>
+    <td>Set freeSolo to true so the textbox can contain any arbitrary value.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>creatable</td>
+    <td>boolean</td>
+    <td>If true, allows creation of new Items, `freeSolo` must be true.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>selectOnFocus</td>
+    <td>boolean</td>
+    <td>select the text in input when input is focused<br>openOnFocus - Open the suggestions once input is focused.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>emphasize</td>
+    <td>
+
+```ts
+type emphasize = boolean | CSSObject;
+```
+
+  </td>
+    <td>The parts of the option string that match the <br>`AutoCompleteInput`<br> value are emphasized. Pass boolean to bolden it, or a Chakra <br>`CSSObject`<br> for custom styling.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>defaultIsOpen</td>
+    <td>boolean</td>
+    <td>If true, the suggestions menu is open by default</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>onSelectOption</td>
+    <td>
+  
+```ts
+type onSelectOption=  (params: {
+    optionValue: string;
+    selectMethod: 'click' | 'keyboard';
+    isNewInput: boolean;
+}) => boolean | void;
+```
+
+  </td>
+    <td>Will be called every time suggestion is selected via mouse or keyboard. It returns the selectedValue, the selectionMethod and a boolean specifying if the input is a new one; useFul when combined with creatable mode.</td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>suggestWhenEmpty</td>
+    <td>boolean</td>
+    <td>Return false to prevent selecting the option.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>closeOnBlur</td>
+    <td>boolean</td>
+    <td>If true, the menu will close when the AutoComplete Component loses focus.</td>
+    <td>No</td>
+    <td>true</td>
+  </tr>
+  <tr>
+    <td>closeOnselect</td>
+    <td>boolean</td>
+    <td>If true, the menu will close when an item is selected, by mouse or keyboard.</td>
+    <td>No</td>
+    <td>true</td>
+  </tr>
+</tbody>
+</table></div>
+
 ### **AutoCompleteInput**
 
 Input for `AutoComplete` value.
@@ -328,7 +489,6 @@ Wrapper for collections of `AutoCompleteItem`s
     <td>Styles for title decoration, if present</td>
     <td>No</td>
     <td>
-    
 
 ```ts
 const baseTitleStyles: TextProps = {
@@ -340,7 +500,7 @@ const baseTitleStyles: TextProps = {
   textTransform: 'uppercase',
 };
 ```
-    
+
   </td>
   </tr>
   <tr>
@@ -386,7 +546,7 @@ This Composes your suggestions
   </tr>
   <tr>
     <td>_focus</td>
-    <td>  
+    <td>
 
     CSSObject
 
