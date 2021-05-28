@@ -2,8 +2,8 @@ import React, { useContext, useEffect } from 'react';
 import { State, StoreContext, StoreDispatch } from '../store';
 import { InputAction } from '../store/reducers/input';
 import { ItemAction } from '../store/reducers/item';
-import { ListAction } from '../store/reducers/list';
 import { runOnSelect } from './autocomplete-props/onSelectOption';
+import { closeList } from './list';
 
 export const useOptionsFilter = () => {
   const {
@@ -74,7 +74,7 @@ export const handleNavigation = (
     dispatch({ type: ItemAction.ResetActive, payload: true });
     e.preventDefault();
   } else if (e.key === 'Escape') {
-    dispatch({ type: ListAction.Hide });
+    closeList(state, dispatch);
     e.preventDefault();
   }
 };

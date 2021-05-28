@@ -2,8 +2,8 @@ import { isDefined, runIfFn } from '@chakra-ui/utils';
 import { State, StoreDispatch } from '../../store';
 import { AutoCompleteAction } from '../../store/reducers/autocomplete';
 import { InputAction } from '../../store/reducers/input';
-import { ListAction } from '../../store/reducers/list';
 import { returnT } from '../../utils/operations';
+import { closeList } from '../list';
 
 export type OnSelectOptionParams = {
   optionValue: string;
@@ -38,7 +38,7 @@ export const runOnSelect = (
     returnT(inputRef?.current).value = activeItem.value;
     dispatch({ type: InputAction.Set, payload: activeItem.value });
     dispatch({ type: AutoCompleteAction.Set, payload: activeItem.value });
-    dispatch({ type: ListAction.Hide });
+    closeList(state, dispatch);
     runIfFn(cb);
   }
   if (inputRef?.current && focusInputOnSelect) inputRef.current.focus();

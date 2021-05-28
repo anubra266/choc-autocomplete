@@ -1,7 +1,10 @@
 import React, { ReactNode, useState } from 'react';
-import { State } from '../store';
+import { State, StoreDispatch } from '../store';
+import { InputAction } from '../store/reducers/input';
 import { Item } from '../store/reducers/item';
+import { ListAction } from '../store/reducers/list';
 import { isChild } from '../utils/components';
+import { returnT } from '../utils/operations';
 
 export const handleItemGroup = (group: any, state: State) => {
   const isValidItem = (child: any) =>
@@ -58,4 +61,17 @@ export const useRefDimensions = (
     }
   }, [ref]);
   return dimensions;
+};
+
+export const closeList = (state: State, dispatch: StoreDispatch) => {
+  const {
+    autocomplete: { value: autoCompleteValue, freeSolo },
+    input: { value: inputValue, ref: inputRef },
+  } = state;
+
+  dispatch({ type: ListAction.Hide });
+  if (inputValue !== autoCompleteValue && !freeSolo) {
+    dispatch({ type: InputAction.Set, payload: autoCompleteValue });
+    returnT(inputRef?.current).value = autoCompleteValue;
+  }
 };

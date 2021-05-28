@@ -6,6 +6,7 @@ import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
 import { ListAction } from './store/reducers/list';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
+import { closeList } from './helpers/list';
 
 interface AutoCompleteInput extends InputProps {}
 
@@ -30,6 +31,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     } = autocomplete;
 
     const isEmpty = item.filtered.length < 1 && !emptyState;
+    const hideList = () => closeList(state, dispatch);
 
     useOptionsFilter();
     useEffect(() => {
@@ -44,7 +46,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
       const inputIsEmpty = value?.length < 1;
       if (!isEmpty) {
         if (!inputIsEmpty) dispatch({ type: ListAction.Show });
-        else if (!suggestWhenEmpty) dispatch({ type: ListAction.Hide });
+        else if (!suggestWhenEmpty) hideList();
       }
     };
 
@@ -59,7 +61,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
       if (autocomplete.openOnFocus) dispatch({ type: ListAction.Show });
       const focusedFromList = e.relatedTarget === listRef?.current;
       if (focusedFromList && closeOnselect && listIsVisible) {
-        dispatch({ type: ListAction.Hide });
+        hideList();
       }
     };
 
@@ -70,7 +72,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onBlur, e);
       const listIsFocused = e.relatedTarget === listRef?.current;
-      if (!listIsFocused && closeOnBlur) dispatch({ type: ListAction.Hide });
+      if (!listIsFocused && closeOnBlur) hideList();
     };
 
     return (

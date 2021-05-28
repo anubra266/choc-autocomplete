@@ -39,7 +39,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
 
 export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
   const {
-    emptyState,
+    emptyState = true,
     rollNavigation,
     focusInputOnSelect,
     freeSolo,

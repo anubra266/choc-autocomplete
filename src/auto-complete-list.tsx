@@ -7,7 +7,12 @@ import {
 import React, { useContext, useEffect, useRef } from 'react';
 import { CreateInput } from './components/create-input';
 import { EmptyState } from './components/empty-state';
-import { getItemKeys, handleItemGroup, useRefDimensions } from './helpers/list';
+import {
+  closeList,
+  getItemKeys,
+  handleItemGroup,
+  useRefDimensions,
+} from './helpers/list';
 import { StoreContext } from './store';
 import { Item, ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
@@ -50,7 +55,11 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
             : handleItemGroup(child, state)
         )}
         <CreateInput />
-        <EmptyState />
+        <EmptyState
+          onClick={() => {
+            closeList(state, dispatch);
+          }}
+        />
       </PopoverContent>
     );
   }

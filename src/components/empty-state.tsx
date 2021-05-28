@@ -1,8 +1,8 @@
-import { Flex, FlexProps } from '@chakra-ui/layout';
+import { Box, BoxProps, Flex, FlexProps } from '@chakra-ui/layout';
 import React, { useContext } from 'react';
 import { StoreContext } from '../store';
 
-export const EmptyState = () => {
+export const EmptyState = (props: BoxProps) => {
   const {
     state: {
       item: { filtered },
@@ -11,7 +11,7 @@ export const EmptyState = () => {
   } = useContext(StoreContext);
 
   return (
-    <>
+    <Box {...props}>
       {filtered.length < 1 &&
         emptyState &&
         (typeof emptyState === 'boolean' ? (
@@ -19,7 +19,7 @@ export const EmptyState = () => {
         ) : (
           emptyState
         ))}
-    </>
+    </Box>
   );
 };
 

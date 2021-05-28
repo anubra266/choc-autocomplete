@@ -25,8 +25,8 @@ const App = () => {
         focusInputOnSelect
         openOnFocus
         emphasize
-        freeSolo
-        creatable
+        // freeSolo
+        // creatable
         defaultIsOpen
         suggestWhenEmpty
       >

@@ -2,36 +2,28 @@ import React, { useContext, useEffect } from 'react';
 import { Box, forwardRef, Popover } from '@chakra-ui/react';
 import { runIfFn } from '@chakra-ui/utils';
 import { AutoComplete } from './auto-complete-provider';
-import { returnT } from './utils/operations';
 import { StoreContext } from './store';
-import { ListAction } from './store/reducers/list';
 import { InputAction } from './store/reducers/input';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
+import { closeList } from './helpers/list';
 
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
     const { children, onChange, ...rest } = props;
 
+    const { state, dispatch } = useContext(StoreContext);
+
     const {
-      state: {
-        autocomplete: { value: autoCompleteValue, freeSolo },
-        list: { visible: isOpen },
-        input: { value: inputValue, ref: inputRef },
-      },
-      dispatch,
-    } = useContext(StoreContext);
+      autocomplete: { value: autoCompleteValue },
+      list: { visible: isOpen },
+      input: { value: inputValue, ref: inputRef },
+    } = state;
 
     useEffect(() => {
       runIfFn(onChange, autoCompleteValue);
     }, [autoCompleteValue]);
 
-    const onClose = () => {
-      dispatch({ type: ListAction.Hide });
-      if (inputValue !== autoCompleteValue && !freeSolo) {
-        dispatch({ type: InputAction.Set, payload: autoCompleteValue });
-        returnT(inputRef?.current).value = autoCompleteValue;
-      }
-    };
+    const onClose = () => closeList(state, dispatch);
 
     const resetInput = () => {
       if (inputRef?.current) {
