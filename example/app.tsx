@@ -27,6 +27,7 @@ const App = () => {
         freeSolo
         creatable
         defaultIsOpen
+        suggestWhenEmpty
       >
         <AutoCompleteInput
           variant="filled"
@@ -68,6 +69,10 @@ const App = () => {
         freeSolo
         creatable
         defaultIsOpen
+        onSelectOption={({ optionValue }) => {
+          console.log('wow :>> ', optionValue);
+          return false;
+        }}
       >
         {({ inputIsEmpty, resetInput }) => (
           <>

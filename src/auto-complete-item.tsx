@@ -1,12 +1,11 @@
 import { CSSObject, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 import { runIfFn } from '@chakra-ui/utils';
 import React, { MouseEventHandler, useContext } from 'react';
+import { useOnOptionHighlight } from './helpers/autocomplete-props/onOptionHighlight';
+import { runOnSelect } from './helpers/autocomplete-props/onSelectOption';
 import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
-import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { ItemAction } from './store/reducers/item';
-import { ListAction } from './store/reducers/list';
-import { returnT } from './utils/operations';
 
 interface AutoCompleteItem extends FlexProps {
   value: string;
@@ -27,16 +26,15 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       sx,
       ...rest
     } = props;
+    const { state, dispatch } = useContext(StoreContext);
     const {
-      state: {
-        autocomplete: { emphasize },
-        input: { ref: inputRef, value: inputValue },
-        item,
-      },
-      dispatch,
-    } = useContext(StoreContext);
+      autocomplete: { emphasize },
+      input: { value: inputValue },
+      item,
+    } = state;
     const activeItem = item.filtered[item.active];
     const isActiveItem = activeItem?.key === optionKey;
+    useOnOptionHighlight(activeItem);
     const isValidSuggestion = item.filtered.some(i => i.key === optionKey);
 
     const handleMouseOver: MouseEventHandler<HTMLDivElement> = e => {
@@ -45,10 +43,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
     };
 
     const handleOnClick: MouseEventHandler<HTMLDivElement> = e => {
-      runIfFn(onClick, e);
-      dispatch({ type: AutoCompleteAction.Set, payload: itemValue });
-      returnT(inputRef?.current).value = itemValue;
-      dispatch({ type: ListAction.Hide });
+      runOnSelect(state, dispatch, 'click', () => runIfFn(onClick, e));
     };
 
     const { itemChild, emphasizeStyles } = useEmphasizer({

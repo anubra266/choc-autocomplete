@@ -5,6 +5,7 @@ import { StoreContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
 import { ListAction } from './store/reducers/list';
+import { AutoCompleteAction } from './store/reducers/autocomplete';
 
 interface AutoCompleteInput extends InputProps {}
 
@@ -15,8 +16,20 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
     const inputRef = useMergeRefs(ref, internalRef);
 
     const { state, dispatch } = useContext(StoreContext);
-    const { autocomplete, item } = state;
-    const isEmpty = item.filtered.length < 1 && !autocomplete.emptyState;
+    const {
+      autocomplete,
+      list: { ref: listRef },
+      item,
+    } = state;
+    const {
+      freeSolo,
+      emptyState,
+      suggestWhenEmpty,
+      closeOnBlur,
+      closeOnselect,
+    } = autocomplete;
+
+    const isEmpty = item.filtered.length < 1 && !emptyState;
 
     useOptionsFilter();
     useEffect(() => {
@@ -25,18 +38,29 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     const handleChange: React.ChangeEventHandler<HTMLInputElement> = e => {
       runIfFn(onChange, e);
-      if (!isEmpty) dispatch({ type: ListAction.Show });
+      const value = e.target.value;
+      dispatch({ type: InputAction.Set, payload: value });
+      if (freeSolo) dispatch({ type: AutoCompleteAction.Set, payload: value });
+      const inputIsEmpty = value?.length < 1;
+      if (!isEmpty) {
+        if (!inputIsEmpty) dispatch({ type: ListAction.Show });
+        else if (!suggestWhenEmpty) dispatch({ type: ListAction.Hide });
+      }
     };
 
     const handleKeyDown: React.KeyboardEventHandler<HTMLInputElement> = e => {
       runIfFn(onKeyDown, e);
-      handleNavigation(e, state, dispatch, internalRef);
+      handleNavigation(e, state, dispatch);
     };
 
     const handleFocus: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onFocus, e);
       if (autocomplete.selectOnFocus) e.target.select();
       if (autocomplete.openOnFocus) dispatch({ type: ListAction.Show });
+      const focusedFromList = e.relatedTarget === listRef?.current;
+      if (focusedFromList && closeOnselect) {
+        dispatch({ type: ListAction.Hide });
+      }
     };
 
     const handleClick: React.MouseEventHandler<HTMLInputElement> = e => {
@@ -45,8 +69,8 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
 
     const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onBlur, e);
-      //TODO comeback if (!listIsFocused) dispatch({ type: ListAction.Hide });
-      // console.log('document.activeElement :>> ', document.activeElement);
+      const listIsFocused = e.relatedTarget === listRef?.current;
+      if (!listIsFocused && closeOnBlur) dispatch({ type: ListAction.Hide });
     };
 
     return (

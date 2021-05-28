@@ -10,6 +10,7 @@ import { EmptyState } from './components/empty-state';
 import { getItemKeys, handleItemGroup, useRefDimensions } from './helpers/list';
 import { StoreContext } from './store';
 import { Item, ItemAction } from './store/reducers/item';
+import { ListAction } from './store/reducers/list';
 import { isChild } from './utils/components';
 
 interface AutoCompleteList extends PopoverContentProps {}
@@ -24,6 +25,10 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
     const { input } = state;
 
     useEffect(() => {
+      dispatch({ type: ListAction.SetRef, payload: ref });
+    }, []);
+
+    useEffect(() => {
       const itemValues: Item[] = getItemKeys(children);
       dispatch({ type: ItemAction.SetAll, payload: itemValues });
     }, [childCount]);
@@ -31,7 +36,13 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
     const { width } = useRefDimensions(input.ref);
 
     return (
-      <PopoverContent {...baseStyles} ref={refs} w={width} {...rest}>
+      <PopoverContent
+        tabIndex={0}
+        {...baseStyles}
+        ref={refs}
+        w={width}
+        {...rest}
+      >
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
             ? React.cloneElement(child, { optionKey: child.key })

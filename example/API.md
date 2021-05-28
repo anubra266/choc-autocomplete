@@ -1,23 +1,4 @@
----
 
-`Prop`
----**Description**
-
-> Description
-
-**Type**
-
-```ts
-boolean;
-```
-
-**Default**
-
-`default`
-
-**Required**
-
-No
 
 ## Autocomplete
 
@@ -33,11 +14,17 @@ selectOnFocus - select the text in input when input is focused
 openOnFocus - Open the suggestions once input is focused
 emphasize - The parts of the option string that match the `AutoCompleteInput` value are emphasized. Pass boolean to bolden it, or a Chakra `CSSObject` for custom styling.
 defaultIsOpen - The suggestions menu is open by default
+onSelectOption - Will be called every time suggestion is selected via mouse or keyboard. It returns the selectedValue, theselectionMethod and a boolean specifying if the input is a new one; useFul when combined creatable mode. Return false to prevent selecting the option.
+suggestWhenEmpty -  If the suggestions shoud show when the input is Empty. - It is used when the input is focused.
+closeOnBlur - If true, the menu will close when the AutoComplete Component loses focus.
+
+
+closeOnselect - //TODO to be added when close on blur is working If true, the menu will close when an item is selected, by mouse or keyboard.
 
 ## Item
 
 value:string;
-\_focus:CSSObject - styles for focused Item
+_focus?:CSSObject - styles for focused Item
 
 ## Group
 

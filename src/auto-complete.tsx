@@ -6,6 +6,7 @@ import { returnT } from './utils/operations';
 import { StoreContext } from './store';
 import { ListAction } from './store/reducers/list';
 import { InputAction } from './store/reducers/input';
+import { AutoCompleteAction } from './store/reducers/autocomplete';
 
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
@@ -13,11 +14,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
 
     const {
       state: {
-        autocomplete: {
-          value: autoCompleteValue,
-          freeSolo,
-          focusInputOnSelect,
-        },
+        autocomplete: { value: autoCompleteValue, freeSolo },
         list: { visible: isOpen },
         input: { value: inputValue, ref: inputRef },
       },
@@ -41,9 +38,13 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
         inputRef.current.value = '';
         inputRef.current.focus();
       }
+      dispatch({ type: InputAction.Set, payload: '' });
+      dispatch({ type: AutoCompleteAction.Set, payload: '' });
     };
 
-    const inputIsEmpty = inputValue.length < 1;
+    const inputIsEmpty = !(
+      !!inputValue.length || !!inputRef?.current?.value.length
+    );
 
     const childProps = {
       isOpen,
@@ -59,7 +60,6 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
         placement="bottom"
         isOpen={isOpen}
         onClose={onClose}
-        returnFocusOnClose={!focusInputOnSelect}
       >
         <Box ref={ref} {...rest}>
           {runIfFn(children, childProps)}

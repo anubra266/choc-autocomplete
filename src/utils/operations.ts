@@ -1,1 +1,1 @@
-export const returnT = (variable: any) => variable && variable;
+export const returnT = (variable: any): typeof variable => variable && variable;

@@ -1,7 +1,7 @@
 <div align="center">
   <h1>
     <br/>
-    🥵
+    🏇
     <br />
     @choc-ui/chakra-autocomplete
     <br />
@@ -275,3 +275,6 @@ export default () => {
 ## API Reference
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
+
+
+

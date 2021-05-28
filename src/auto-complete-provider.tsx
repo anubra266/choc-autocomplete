@@ -3,6 +3,7 @@ import { MaybeRenderProp } from '@chakra-ui/react-utils';
 
 import React, { ReactNode, useMemo, useReducer } from 'react';
 import { AutoCompleteBody } from './auto-complete';
+import { OnSelectOptionParams } from './helpers/autocomplete-props/onSelectOption';
 import { useParseProps } from './helpers/provider';
 import StoreProvider, { State } from './store';
 import { AutoCompleteReducer } from './store/reducers/autocomplete';
@@ -29,6 +30,11 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;
   defaultIsOpen?: boolean;
+  onSelectOption?: (params: OnSelectOptionParams) => boolean | void;
+  onOptionHighlight?: (optionValue: string) => boolean;
+  suggestWhenEmpty?: boolean;
+  closeOnselect?: boolean;
+  closeOnBlur?: boolean;
 }
 
 export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
@@ -42,6 +48,11 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     openOnFocus,
     emphasize,
     defaultIsOpen,
+    onSelectOption,
+    onOptionHighlight,
+    suggestWhenEmpty,
+    closeOnselect = true,
+    closeOnBlur = true,
     ...rest
   } = props;
 
@@ -56,6 +67,11 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
       selectOnFocus,
       openOnFocus,
       emphasize,
+      onSelectOption,
+      onOptionHighlight,
+      suggestWhenEmpty,
+      closeOnselect,
+      closeOnBlur,
     },
     input: {
       value: '',
@@ -68,6 +84,7 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
     },
     list: {
       visible: defaultIsOpen || false,
+      ref: undefined,
     },
   };
 

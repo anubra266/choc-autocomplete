@@ -1,18 +1,14 @@
 import React, { useContext, useEffect } from 'react';
-import { State, StoreContext } from '../store';
-import { ItemAction, ItemActions } from '../store/reducers/item';
-import {
-  AutoCompleteAction,
-  AutoCompleteActions,
-} from '../store/reducers/autocomplete';
-import { InputAction, InputActions } from '../store/reducers/input';
-import { returnT } from '../utils/operations';
-import { ListAction, ListActions } from '../store/reducers/list';
+import { State, StoreContext, StoreDispatch } from '../store';
+import { InputAction } from '../store/reducers/input';
+import { ItemAction } from '../store/reducers/item';
+import { ListAction } from '../store/reducers/list';
+import { runOnSelect } from './autocomplete-props/onSelectOption';
 
 export const useOptionsFilter = () => {
   const {
     state: {
-      autocomplete: { creatable, freeSolo },
+      autocomplete: { creatable },
       input,
       item,
     },
@@ -23,7 +19,16 @@ export const useOptionsFilter = () => {
   const filteredItems = options.filter(
     i => i.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
   );
-  const rawInputValue = input.ref?.current?.value;
+
+  //? Update input state if there's a defaultValue for input
+  useEffect(() => {
+    if (input.ref?.current) {
+      const rawInputValue = input.ref?.current?.value;
+      if (inputValue.trim().length < 1 && rawInputValue.trim().length > 0) {
+        dispatch({ type: InputAction.Set, payload: rawInputValue });
+      }
+    }
+  }, [input.ref]);
 
   useEffect(() => {
     const filterPayload = creatable
@@ -32,35 +37,23 @@ export const useOptionsFilter = () => {
     dispatch({ type: ItemAction.SetFiltered, payload: filterPayload });
     dispatch({ type: ItemAction.ResetActive, payload: false });
   }, [inputValue, options]);
-
-  useEffect(() => {
-    if (rawInputValue !== undefined) {
-      dispatch({ type: InputAction.Set, payload: rawInputValue });
-      if (freeSolo)
-        dispatch({ type: AutoCompleteAction.Set, payload: rawInputValue });
-    }
-  }, [rawInputValue]);
 };
 
 export const handleNavigation = (
   e: React.KeyboardEvent<HTMLInputElement>,
   state: State,
-  dispatch: React.Dispatch<
-    AutoCompleteActions | InputActions | ItemActions | ListActions
-  >,
-  inputRef: React.RefObject<HTMLInputElement>
+  dispatch: StoreDispatch
 ) => {
-  const { autocomplete, item } = state;
-  const activeItem = item.filtered[item.active];
+  const {
+    autocomplete: { rollNavigation },
+    item,
+  } = state;
 
   if (e.key === 'Enter') {
-    dispatch({ type: InputAction.Set, payload: activeItem.value });
-    dispatch({ type: AutoCompleteAction.Set, payload: activeItem.value });
-    returnT(inputRef.current).value = activeItem.value;
-    dispatch({ type: ListAction.Hide });
+    runOnSelect(state, dispatch, 'keyboard');
   } else if (e.key === 'ArrowUp') {
     if (item.active === 0) {
-      if (autocomplete.rollNavigation)
+      if (rollNavigation)
         dispatch({ type: ItemAction.ResetActive, payload: true });
       e.preventDefault();
       return;
@@ -69,7 +62,7 @@ export const handleNavigation = (
     e.preventDefault();
   } else if (e.key === 'ArrowDown') {
     if (item.active === item.filtered.length - 1) {
-      if (autocomplete.rollNavigation)
+      if (rollNavigation)
         dispatch({ type: ItemAction.ResetActive, payload: false });
       return;
     }

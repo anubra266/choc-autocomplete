@@ -15,6 +15,7 @@ export interface State {
   item: { active: number; list: Item[]; filtered: Item[] };
   list: {
     visible: boolean;
+    ref: React.RefObject<HTMLDivElement> | undefined;
   };
 }
 
@@ -29,11 +30,13 @@ export type ActionMap<M extends Record<string, any>> = {
       };
 };
 
+export type StoreDispatch = Dispatch<
+  AutoCompleteActions | InputActions | ItemActions | ListActions
+>;
+
 type ContextValue = {
   state: State;
-  dispatch: Dispatch<
-    AutoCompleteActions | InputActions | ItemActions | ListActions
-  >;
+  dispatch: StoreDispatch;
 };
 
 export const StoreContext = createContext({} as ContextValue);

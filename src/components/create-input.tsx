@@ -23,7 +23,7 @@ export const CreateInput = () => {
 
   return (
     <>
-      {!!inputValue.length && creatable && !itemExists && (
+      {!!inputValue.trim().length && creatable && !itemExists && (
         <AutoCompleteItem value={inputValue} optionKey="newInput">
           Add &nbsp;
           <chakra.span sx={emphasizeStyles}>"{inputValue}"</chakra.span>
