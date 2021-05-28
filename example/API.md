@@ -19,14 +19,7 @@ suggestWhenEmpty -  If the suggestions shoud show when the input is Empty. - It 
 closeOnBlur - If true, the menu will close when the AutoComplete Component loses focus.
 closeOnselect - If true, the menu will close when an item is selected, by mouse or keyboard.
 
-
-
-## Item
-
-value:string;
-_focus?:CSSObject - styles for focused Item
-
-## Group
+ ## Group
 
 title?: string;
 titleStyles?: TextProps;

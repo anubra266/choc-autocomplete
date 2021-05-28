@@ -300,6 +300,66 @@ Wrapper for collections of `AutoCompleteItem`s
 
 **AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
+<div class="tg-wrap"><table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>title</td>
+    <td>string</td>
+    <td>The group title</td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>titleStyles</td>
+    <td>
+    
+    TextProps
+    
+  </td>
+    <td>Styles for title decoration, if present</td>
+    <td>No</td>
+    <td>
+    
+
+```ts
+const baseTitleStyles: TextProps = {
+  ml: '5',
+  mt: '0.5rem',
+  fontSize: 'xs',
+  letterSpacing: 'wider',
+  fontWeight: 'extrabold',
+  textTransform: 'uppercase',
+};
+```
+    
+  </td>
+  </tr>
+  <tr>
+    <td>showDivider</td>
+    <td>boolean</td>
+    <td>If true, a divider is shown</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+  <tr>
+    <td>dividerColor</td>
+    <td>string</td>
+    <td>Color for divider, if present</td>
+    <td>No</td>
+    <td>inherit</td>
+  </tr>
+</tbody>
+</table></div>
+
 ### **AutoCompleteItem**
 
 This Composes your suggestions
@@ -322,11 +382,15 @@ This Composes your suggestions
     <td>string</td>
     <td>The value of the Option</td>
     <td>yes<br></td>
-    <td>&amp;mdash;</td>
+    <td>&mdash;&mdash;&mdash;</td>
   </tr>
   <tr>
     <td>_focus</td>
-    <td>CSSObjec</td>
+    <td>  
+
+    CSSObject
+
+</td>
     <td>Styles for focused Item</td>
     <td>No</td>
     <td>
