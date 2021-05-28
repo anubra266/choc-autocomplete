@@ -11,6 +11,7 @@ interface AutoCompleteItem extends FlexProps {
   value: string;
   _focus?: CSSObject | any;
   optionKey?: string;
+  // disabled?: boolean;
 }
 
 export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
@@ -24,6 +25,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       onMouseOver,
       onClick,
       sx,
+      // disabled,
       ...rest
     } = props;
     const { state, dispatch } = useContext(StoreContext);
@@ -69,6 +71,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
         }}
         ref={ref}
         {...rest}
+        // {...(disabled && disabledStyles)}
       >
         {isNewInput ? children : itemChild}
       </Flex>
@@ -92,3 +95,9 @@ const activeStyles: FlexProps = {
     bg: 'gray.200',
   },
 };
+
+//TODO
+// const disabledStyles: FlexProps = {
+//   pointerEvents: 'none',
+//   userSelect: 'none',
+// };

@@ -5,6 +5,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteChildProps,
 } from '../.';
 import { Button, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useTheme } from '@chakra-ui/system';
@@ -41,6 +42,7 @@ const App = () => {
               textTransform="capitalize"
               value={option}
               key={`option-${oid}`}
+              disabled={option === 'zap'}
             >
               {option}{' '}
             </AutoCompleteItem>
@@ -64,9 +66,9 @@ const App = () => {
       <AutoComplete
         rollNavigation
         focusInputOnSelect
-        openOnFocus
-        emphasize
         freeSolo
+        emphasize
+        openOnFocus
         creatable
         defaultIsOpen
         onSelectOption={({ optionValue }) => {
@@ -74,7 +76,7 @@ const App = () => {
           return false;
         }}
       >
-        {({ inputIsEmpty, resetInput }) => (
+        {({ inputIsEmpty, resetInput }: AutoCompleteChildProps) => (
           <>
             <InputGroup>
               <AutoCompleteInput

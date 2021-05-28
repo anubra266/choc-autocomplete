@@ -11,7 +11,7 @@ import { inputReducer } from './store/reducers/input';
 import { itemReducer } from './store/reducers/item';
 import { listReducer } from './store/reducers/list';
 
-type ChildrenProps = {
+export type ChildrenProps = {
   isOpen: boolean;
   onClose: () => void;
   inputIsEmpty: boolean;

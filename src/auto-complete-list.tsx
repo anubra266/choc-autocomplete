@@ -41,6 +41,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
         {...baseStyles}
         ref={refs}
         w={width}
+        _focus={{ boxShadow: 'none' }}
         {...rest}
       >
         {React.Children.map(children, (child: any) =>

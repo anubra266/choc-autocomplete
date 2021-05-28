@@ -447,7 +447,7 @@ type onSelectOption=  (params: {
 
 Input for `AutoComplete` value.
 
-**AutoComplete** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
+**AutoCompleteInput** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
 
 ### **AutoCompleteList**
 
@@ -459,7 +459,7 @@ Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 
 Wrapper for collections of `AutoCompleteItem`s
 
-**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+**AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
 <div class="tg-wrap"><table>
 <thead>
@@ -524,7 +524,7 @@ const baseTitleStyles: TextProps = {
 
 This Composes your suggestions
 
-**AutoComplete** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+**AutoCompleteItem** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
 
 <table>
 <thead>
@@ -562,6 +562,13 @@ This Composes your suggestions
 ```
 
 </td>
-  </tr>
+</tr>
+<!-- <tr>
+  <td>disabled</td>
+  <td>boolean</td>
+  <td>When true, the Item is disabled</td>
+  <td>no<br></td>
+  <td>&mdash;&mdash;&mdash;</td>
+</tr> -->
 </tbody>
 </table>
