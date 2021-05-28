@@ -36,6 +36,10 @@
   },
   "name": "@choc-ui/chakra-autocomplete",
   "author": "anubra266",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/anubra266/choc-autocomplete.git"
+  },
   "module": "dist/chakra-autocomplete.esm.js",
   "size-limit": [
     {
