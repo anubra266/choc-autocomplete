@@ -30,9 +30,13 @@ export type ActionMap<M extends Record<string, any>> = {
       };
 };
 
-export type StoreDispatch = Dispatch<
-  AutoCompleteActions | InputActions | ItemActions | ListActions
->;
+export type StoreActions =
+  | AutoCompleteActions
+  | InputActions
+  | ItemActions
+  | ListActions;
+
+export type StoreDispatch = Dispatch<StoreActions>;
 
 type ContextValue = {
   state: State;
