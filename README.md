@@ -398,10 +398,19 @@ When using `creatable`, `freeSolo` must be true.
   <tr>
     <td>selectOnFocus</td>
     <td>boolean</td>
-    <td>select the text in input when input is focused<br>openOnFocus - Open the suggestions once input is focused.</td>
+    <td>select the text in input when input is focused</td>
     <td>No</td>
     <td>false</td>
   </tr>
+
+ <tr>
+    <td>openOnFocus</td>
+    <td>boolean</td>
+    <td>Open the suggestions once input is focused.</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+
   <tr>
     <td>emphasize</td>
     <td>

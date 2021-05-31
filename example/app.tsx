@@ -23,18 +23,17 @@ const App = () => {
       <AutoComplete
         rollNavigation
         focusInputOnSelect
-        openOnFocus
+        // openOnFocus
         emphasize
         // freeSolo
         // creatable
-        defaultIsOpen
         suggestWhenEmpty
       >
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
           // defaultValue="app"
-          autoFocus
+          // autoFocus
         />
         <AutoCompleteList>
           {options.map((option, oid) => (
@@ -87,6 +86,7 @@ const App = () => {
                 variant="filled"
                 placeholder="Search..."
                 defaultValue="app"
+                autoFocus
               />
               {!inputIsEmpty && (
                 <InputRightElement cursor="pointer" onClick={resetInput}>
