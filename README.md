@@ -82,14 +82,14 @@ export default () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
 
   return (
-    <AutoComplete>
+    <AutoComplete rollNavigation>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
         defaultValue="ap"
         autoFocus
       />
-      <AutoCompleteList rollNavigation>
+      <AutoCompleteList>
         {options.map((option, oid) => (
           <AutoCompleteItem
             key={`option-${oid}`}
@@ -127,7 +127,7 @@ export default () => {
   const countries = ['Korea', 'Nigeria', 'India'];
 
   return (
-    <AutoComplete>
+    <AutoComplete rollNavigation>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
@@ -135,7 +135,7 @@ export default () => {
         defaultValue="ap"
         autoFocus
       />
-      <AutoCompleteList rollNavigation>
+      <AutoCompleteList>
         <AutoCompleteGroup title="Fruits" showDivider>
           {fruits.map((option, oid) => (
             <AutoCompleteItem
@@ -186,7 +186,7 @@ export default () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
 
   return (
-    <AutoComplete>
+    <AutoComplete rollNavigation>
       {({ isOpen }) => (
         <>
           <InputGroup>
@@ -197,7 +197,7 @@ export default () => {
               }
             />
           </InputGroup>
-          <AutoCompleteList rollNavigation>
+          <AutoCompleteList>
             {options.map((option, oid) => (
               <AutoCompleteItem
                 key={`optio-${oid}`}
@@ -245,7 +245,7 @@ export default () => {
   ];
 
   return (
-    <AutoComplete>
+    <AutoComplete rollNavigation>
       <AutoCompleteInput
         variant="filled"
         placeholder="Search..."
@@ -253,7 +253,7 @@ export default () => {
         defaultValue="ap"
         autoFocus
       />
-      <AutoCompleteList rollNavigation>
+      <AutoCompleteList>
         {people.map((person, oid) => (
           <AutoCompleteItem
             key={`option-${oid}`}
