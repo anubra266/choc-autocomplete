@@ -38,7 +38,7 @@
   <br />
   <br />
   <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/autocomplete">@choc-ui/chakra-autocomplete</a></pre>
+  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete">@choc-ui/chakra-autocomplete</a></pre>
   <br />
   <br />
   <br />
@@ -76,7 +76,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-} from '@choc-ui/autocomplete';
+} from '@choc-ui/chakra-autocomplete';
 
 export default () => {
   const options = ['apple', 'appoint', 'zap', 'cap', 'japan'];
@@ -120,7 +120,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-} from '@choc-ui/autocomplete';
+} from '@choc-ui/chakra-autocomplete';
 
 export default () => {
   const fruits = ['Apple', 'Grape', 'Pawpaw'];
