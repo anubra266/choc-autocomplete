@@ -14,9 +14,7 @@ export const handleItemGroup = (group: any, state: State) => {
     const children: any[] = group.props.children;
     const childrenWithKeys = children.reduce((acc, child) => {
       acc.push(
-        isChild(child, 'AutoCompleteItem')
-          ? React.cloneElement(child, { optionKey: child.key })
-          : child
+        isChild(child, 'AutoCompleteItem') ? assignChildKey(child) : child
       );
       return acc;
     }, []);
@@ -27,6 +25,11 @@ export const handleItemGroup = (group: any, state: State) => {
       : React.cloneElement(group, { children: childrenWithKeys });
   } else return group;
 };
+
+export const assignChildKey = (child: any) =>
+  React.cloneElement(child, {
+    optionKey: child.key,
+  });
 
 export const getItemKeys: string[] | any = (children: ReactNode) => {
   const items: Item[] = [];

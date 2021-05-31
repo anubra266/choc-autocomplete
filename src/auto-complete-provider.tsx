@@ -38,29 +38,12 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   closeOnBlur?: boolean;
 }
 
-export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
-  const {
-    emptyState = true,
-    rollNavigation,
-    focusInputOnSelect,
-    freeSolo,
-    creatable,
-    selectOnFocus,
-    openOnFocus,
-    emphasize,
-    defaultIsOpen,
-    onSelectOption,
-    onOptionHighlight,
-    suggestWhenEmpty,
-    closeOnselect = true,
-    closeOnBlur = true,
-    ...rest
-  } = props;
+export type AutoCompleteProps = AutoComplete;
 
-  const initialState: State = {
-    autocomplete: {
-      value: '',
-      emptyState,
+export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
+  (props, ref) => {
+    const {
+      emptyState = true,
       rollNavigation,
       focusInputOnSelect,
       freeSolo,
@@ -68,52 +51,73 @@ export const AutoComplete = forwardRef<AutoComplete, 'div'>((props, ref) => {
       selectOnFocus,
       openOnFocus,
       emphasize,
+      defaultIsOpen,
       onSelectOption,
       onOptionHighlight,
       suggestWhenEmpty,
-      closeOnselect,
-      closeOnBlur,
-    },
-    input: {
-      value: '',
-      ref: undefined,
-    },
-    item: {
-      active: -1,
-      list: [],
-      filtered: [],
-    },
-    list: {
-      visible: defaultIsOpen || false,
-      ref: undefined,
-    },
-  };
+      closeOnselect = true,
+      closeOnBlur = true,
+      ...rest
+    } = props;
 
-  const mainReducer = (
-    { autocomplete, input, item, list }: State,
-    action: any
-  ) => ({
-    autocomplete: AutoCompleteReducer(autocomplete, action),
-    input: inputReducer(input, action),
-    item: itemReducer(item, action),
-    list: listReducer(list, action),
-  });
+    const initialState: State = {
+      autocomplete: {
+        value: '',
+        emptyState,
+        rollNavigation,
+        focusInputOnSelect,
+        freeSolo,
+        creatable,
+        selectOnFocus,
+        openOnFocus,
+        emphasize,
+        onSelectOption,
+        onOptionHighlight,
+        suggestWhenEmpty,
+        closeOnselect,
+        closeOnBlur,
+      },
+      input: {
+        value: '',
+        ref: undefined,
+      },
+      item: {
+        active: -1,
+        list: [],
+        filtered: [],
+      },
+      list: {
+        visible: defaultIsOpen || false,
+        ref: undefined,
+      },
+    };
 
-  const [state, dispatch] = useReducer(mainReducer, initialState);
+    const mainReducer = (
+      { autocomplete, input, item, list }: State,
+      action: any
+    ) => ({
+      autocomplete: AutoCompleteReducer(autocomplete, action),
+      input: inputReducer(input, action),
+      item: itemReducer(item, action),
+      list: listReducer(list, action),
+    });
 
-  const providerValue = useMemo(
-    () => ({
-      state,
-      dispatch,
-    }),
-    [state, dispatch]
-  );
+    const [state, dispatch] = useReducer(mainReducer, initialState);
 
-  useParseProps(props);
+    const providerValue = useMemo(
+      () => ({
+        state,
+        dispatch,
+      }),
+      [state, dispatch]
+    );
 
-  return (
-    <StoreProvider value={providerValue}>
-      <AutoCompleteBody ref={ref} {...rest} />
-    </StoreProvider>
-  );
-});
+    useParseProps(props);
+
+    return (
+      <StoreProvider value={providerValue}>
+        <AutoCompleteBody ref={ref} {...rest} />
+      </StoreProvider>
+    );
+  }
+);

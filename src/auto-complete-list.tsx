@@ -8,6 +8,7 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { CreateInput } from './components/create-input';
 import { EmptyState } from './components/empty-state';
 import {
+  assignChildKey,
   closeList,
   getItemKeys,
   handleItemGroup,
@@ -18,9 +19,9 @@ import { Item, ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
 import { isChild } from './utils/components';
 
-interface AutoCompleteList extends PopoverContentProps {}
+export interface AutoCompleteListProps extends PopoverContentProps {}
 
-export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
+export const AutoCompleteList = forwardRef<AutoCompleteListProps, 'div'>(
   (props, outRef) => {
     const ref = useRef<HTMLDivElement>(null);
     const refs = useMergeRefs(ref, outRef);
@@ -51,7 +52,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteList, 'div'>(
       >
         {React.Children.map(children, (child: any) =>
           isChild(child, 'AutoCompleteItem')
-            ? React.cloneElement(child, { optionKey: child.key })
+            ? assignChildKey(child)
             : handleItemGroup(child, state)
         )}
         <CreateInput />

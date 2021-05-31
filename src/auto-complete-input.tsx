@@ -8,9 +8,9 @@ import { ListAction } from './store/reducers/list';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { closeList } from './helpers/list';
 
-interface AutoCompleteInput extends InputProps {}
+export interface AutoCompleteInputProps extends InputProps {}
 
-export const AutoCompleteInput = forwardRef<AutoCompleteInput, 'input'>(
+export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
   (props, ref) => {
     const { onChange, onKeyDown, onFocus, onBlur, onClick, ...rest } = props;
     const internalRef = useRef<HTMLInputElement>(null);

@@ -23,17 +23,18 @@ const App = () => {
       <AutoComplete
         rollNavigation
         focusInputOnSelect
-        // openOnFocus
+        openOnFocus
         emphasize
         // freeSolo
         // creatable
         suggestWhenEmpty
+        closeOnselect={false}
       >
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
           // defaultValue="app"
-          // autoFocus
+          autoFocus
         />
         <AutoCompleteList>
           {options.map((option, oid) => (
@@ -53,6 +54,12 @@ const App = () => {
               </AutoCompleteItem>
             ))}
           </AutoCompleteGroup>
+          <AutoCompleteItem
+            fixed
+            onClick={() => setOptions(o => [...o, 'new'])}
+          >
+            Create New
+          </AutoCompleteItem>
         </AutoCompleteList>
       </AutoComplete>
       <Button
@@ -62,7 +69,7 @@ const App = () => {
       >
         Add Option
       </Button>
-      <AutoComplete
+      {/* <AutoComplete
         rollNavigation
         focusInputOnSelect
         freeSolo
@@ -86,7 +93,7 @@ const App = () => {
                 variant="filled"
                 placeholder="Search..."
                 defaultValue="app"
-                autoFocus
+                // autoFocus
               />
               {!inputIsEmpty && (
                 <InputRightElement cursor="pointer" onClick={resetInput}>
@@ -114,7 +121,7 @@ const App = () => {
             </AutoCompleteList>
           </>
         )}
-      </AutoComplete>
+      </AutoComplete> */}
     </Flex>
   );
 };

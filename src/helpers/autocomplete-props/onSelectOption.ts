@@ -18,7 +18,7 @@ export const runOnSelect = (
   cb?: Function
 ) => {
   const {
-    autocomplete: { onSelectOption, focusInputOnSelect },
+    autocomplete: { onSelectOption, focusInputOnSelect, closeOnselect },
     item,
     input: { ref: inputRef },
   } = state;
@@ -38,7 +38,7 @@ export const runOnSelect = (
     returnT(inputRef?.current).value = activeItem.value;
     dispatch({ type: InputAction.Set, payload: activeItem.value });
     dispatch({ type: AutoCompleteAction.Set, payload: activeItem.value });
-    closeList(state, dispatch);
+    if (closeOnselect) closeList(state, dispatch);
     runIfFn(cb);
   }
   if (inputRef?.current && focusInputOnSelect) inputRef.current.focus();

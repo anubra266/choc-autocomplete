@@ -12,7 +12,7 @@ import React, { useContext } from 'react';
 import { hasFirstOption } from './helpers/group';
 import { StoreContext } from './store';
 
-interface AutoCompleteGroup extends StackProps {
+export interface AutoCompleteGroupProps extends StackProps {
   children?: any;
   title?: string;
   titleStyles?: TextProps;
@@ -20,7 +20,7 @@ interface AutoCompleteGroup extends StackProps {
   dividerColor?: string;
 }
 
-export const AutoCompleteGroup = forwardRef<AutoCompleteGroup, 'div'>(
+export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, 'div'>(
   (props, ref) => {
     const {
       title,
