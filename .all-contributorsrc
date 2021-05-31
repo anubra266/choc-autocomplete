@@ -6,21 +6,21 @@
   "commit": false,
   "contributors": [
     {
-      "login": "margalit",
-      "name": "Sam Margalit",
-      "avatar_url": "https://avatars.githubusercontent.com/u/2268424?v=4",
-      "profile": "http://margalit.com.au",
-      "contributions": [
-        "doc"
-      ]
-    },
-    {
       "login": "anubra266",
       "name": "Abraham",
       "avatar_url": "https://avatars.githubusercontent.com/u/30869823?v=4",
       "profile": "https://anubra266.tk",
       "contributions": [
         "code"
+      ]
+    },
+    {
+      "login": "margalit",
+      "name": "Sam Margalit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2268424?v=4",
+      "profile": "http://margalit.com.au",
+      "contributions": [
+        "doc"
       ]
     }
   ],
