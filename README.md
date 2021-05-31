@@ -42,9 +42,9 @@
 ## Install
 
 ```bash
-npm i --save @choc-ui/autocomplete
+npm i --save @choc-ui/chakra-autocomplete
 #or
-yarn add @choc-ui/autocomplete
+yarn add @choc-ui/chakra-autocomplete
 ```
 
 ## Preview
