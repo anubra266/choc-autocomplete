@@ -71,8 +71,8 @@ const App = () => {
         openOnFocus
         creatable
         defaultIsOpen
-        onSelectOption={({ optionValue }) => {
-          console.log('wow :>> ', optionValue);
+        onSelectOption={({ optionValue, isNewInput }) => {
+          console.log('wow :>> ', optionValue, isNewInput);
           return false;
         }}
       >

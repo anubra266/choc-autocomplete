@@ -28,7 +28,7 @@ export const runOnSelect = (
     runIfFn(onSelectOption, {
       optionValue: activeItem.value,
       selectMethod,
-      isNewInput: activeItem.key === 'isNewInput',
+      isNewInput: activeItem.key === 'newInput',
     });
 
   if (
