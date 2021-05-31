@@ -22,6 +22,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "gepd",
+      "name": "gepd",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7091609?v=4",
+      "profile": "https://github.com/gepd",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
