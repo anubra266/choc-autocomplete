@@ -7,14 +7,14 @@ import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
 import { ItemAction } from './store/reducers/item';
 
-interface AutoCompleteItem extends FlexProps {
+interface AutoCompleteItemProps extends FlexProps {
   value: string;
   _focus?: CSSObject | any;
   optionKey?: string;
   // disabled?: boolean;
 }
 
-export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
+export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, 'div'>(
   (props, ref) => {
     const {
       children,
@@ -62,9 +62,9 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
       <Flex
         onMouseOver={handleMouseOver}
         onClick={handleOnClick}
-        {...baseStyles}
+        {...itemBaseStyles}
         _hover={_hover}
-        {...(isActiveItem && (_focus || activeStyles))}
+        {...(isActiveItem && (_focus || itemActiveStyles))}
         sx={{
           ...sx,
           '.emphasizedItem': emphasizeStyles,
@@ -80,8 +80,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItem, 'div'>(
 );
 
 AutoCompleteItem.displayName = 'AutoCompleteItem';
-
-const baseStyles: FlexProps = {
+export const itemBaseStyles: FlexProps = {
   mx: '2',
   px: '2',
   py: '2',
@@ -89,7 +88,7 @@ const baseStyles: FlexProps = {
   cursor: 'pointer',
 };
 
-const activeStyles: FlexProps = {
+export const itemActiveStyles: FlexProps = {
   bg: 'whiteAlpha.100',
   _light: {
     bg: 'gray.200',

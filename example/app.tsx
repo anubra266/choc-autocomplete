@@ -6,6 +6,7 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
   AutoCompleteChildProps,
+  AutoCompleteFixedItem,
 } from '../.';
 import { Button, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useTheme } from '@chakra-ui/system';
@@ -54,12 +55,10 @@ const App = () => {
               </AutoCompleteItem>
             ))}
           </AutoCompleteGroup>
-          <AutoCompleteItem
-            fixed
-            onClick={() => setOptions(o => [...o, 'new'])}
-          >
+          <AutoCompleteFixedItem onClick={() => setOptions(o => [...o, 'new'])}>
             Create New
-          </AutoCompleteItem>
+          </AutoCompleteFixedItem>
+          <Flex onClick={() => setOptions(o => [...o, 'new'])}>Create New</Flex>
         </AutoCompleteList>
       </AutoComplete>
       <Button

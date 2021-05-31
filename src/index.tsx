@@ -5,6 +5,7 @@ export {
 export * from './auto-complete-input';
 export * from './auto-complete-list';
 export * from './auto-complete-item';
+export * from './auto-complete-fixed-item';
 export * from './auto-complete-group';
 // export { AutoCompleteTags } from './auto-complete-tags';
 

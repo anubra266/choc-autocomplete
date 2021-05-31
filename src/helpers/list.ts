@@ -36,7 +36,7 @@ export const getItemKeys: string[] | any = (children: ReactNode) => {
 
   React.Children.map(children, (child: any) => {
     if (isChild(child, 'AutoCompleteItem')) items.push(getChildProps(child));
-    else
+    else if (isChild(child, 'AutoCompleteGroup'))
       return child.props.children?.map((option: any) => {
         if (isChild(option, 'AutoCompleteItem'))
           items.push(getChildProps(option));
