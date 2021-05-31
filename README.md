@@ -378,7 +378,20 @@ type emptyState = boolean | ReactNode;
   <tr>
     <td>creatable</td>
     <td>boolean</td>
-    <td>If true, allows creation of new Items, `freeSolo` must be true.</td>
+    <td>Allows creation of new Items, set to true to show `Add {newInput}` It can also be a function that returns a `ReactNode` and is provided with the `newInput` and an `Emphasize` component.
+    e.g.
+
+```js
+const creatable={({ newInput, Emphasize }) => (
+  <>
+    Add<Emphasize>"{newInput}"</Emphasize>
+  </>
+)}
+```
+
+When using `creatable`, `freeSolo` must be true.
+
+</td>
     <td>No</td>
     <td>false</td>
   </tr>

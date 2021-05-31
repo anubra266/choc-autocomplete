@@ -3,6 +3,7 @@ import { MaybeRenderProp } from '@chakra-ui/react-utils';
 
 import React, { ReactNode, useMemo, useReducer } from 'react';
 import { AutoCompleteBody } from './auto-complete';
+import { CreatableProps } from './components/create-input';
 import { OnSelectOptionParams } from './helpers/autocomplete-props/onSelectOption';
 import { useParseProps } from './helpers/provider';
 import StoreProvider, { State } from './store';
@@ -25,7 +26,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   rollNavigation?: boolean;
   focusInputOnSelect?: boolean;
   freeSolo?: boolean;
-  creatable?: boolean;
+  creatable?: boolean | ((props: CreatableProps) => ReactNode);
   selectOnFocus?: boolean;
   openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;

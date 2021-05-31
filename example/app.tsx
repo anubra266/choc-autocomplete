@@ -69,7 +69,11 @@ const App = () => {
         freeSolo
         emphasize
         openOnFocus
-        creatable
+        creatable={({ newInput, Emphasize }) => (
+          <>
+            Create<Emphasize>"{newInput}"</Emphasize>
+          </>
+        )}
         defaultIsOpen
         onSelectOption={({ optionValue, isNewInput }) => {
           console.log('wow :>> ', optionValue, isNewInput);
