@@ -28,7 +28,7 @@ export const AutoCompleteFixedItem = forwardRef<
   AutoCompleteFixedItemProps,
   'div'
 >((props, outerRef) => {
-  const ref = useRef(null);
+  const ref = useRef<any>(null);
   const refs = useMergeRefs(outerRef, ref);
 
   const {
@@ -71,13 +71,11 @@ export const AutoCompleteFixedItem = forwardRef<
     onItemSelected('click');
   };
 
-  const exposed: any = {
+  useImperativeHandle(ref, () => ({
     onKeyboardSelect: () => {
       onItemSelected('keyboard');
     },
-  };
-
-  useImperativeHandle(ref, () => exposed);
+  }));
 
   return (
     <Flex
