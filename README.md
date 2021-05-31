@@ -489,7 +489,7 @@ Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 Wrapper for collections of `AutoCompleteItem`s
 
 **AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
-
+<Table>
 <thead>
   <tr>
     <th>Prop<br></th>
@@ -531,6 +531,7 @@ const baseTitleStyles: TextProps = {
 
   </td>
   </tr>
+
   <tr>
     <td>showDivider</td>
     <td>boolean</td>
@@ -538,6 +539,7 @@ const baseTitleStyles: TextProps = {
     <td>No</td>
     <td>false</td>
   </tr>
+
   <tr>
     <td>dividerColor</td>
     <td>string</td>
@@ -546,7 +548,9 @@ const baseTitleStyles: TextProps = {
     <td>inherit</td>
   </tr>
 </tbody>
+
 </table>
+
 
 ### **AutoCompleteItem**
 
@@ -622,7 +626,7 @@ This is an item that is not filtered with the other options, but syncs with the 
 <tbody>
   <tr>
     <td>onItemSelect</td>
-    <td>
+    <td> 
 
 ```ts
 type onItemSelect = (method: 'click' | 'keyboard') => void;
