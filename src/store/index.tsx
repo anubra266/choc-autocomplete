@@ -1,5 +1,6 @@
-import { BoxProps } from '@chakra-ui/layout';
-import React, { createContext, Dispatch, ProviderProps } from 'react';
+import { BoxProps } from '@chakra-ui/react';
+import { createContext } from '@chakra-ui/react-utils';
+import React, { Dispatch } from 'react';
 import { AutoComplete } from '../auto-complete-provider';
 import { AutoCompleteActions } from './reducers/autocomplete';
 import { InputActions } from './reducers/input';
@@ -48,10 +49,10 @@ type ContextValue = {
   dispatch: StoreDispatch;
 };
 
-export const StoreContext = createContext({} as ContextValue);
+export const [AutoCompleteProvider, useAutoCompleteContext] = createContext<
+  ContextValue
+>({
+  name: 'AutoCompleteContext',
+});
 
-const StoreProvider = (props: ProviderProps<ContextValue>) => (
-  <StoreContext.Provider {...props} />
-);
-
-export default StoreProvider;
+export default AutoCompleteProvider;

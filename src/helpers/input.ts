@@ -1,5 +1,5 @@
-import React, { useContext, useEffect } from 'react';
-import { State, StoreContext, StoreDispatch } from '../store';
+import React, { useEffect } from 'react';
+import { State, useAutoCompleteContext, StoreDispatch } from '../store';
 import { InputAction } from '../store/reducers/input';
 import { ItemAction } from '../store/reducers/item';
 import { runOnSelect } from './autocomplete-props/onSelectOption';
@@ -13,7 +13,7 @@ export const useOptionsFilter = () => {
       item,
     },
     dispatch,
-  } = useContext(StoreContext);
+  } = useAutoCompleteContext();
   const inputValue = input.value;
   const options = item.list;
   const filteredItems = options.filter(

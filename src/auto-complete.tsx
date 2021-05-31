@@ -1,8 +1,8 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { Box, forwardRef, Popover } from '@chakra-ui/react';
 import { runIfFn } from '@chakra-ui/utils';
 import { AutoComplete } from './auto-complete-provider';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { closeList } from './helpers/list';
@@ -11,7 +11,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
     const { children, onChange, ...rest } = props;
 
-    const { state, dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useAutoCompleteContext();
 
     const {
       autocomplete: { value: autoCompleteValue },

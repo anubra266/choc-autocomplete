@@ -1,6 +1,6 @@
 import { Box, BoxProps, Flex, FlexProps } from '@chakra-ui/layout';
-import React, { useContext } from 'react';
-import { StoreContext } from '../store';
+import React from 'react';
+import { useAutoCompleteContext } from '../store';
 
 export const EmptyState = (props: BoxProps) => {
   const {
@@ -8,7 +8,7 @@ export const EmptyState = (props: BoxProps) => {
       item: { filtered },
       autocomplete: { emptyState },
     },
-  } = useContext(StoreContext);
+  } = useAutoCompleteContext();
 
   return (
     <Box {...props}>

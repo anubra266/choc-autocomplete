@@ -1,8 +1,8 @@
 import { chakra, ChakraComponent } from '@chakra-ui/system';
 import { runIfFn } from '@chakra-ui/utils';
-import React, { useContext } from 'react';
+import React from 'react';
 import { AutoCompleteItem } from '../auto-complete-item';
-import { StoreContext } from '../store';
+import { useAutoCompleteContext } from '../store';
 
 export const CreateInput = () => {
   const {
@@ -11,7 +11,7 @@ export const CreateInput = () => {
       autocomplete: { creatable, emphasize },
       input: { value: inputValue },
     },
-  } = useContext(StoreContext);
+  } = useAutoCompleteContext();
 
   const itemExists = item.list.some(i => i.value === inputValue);
 

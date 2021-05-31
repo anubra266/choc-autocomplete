@@ -1,7 +1,7 @@
 import { forwardRef, Input, InputProps, useMergeRefs } from '@chakra-ui/react';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { runIfFn } from '@chakra-ui/utils';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 import { InputAction } from './store/reducers/input';
 import { handleNavigation, useOptionsFilter } from './helpers/input';
 import { ListAction } from './store/reducers/list';
@@ -16,7 +16,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
     const internalRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs(ref, internalRef);
 
-    const { state, dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useAutoCompleteContext();
     const {
       autocomplete,
       list: { ref: listRef, visible: listIsVisible },

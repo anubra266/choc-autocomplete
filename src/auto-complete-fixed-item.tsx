@@ -8,13 +8,12 @@ import {
 import { runIfFn } from '@chakra-ui/utils';
 import React, {
   MouseEventHandler,
-  useContext,
   useEffect,
   useImperativeHandle,
   useRef,
 } from 'react';
 import { itemActiveStyles, itemBaseStyles } from './auto-complete-item';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 import { ItemAction } from './store/reducers/item';
 
 type SelectMethod = 'click' | 'keyboard';
@@ -45,7 +44,7 @@ export const AutoCompleteFixedItem = forwardRef<
       item: { filtered: filterdItems, active: activeItemIndex },
     },
     dispatch,
-  } = useContext(StoreContext);
+  } = useAutoCompleteContext();
 
   useEffect(() => {
     dispatch({

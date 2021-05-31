@@ -1,10 +1,10 @@
 import { CSSObject, Flex, FlexProps, forwardRef } from '@chakra-ui/react';
 import { runIfFn } from '@chakra-ui/utils';
-import React, { MouseEventHandler, useContext } from 'react';
+import React, { MouseEventHandler } from 'react';
 import { useOnOptionHighlight } from './helpers/autocomplete-props/onOptionHighlight';
 import { runOnSelect } from './helpers/autocomplete-props/onSelectOption';
 import { useEmphasizer } from './helpers/item';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 import { ItemAction } from './store/reducers/item';
 
 export interface AutoCompleteItemProps extends FlexProps {
@@ -28,7 +28,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, 'div'>(
       // disabled,
       ...rest
     } = props;
-    const { state, dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useAutoCompleteContext();
     const {
       autocomplete: { emphasize },
       input: { value: inputValue },

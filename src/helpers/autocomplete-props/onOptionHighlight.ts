@@ -1,6 +1,6 @@
-import { useContext, useEffect } from 'react';
+import { useEffect } from 'react';
 import { runIfFn } from '@chakra-ui/utils';
-import { StoreContext } from '../../store';
+import { useAutoCompleteContext } from '../../store';
 import { Item } from '../../store/reducers/item';
 
 export const useOnOptionHighlight = (activeItem: Item) => {
@@ -8,7 +8,7 @@ export const useOnOptionHighlight = (activeItem: Item) => {
     state: {
       autocomplete: { onOptionHighlight },
     },
-  } = useContext(StoreContext);
+  } = useAutoCompleteContext();
   useEffect(() => {
     runIfFn(onOptionHighlight, activeItem?.value);
   }, [activeItem]);

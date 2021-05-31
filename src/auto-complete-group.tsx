@@ -8,9 +8,9 @@ import {
   Text,
   TextProps,
 } from '@chakra-ui/react';
-import React, { useContext } from 'react';
+import React from 'react';
 import { hasFirstOption } from './helpers/group';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 
 export interface AutoCompleteGroupProps extends StackProps {
   children?: any;
@@ -31,7 +31,7 @@ export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, 'div'>(
       ...rest
     } = props;
 
-    const { state } = useContext(StoreContext);
+    const { state } = useAutoCompleteContext();
 
     const noDivider = hasFirstOption(children, state);
 

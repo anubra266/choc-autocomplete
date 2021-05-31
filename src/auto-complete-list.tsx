@@ -4,7 +4,7 @@ import {
   PopoverContentProps,
   useMergeRefs,
 } from '@chakra-ui/react';
-import React, { useContext, useEffect, useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { CreateInput } from './components/create-input';
 import { EmptyState } from './components/empty-state';
 import {
@@ -13,7 +13,7 @@ import {
   handleListChild,
   useRefDimensions,
 } from './helpers/list';
-import { StoreContext } from './store';
+import { useAutoCompleteContext } from './store';
 import { Item, ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
 
@@ -25,7 +25,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, 'div'>(
     const refs = useMergeRefs(ref, outRef);
     const { children, ...rest } = props;
     const childCount = React.Children.count(children);
-    const { state, dispatch } = useContext(StoreContext);
+    const { state, dispatch } = useAutoCompleteContext();
     const { input } = state;
 
     useEffect(() => {
@@ -48,9 +48,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, 'div'>(
         _focus={{ boxShadow: 'none' }}
         {...rest}
       >
-        {React.Children.map(children, (child) =>
-          handleListChild(child, state)
-        )}
+        {React.Children.map(children, child => handleListChild(child, state))}
         <CreateInput />
         <EmptyState
           onClick={() => {
