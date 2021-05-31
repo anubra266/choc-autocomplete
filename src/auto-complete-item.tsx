@@ -7,7 +7,7 @@ import { useEmphasizer } from './helpers/item';
 import { StoreContext } from './store';
 import { ItemAction } from './store/reducers/item';
 
-interface AutoCompleteItemProps extends FlexProps {
+export interface AutoCompleteItemProps extends FlexProps {
   value: string;
   _focus?: CSSObject | any;
   optionKey?: string;
@@ -19,7 +19,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, 'div'>(
     const {
       children,
       value: itemValue,
-      optionKey,
+      optionKey = '',
       _hover,
       _focus,
       onMouseOver,
@@ -41,7 +41,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, 'div'>(
 
     const handleMouseOver: MouseEventHandler<HTMLDivElement> = e => {
       runIfFn(onMouseOver, e);
-      dispatch({ type: ItemAction.SetWithKey, payload: optionKey || '' });
+      dispatch({ type: ItemAction.SetWithKey, payload: optionKey });
     };
 
     const handleOnClick: MouseEventHandler<HTMLDivElement> = e => {

@@ -490,7 +490,6 @@ Wrapper for collections of `AutoCompleteItem`s
 
 **AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
 
-<div class="tg-wrap"><table>
 <thead>
   <tr>
     <th>Prop<br></th>
@@ -547,7 +546,7 @@ const baseTitleStyles: TextProps = {
     <td>inherit</td>
   </tr>
 </tbody>
-</table></div>
+</table>
 
 ### **AutoCompleteItem**
 
@@ -599,6 +598,42 @@ This Composes your suggestions
   <td>no<br></td>
   <td>&mdash;&mdash;&mdash;</td>
 </tr> -->
+</tbody>
+</table>
+
+### **AutoCompleteFixedItem**
+
+This is an item that is not filtered with the other options, but syncs with the highlight and active states.
+
+**AutoCompleteFixedItem** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+
+**AutoCompleteFixedItem** composes [**AutoCompleteItem**](https://github.com/anubra266/choc-autocomplete#autocompleteitem) so you can pass all AutoCompleteItem props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>onItemSelect</td>
+    <td>
+
+```ts
+type onItemSelect = (method: 'click' | 'keyboard') => void;
+```
+
+  </td>
+    <td>Callback to run when Item is selected my mouse or keyboard. Provides the select method</td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+ 
 </tbody>
 </table>
 

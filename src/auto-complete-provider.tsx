@@ -85,6 +85,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
         active: -1,
         list: [],
         filtered: [],
+        fixed: {},
       },
       list: {
         visible: defaultIsOpen || false,

@@ -6,6 +6,23 @@ import { ListAction } from '../store/reducers/list';
 import { isChild } from '../utils/components';
 import { returnT } from '../utils/operations';
 
+export const handleListChild = (child: any, state: State) => {
+  const type = child.type.displayName;
+  switch (type) {
+    case 'AutoCompleteItem':
+      return assignChildKey(child);
+
+    case 'AutoCompleteGroup':
+      return handleItemGroup(child, state);
+
+    case 'AutoCompleteFixedItem':
+      return assignChildKey(child);
+
+    default:
+      return child;
+  }
+};
+
 export const handleItemGroup = (group: any, state: State) => {
   const isValidItem = (child: any) =>
     state.item.filtered.some(i => i.key === child.key);
@@ -28,7 +45,7 @@ export const handleItemGroup = (group: any, state: State) => {
 
 export const assignChildKey = (child: any) =>
   React.cloneElement(child, {
-    optionKey: child.key,
+    optionKey: child.key || child.props.children.toString(),
   });
 
 export const getItemKeys: string[] | any = (children: ReactNode) => {
@@ -42,13 +59,15 @@ export const getItemKeys: string[] | any = (children: ReactNode) => {
           items.push(getChildProps(option));
         else return;
       });
+    else if (isChild(child, 'AutoCompleteFixedItem'))
+      items.push(getChildProps(child));
   });
   return items;
 };
 
 const getChildProps = (child: any) => ({
-  key: child.key,
-  value: child.props.value,
+  key: child.key || child.props.children.toString(),
+  value: child.props.value || '',
 });
 
 export const useRefDimensions = (

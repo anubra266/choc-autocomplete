@@ -11,6 +11,7 @@ export enum ItemAction {
   SetWithKey = 'SET_ACTIVE_ITEM_WITH_KEY',
   SetFiltered = 'SET_FILTERED_ITEMS',
   ResetActive = 'RESET_ACTIVE_ITEM',
+  AddFixedRef = 'ADD_FIXED_ITEM_REF',
 }
 
 type ItemPayload = {
@@ -19,6 +20,10 @@ type ItemPayload = {
   [ItemAction.SetWithKey]: string;
   [ItemAction.SetFiltered]: State['item']['filtered'];
   [ItemAction.ResetActive]: boolean;
+  [ItemAction.AddFixedRef]: {
+    key: string;
+    ref: React.RefObject<HTMLDivElement>;
+  };
 };
 
 export type ItemActions = ActionMap<ItemPayload>[keyof ActionMap<ItemPayload>];
@@ -42,6 +47,12 @@ export const itemReducer = (state: State['item'], action: ItemActions) => {
       return {
         ...state,
         active: action.payload ? state.filtered.length - 1 : 0,
+      };
+
+    case ItemAction.AddFixedRef:
+      return {
+        ...state,
+        fixed: { ...state.fixed, [action.payload.key]: action.payload.ref },
       };
 
     default:

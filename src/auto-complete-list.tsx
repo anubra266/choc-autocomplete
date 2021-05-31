@@ -8,16 +8,14 @@ import React, { useContext, useEffect, useRef } from 'react';
 import { CreateInput } from './components/create-input';
 import { EmptyState } from './components/empty-state';
 import {
-  assignChildKey,
   closeList,
   getItemKeys,
-  handleItemGroup,
+  handleListChild,
   useRefDimensions,
 } from './helpers/list';
 import { StoreContext } from './store';
 import { Item, ItemAction } from './store/reducers/item';
 import { ListAction } from './store/reducers/list';
-import { isChild } from './utils/components';
 
 export interface AutoCompleteListProps extends PopoverContentProps {}
 
@@ -50,10 +48,8 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, 'div'>(
         _focus={{ boxShadow: 'none' }}
         {...rest}
       >
-        {React.Children.map(children, (child: any) =>
-          isChild(child, 'AutoCompleteItem')
-            ? assignChildKey(child)
-            : handleItemGroup(child, state)
+        {React.Children.map(children, (child) =>
+          handleListChild(child, state)
         )}
         <CreateInput />
         <EmptyState

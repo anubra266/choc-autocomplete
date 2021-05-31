@@ -50,7 +50,11 @@ export const handleNavigation = (
   } = state;
 
   if (e.key === 'Enter') {
-    runOnSelect(state, dispatch, 'keyboard');
+    const activeItem = item.filtered[item.active];
+    if (activeItem.value.trim().length === 0) {
+      const activeItemRef: any = item.fixed[activeItem.key];
+      activeItemRef.current?.onKeyboardSelect();
+    } else runOnSelect(state, dispatch, 'keyboard');
   } else if (e.key === 'ArrowUp') {
     if (item.active === 0) {
       if (rollNavigation)

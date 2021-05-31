@@ -12,7 +12,12 @@ export interface State {
     value: string;
     ref: React.RefObject<HTMLInputElement> | undefined;
   };
-  item: { active: number; list: Item[]; filtered: Item[] };
+  item: {
+    active: number;
+    list: Item[];
+    filtered: Item[];
+    fixed: Record<string, React.RefObject<HTMLDivElement>>;
+  };
   list: {
     visible: boolean;
     ref: React.RefObject<HTMLDivElement> | undefined;

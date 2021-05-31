@@ -29,7 +29,7 @@ const App = () => {
         // freeSolo
         // creatable
         suggestWhenEmpty
-        closeOnselect={false}
+        // closeOnselect={false}
       >
         <AutoCompleteInput
           variant="filled"
@@ -55,7 +55,12 @@ const App = () => {
               </AutoCompleteItem>
             ))}
           </AutoCompleteGroup>
-          <AutoCompleteFixedItem onClick={() => setOptions(o => [...o, 'new'])}>
+          <AutoCompleteFixedItem
+            onItemSelect={method => {
+              console.log('me', method);
+              setOptions(o => [...o, 'new']);
+            }}
+          >
             Create New
           </AutoCompleteFixedItem>
           <Flex onClick={() => setOptions(o => [...o, 'new'])}>Create New</Flex>
