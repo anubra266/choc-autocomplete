@@ -34,7 +34,7 @@ const App = () => {
         <AutoCompleteInput
           variant="filled"
           placeholder="Search..."
-          // defaultValue="app"
+          defaultValue="app"
           autoFocus
         />
         <AutoCompleteList>
@@ -63,16 +63,15 @@ const App = () => {
           >
             Create New
           </AutoCompleteFixedItem>
-          <Flex onClick={() => setOptions(o => [...o, 'new'])}>Create New</Flex>
         </AutoCompleteList>
       </AutoComplete>
-      <Button
+      {/* <Button
         zIndex="tooltip"
         mt="150px"
         onClick={() => setOptions(o => [...o, 'new'])}
       >
         Add Option
-      </Button>
+      </Button> */}
       {/* <AutoComplete
         rollNavigation
         focusInputOnSelect

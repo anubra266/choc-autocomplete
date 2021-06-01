@@ -53,10 +53,10 @@
   ],
   "devDependencies": {
     "@size-limit/preset-small-lib": "^4.10.2",
-    "@types/react": "^17.0.8",
+    "@types/react": "^17.0.5",
     "@types/react-dom": "^17.0.5",
     "husky": "^6.0.0",
-    "react": "^17.0.2",
+    "react": "^0.14.0 || ^15.0.0 || ^16.0.0-0",
     "react-dom": "^17.0.2",
     "size-limit": "^4.10.2",
     "tsdx": "^0.14.1",

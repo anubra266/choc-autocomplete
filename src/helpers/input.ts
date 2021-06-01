@@ -17,7 +17,9 @@ export const useOptionsFilter = () => {
   const inputValue = input.value;
   const options = item.list;
   const filteredItems = options.filter(
-    i => i.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1
+    i =>
+      i.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+      i.value.trim().length === 0
   );
 
   //? Update input state if there's a defaultValue for input
