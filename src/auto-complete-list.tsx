@@ -52,7 +52,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, 'div'>(
         <CreateInput />
         <EmptyState
           onClick={() => {
-            closeList(state, dispatch);
+            closeList(dispatch);
           }}
         />
       </PopoverContent>

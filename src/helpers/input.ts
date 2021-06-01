@@ -84,7 +84,7 @@ export const handleNavigation = (
     dispatch({ type: ItemAction.ResetActive, payload: true });
     e.preventDefault();
   } else if (e.key === 'Escape') {
-    closeList(state, dispatch);
+    closeList(dispatch);
     e.preventDefault();
   }
 };

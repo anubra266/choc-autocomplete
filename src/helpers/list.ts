@@ -83,7 +83,6 @@ export const useRefDimensions = (
   return dimensions;
 };
 
-export const closeList = (state: State, dispatch: StoreDispatch) => {
+export const closeList = (dispatch: StoreDispatch) => {
   dispatch({ type: ListAction.Hide });
-  console.log(state);
 };

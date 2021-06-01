@@ -38,7 +38,7 @@ export const runOnSelect = (
     returnT(inputRef?.current).value = activeItem.value;
     dispatch({ type: InputAction.Set, payload: activeItem.value });
     dispatch({ type: AutoCompleteAction.Set, payload: activeItem.value });
-    if (closeOnselect) closeList(state, dispatch);
+    if (closeOnselect) closeList(dispatch);
     runIfFn(cb);
   }
   if (inputRef?.current && focusInputOnSelect) inputRef.current.focus();

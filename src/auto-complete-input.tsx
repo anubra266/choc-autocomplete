@@ -43,7 +43,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
     } = autocomplete;
 
     const isEmpty = item.filtered.length < 1 && !emptyState;
-    const hideList = () => closeList(state, dispatch);
+    const hideList = () => closeList(dispatch);
 
     useOptionsFilter({ initialFilter });
     useEffect(() => {

@@ -23,7 +23,7 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
       runIfFn(onChange, autoCompleteValue);
     }, [autoCompleteValue]);
 
-    const onClose = () => closeList(state, dispatch);
+    const onClose = () => closeList(dispatch);
 
     const resetInput = () => {
       if (inputRef?.current) {
