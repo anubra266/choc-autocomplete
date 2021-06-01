@@ -1,10 +1,8 @@
 import React, { ReactNode, useState } from 'react';
 import { State, StoreDispatch } from '../store';
-import { InputAction } from '../store/reducers/input';
 import { Item } from '../store/reducers/item';
 import { ListAction } from '../store/reducers/list';
 import { isChild } from '../utils/components';
-import { returnT } from '../utils/operations';
 
 export const handleListChild = (child: any, state: State) => {
   const type = child.type.displayName;
@@ -86,14 +84,6 @@ export const useRefDimensions = (
 };
 
 export const closeList = (state: State, dispatch: StoreDispatch) => {
-  const {
-    autocomplete: { value: autoCompleteValue, freeSolo },
-    input: { value: inputValue, ref: inputRef },
-  } = state;
-
   dispatch({ type: ListAction.Hide });
-  if (inputValue !== autoCompleteValue && !freeSolo) {
-    dispatch({ type: InputAction.Set, payload: autoCompleteValue });
-    returnT(inputRef?.current).value = autoCompleteValue;
-  }
+  console.log(state);
 };

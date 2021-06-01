@@ -7,6 +7,7 @@ import { handleNavigation, useOptionsFilter } from './helpers/input';
 import { ListAction } from './store/reducers/list';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { closeList } from './helpers/list';
+import { returnT } from './utils/operations';
 
 export interface AutoCompleteInputProps extends InputProps {
   initialFilter?: boolean;
@@ -38,6 +39,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
       suggestWhenEmpty,
       closeOnBlur,
       closeOnselect,
+      value: autoCompleteValue,
     } = autocomplete;
 
     const isEmpty = item.filtered.length < 1 && !emptyState;
@@ -82,7 +84,13 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
     const handleBlur: React.FocusEventHandler<HTMLInputElement> = e => {
       runIfFn(onBlur, e);
       const listIsFocused = e.relatedTarget === listRef?.current;
-      if (!listIsFocused && closeOnBlur) hideList();
+      if (!listIsFocused && closeOnBlur) {
+        hideList();
+        if (e.target.value !== autoCompleteValue && !freeSolo) {
+          dispatch({ type: InputAction.Set, payload: autoCompleteValue });
+          returnT(internalRef.current).value = autoCompleteValue;
+        }
+      }
     };
 
     return (

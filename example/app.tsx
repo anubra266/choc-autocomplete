@@ -23,21 +23,15 @@ const App = () => {
     <Flex justify="center" pt="150px">
       <AutoComplete
         rollNavigation
-        focusInputOnSelect
-        openOnFocus
+        // focusInputOnSelect
+        // openOnFocus
         emphasize
         // freeSolo
         // creatable
-        suggestWhenEmpty
+        // suggestWhenEmpty
         // closeOnselect={false}
       >
-        <AutoCompleteInput
-          variant="filled"
-          placeholder="Search..."
-          defaultValue="app"
-          autoFocus
-          initialFilter={true}
-        />
+        <AutoCompleteInput variant="filled" placeholder="Search..." autoFocus />
         <AutoCompleteList>
           {options.map((option, oid) => (
             <AutoCompleteItem
