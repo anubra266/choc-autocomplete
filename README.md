@@ -478,6 +478,28 @@ Input for `AutoComplete` value.
 
 **AutoCompleteInput** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
 
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>initialFilter</td>
+    <td> boolean </td>
+    <td>determines if the options are filtered by default, when a `defaultValue` is provided to the input.</td>
+    <td>No<br></td>
+    <td>true</td>
+  </tr>
+ 
+</tbody>
+</table>
+
 ### **AutoCompleteList**
 
 Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
@@ -489,6 +511,7 @@ Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 Wrapper for collections of `AutoCompleteItem`s
 
 **AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
 <Table>
 <thead>
   <tr>
@@ -550,7 +573,6 @@ const baseTitleStyles: TextProps = {
 </tbody>
 
 </table>
-
 
 ### **AutoCompleteItem**
 
@@ -626,7 +648,7 @@ This is an item that is not filtered with the other options, but syncs with the 
 <tbody>
   <tr>
     <td>onItemSelect</td>
-    <td> 
+    <td>
 
 ```ts
 type onItemSelect = (method: 'click' | 'keyboard') => void;

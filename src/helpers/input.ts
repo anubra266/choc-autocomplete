@@ -1,11 +1,14 @@
 import React, { useEffect } from 'react';
+import { AutoCompleteInputProps } from '../auto-complete-input';
 import { State, useAutoCompleteContext, StoreDispatch } from '../store';
 import { InputAction } from '../store/reducers/input';
 import { ItemAction } from '../store/reducers/item';
 import { runOnSelect } from './autocomplete-props/onSelectOption';
 import { closeList } from './list';
 
-export const useOptionsFilter = () => {
+export const useOptionsFilter = (props: AutoCompleteInputProps) => {
+  const { initialFilter = true } = props;
+
   const {
     state: {
       autocomplete: { creatable },
@@ -27,7 +30,8 @@ export const useOptionsFilter = () => {
     if (input.ref?.current) {
       const rawInputValue = input.ref?.current?.value;
       if (inputValue.trim().length < 1 && rawInputValue.trim().length > 0) {
-        dispatch({ type: InputAction.Set, payload: rawInputValue });
+        if (initialFilter)
+          dispatch({ type: InputAction.Set, payload: rawInputValue });
       }
     }
   }, [input.ref]);

@@ -8,11 +8,21 @@ import { ListAction } from './store/reducers/list';
 import { AutoCompleteAction } from './store/reducers/autocomplete';
 import { closeList } from './helpers/list';
 
-export interface AutoCompleteInputProps extends InputProps {}
+export interface AutoCompleteInputProps extends InputProps {
+  initialFilter?: boolean;
+}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
   (props, ref) => {
-    const { onChange, onKeyDown, onFocus, onBlur, onClick, ...rest } = props;
+    const {
+      onChange,
+      onKeyDown,
+      onFocus,
+      onBlur,
+      onClick,
+      initialFilter,
+      ...rest
+    } = props;
     const internalRef = useRef<HTMLInputElement>(null);
     const inputRef = useMergeRefs(ref, internalRef);
 
@@ -33,7 +43,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
     const isEmpty = item.filtered.length < 1 && !emptyState;
     const hideList = () => closeList(state, dispatch);
 
-    useOptionsFilter();
+    useOptionsFilter({ initialFilter });
     useEffect(() => {
       dispatch({ type: InputAction.SetRef, payload: internalRef });
     }, []);

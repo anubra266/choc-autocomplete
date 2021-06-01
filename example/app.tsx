@@ -36,6 +36,7 @@ const App = () => {
           placeholder="Search..."
           defaultValue="app"
           autoFocus
+          initialFilter={true}
         />
         <AutoCompleteList>
           {options.map((option, oid) => (
