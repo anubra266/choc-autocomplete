@@ -468,6 +468,13 @@ type onSelectOption=  (params: {
     <td>If true, the menu will close when an item is selected, by mouse or keyboard.</td>
     <td>No</td>
     <td>true</td>
+  </tr> 
+  <tr>
+    <td>maxSuggestions</td>
+    <td>number</td>
+    <td>Limit the maximum number of suggestions that is shown.</td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
   </tr>  
   <tr>
     <td>shouldRenderSuggestions</td>
@@ -481,11 +488,13 @@ type onSelectOption=  (params: {
 By default, suggestions are rendered when the input isn't blank. Feel free to override this behaviour. This function gets the current value of the input
 
 e.g. The following function is to show the suggestions only if the input has more than two characters.
+
 ```js
 function shouldRenderSuggestions(value) {
   return value.trim().length > 2;
 }
 ```
+
 </td>
     <td>No</td>
     <td>&mdash;&mdash;&mdash;</td>

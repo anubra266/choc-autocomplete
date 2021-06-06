@@ -11,7 +11,7 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
 
   const {
     state: {
-      autocomplete: { creatable },
+      autocomplete: { creatable, maxSuggestions },
       input,
       item,
     },
@@ -19,11 +19,13 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
   } = useAutoCompleteContext();
   const inputValue = input.value;
   const options = item.list;
-  const filteredItems = options.filter(
-    i =>
-      i.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
-      i.value.trim().length === 0
-  );
+  const filteredItems = options
+    .filter(
+      opt =>
+        opt.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+        opt.value.trim().length === 0
+    )
+    .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
 
   //? Update input state if there's a defaultValue for input
   useEffect(() => {

@@ -21,12 +21,13 @@ const App = () => {
   //   setOutValue(e.target.value);
   // };
   const shouldRenderSuggestions: AutoCompleteProps['shouldRenderSuggestions'] = value => {
-    return value.trim().length > 2;
+    return value.trim().length > 0;
   };
 
   return (
     <Flex justify="center" pt="150px">
       <AutoComplete
+        maxSuggestions={3}
         rollNavigation
         // focusInputOnSelect
         // openOnFocus
@@ -35,7 +36,7 @@ const App = () => {
         // creatable
         suggestWhenEmpty
         // closeOnselect={false}
-        shouldRenderSuggestions={shouldRenderSuggestions}
+        // shouldRenderSuggestions={shouldRenderSuggestions}
       >
         <AutoCompleteInput variant="filled" placeholder="Search..." autoFocus />
         <AutoCompleteList>

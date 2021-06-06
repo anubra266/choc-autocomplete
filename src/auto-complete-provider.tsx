@@ -37,6 +37,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   closeOnselect?: boolean;
   closeOnBlur?: boolean;
   shouldRenderSuggestions?: (value: string) => boolean;
+  maxSuggestions?: number;
 }
 
 export type AutoCompleteProps = AutoComplete;
@@ -58,7 +59,8 @@ export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
       suggestWhenEmpty,
       closeOnselect = true,
       closeOnBlur = true,
-      shouldRenderSuggestions,
+      shouldRenderSuggestions = () => true,
+      maxSuggestions,
       ...rest
     } = props;
 
@@ -79,6 +81,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
         closeOnselect,
         closeOnBlur,
         shouldRenderSuggestions,
+        maxSuggestions,
       },
       input: {
         value: '',
