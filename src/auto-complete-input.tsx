@@ -40,6 +40,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
       closeOnBlur,
       closeOnselect,
       value: autoCompleteValue,
+      shouldRenderSuggestions,
     } = autocomplete;
 
     const isEmpty = item.filtered.length < 1 && !emptyState;
@@ -57,8 +58,11 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
       if (freeSolo) dispatch({ type: AutoCompleteAction.Set, payload: value });
       const inputIsEmpty = value?.length < 1;
       if (!isEmpty) {
-        if (!inputIsEmpty) dispatch({ type: ListAction.Show });
-        else if (!suggestWhenEmpty) hideList();
+        if (!inputIsEmpty) {
+          if (runIfFn(shouldRenderSuggestions, value))
+            dispatch({ type: ListAction.Show });
+          else dispatch({ type: ListAction.Hide });
+        } else if (!suggestWhenEmpty) hideList();
       }
     };
 

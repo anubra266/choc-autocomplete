@@ -7,6 +7,7 @@ import {
   AutoCompleteList,
   AutoCompleteChildProps,
   AutoCompleteFixedItem,
+  AutoCompleteProps,
 } from '../.';
 import { Button, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
 import { useTheme } from '@chakra-ui/system';
@@ -19,6 +20,10 @@ const App = () => {
   //   console.log(e.target.value);
   //   setOutValue(e.target.value);
   // };
+  const shouldRenderSuggestions: AutoCompleteProps['shouldRenderSuggestions'] = value => {
+    return value.trim().length > 2;
+  };
+
   return (
     <Flex justify="center" pt="150px">
       <AutoComplete
@@ -28,8 +33,9 @@ const App = () => {
         emphasize
         // freeSolo
         // creatable
-        // suggestWhenEmpty
+        suggestWhenEmpty
         // closeOnselect={false}
+        shouldRenderSuggestions={shouldRenderSuggestions}
       >
         <AutoCompleteInput variant="filled" placeholder="Search..." autoFocus />
         <AutoCompleteList>

@@ -1,7 +1,4 @@
-export {
-  AutoComplete,
-  ChildrenProps as AutoCompleteChildProps,
-} from './auto-complete-provider';
+export * from './auto-complete-provider';
 export * from './auto-complete-input';
 export * from './auto-complete-list';
 export * from './auto-complete-item';

@@ -12,7 +12,7 @@ import { inputReducer } from './store/reducers/input';
 import { itemReducer } from './store/reducers/item';
 import { listReducer } from './store/reducers/list';
 
-export type ChildrenProps = {
+export type AutoCompleteChildProps = {
   isOpen: boolean;
   onClose: () => void;
   inputIsEmpty: boolean;
@@ -20,7 +20,7 @@ export type ChildrenProps = {
 };
 
 export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
-  children?: MaybeRenderProp<ChildrenProps>;
+  children?: MaybeRenderProp<AutoCompleteChildProps>;
   onChange?: (value: string) => void;
   emptyState?: boolean | ReactNode;
   rollNavigation?: boolean;
@@ -36,6 +36,7 @@ export interface AutoComplete extends Omit<BoxProps, 'onChange'> {
   suggestWhenEmpty?: boolean;
   closeOnselect?: boolean;
   closeOnBlur?: boolean;
+  shouldRenderSuggestions?: (value: string) => boolean;
 }
 
 export type AutoCompleteProps = AutoComplete;
@@ -57,6 +58,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
       suggestWhenEmpty,
       closeOnselect = true,
       closeOnBlur = true,
+      shouldRenderSuggestions,
       ...rest
     } = props;
 
@@ -76,6 +78,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, 'div'>(
         suggestWhenEmpty,
         closeOnselect,
         closeOnBlur,
+        shouldRenderSuggestions,
       },
       input: {
         value: '',
