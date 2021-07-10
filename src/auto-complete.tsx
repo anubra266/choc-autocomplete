@@ -9,7 +9,7 @@ import { closeList } from './helpers/list';
 
 export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
   (props, ref) => {
-    const { children, onChange, ...rest } = props;
+    const { children, onChange, sx, ...rest } = props;
 
     const { state, dispatch } = useAutoCompleteContext();
 
@@ -53,7 +53,14 @@ export const AutoCompleteBody = forwardRef<AutoComplete, 'div'>(
         isOpen={isOpen}
         onClose={onClose}
       >
-        <Box ref={ref} {...rest}>
+        <Box
+          ref={ref}
+          sx={{
+            '.chakra-popover__popper': { position: 'unset !important' },
+            ...sx,
+          }}
+          {...rest}
+        >
           {runIfFn(children, childProps)}
         </Box>
       </Popover>
