@@ -1,4 +1,6 @@
 import { forwardRef, Input, InputProps, useMergeRefs } from '@chakra-ui/react';
+import { __DEV__ } from '@chakra-ui/utils';
+
 import React, { useEffect, useRef } from 'react';
 import { runIfFn } from '@chakra-ui/utils';
 import { useAutoCompleteContext } from './store';
@@ -112,3 +114,9 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, 'input'>(
     );
   }
 );
+
+if (__DEV__) {
+  AutoCompleteInput.displayName = 'Input';
+}
+
+AutoCompleteInput.id = 'Input';

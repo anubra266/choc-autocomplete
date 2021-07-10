@@ -1,71 +1,63 @@
 import * as React from 'react';
 import {
   AutoComplete,
-  AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-  AutoCompleteChildProps,
-  AutoCompleteFixedItem,
   AutoCompleteProps,
 } from '../.';
-import { Button, Flex, InputGroup, InputRightElement } from '@chakra-ui/react';
-import { useTheme } from '@chakra-ui/system';
+import {
+  Flex,
+  Icon,
+  InputGroup,
+  InputLeftElement,
+  InputRightElement,
+} from '@chakra-ui/react';
+import {
+  ChevronDownIcon,
+  ChevronRightIcon,
+  SearchIcon,
+} from '@chakra-ui/icons';
 
 const App = () => {
   const defOptions = ['apple', 'appoint', 'zap', 'cap', 'japan'];
   const [options, setOptions] = React.useState(defOptions);
-  // const [outValue, setOutValue] = React.useState('');
-  // const handleChange = (e: any) => {
-  //   console.log(e.target.value);
-  //   setOutValue(e.target.value);
-  // };
   const shouldRenderSuggestions: AutoCompleteProps['shouldRenderSuggestions'] = value => {
     return value.trim().length > 0;
   };
 
   return (
     <Flex justify="center" pt="150px">
-      <AutoComplete
-        maxSuggestions={3}
-        rollNavigation
-        // focusInputOnSelect
-        // openOnFocus
-        emphasize
-        // freeSolo
-        // creatable
-        suggestWhenEmpty
-        // closeOnselect={false}
-        // shouldRenderSuggestions={shouldRenderSuggestions}
-      >
-        <AutoCompleteInput variant="filled" placeholder="Search..." autoFocus />
-        <AutoCompleteList>
-          {options.map((option, oid) => (
-            <AutoCompleteItem
-              textTransform="capitalize"
-              value={option}
-              key={`option-${oid}`}
-              disabled={option === 'zap'}
-            >
-              {option}{' '}
-            </AutoCompleteItem>
-          ))}
-          <AutoCompleteGroup title="fruits" showDivider>
-            {fruits.map((fruit, fid) => (
-              <AutoCompleteItem value={fruit} key={`fruit-${fid}`}>
-                {fruit}{' '}
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteGroup>
-          <AutoCompleteFixedItem
-            onItemSelect={method => {
-              console.log('me', method);
-              setOptions(o => [...o, 'new']);
-            }}
-          >
-            Create New
-          </AutoCompleteFixedItem>
-        </AutoCompleteList>
+      <AutoComplete rollNavigation>
+        {({ isOpen }) => (
+          <>
+            <InputGroup>
+              <InputLeftElement
+                pointerEvents="none"
+                children={<SearchIcon />}
+              />
+              <AutoCompleteInput variant="filled" placeholder=" Search..." />
+              <InputRightElement
+                pointerEvents="none"
+                children={
+                  <Icon as={isOpen ? ChevronRightIcon : ChevronDownIcon} />
+                }
+              />
+            </InputGroup>
+            <AutoCompleteList>
+              {options.map((option, oid) => (
+                <AutoCompleteItem
+                  key={`optio-${oid}`}
+                  value={option}
+                  textTransform="capitalize"
+                  align="center"
+                >
+                  {option}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteList>
+          </>
+        )}
       </AutoComplete>
       {/* <Button
         zIndex="tooltip"
@@ -74,59 +66,6 @@ const App = () => {
       >
         Add Option
       </Button> */}
-      {/* <AutoComplete
-        rollNavigation
-        focusInputOnSelect
-        freeSolo
-        emphasize
-        openOnFocus
-        creatable={({ newInput, Emphasize }) => (
-          <>
-            Create<Emphasize>"{newInput}"</Emphasize>
-          </>
-        )}
-        defaultIsOpen
-        onSelectOption={({ optionValue, isNewInput }) => {
-          console.log('wow :>> ', optionValue, isNewInput);
-          return false;
-        }}
-      >
-        {({ inputIsEmpty, resetInput }: AutoCompleteChildProps) => (
-          <>
-            <InputGroup>
-              <AutoCompleteInput
-                variant="filled"
-                placeholder="Search..."
-                defaultValue="app"
-                // autoFocus
-              />
-              {!inputIsEmpty && (
-                <InputRightElement cursor="pointer" onClick={resetInput}>
-                  ❌
-                </InputRightElement>
-              )}
-            </InputGroup>
-            <AutoCompleteList>
-              {options.map((option, oid) => (
-                <AutoCompleteItem
-                  textTransform="capitalize"
-                  value={option}
-                  key={`option-${oid}`}
-                >
-                  {option}{' '}
-                </AutoCompleteItem>
-              ))}
-              <AutoCompleteGroup title="fruits" showDivider>
-                {fruits.map((fruit, fid) => (
-                  <AutoCompleteItem value={fruit} key={`fruit-${fid}`}>
-                    {fruit}{' '}
-                  </AutoCompleteItem>
-                ))}
-              </AutoCompleteGroup>
-            </AutoCompleteList>
-          </>
-        )}
-      </AutoComplete> */}
     </Flex>
   );
 };
