@@ -1,6 +1,8 @@
 import * as React from 'react';
 import {
   AutoComplete,
+  AutoCompleteFixedItem,
+  AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
@@ -45,7 +47,7 @@ const App = () => {
               />
             </InputGroup>
             <AutoCompleteList>
-              {options.map((option, oid) => (
+              {/* {options.map((option, oid) => (
                 <AutoCompleteItem
                   key={`optio-${oid}`}
                   value={option}
@@ -54,13 +56,27 @@ const App = () => {
                 >
                   {option}
                 </AutoCompleteItem>
-              ))}
+              ))} */}
+
+              <AutoCompleteGroup title="Title" showDivider>
+                <AutoCompleteItem key="2" value="Apple">
+                  Apple
+                </AutoCompleteItem>
+                <AutoCompleteItem key="3" value="appoi">
+                  Appoint
+                </AutoCompleteItem>
+              </AutoCompleteGroup>
+              <AutoCompleteFixedItem value="F1">
+                Fixed Item 1
+              </AutoCompleteFixedItem>
+              <AutoCompleteFixedItem value="F2">
+                Fixed Item 2
+              </AutoCompleteFixedItem>
             </AutoCompleteList>
           </>
         )}
       </AutoComplete>
 
-      
       {/* <Button
         zIndex="tooltip"
         mt="150px"

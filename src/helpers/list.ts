@@ -58,14 +58,15 @@ export const getItemKeys: string[] | any = (children: ReactNode) => {
         else return;
       });
     else if (isChild(child, 'AutoCompleteFixedItem'))
-      items.push(getChildProps(child));
+      items.push(getChildProps(child, true));
   });
   return items;
 };
 
-const getChildProps = (child: any) => ({
+const getChildProps = (child: any, fixed?: boolean) => ({
   key: child.key || child.props.children.toString(),
   value: child.props.value || '',
+  fixed,
 });
 
 export const useRefDimensions = (

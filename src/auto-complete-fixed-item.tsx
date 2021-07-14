@@ -39,13 +39,8 @@ export const AutoCompleteFixedItem = forwardRef<
     ...rest
   } = props;
 
-  const {
-    state: {
-      item: { filtered: filterdItems, active: activeItemIndex },
-    },
-    dispatch,
-  } = useAutoCompleteContext();
-
+  const { state, dispatch } = useAutoCompleteContext();
+  const { item } = state;
   useEffect(() => {
     dispatch({
       type: ItemAction.AddFixedRef,
@@ -53,7 +48,7 @@ export const AutoCompleteFixedItem = forwardRef<
     });
   }, [ref]);
 
-  const activeItem = filterdItems[activeItemIndex];
+  const activeItem = item.filtered[item.active];
   const isActiveItem = activeItem?.key === optionKey;
 
   const handleMouseOver: MouseEventHandler<HTMLDivElement> = e => {

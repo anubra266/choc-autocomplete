@@ -3,6 +3,7 @@ import { ActionMap, State } from '..';
 export interface Item {
   key: string;
   value: string;
+  fixed?: boolean;
 }
 
 export enum ItemAction {

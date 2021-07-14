@@ -23,10 +23,10 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
     .filter(
       opt =>
         opt.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
-        opt.value.trim().length === 0
+        opt.value.trim().length === 0 ||
+        opt.fixed
     )
     .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
-
   //? Update input state if there's a defaultValue for input
   useEffect(() => {
     if (input.ref?.current) {
