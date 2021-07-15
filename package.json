@@ -70,5 +70,7 @@
   "publishConfig": {
     "access": "public"
   },
-  "dependencies": {}
+  "dependencies": {
+    "react-innertext": "^1.1.5"
+  }
 }

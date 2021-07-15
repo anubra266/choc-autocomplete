@@ -30,7 +30,7 @@ const App = () => {
 
   return (
     <Flex justify="center" pt="150px">
-      <AutoComplete rollNavigation>
+      <AutoComplete rollNavigation openOnFocus>
         {({ isOpen }) => (
           <>
             <InputGroup>
@@ -57,7 +57,6 @@ const App = () => {
                   {option}
                 </AutoCompleteItem>
               ))} */}
-
               <AutoCompleteGroup title="Title" showDivider>
                 <AutoCompleteItem key="2" value="Apple">
                   Apple
@@ -66,11 +65,17 @@ const App = () => {
                   Appoint
                 </AutoCompleteItem>
               </AutoCompleteGroup>
-              <AutoCompleteFixedItem value="F1">
-                Fixed Item 1
-              </AutoCompleteFixedItem>
-              <AutoCompleteFixedItem value="F2">
-                Fixed Item 2
+              <AutoCompleteGroup title="Titles" showDivider>
+                <AutoCompleteItem key="2g" value="f2">
+                  Apple
+                </AutoCompleteItem>
+                <AutoCompleteItem key="3g" value="appoin">
+                  Appoint
+                </AutoCompleteItem>
+              </AutoCompleteGroup>
+
+              <AutoCompleteFixedItem value="F3">
+                Fixed Item 3
               </AutoCompleteFixedItem>
             </AutoCompleteList>
           </>
