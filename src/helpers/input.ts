@@ -22,7 +22,7 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
   const filteredItems = options
     .filter(
       opt =>
-        opt.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+        opt.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
         opt.value.trim().length === 0 ||
         opt.fixed
     )
@@ -40,7 +40,14 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
 
   useEffect(() => {
     const filterPayload = creatable
-      ? [...filteredItems, creatable && { key: 'newInput', value: inputValue }]
+      ? [
+          ...filteredItems,
+          creatable && {
+            key: 'newInput',
+            value: inputValue,
+            label: inputValue,
+          },
+        ]
       : filteredItems;
     dispatch({ type: ItemAction.SetFiltered, payload: filterPayload });
     dispatch({ type: ItemAction.ResetActive, payload: false });

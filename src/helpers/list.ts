@@ -1,4 +1,6 @@
 import React, { ReactNode, useState } from 'react';
+import innerText from 'react-innertext';
+
 import { State, StoreDispatch } from '../store';
 import { Item } from '../store/reducers/item';
 import { ListAction } from '../store/reducers/list';
@@ -66,6 +68,7 @@ export const getItemKeys: string[] | any = (children: ReactNode) => {
 const getChildProps = (child: any, fixed?: boolean) => ({
   key: child.key || child.props.children.toString(),
   value: child.props.value || '',
+  label: innerText(child.props.children),
   fixed,
 });
 
