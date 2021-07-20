@@ -23,6 +23,7 @@ export const useOptionsFilter = (props: AutoCompleteInputProps) => {
     .filter(
       opt =>
         opt.label.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
+        opt.value.toLowerCase().indexOf(inputValue.toLowerCase()) > -1 ||
         opt.value.trim().length === 0 ||
         opt.fixed
     )

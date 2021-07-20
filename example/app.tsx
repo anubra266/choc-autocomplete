@@ -69,7 +69,7 @@ const App = () => {
                 <AutoCompleteItem key="2g" value="f2">
                   Apple
                 </AutoCompleteItem>
-                <AutoCompleteItem key="3g" value="appoin">
+                <AutoCompleteItem key="3g" value="f2">
                   Appoint
                 </AutoCompleteItem>
               </AutoCompleteGroup>

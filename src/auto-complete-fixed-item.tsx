@@ -15,6 +15,7 @@ import React, {
 import { itemActiveStyles, itemBaseStyles } from './auto-complete-item';
 import { useAutoCompleteContext } from './store';
 import { ItemAction } from './store/reducers/item';
+import { runOnSelect } from './helpers/autocomplete-props/onSelectOption';
 
 type SelectMethod = 'click' | 'keyboard';
 export interface AutoCompleteFixedItemProps extends FlexProps {
@@ -63,6 +64,7 @@ export const AutoCompleteFixedItem = forwardRef<
   const handleClick: MouseEventHandler<HTMLDivElement> = e => {
     runIfFn(onClick, e);
     onItemSelected('click');
+    runOnSelect(state, dispatch, 'click', () => runIfFn(onClick, e));
   };
 
   useImperativeHandle(ref, () => ({
