@@ -25,13 +25,17 @@ export const handleListChild = (child: any, state: State) => {
 
 export const handleItemGroup = (group: any, state: State) => {
   const isValidItem = (child: any) =>
-    state.item.filtered.some(i => i.key === child.key);
+    state.item.filtered.some(i => i.key === child.key) ||
+    isChild(child, 'AutoCompleteFixedItem');
 
   if (isChild(group, 'AutoCompleteGroup')) {
     const children: any[] = group.props.children;
     const childrenWithKeys = children.reduce((acc, child) => {
       acc.push(
-        isChild(child, 'AutoCompleteItem') ? assignChildKey(child) : child
+        isChild(child, 'AutoCompleteItem') ||
+          isChild(child, 'AutoCompleteFixedItem')
+          ? assignChildKey(child)
+          : child
       );
       return acc;
     }, []);
@@ -57,6 +61,8 @@ export const getItemKeys: string[] | any = (children: ReactNode) => {
       return child.props.children?.map((option: any) => {
         if (isChild(option, 'AutoCompleteItem'))
           items.push(getChildProps(option));
+        else if (isChild(option, 'AutoCompleteFixedItem'))
+          items.push(getChildProps(option, true));
         else return;
       });
     else if (isChild(child, 'AutoCompleteFixedItem'))

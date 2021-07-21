@@ -66,16 +66,26 @@ const App = () => {
                 </AutoCompleteItem>
               </AutoCompleteGroup>
               <AutoCompleteGroup title="Titles" showDivider>
-                <AutoCompleteItem key="2g" value="f2">
+                <AutoCompleteItem key="2g" value="apple">
                   Apple
                 </AutoCompleteItem>
-                <AutoCompleteItem key="3g" value="f2">
+                <AutoCompleteItem key="3g" value="appoint">
                   Appoint
                 </AutoCompleteItem>
+                <AutoCompleteFixedItem key="f3" value="F3">
+                  Fixed Item 3
+                </AutoCompleteFixedItem>
               </AutoCompleteGroup>
-
-              <AutoCompleteFixedItem value="F3">
-                Fixed Item 3
+              <AutoCompleteGroup title="Another Group" showDivider>
+                <AutoCompleteItem key="it" value="appoint">
+                  Item
+                </AutoCompleteItem>
+                <AutoCompleteFixedItem key="f6" value="F6">
+                  Fixed Item 6
+                </AutoCompleteFixedItem>
+              </AutoCompleteGroup>
+              <AutoCompleteFixedItem key="f4" value="F4">
+                Fixed Item 4
               </AutoCompleteFixedItem>
             </AutoCompleteList>
           </>
