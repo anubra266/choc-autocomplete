@@ -8,12 +8,9 @@ function App(props: Props) {
   const {} = props;
 
   return (
-    <Flex pt="48" justify="center" w="full" direction="column">
+    <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <AutoComplete>
-        <InputGroup>
-          <InputLeftElement>hey</InputLeftElement>
-          <AutoCompleteInput variant="filled" w="48" />
-        </InputGroup>
+        <AutoCompleteInput variant="filled" w="48" />
         <AutoCompleteList>wow</AutoCompleteList>
       </AutoComplete>
       aaaaa
