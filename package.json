@@ -22,6 +22,7 @@
     "build-storybook": "build-storybook"
   },
   "peerDependencies": {
+    "@chakra-ui/react": ">=1.6.5",
     "react": ">=16"
   },
   "husky": {
@@ -32,7 +33,7 @@
   "prettier": {
     "printWidth": 80,
     "semi": true,
-    "singleQuote": true,
+    "singleQuote": false,
     "trailingComma": "es5"
   },
   "name": "chakra-autocomplete",
@@ -50,6 +51,9 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.14.8",
+    "@chakra-ui/react": "^1.6.5",
+    "@emotion/react": "^11",
+    "@emotion/styled": "^11",
     "@size-limit/preset-small-lib": "^5.0.1",
     "@storybook/addon-essentials": "^6.3.5",
     "@storybook/addon-info": "^5.3.21",
@@ -59,6 +63,7 @@
     "@types/react": "^17.0.14",
     "@types/react-dom": "^17.0.9",
     "babel-loader": "^8.2.2",
+    "framer-motion": "^4",
     "husky": "^7.0.1",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
