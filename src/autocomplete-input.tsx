@@ -6,7 +6,7 @@ import {
   Wrap,
 } from "@chakra-ui/react";
 import { __DEV__ } from "@chakra-ui/utils";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 
@@ -14,11 +14,17 @@ export interface AutoCompleteInputProps extends InputProps {}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
-    const { inputRef, getInputProps } = useAutoCompleteContext();
+    const { inputRef, getInputProps, setQuery } = useAutoCompleteContext();
 
     const ref = useMergeRefs(forwardedRef, inputRef);
 
-    const inputProps = getInputProps(props);
+    const { value, ...rest } = props;
+
+    useEffect(() => {
+      setQuery(value ?? "");
+    }, [value]);
+
+    const inputProps = getInputProps(rest);
 
     return (
       <Wrap {...inputProps.wrapper}>

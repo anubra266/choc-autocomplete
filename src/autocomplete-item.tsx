@@ -14,6 +14,7 @@ export interface AutoCompleteItemProps extends FlexProps {
   fixed?: boolean;
   _focus?: CSSObject | any;
   // disabled?: boolean;
+  _fixed?: CSSObject;
 }
 
 export interface Item {
@@ -32,6 +33,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     const ref = useMergeRefs(forwardedRef, itemRef);
 
     const itemProps = getItemProps(props);
+    const { isValidSuggestion } = itemProps.root;
 
     const isFocused = focusedValue === props.value;
 
@@ -43,7 +45,9 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
         });
     }, [isFocused]);
 
-    return <Flex ref={ref} {...baseStyles} {...itemProps} />;
+    return isValidSuggestion ? (
+      <Flex ref={ref} {...baseStyles} {...itemProps.item} />
+    ) : null;
   }
 );
 

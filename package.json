@@ -67,6 +67,7 @@
     "typescript": "^4.3.5"
   },
   "dependencies": {
+    "match-sorter": "^6.3.0",
     "react-nanny": "^2.9.0"
   }
 }

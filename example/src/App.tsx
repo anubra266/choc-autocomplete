@@ -20,8 +20,11 @@ function App(props: Props) {
           <AutoCompleteInput
             variant="filled"
             // w="80"
-            value={value}
-            onChange={e => setValue(e.target.value)}
+            // value={value}
+            // onChange={e => {
+            //   setValue(e.target.value);
+            //   console.log("app.tsx", e.target.value);
+            // }}
           />
           <AutoCompleteList>
             <AutoCompleteItem value="apple">Apple</AutoCompleteItem>
@@ -41,7 +44,9 @@ function App(props: Props) {
           </AutoCompleteList>
         </AutoComplete>
       </Flex>
-      {value}
+      <Flex aria-disabled={true} _disabled={{ color: "red" }}>
+        {value}
+      </Flex>
     </Flex>
   );
 }
