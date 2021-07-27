@@ -29,5 +29,8 @@ export const defaultFilterMethod = (
   query: string,
   itemValue: Item["value"]
 ) => {
-  return fuzzyScore(query, itemValue) >= 0.5 || itemValue.indexOf(query) >= 0;
+  return (
+    itemValue.toLowerCase().indexOf(query.toLocaleLowerCase()) >= 0 ||
+    fuzzyScore(query, itemValue) >= 0.5
+  );
 };

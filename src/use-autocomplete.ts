@@ -127,15 +127,17 @@ export function useAutoComplete(
   useEffect(() => {
     runIfFn(
       autoCompleteProps.onChange,
-      autoCompleteProps.multiple ? values[0] : values
+      autoCompleteProps.multiple ? values : values[0]
     );
   }, [values]);
 
   const selectItem = (itemValue: Item["value"]) => {
-    setValues(v =>
-      autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
-    );
-    setQuery(itemValue);
+    if (!values.includes(itemValue)) {
+      setValues(v =>
+        autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
+      );
+      setQuery(itemValue);
+    }
   };
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = props => {

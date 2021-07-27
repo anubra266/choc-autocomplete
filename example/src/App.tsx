@@ -16,7 +16,11 @@ function App(props: Props) {
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <Flex>
-        <AutoComplete rollNavigation onChange={val => console.log(val)}>
+        <AutoComplete
+          rollNavigation
+          onChange={val => console.log(val)}
+          multiple
+        >
           <AutoCompleteInput
             variant="filled"
             // w="80"
