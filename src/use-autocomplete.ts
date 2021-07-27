@@ -1,4 +1,9 @@
-import { InputProps, useDimensions, useDisclosure } from "@chakra-ui/react";
+import {
+  FlexProps,
+  InputProps,
+  useDimensions,
+  useDisclosure,
+} from "@chakra-ui/react";
 import {
   callAll,
   getFirstItem,
@@ -7,17 +12,17 @@ import {
   getPrevItem,
   runIfFn,
 } from "@chakra-ui/utils";
-import { matchSorter } from "match-sorter";
 import React, { Dispatch, SetStateAction, useRef, useState } from "react";
 
 import { AutoCompleteInputProps } from "./autocomplete-input";
 import { AutoCompleteProps } from "./autocomplete";
 import { AutoCompleteItemProps, Item } from "./autocomplete-item";
 import { getFocusedStyles, getItemList } from "./helpers/items";
-
-const DEFAULT_MATCHING_THRESHOLD = matchSorter.rankings.ACRONYM;
+import { fuzzyScore } from "./helpers/fuzzySearch";
 
 export type UseAutoCompleteProps = Partial<{
+  multiple: boolean;
+  onChange: (value: string) => void;
   rollNavigation: boolean;
 }>;
 
@@ -30,7 +35,7 @@ export type InputReturnProps = {
 };
 
 export type ItemReturnProps = {
-  item: any;
+  item: FlexProps;
   root: {
     isValidSuggestion: boolean;
   };
@@ -55,6 +60,7 @@ export type UseAutoCompleteReturn = {
   onClose: () => void;
   onOpen: () => void;
   setQuery: Dispatch<SetStateAction<any>>;
+  values: Item["value"][];
 };
 
 /**
@@ -82,12 +88,37 @@ export function useAutoComplete(
 
   const [query, setQuery] = useState("");
 
-  const validSuggestions = matchSorter(itemList, query, {
-    keys: ["value"],
-    threshold: DEFAULT_MATCHING_THRESHOLD,
+  const [values, setValues] = useState<any[]>([]);
+
+  const defaultSort = (value: Item["value"]) => {
+    return fuzzyScore(query, value) >= 0.5 || value.indexOf(query) >= 0;
+  };
+
+  const filteredList = itemList.filter(i => {
+    return i.fixed || runIfFn(defaultSort, i.value);
   });
-  const fixedItems = itemList.filter(i => i.fixed);
-  const filteredList = [...validSuggestions, ...fixedItems];
+
+  const selectItem = (itemValue: Item["value"]) => {
+    setValues(v =>
+      autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
+    );
+    setQuery(itemValue);
+    runIfFn(autoCompleteProps.onChange, itemValue);
+  };
+
+  const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
+  const nextItem = getNextItem(
+    focusedIndex,
+    filteredList,
+    !!autoCompleteProps.rollNavigation
+  );
+  const prevItem = getPrevItem(
+    focusedIndex,
+    filteredList,
+    !!autoCompleteProps.rollNavigation
+  );
+  const firstItem = getFirstItem(filteredList);
+  const lastItem = getLastItem(filteredList);
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = props => {
     const { onBlur, onChange, onFocus, onKeyDown, ...rest } = props;
@@ -120,19 +151,10 @@ export function useAutoComplete(
           const { key } = e;
 
           if (key === "Enter") {
+            selectItem(filteredList[focusedIndex].value);
             e.preventDefault();
             return;
           }
-
-          const focusedIndex = filteredList.findIndex(
-            i => i.value === focusedValue
-          );
-
-          const nextItem = getNextItem(
-            focusedIndex,
-            filteredList,
-            !!autoCompleteProps.rollNavigation
-          );
 
           if (key === "ArrowDown") {
             setFocusedValue(nextItem.value);
@@ -141,11 +163,6 @@ export function useAutoComplete(
           }
 
           if (key === "ArrowUp") {
-            const prevItem = getPrevItem(
-              focusedIndex,
-              filteredList,
-              !!autoCompleteProps.rollNavigation
-            );
             setFocusedValue(prevItem.value);
 
             e.preventDefault();
@@ -159,14 +176,12 @@ export function useAutoComplete(
           }
 
           if (key === "Home") {
-            const firstItem = getFirstItem(filteredList);
             setFocusedValue(firstItem?.value);
             e.preventDefault();
             return;
           }
 
           if (key === "End") {
-            const lastItem = getLastItem(filteredList);
             setFocusedValue(lastItem?.value);
             e.preventDefault();
             return;
@@ -192,12 +207,16 @@ export function useAutoComplete(
   };
 
   const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
-    const { _fixed, _focus, value, fixed, ...rest } = props;
+    const { _fixed, _focus, value, fixed, onClick, ...rest } = props;
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
     return {
       item: {
+        onClick: e => {
+          runIfFn(onClick, e);
+          selectItem(value);
+        },
         onMouseOver: () => {
           setFocusedValue(value);
           interactionRef.current = "mouse";
@@ -227,5 +246,6 @@ export function useAutoComplete(
     onClose,
     onOpen,
     setQuery,
+    values,
   };
 }

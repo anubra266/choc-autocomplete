@@ -1,5 +1,6 @@
 Changelog
 
+- New multiple prop
 - Input can Now be controlled
 - Now built on hooks
 - Automatic list scroll
@@ -8,12 +9,12 @@ Changelog
 ```ts
 export interface AutoComplete extends Omit<BoxProps, "onChange"> {
   //   children?: MaybeRenderProp<AutoCompleteChildProps>;
-  onChange?: (value: string) => void;
+  creatable?: boolean | ((props: CreatableProps) => ReactNode);
+  // onChange?: (value: string) => void;
   emptyState?: boolean | ReactNode;
   //   rollNavigation?: boolean;
   focusInputOnSelect?: boolean;
   freeSolo?: boolean;
-  creatable?: boolean | ((props: CreatableProps) => ReactNode);
   selectOnFocus?: boolean;
   openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;
@@ -25,5 +26,6 @@ export interface AutoComplete extends Omit<BoxProps, "onChange"> {
   closeOnBlur?: boolean;
   shouldRenderSuggestions?: (value: string) => boolean;
   maxSuggestions?: number;
+  // multiple: boolean;
 }
 ```
