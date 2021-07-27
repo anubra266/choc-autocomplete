@@ -1,19 +1,47 @@
-import { Flex, InputGroup, InputLeftElement, Wrap } from "@chakra-ui/react";
+import { Flex } from "@chakra-ui/react";
 import * as React from "react";
-import { AutoComplete, AutoCompleteInput, AutoCompleteList } from "../../";
+import {
+  AutoComplete,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+} from "../../";
 
 interface Props {}
 
 function App(props: Props) {
   const {} = props;
+  const [value, setValue] = React.useState("wow");
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
-      <AutoComplete>
-        <AutoCompleteInput variant="filled" w="48" />
-        <AutoCompleteList>wow</AutoCompleteList>
-      </AutoComplete>
-      aaaaa
+      <Flex>
+        <AutoComplete rollNavigation>
+          <AutoCompleteInput
+            variant="filled"
+            // w="80"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+          />
+          <AutoCompleteList>
+            <AutoCompleteItem value="apple">Apple</AutoCompleteItem>
+            <AutoCompleteItem value="appoint">Appoint</AutoCompleteItem>
+            <AutoCompleteItem value="zap">Zap</AutoCompleteItem>
+            <AutoCompleteItem value="cap">Cap</AutoCompleteItem>
+            <AutoCompleteItem value="Ball">Ball</AutoCompleteItem>
+            <AutoCompleteItem value="Table">Table</AutoCompleteItem>
+            <AutoCompleteItem value="Korea">Korea</AutoCompleteItem>
+            <AutoCompleteItem value="United Kingdom">
+              United Kingdom
+            </AutoCompleteItem>
+            <AutoCompleteItem value="Nigeria">Nigeria</AutoCompleteItem>
+            <AutoCompleteItem fixed value="japan">
+              Japan
+            </AutoCompleteItem>
+          </AutoCompleteList>
+        </AutoComplete>
+      </Flex>
+      {value}
     </Flex>
   );
 }

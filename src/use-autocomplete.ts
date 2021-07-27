@@ -1,70 +1,194 @@
-import { useDisclosure, useOutsideClick } from "@chakra-ui/react";
-import { useRef } from "react";
-import { useRefDimensions } from "./helpers/useRefDimensions";
+import { InputProps, useDimensions, useDisclosure } from "@chakra-ui/react";
+import {
+  callAll,
+  getFirstItem,
+  getLastItem,
+  getNextItem,
+  getPrevItem,
+  omit,
+  runIfFn,
+} from "@chakra-ui/utils";
+import React, { useRef, useState } from "react";
+import { AutoCompleteInputProps } from "./autocomplete-input";
+import { AutoCompleteProps } from "./autocomplete";
+import { AutoCompleteItemProps, Item } from "./autocomplete-item";
+import { getFocusedStyles, getItemList } from "./helpers/items";
 
-export type UseAutoCompleteProps = {};
-
-export type UseAutoCompleteReturn = {
-  getInputProps: () => void;
-  getListProps: () => void;
-  inputRef: React.RefObject<HTMLInputElement>;
-  isOpen: boolean;
-  listRef: React.RefObject<HTMLDivElement>;
-  onClose: () => void;
-  onOpen: () => void;
-};
-
+export type UseAutoCompleteProps = Partial<{
+  rollNavigation: boolean;
+}>;
 
 export type InputReturnProps = {
-  onClick: React.MouseEventHandler<HTMLDivElement>;
-  ref: React.RefObject<HTMLDivElement>;
+  wrapper: {
+    onClick: React.MouseEventHandler<HTMLDivElement>;
+    ref: React.RefObject<HTMLDivElement>;
+  };
+  input: InputProps;
 };
 
 export type ListReturnProps = {
   width: number;
 };
 
+export type UseAutoCompleteReturn = {
+  children: React.ReactNode;
+  focusedValue: Item["value"];
+  getInputProps: (props: AutoCompleteInputProps) => InputReturnProps;
+  getItemProps: (props: AutoCompleteItemProps) => any;
+  getListProps: () => ListReturnProps;
+  inputRef: React.RefObject<HTMLInputElement>;
+  interactionRef: React.RefObject<"mouse" | "keyboard" | null>;
+  isOpen: boolean;
+  itemList: Item[];
+  listRef: React.RefObject<HTMLDivElement>;
+  onClose: () => void;
+  onOpen: () => void;
+};
+
+/**
+ * useAutoComplete that provides all the state and focus management logic
+ * for the autocomplete component. It is consumed by the `Autocomplete` component
+ *
+ */
+
 export function useAutoComplete(
-  props: UseAutoCompleteProps
+  autoCompleteProps: AutoCompleteProps
 ): UseAutoCompleteReturn {
   const { isOpen, onClose, onOpen } = useDisclosure({});
+
+  const children = runIfFn(autoCompleteProps.children);
+  const itemList: Item[] = getItemList(children);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
   const listRef = useRef<HTMLDivElement>(null);
+  const interactionRef = useRef<"mouse" | "keyboard" | null>(null);
 
-  console.log(props);
+  const [focusedValue, setFocusedValue] = useState<Item["value"]>(
+    itemList[0].value
+  );
 
-  useOutsideClick({
-    ref: inputWrapperRef,
-    handler: () => {
-      if (!listRef?.current?.contains(document.activeElement)) onClose();
-    },
-  });
+  const getInputProps: UseAutoCompleteReturn["getInputProps"] = props => {
+    const { onBlur, onFocus, onKeyDown, ...rest } = props;
 
-  const getInputProps = (): InputReturnProps => {
     return {
-      onClick: (e) => {
-        onOpen();
-        inputRef?.current?.focus();
-        e.stopPropagation();
+      wrapper: {
+        onClick: () => {
+          inputRef?.current?.focus();
+        },
+        ref: inputWrapperRef,
       },
-      ref: inputWrapperRef,
+      input: {
+        onFocus: () => {
+          runIfFn(onFocus);
+          onOpen();
+        },
+        onBlur: e => {
+          runIfFn(onBlur);
+          const listIsFocused = e.relatedTarget === listRef?.current;
+          if (!listIsFocused) onClose();
+        },
+        onKeyDown: e => {
+          runIfFn(onKeyDown, e);
+          interactionRef.current = "keyboard";
+
+          const { key } = e;
+
+          if (key === "Enter") {
+            e.preventDefault();
+            return;
+          }
+
+          const focusedIndex = itemList.findIndex(
+            i => i.value === focusedValue
+          );
+
+          const nextItem = getNextItem(
+            focusedIndex,
+            itemList,
+            !!autoCompleteProps.rollNavigation
+          );
+
+          if (key === "ArrowDown") {
+            setFocusedValue(nextItem.value);
+            e.preventDefault();
+            return;
+          }
+
+          if (key === "ArrowUp") {
+            const prevItem = getPrevItem(
+              focusedIndex,
+              itemList,
+              !!autoCompleteProps.rollNavigation
+            );
+            setFocusedValue(prevItem.value);
+
+            e.preventDefault();
+            return;
+          }
+
+          if (key === "Tab") {
+            setFocusedValue(nextItem.value);
+            e.preventDefault();
+            return;
+          }
+
+          if (key === "Home") {
+            const firstItem = getFirstItem(itemList);
+            setFocusedValue(firstItem?.value);
+            e.preventDefault();
+            return;
+          }
+
+          if (key === "End") {
+            const lastItem = getLastItem(itemList);
+            setFocusedValue(lastItem?.value);
+            e.preventDefault();
+            return;
+          }
+
+          if (key === "Escape") {
+            callAll(onClose, e.preventDefault);
+          }
+        },
+        ...rest,
+      },
     };
   };
 
-  const getListProps = (): ListReturnProps => {
-    const { width } = useRefDimensions(inputWrapperRef);
+  const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
+    const dim = useDimensions(inputWrapperRef, true);
+    const width = dim?.marginBox.width as number;
+
     return {
       width,
     };
   };
 
+  const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
+    const { value, ...restProps } = props;
+    const rest = omit(restProps, ["fixed" /* "disabled" */]);
+    const isFocused = value === focusedValue;
+    return {
+      onMouseOver: () => {
+        setFocusedValue(value);
+        interactionRef.current = "mouse";
+      },
+      ...(isFocused && getFocusedStyles()),
+      ...rest,
+    };
+  };
+
   return {
+    children,
+    focusedValue,
     getInputProps,
+    getItemProps,
     getListProps,
     inputRef,
+    interactionRef,
     isOpen,
+    itemList,
     listRef,
     onClose,
     onOpen,

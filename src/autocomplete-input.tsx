@@ -2,7 +2,6 @@ import {
   forwardRef,
   Input,
   InputProps,
-  PopoverTrigger,
   useMergeRefs,
   Wrap,
 } from "@chakra-ui/react";
@@ -11,21 +10,20 @@ import React from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 
-interface AutoCompleteInputProps extends InputProps {}
+export interface AutoCompleteInputProps extends InputProps {}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
-    const { ...rest } = props;
     const { inputRef, getInputProps } = useAutoCompleteContext();
 
     const ref = useMergeRefs(forwardedRef, inputRef);
 
+    const inputProps = getInputProps(props);
+
     return (
-      <PopoverTrigger>
-        <Wrap {...getInputProps()}>
-          <Input {...rest} ref={ref} />
-        </Wrap>
-      </PopoverTrigger>
+      <Wrap {...inputProps.wrapper}>
+        <Input {...inputProps.input} ref={ref} />
+      </Wrap>
     );
   }
 );
