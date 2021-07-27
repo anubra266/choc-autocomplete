@@ -5,6 +5,7 @@ Changelog
 - Now built on hooks
 - Automatic list scroll
 - `_fixed` pseudo prop to style fixed items
+- Allow custom filter method
 
 ```ts
 export interface AutoComplete extends Omit<BoxProps, "onChange"> {

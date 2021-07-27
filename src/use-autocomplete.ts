@@ -24,6 +24,7 @@ export type UseAutoCompleteProps = Partial<{
   multiple: boolean;
   onChange: (value: string) => void;
   rollNavigation: boolean;
+  filter: (query: string, itemValue: Item["value"]) => boolean;
 }>;
 
 export type InputReturnProps = {
@@ -90,12 +91,15 @@ export function useAutoComplete(
 
   const [values, setValues] = useState<any[]>([]);
 
-  const defaultSort = (value: Item["value"]) => {
-    return fuzzyScore(query, value) >= 0.5 || value.indexOf(query) >= 0;
+  const defaultFilterMethod = (query: string, itemValue: Item["value"]) => {
+    return fuzzyScore(query, itemValue) >= 0.5 || itemValue.indexOf(query) >= 0;
   };
 
   const filteredList = itemList.filter(i => {
-    return i.fixed || runIfFn(defaultSort, i.value);
+    return (
+      i.fixed ||
+      runIfFn(autoCompleteProps.filter || defaultFilterMethod, query, i.value)
+    );
   });
 
   const selectItem = (itemValue: Item["value"]) => {
