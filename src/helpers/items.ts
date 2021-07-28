@@ -1,9 +1,19 @@
 import { getChildrenDeep } from "react-nanny";
-import { pick } from "@chakra-ui/utils";
+import { pick, isEmpty } from "@chakra-ui/utils";
 import { ReactNode } from "react";
 import { FlexProps } from "@chakra-ui/react";
 import { Item } from "../autocomplete-item";
 import { fuzzyScore } from "./fuzzySearch";
+
+export const setEmphasis = (children: any, query: string) => {
+  if (typeof children !== "string" || isEmpty(query)) {
+    return children;
+  }
+  const newChildren = children
+    .toString()
+    .replace(new RegExp(query, "gi"), (match: any) => `<mark>${match}</mark>`);
+  return newChildren;
+};
 
 export const getItemList = (children: ReactNode) => {
   const itemChildren = getChildrenDeep(

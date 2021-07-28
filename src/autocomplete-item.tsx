@@ -7,6 +7,7 @@ import {
 } from "@chakra-ui/react";
 import { __DEV__ } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
+
 import { useAutoCompleteContext } from "./autocomplete-context";
 
 export interface AutoCompleteItemProps extends FlexProps {
@@ -19,7 +20,7 @@ export interface AutoCompleteItemProps extends FlexProps {
 
 export interface Item {
   value: any;
-  fixed: boolean;
+  fixed?: boolean;
 }
 
 export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
@@ -46,7 +47,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     }, [isFocused]);
 
     return isValidSuggestion ? (
-      <Flex ref={ref} {...baseStyles} {...itemProps.item} />
+      <Flex ref={ref} {...baseItemStyles} {...itemProps.item} />
     ) : null;
   }
 );
@@ -55,7 +56,7 @@ if (__DEV__) {
   AutoCompleteItem.displayName = "AutoCompleteItem";
 }
 
-const baseStyles: FlexProps = {
+export const baseItemStyles: FlexProps = {
   mx: "2",
   px: "2",
   py: "2",

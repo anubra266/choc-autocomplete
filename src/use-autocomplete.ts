@@ -1,5 +1,6 @@
 import {
   BoxProps,
+  CSSObject,
   FlexProps,
   InputProps,
   useDimensions,
@@ -13,6 +14,7 @@ import {
   getLastItem,
   getNextItem,
   getPrevItem,
+  isObject,
   isEmpty,
   runIfFn,
 } from "@chakra-ui/utils";
@@ -31,6 +33,7 @@ import {
   defaultFilterMethod,
   getFocusedStyles,
   getItemList,
+  setEmphasis,
 } from "./helpers/items";
 import { getMultipleWrapStyles } from "./helpers/input";
 import { AutoCompleteGroupProps } from "./autocomplete-group";
@@ -40,6 +43,7 @@ export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
   defaultIsOpen: boolean;
+  emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (query: string, itemValue: Item["value"]) => boolean;
   focusInputOnSelect: boolean;
@@ -132,6 +136,7 @@ export function useAutoComplete(
   const {
     closeOnBlur = true,
     closeOnSelect = true,
+    emphasize,
     emptyState = true,
     maxSuggestions,
     defaultIsOpen,
@@ -155,13 +160,16 @@ export function useAutoComplete(
     itemList[0].value
   );
 
-  const filteredList = itemList
+  const filteredResults = itemList
     .filter(
       i =>
         i.fixed ||
         runIfFn(autoCompleteProps.filter || defaultFilterMethod, query, i.value)
     )
     .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
+
+  // Add Creatable to Filtered List
+  const filteredList = [...filteredResults, { value: query }];
 
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
@@ -333,12 +341,28 @@ export function useAutoComplete(
   };
 
   const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
-    const { _fixed, _focus, value, fixed, onClick, ...rest } = props;
+    const {
+      _fixed,
+      _focus,
+      children: itemChild,
+      value,
+      fixed,
+      onClick,
+      sx,
+      ...rest
+    } = props;
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
     return {
       item: {
+        ...(typeof itemChild !== "string"
+          ? { children: itemChild }
+          : {
+              dangerouslySetInnerHTML: {
+                __html: setEmphasis(itemChild, query),
+              },
+            }),
         onClick: e => {
           runIfFn(onClick, e);
           selectItem(value);
@@ -346,6 +370,18 @@ export function useAutoComplete(
         onMouseOver: () => {
           setFocusedValue(value);
           interactionRef.current = "mouse";
+        },
+        sx: {
+          ...sx,
+          mark: {
+            color: "inherit",
+            bg: "transparent",
+            ...(isObject(emphasize)
+              ? emphasize
+              : {
+                  fontWeight: emphasize ? "extrabold" : "inherit",
+                }),
+          },
         },
         ...(isFocused && (_focus || getFocusedStyles())),
         ...(fixed && _fixed),

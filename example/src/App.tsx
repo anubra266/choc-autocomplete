@@ -2,6 +2,7 @@ import { Flex, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
+  AutoCompleteCreatable,
   AutoCompleteGroup,
   AutoCompleteGroupTitle,
   AutoCompleteInput,
@@ -25,6 +26,8 @@ function App(props: Props) {
           selectOnFocus
           openOnFocus
           freeSolo
+          emptyState={({ query }: any) => <h1>{query} not found</h1>}
+          // emphasize={{ color: "green" }}
           // multiple
         >
           <AutoCompleteInput
@@ -64,6 +67,9 @@ function App(props: Props) {
             </AutoCompleteItem>
             <AutoCompleteItem value="Nigeria">Nigeria</AutoCompleteItem>
             <AutoCompleteItem value="japan">Japan</AutoCompleteItem>
+            <AutoCompleteCreatable>
+              {({ value }: any) => <span>Add {value} Option </span>}
+            </AutoCompleteCreatable>
           </AutoCompleteList>
         </AutoComplete>
       </Flex>

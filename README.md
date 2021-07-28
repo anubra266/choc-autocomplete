@@ -12,6 +12,8 @@ Changelog
 - New onOptionFocus method
 - New `AutoCompleteGroupTitle` component. `AutoCompleteGroup` no longer takes a title prop.
 - `AutoCompleteFixedItem` is not exported, just add `fixed` prop to `AutoCompleteItem`
+- `emptyState` can now be a function that is provided with the `inputValue`
+- new `AutoCompleteCreatable` Component in place of `creatable` prop for easier user customization. It takes a function child that exposes the current value, or just normal children. And it's accepts flexProps
 
 Todo
 
@@ -20,8 +22,6 @@ Todo
 ```ts
 export interface AutoComplete extends Omit<BoxProps, "onChange"> {
   //   children?: MaybeRenderProp<AutoCompleteChildProps>;
-  creatable?: boolean | ((props: CreatableProps) => ReactNode);
-  emphasize?: boolean | CSSObject;
   // onChange?: (value: string) => void;
   // emptyState?: boolean | ReactNode;
   //   rollNavigation?: boolean;
