@@ -3,31 +3,48 @@ import {
   Input,
   InputProps,
   useMergeRefs,
+  useMultiStyleConfig,
   Wrap,
 } from "@chakra-ui/react";
-import { __DEV__ } from "@chakra-ui/utils";
+import { __DEV__, runIfFn } from "@chakra-ui/utils";
+import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
+import { Item } from "./autocomplete-item";
 
-export interface AutoCompleteInputProps extends InputProps {}
+export interface AutoCompleteInputProps extends InputProps {
+  children?: MaybeRenderProp<{ tags: Item["value"][] }>;
+}
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
-    const { inputRef, getInputProps, setQuery } = useAutoCompleteContext();
+    const {
+      inputRef,
+      getInputProps,
+      setQuery,
+      tags,
+    } = useAutoCompleteContext();
 
     const ref = useMergeRefs(forwardedRef, inputRef);
 
-    const { value, ...rest } = props;
+    const { children: childrenProp, value, ...rest } = props;
 
     useEffect(() => {
       setQuery(value ?? "");
     }, [value]);
 
-    const inputProps = getInputProps(rest);
+    const themeInput: any = useMultiStyleConfig("Input", {
+      variant: props.variant,
+    });
+
+    const inputProps = getInputProps(rest, themeInput);
+
+    const children = runIfFn(childrenProp, { tags });
 
     return (
       <Wrap {...inputProps.wrapper}>
+        {children}
         <Input {...inputProps.input} ref={ref} />
       </Wrap>
     );

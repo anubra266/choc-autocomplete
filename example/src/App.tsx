@@ -1,10 +1,11 @@
-import { Flex } from "@chakra-ui/react";
+import { Flex, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteTag,
 } from "../../";
 
 interface Props {}
@@ -19,7 +20,7 @@ function App(props: Props) {
         <AutoComplete
           rollNavigation
           onChange={val => console.log(val)}
-          multiple
+          // multiple
         >
           <AutoCompleteInput
             variant="filled"
@@ -29,7 +30,19 @@ function App(props: Props) {
             //   setValue(e.target.value);
             //   console.log("app.tsx", e.target.value);
             // }}
-          />
+          >
+            {({ tags }: any) => (
+              <>
+                {tags.map((t: any, key: number) => (
+                  <AutoCompleteTag
+                    key={key}
+                    label={t.value}
+                    onRemove={t.onRemove}
+                  />
+                ))}
+              </>
+            )}
+          </AutoCompleteInput>
           <AutoCompleteList>
             <AutoCompleteItem value="apple">Apple</AutoCompleteItem>
             <AutoCompleteItem value="appoint">Appoint</AutoCompleteItem>

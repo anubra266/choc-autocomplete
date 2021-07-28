@@ -29,10 +29,23 @@ import {
   getFocusedStyles,
   getItemList,
 } from "./helpers/items";
+import { getMultipleWrapStyles } from "./helpers/input";
 
 export type UseAutoCompleteProps = Partial<{
+  closeOnselect: boolean;
   multiple: boolean;
   onChange: (value: string | Item["value"][]) => void;
+  onSelectOption: (params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void;
+  onOptionFocus: (params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void;
+  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
   rollNavigation: boolean;
   filter: (query: string, itemValue: Item["value"]) => boolean;
 }>;
@@ -60,7 +73,10 @@ export type UseAutoCompleteReturn = {
   children: React.ReactNode;
   filteredList: Item[];
   focusedValue: Item["value"];
-  getInputProps: (props: AutoCompleteInputProps) => InputReturnProps;
+  getInputProps: (
+    props: AutoCompleteInputProps,
+    themeInput?: any
+  ) => InputReturnProps;
   getItemProps: (props: AutoCompleteItemProps) => ItemReturnProps;
   getListProps: () => ListReturnProps;
   inputRef: React.RefObject<HTMLInputElement>;
@@ -71,6 +87,10 @@ export type UseAutoCompleteReturn = {
   onClose: () => void;
   onOpen: () => void;
   setQuery: Dispatch<SetStateAction<any>>;
+  tags: {
+    value: Item["value"];
+    onRemove: () => void;
+  }[];
   values: Item["value"][];
 };
 
@@ -131,6 +151,14 @@ export function useAutoComplete(
     );
   }, [values]);
 
+  useEffect(() => {
+    runIfFn(autoCompleteProps.onOptionFocus, {
+      optionValue: focusedValue,
+      selectMethod: interactionRef.current,
+      isNewInput: false,
+    });
+  }, [focusedValue]);
+
   const selectItem = (itemValue: Item["value"]) => {
     if (!values.includes(itemValue)) {
       setValues(v =>
@@ -138,17 +166,45 @@ export function useAutoComplete(
       );
       setQuery(itemValue);
     }
+    if (autoCompleteProps.multiple) {
+      setQuery("");
+      inputRef.current?.focus();
+    }
+    runIfFn(autoCompleteProps.onSelectOption, {
+      optionValue: itemValue,
+      selectMethod: interactionRef.current,
+      isNewInput: false,
+    });
+    if (autoCompleteProps.closeOnselect) onClose();
   };
 
-  const getInputProps: UseAutoCompleteReturn["getInputProps"] = props => {
-    const { onBlur, onChange, onFocus, onKeyDown, ...rest } = props;
+  const removeItem = (itemValue: Item["value"]) => {
+    const newValues = values.filter(i => i !== itemValue);
+    setValues(newValues);
+    runIfFn(autoCompleteProps.onTagRemoved, itemValue, newValues);
+    if (query === itemValue) setQuery("");
+  };
+
+  const tags = autoCompleteProps.multiple
+    ? values.map(tag => ({
+        value: tag,
+        onRemove: () => removeItem(tag),
+      }))
+    : [];
+
+  const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
+    props,
+    themeInput
+  ) => {
+    const { onBlur, onChange, onFocus, onKeyDown, variant, ...rest } = props;
 
     return {
       wrapper: {
+        ref: inputWrapperRef,
         onClick: () => {
           inputRef?.current?.focus();
         },
-        ref: inputWrapperRef,
+        ...(autoCompleteProps.multiple && getMultipleWrapStyles(themeInput)),
       },
       input: {
         onFocus: () => {
@@ -212,6 +268,7 @@ export function useAutoComplete(
           }
         },
         value: query,
+        variant: autoCompleteProps.multiple ? "unstyled" : variant,
         ...rest,
       },
     };
@@ -266,6 +323,7 @@ export function useAutoComplete(
     onClose,
     onOpen,
     setQuery,
+    tags,
     values,
   };
 }
