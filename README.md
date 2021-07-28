@@ -11,6 +11,7 @@ Changelog
 - onSelectOption params changed - `click` to `mouse`
 - New onOptionFocus method
 - New `AutoCompleteGroupTitle` component. `AutoCompleteGroup` no longer takes a title prop.
+- `AutoCompleteFixedItem` is not exported, just add `fixed` prop to `AutoCompleteItem`
 
 Todo
 
@@ -20,14 +21,14 @@ Todo
 export interface AutoComplete extends Omit<BoxProps, "onChange"> {
   //   children?: MaybeRenderProp<AutoCompleteChildProps>;
   creatable?: boolean | ((props: CreatableProps) => ReactNode);
+  emphasize?: boolean | CSSObject;
   // onChange?: (value: string) => void;
-  emptyState?: boolean | ReactNode;
+  // emptyState?: boolean | ReactNode;
   //   rollNavigation?: boolean;
   // focusInputOnSelect?: boolean;
-  freeSolo?: boolean;
+  // freeSolo?: boolean;
   // selectOnFocus?: boolean;
   // openOnFocus?: boolean;
-  emphasize?: boolean | CSSObject;
   // defaultIsOpen?: boolean;
   // onSelectOption?: (params: OptionEvent) => boolean | void; //TODO come beack for newInput
   // onOptionFocus?: (params: OptionEvent) => boolean | void;

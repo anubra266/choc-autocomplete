@@ -39,8 +39,10 @@ export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
   defaultIsOpen: boolean;
+  emptyState?: boolean | React.ReactNode;
   filter: (query: string, itemValue: Item["value"]) => boolean;
   focusInputOnSelect: boolean;
+  freeSolo: boolean;
   maxSuggestions: number;
   multiple: boolean;
   onChange: (value: string | Item["value"][]) => void;
@@ -93,6 +95,7 @@ export type UseAutoCompleteReturn = {
   children: React.ReactNode;
   filteredList: Item[];
   focusedValue: Item["value"];
+  getEmptyStateProps: (component: any) => any;
   getGroupProps: (props: AutoCompleteGroupProps) => GroupReturnProps;
   getInputProps: (
     props: AutoCompleteInputProps,
@@ -127,8 +130,10 @@ export function useAutoComplete(
   const {
     closeOnBlur = true,
     closeOnSelect = true,
+    emptyState = true,
     maxSuggestions,
     defaultIsOpen,
+    freeSolo,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
   } = autoCompleteProps;
@@ -247,6 +252,8 @@ export function useAutoComplete(
           runIfFn(onBlur);
           const listIsFocused = e.relatedTarget === listRef?.current;
           if (!listIsFocused && closeOnBlur) onClose();
+          if (!values.includes(e.target.value) && !freeSolo)
+            setQuery(getLastItem(values) ?? "");
         },
         onChange: e => {
           const newValue = e.target.value;
@@ -361,10 +368,17 @@ export function useAutoComplete(
     };
   };
 
+  const getEmptyStateProps: UseAutoCompleteReturn["getEmptyStateProps"] = defaultEmptyState => {
+    if (filteredList.length < 1 && emptyState) {
+      return typeof emptyState === "boolean" ? defaultEmptyState : emptyState;
+    }
+  };
+
   return {
     children,
     filteredList,
     focusedValue,
+    getEmptyStateProps,
     getGroupProps,
     getInputProps,
     getItemProps,

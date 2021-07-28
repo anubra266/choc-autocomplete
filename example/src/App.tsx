@@ -24,6 +24,7 @@ function App(props: Props) {
           onChange={val => console.log(val)}
           selectOnFocus
           openOnFocus
+          freeSolo
           // multiple
         >
           <AutoCompleteInput
@@ -62,9 +63,7 @@ function App(props: Props) {
               United Kingdom
             </AutoCompleteItem>
             <AutoCompleteItem value="Nigeria">Nigeria</AutoCompleteItem>
-            <AutoCompleteItem fixed value="japan">
-              Japan
-            </AutoCompleteItem>
+            <AutoCompleteItem value="japan">Japan</AutoCompleteItem>
           </AutoCompleteList>
         </AutoComplete>
       </Flex>
