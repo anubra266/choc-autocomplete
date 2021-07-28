@@ -6,6 +6,7 @@ import {
   useDisclosure,
   useUpdateEffect,
 } from "@chakra-ui/react";
+import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import {
   callAll,
   getFirstItem,
@@ -39,7 +40,7 @@ export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
   defaultIsOpen: boolean;
-  emptyState?: boolean | React.ReactNode;
+  emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (query: string, itemValue: Item["value"]) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
@@ -110,6 +111,7 @@ export type UseAutoCompleteReturn = {
   listRef: React.RefObject<HTMLDivElement>;
   onClose: () => void;
   onOpen: () => void;
+  query: string;
   setQuery: Dispatch<SetStateAction<any>>;
   tags: {
     value: Item["value"];
@@ -370,7 +372,9 @@ export function useAutoComplete(
 
   const getEmptyStateProps: UseAutoCompleteReturn["getEmptyStateProps"] = defaultEmptyState => {
     if (filteredList.length < 1 && emptyState) {
-      return typeof emptyState === "boolean" ? defaultEmptyState : emptyState;
+      return typeof emptyState === "boolean"
+        ? defaultEmptyState
+        : runIfFn(emptyState, { query });
     }
   };
 
@@ -390,6 +394,7 @@ export function useAutoComplete(
     listRef,
     onClose,
     onOpen,
+    query,
     setQuery,
     tags,
     values,
