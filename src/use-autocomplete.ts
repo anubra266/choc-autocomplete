@@ -206,12 +206,12 @@ export function useAutoComplete(
   }, [focusedValue]);
 
   const selectItem = (itemValue: Item["value"]) => {
-    if (!values.includes(itemValue)) {
+    if (!values.includes(itemValue))
       setValues(v =>
         autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
       );
-      setQuery(itemValue);
-    }
+
+    setQuery(itemValue);
     if (autoCompleteProps.multiple) {
       setQuery("");
       inputRef.current?.focus();

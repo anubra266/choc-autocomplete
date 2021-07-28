@@ -58,3 +58,4 @@ yarn add @choc-ui/chakra-autocomplete
 
 ### With Mouse
 
+![](./assets/mouse.gif)
