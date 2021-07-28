@@ -262,7 +262,6 @@ export function useAutoComplete(
         onBlur: e => {
           runIfFn(onBlur);
           const listIsFocused = e.relatedTarget === listRef?.current;
-          console.log(e.relatedTarget, listRef.current);
           if (!listIsFocused) {
             if (closeOnBlur) onClose();
             if (!values.includes(e.target.value) && !freeSolo)
