@@ -19,7 +19,7 @@ function App(props: Props) {
       <Flex>
         <AutoComplete
           rollNavigation
-          onChange={val => console.log(val)}
+          onChange={val => console.log(val)} selectOnFocus
           // multiple
         >
           <AutoCompleteInput

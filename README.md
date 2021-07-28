@@ -22,19 +22,19 @@ export interface AutoComplete extends Omit<BoxProps, "onChange"> {
   // onChange?: (value: string) => void;
   emptyState?: boolean | ReactNode;
   //   rollNavigation?: boolean;
-  focusInputOnSelect?: boolean;
+  // focusInputOnSelect?: boolean;
   freeSolo?: boolean;
-  selectOnFocus?: boolean;
-  openOnFocus?: boolean;
+  // selectOnFocus?: boolean;
+  // openOnFocus?: boolean;
   emphasize?: boolean | CSSObject;
-  defaultIsOpen?: boolean;
+  // defaultIsOpen?: boolean;
   // onSelectOption?: (params: OptionEvent) => boolean | void; //TODO come beack for newInput
   // onOptionFocus?: (params: OptionEvent) => boolean | void;
-  suggestWhenEmpty?: boolean;
-  // closeOnselect?: boolean;
-  closeOnBlur?: boolean;
-  shouldRenderSuggestions?: (value: string) => boolean;
-  maxSuggestions?: number;
+  // suggestWhenEmpty?: boolean;
+  // closeOnSelect?: boolean;
+  // closeOnBlur?: boolean;
+  // shouldRenderSuggestions?: (value: string) => boolean;
+  // maxSuggestions?: number;
   // multiple: boolean;
   // onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
 }

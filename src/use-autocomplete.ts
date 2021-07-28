@@ -11,6 +11,7 @@ import {
   getLastItem,
   getNextItem,
   getPrevItem,
+  isEmpty,
   runIfFn,
 } from "@chakra-ui/utils";
 import React, {
@@ -32,7 +33,12 @@ import {
 import { getMultipleWrapStyles } from "./helpers/input";
 
 export type UseAutoCompleteProps = Partial<{
-  closeOnselect: boolean;
+  closeOnBlur: boolean;
+  closeOnSelect: boolean;
+  defaultIsOpen: boolean;
+  filter: (query: string, itemValue: Item["value"]) => boolean;
+  focusInputOnSelect: boolean;
+  maxSuggestions: number;
   multiple: boolean;
   onChange: (value: string | Item["value"][]) => void;
   onSelectOption: (params: {
@@ -46,8 +52,11 @@ export type UseAutoCompleteProps = Partial<{
     isNewInput: boolean;
   }) => boolean | void;
   onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
+  openOnFocus: boolean;
   rollNavigation: boolean;
-  filter: (query: string, itemValue: Item["value"]) => boolean;
+  selectOnFocus: boolean;
+  shouldRenderSuggestions: (value: string) => boolean;
+  suggestWhenEmpty: boolean;
 }>;
 
 export type InputReturnProps = {
@@ -103,7 +112,13 @@ export type UseAutoCompleteReturn = {
 export function useAutoComplete(
   autoCompleteProps: AutoCompleteProps
 ): UseAutoCompleteReturn {
-  const { isOpen, onClose, onOpen } = useDisclosure({});
+  const {
+    closeOnBlur = true,
+    closeOnSelect = true,
+    maxSuggestions,
+    defaultIsOpen,
+  } = autoCompleteProps;
+  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
   const children = runIfFn(autoCompleteProps.children);
   const itemList: Item[] = getItemList(children);
@@ -119,12 +134,13 @@ export function useAutoComplete(
     itemList[0].value
   );
 
-  const filteredList = itemList.filter(i => {
-    return (
-      i.fixed ||
-      runIfFn(autoCompleteProps.filter || defaultFilterMethod, query, i.value)
-    );
-  });
+  const filteredList = itemList
+    .filter(
+      i =>
+        i.fixed ||
+        runIfFn(autoCompleteProps.filter || defaultFilterMethod, query, i.value)
+    )
+    .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
 
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
@@ -170,12 +186,13 @@ export function useAutoComplete(
       setQuery("");
       inputRef.current?.focus();
     }
+    if (autoCompleteProps.focusInputOnSelect) inputRef.current?.focus();
     runIfFn(autoCompleteProps.onSelectOption, {
       optionValue: itemValue,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
-    if (autoCompleteProps.closeOnselect) onClose();
+    if (closeOnSelect) onClose();
   };
 
   const removeItem = (itemValue: Item["value"]) => {
@@ -207,18 +224,25 @@ export function useAutoComplete(
         ...(autoCompleteProps.multiple && getMultipleWrapStyles(themeInput)),
       },
       input: {
-        onFocus: () => {
+        onFocus: e => {
           runIfFn(onFocus);
-          onOpen();
+          if (autoCompleteProps.openOnFocus) onOpen();
+          if (autoCompleteProps.selectOnFocus) e.target.select();
         },
         onBlur: e => {
           runIfFn(onBlur);
           const listIsFocused = e.relatedTarget === listRef?.current;
-          if (!listIsFocused) onClose();
+          if (!listIsFocused && closeOnBlur) onClose();
         },
         onChange: e => {
           runIfFn(onChange, e);
           setQuery(e.target.value);
+          const queryIsEmpty = isEmpty(query);
+          if (!queryIsEmpty) {
+            if (runIfFn(autoCompleteProps.shouldRenderSuggestions, query))
+              onOpen();
+            else onClose();
+          } else if (!autoCompleteProps.suggestWhenEmpty) onClose();
         },
         onKeyDown: e => {
           runIfFn(onKeyDown, e);
