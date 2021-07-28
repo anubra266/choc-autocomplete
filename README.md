@@ -59,3 +59,7 @@ yarn add @choc-ui/chakra-autocomplete
 ### With Mouse
 
 ![](./assets/mouse.gif)
+
+### With Keyboard
+
+![](./assets/keyboard.gif)
