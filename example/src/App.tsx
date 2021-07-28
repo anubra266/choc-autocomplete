@@ -1,4 +1,12 @@
-import { Flex, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
+import {
+  Flex,
+  FormControl,
+  FormHelperText,
+  FormLabel,
+  Tag,
+  TagCloseButton,
+  TagLabel,
+} from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
@@ -14,68 +22,31 @@ import {
 interface Props {}
 
 function App(props: Props) {
-  const {} = props;
   const [value, setValue] = React.useState("wow");
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
-      <Flex>
-        <AutoComplete
-          rollNavigation
-          onChange={val => console.log(val)}
-          selectOnFocus
-          openOnFocus
-          freeSolo
-          emptyState={({ query }: any) => <h1>{query} not found</h1>}
-          // emphasize={{ color: "green" }}
-          // multiple
-        >
-          <AutoCompleteInput
-            variant="filled"
-            // w="80"
-            // value={value}
-            // onChange={e => {
-            //   setValue(e.target.value);
-            //   console.log("app.tsx", e.target.value);
-            // }}
-          >
-            {({ tags }: any) => (
-              <>
-                {tags.map((t: any, key: number) => (
-                  <AutoCompleteTag
-                    key={key}
-                    label={t.value}
-                    onRemove={t.onRemove}
-                  />
-                ))}
-              </>
-            )}
-          </AutoCompleteInput>
+      <FormControl id="email" w="60">
+        <FormLabel>Olympics Soccer Winner</FormLabel>
+        <AutoComplete rollNavigation openOnFocus>
+          <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
-            <AutoCompleteItem value="apple">Apple</AutoCompleteItem>
-            <AutoCompleteItem value="appoint">Appoint</AutoCompleteItem>
-            <AutoCompleteItem value="zap">Zap</AutoCompleteItem>
-            <AutoCompleteItem value="cap">Cap</AutoCompleteItem>
-            <AutoCompleteGroup showDivider>
-              <AutoCompleteGroupTitle>Group</AutoCompleteGroupTitle>
-              <AutoCompleteItem value="Ball">Ball</AutoCompleteItem>
-              <AutoCompleteItem value="Table">Table</AutoCompleteItem>
-              <AutoCompleteItem value="Korea">Korea</AutoCompleteItem>
-            </AutoCompleteGroup>
-            <AutoCompleteItem value="United Kingdom">
-              United Kingdom
-            </AutoCompleteItem>
-            <AutoCompleteItem value="Nigeria">Nigeria</AutoCompleteItem>
             <AutoCompleteItem value="japan">Japan</AutoCompleteItem>
-            <AutoCompleteCreatable>
-              {({ value }: any) => <span>Add {value} Option </span>}
-            </AutoCompleteCreatable>
+            <AutoCompleteItem value="United States">
+              United States
+            </AutoCompleteItem>
+            <AutoCompleteGroup showDivider>
+              <AutoCompleteGroupTitle>Africa</AutoCompleteGroupTitle>
+              <AutoCompleteItem value="Nigeria">Nigeria</AutoCompleteItem>
+              <AutoCompleteItem value="South Africa">
+                South Africa
+              </AutoCompleteItem>
+              <AutoCompleteItem value="Kenya">Kenya</AutoCompleteItem>
+            </AutoCompleteGroup>
           </AutoCompleteList>
         </AutoComplete>
-      </Flex>
-      <Flex aria-disabled={true} _disabled={{ color: "red" }}>
-        {value}
-      </Flex>
+        <FormHelperText>Who do you support.</FormHelperText>
+      </FormControl>
     </Flex>
   );
 }

@@ -18,7 +18,6 @@ export const hasLastItem = (children: ReactNode, lastItem: any) => {
       child?.type?.displayName === "AutoCompleteItem" &&
       child.props.value === lastItem?.value
   );
-
   return result;
 };
 

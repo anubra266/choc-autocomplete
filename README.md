@@ -1,43 +1,59 @@
-Changelog
+<div align="center">
 
-- New multiple prop
-- New AutoCompleteTag component
-- Input can Now be controlled
-- Now built on hooks
-- Automatic list scroll
-- `_fixed` pseudo prop to style fixed items
-- Allow custom filter method
-- onChangeProps new provides values array, when it's multiple
-- onSelectOption params changed - `click` to `mouse`
-- New onOptionFocus method
-- New `AutoCompleteGroupTitle` component. `AutoCompleteGroup` no longer takes a title prop.
-- `AutoCompleteFixedItem` is not exported, just add `fixed` prop to `AutoCompleteItem`
-- `emptyState` can now be a function that is provided with the `inputValue`
-- new `AutoCompleteCreatable` Component in place of `creatable` prop for easier user customization. It takes a function child that exposes the current value, or just normal children. And it's accepts flexProps
+  <h1>
+    <br/>
+    🏇
+    <br />
+    @choc-ui/chakra-autocomplete
+    <br />
+    <br />
+  </h1>
+  <sup>
+    <br />
+    <br />
+    <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete?style=for-the-badge">
+       <img src="https://img.shields.io/npm/v/@choc-ui/chakra-autocomplete.svg?style=for-the-badge" alt="npm package" />
+    </a>
+    <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete?style=for-the-badge">
+      <img src="https://img.shields.io/npm/dw/@choc-ui/chakra-autocomplete.svg?style=for-the-badge" alt="npm  downloads" />
+    </a>
+<a>
+    <img alt="NPM" src="https://img.shields.io/npm/l/@choc-ui/chakra-autocomplete?style=for-the-badge">
+</a>
 
-Todo
+<a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
-- onTagRemoved Function for multi Tags
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-```ts
-export interface AutoComplete extends Omit<BoxProps, "onChange"> {
-  //   children?: MaybeRenderProp<AutoCompleteChildProps>;
-  // onChange?: (value: string) => void;
-  // emptyState?: boolean | ReactNode;
-  //   rollNavigation?: boolean;
-  // focusInputOnSelect?: boolean;
-  // freeSolo?: boolean;
-  // selectOnFocus?: boolean;
-  // openOnFocus?: boolean;
-  // defaultIsOpen?: boolean;
-  // onSelectOption?: (params: OptionEvent) => boolean | void; //TODO come beack for newInput
-  // onOptionFocus?: (params: OptionEvent) => boolean | void;
-  // suggestWhenEmpty?: boolean;
-  // closeOnSelect?: boolean;
-  // closeOnBlur?: boolean;
-  // shouldRenderSuggestions?: (value: string) => boolean;
-  // maxSuggestions?: number;
-  // multiple: boolean;
-  // onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
-}
+[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
+
+</a>
+    <br />
+    AutoComplete Component for the <a href="https://chakra-ui.com">Chakra UI</a> Library.</em>
+    
+  </sup>
+  <br />
+  <br />
+  <br />
+  <br />
+  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete">@choc-ui/chakra-autocomplete</a></pre>
+  <br />
+  <br />
+  <br />
+  <br />
+  <br />
+</div>
+
+## Install
+
+```bash
+npm i --save @choc-ui/chakra-autocomplete
+#or
+yarn add @choc-ui/chakra-autocomplete
 ```
+
+## Preview
+
+### With Mouse

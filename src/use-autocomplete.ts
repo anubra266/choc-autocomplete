@@ -16,6 +16,7 @@ import {
   getPrevItem,
   isObject,
   isEmpty,
+  isUndefined,
   runIfFn,
 } from "@chakra-ui/utils";
 import React, {
@@ -169,7 +170,7 @@ export function useAutoComplete(
     .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
 
   // Add Creatable to Filtered List
-  const filteredList = [...filteredResults, { value: query }];
+  const filteredList = [...filteredResults, { value: query, noFilter: true }];
 
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
@@ -398,7 +399,10 @@ export function useAutoComplete(
     return {
       divider: {
         hasFirstChild: hasFirstItem(props.children, firstItem),
-        hasLastChild: hasLastItem(props.children, lastItem),
+        hasLastChild: hasLastItem(
+          props.children,
+          getLastItem(filteredList.filter(i => isUndefined(i?.noFilter)))
+        ),
       },
       group: {
         display: hasItems ? "initial" : "none",
