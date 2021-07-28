@@ -28,7 +28,7 @@ function App(props: Props) {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete rollNavigation openOnFocus>
+        <AutoComplete rollNavigation openOnFocus selectOnFocus suggestWhenEmpty>
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             <AutoCompleteItem value="japan">Japan</AutoCompleteItem>

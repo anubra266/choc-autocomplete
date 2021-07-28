@@ -57,3 +57,4 @@ yarn add @choc-ui/chakra-autocomplete
 ## Preview
 
 ### With Mouse
+

@@ -262,9 +262,12 @@ export function useAutoComplete(
         onBlur: e => {
           runIfFn(onBlur);
           const listIsFocused = e.relatedTarget === listRef?.current;
-          if (!listIsFocused && closeOnBlur) onClose();
-          if (!values.includes(e.target.value) && !freeSolo)
-            setQuery(getLastItem(values) ?? "");
+          console.log(e.relatedTarget, listRef.current);
+          if (!listIsFocused) {
+            if (closeOnBlur) onClose();
+            if (!values.includes(e.target.value) && !freeSolo)
+              setQuery(getLastItem(values) ?? "");
+          }
         },
         onChange: e => {
           const newValue = e.target.value;
@@ -349,6 +352,7 @@ export function useAutoComplete(
       value,
       fixed,
       onClick,
+      onMouseOver,
       sx,
       ...rest
     } = props;
@@ -357,7 +361,7 @@ export function useAutoComplete(
       filteredList.findIndex(i => i.value === value) >= 0;
     return {
       item: {
-        ...(typeof itemChild !== "string"
+        ...(typeof itemChild !== "string" || !emphasize
           ? { children: itemChild }
           : {
               dangerouslySetInnerHTML: {
@@ -368,7 +372,8 @@ export function useAutoComplete(
           runIfFn(onClick, e);
           selectItem(value);
         },
-        onMouseOver: () => {
+        onMouseOver: e => {
+          runIfFn(onMouseOver, e);
           setFocusedValue(value);
           interactionRef.current = "mouse";
         },
