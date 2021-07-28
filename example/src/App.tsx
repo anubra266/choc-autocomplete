@@ -2,6 +2,8 @@ import { Flex, Tag, TagCloseButton, TagLabel } from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
+  AutoCompleteGroup,
+  AutoCompleteGroupTitle,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
@@ -19,7 +21,9 @@ function App(props: Props) {
       <Flex>
         <AutoComplete
           rollNavigation
-          onChange={val => console.log(val)} selectOnFocus
+          onChange={val => console.log(val)}
+          selectOnFocus
+          openOnFocus
           // multiple
         >
           <AutoCompleteInput
@@ -48,9 +52,12 @@ function App(props: Props) {
             <AutoCompleteItem value="appoint">Appoint</AutoCompleteItem>
             <AutoCompleteItem value="zap">Zap</AutoCompleteItem>
             <AutoCompleteItem value="cap">Cap</AutoCompleteItem>
-            <AutoCompleteItem value="Ball">Ball</AutoCompleteItem>
-            <AutoCompleteItem value="Table">Table</AutoCompleteItem>
-            <AutoCompleteItem value="Korea">Korea</AutoCompleteItem>
+            <AutoCompleteGroup showDivider>
+              <AutoCompleteGroupTitle>Group</AutoCompleteGroupTitle>
+              <AutoCompleteItem value="Ball">Ball</AutoCompleteItem>
+              <AutoCompleteItem value="Table">Table</AutoCompleteItem>
+              <AutoCompleteItem value="Korea">Korea</AutoCompleteItem>
+            </AutoCompleteGroup>
             <AutoCompleteItem value="United Kingdom">
               United Kingdom
             </AutoCompleteItem>

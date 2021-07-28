@@ -10,6 +10,7 @@ Changelog
 - onChangeProps new provides values array, when it's multiple
 - onSelectOption params changed - `click` to `mouse`
 - New onOptionFocus method
+- New `AutoCompleteGroupTitle` component. `AutoCompleteGroup` no longer takes a title prop.
 
 Todo
 

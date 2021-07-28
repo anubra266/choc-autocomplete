@@ -30,7 +30,7 @@ export const defaultFilterMethod = (
   itemValue: Item["value"]
 ) => {
   return (
-    itemValue.toLowerCase().indexOf(query.toLocaleLowerCase()) >= 0 ||
+    itemValue.toLowerCase().indexOf(query.toLowerCase()) >= 0 ||
     fuzzyScore(query, itemValue) >= 0.5
   );
 };

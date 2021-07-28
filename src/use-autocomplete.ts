@@ -1,4 +1,5 @@
 import {
+  BoxProps,
   FlexProps,
   InputProps,
   useDimensions,
@@ -31,6 +32,8 @@ import {
   getItemList,
 } from "./helpers/items";
 import { getMultipleWrapStyles } from "./helpers/input";
+import { AutoCompleteGroupProps } from "./autocomplete-group";
+import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
 
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
@@ -78,10 +81,19 @@ export type ListReturnProps = {
   width: number;
 };
 
+export type GroupReturnProps = {
+  divider: {
+    hasFirstChild: boolean;
+    hasLastChild: boolean;
+  };
+  group: BoxProps;
+};
+
 export type UseAutoCompleteReturn = {
   children: React.ReactNode;
   filteredList: Item[];
   focusedValue: Item["value"];
+  getGroupProps: (props: AutoCompleteGroupProps) => GroupReturnProps;
   getInputProps: (
     props: AutoCompleteInputProps,
     themeInput?: any
@@ -117,6 +129,8 @@ export function useAutoComplete(
     closeOnSelect = true,
     maxSuggestions,
     defaultIsOpen,
+    shouldRenderSuggestions = () => true,
+    suggestWhenEmpty,
   } = autoCompleteProps;
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
@@ -235,14 +249,16 @@ export function useAutoComplete(
           if (!listIsFocused && closeOnBlur) onClose();
         },
         onChange: e => {
+          const newValue = e.target.value;
           runIfFn(onChange, e);
           setQuery(e.target.value);
-          const queryIsEmpty = isEmpty(query);
-          if (!queryIsEmpty) {
-            if (runIfFn(autoCompleteProps.shouldRenderSuggestions, query))
-              onOpen();
-            else onClose();
-          } else if (!autoCompleteProps.suggestWhenEmpty) onClose();
+          const queryIsEmpty = isEmpty(newValue);
+          if (
+            runIfFn(shouldRenderSuggestions, newValue) &&
+            (!queryIsEmpty || suggestWhenEmpty)
+          )
+            onOpen();
+          else onClose();
         },
         onKeyDown: e => {
           runIfFn(onKeyDown, e);
@@ -332,10 +348,24 @@ export function useAutoComplete(
     };
   };
 
+  const getGroupProps: UseAutoCompleteReturn["getGroupProps"] = props => {
+    const hasItems = hasChildren(props.children, filteredList);
+    return {
+      divider: {
+        hasFirstChild: hasFirstItem(props.children, firstItem),
+        hasLastChild: hasLastItem(props.children, lastItem),
+      },
+      group: {
+        display: hasItems ? "initial" : "none",
+      },
+    };
+  };
+
   return {
     children,
     filteredList,
     focusedValue,
+    getGroupProps,
     getInputProps,
     getItemProps,
     getListProps,
