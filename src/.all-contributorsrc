@@ -1,0 +1,42 @@
+{
+  "files": [
+    "README.md"
+  ],
+  "imageSize": 100,
+  "commit": false,
+  "contributors": [
+    {
+      "login": "anubra266",
+      "name": "Abraham",
+      "avatar_url": "https://avatars.githubusercontent.com/u/30869823?v=4",
+      "profile": "https://anubra266.tk",
+      "contributions": [
+        "code"
+      ]
+    },
+    {
+      "login": "margalit",
+      "name": "Sam Margalit",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2268424?v=4",
+      "profile": "http://margalit.com.au",
+      "contributions": [
+        "doc"
+      ]
+    },
+    {
+      "login": "gepd",
+      "name": "gepd",
+      "avatar_url": "https://avatars.githubusercontent.com/u/7091609?v=4",
+      "profile": "https://github.com/gepd",
+      "contributions": [
+        "code"
+      ]
+    }
+  ],
+  "contributorsPerLine": 7,
+  "projectName": "choc-autocomplete",
+  "projectOwner": "anubra266",
+  "repoType": "github",
+  "repoHost": "https://github.com",
+  "skipCi": true
+}
