@@ -14,7 +14,7 @@ v4.0.0
 - New `AutoCompleteGroupTitle` component. `AutoCompleteGroup` no longer takes a title prop.
 - `AutoCompleteFixedItem` is not exported, just add `fixed` prop to `AutoCompleteItem`
 - `_fixed` pseudo prop to style fixed items
-
 - `emptyState` can now be a function that is provided with the `inputValue`
 - new `AutoCompleteCreatable` Component in place of `creatable` prop for easier user customization. It takes a function child that exposes the current value, or just normal children. And it's accepts flexProps
 - use `_selected` pseudo prop to apply selected styles to items
+- `onTagRemoved` method is called when a tag is removed in the `multiple` multi select mode.
