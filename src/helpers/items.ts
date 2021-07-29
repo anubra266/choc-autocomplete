@@ -22,7 +22,7 @@ export const getItemList = (children: ReactNode) => {
   );
 
   return itemChildren.map(item => {
-    return pick(item.props, ["value", "fixed"]);
+    return pick(item.props, ["value", "fixed", "disabled"]);
   });
 };
 

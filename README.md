@@ -389,6 +389,138 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
 
+### **AutoCompleteItem**
+
+This Composes your suggestions
+
+**AutoCompleteItem** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>value</td>
+    <td>string</td>
+    <td>The value of the Option</td>
+    <td>yes<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>fixed</td>
+    <td>
+
+    boolean
+
+</td>
+    <td>Make an item visible at all times, regardless of filtering</td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+</tr>
+<tr>
+    <td>_fixed</td>
+    <td>
+
+    CSSObject
+
+</td>
+    <td>Styles for fixed Itemm</td>
+    <td>No</td>
+    <td>
+
+```js
+{
+  fontWeight: 'extrabold',
+}
+```
+
+</td>
+</tr>
+<tr>
+    <td>value</td>
+    <td>string</td>
+    <td>The value of the Option</td>
+    <td>yes<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>disabled</td>
+    <td>
+
+    boolean
+
+</td>
+    <td>Make an item disabled, so it cannot be selected</td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+</tr>
+<tr>
+    <td>_disabled</td>
+    <td>
+
+    CSSObject
+
+</td>
+    <td>Styles for disabled Item(s)</td>
+    <td>No</td>
+    <td>
+
+```js
+{
+  fontWeight: 'extrabold',
+}
+```
+
+</td>
+</tr>
+<tr>
+    <td>_selected</td>
+    <td>
+
+    CSSObject
+
+</td>
+    <td>Styles for selected Item(s)</td>
+    <td>No</td>
+    <td>
+
+```js
+{
+  fontWeight: 'extrabold',
+}
+```
+
+</td>
+</tr>
+<tr>
+    <td>_focus</td>
+    <td>
+
+    CSSObject
+
+</td>
+    <td>Styles for focused Item</td>
+    <td>No</td>
+    <td>
+
+```js
+{
+  fontWeight: 'extrabold',
+}
+```
+
+</td>
+</tr> 
+</tbody>
+</table>
+
 ### **AutoCompleteCreatable**
 
 Used with the `AutoComplete` component's `creatable` prop, to allow users enter arbitrary values, not available in the provided options.
@@ -419,14 +551,15 @@ type children = MaybeRenderProp<{ value: any }>;
   </td>
     <td>
 
-`ReactNode` or callback that returns `ReactNode` 
+`ReactNode` or callback that returns `ReactNode`
 e.g.
+
 ```js
 <AutoCompleteCreatable>
   {({ value }) => <span>Add {value} to List</span>}
 </AutoCompleteCreatable>
 ```
-    
+
   </td>
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>

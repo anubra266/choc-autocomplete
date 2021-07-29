@@ -14,13 +14,14 @@ export interface AutoCompleteItemProps extends FlexProps {
   value: string;
   fixed?: boolean;
   _focus?: CSSObject | any;
-  // disabled?: boolean;
+  disabled?: boolean;
   _fixed?: CSSObject;
 }
 
 export interface Item {
   value: any;
   fixed?: boolean;
+  disabled?: boolean;
   noFilter?: boolean;
 }
 

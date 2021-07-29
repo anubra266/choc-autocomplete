@@ -308,9 +308,10 @@ export function useAutoComplete(
           interactionRef.current = "keyboard";
 
           const { key } = e;
-
+          const focusedItem = filteredList[focusedIndex];
           if (key === "Enter") {
-            selectItem(filteredList[focusedIndex].value);
+            if (!focusedItem.disabled) selectItem(focusedItem.value);
+            else inputRef.current?.focus();
             e.preventDefault();
             return;
           }
@@ -371,6 +372,7 @@ export function useAutoComplete(
       _fixed,
       _focus,
       children: itemChild,
+      disabled,
       value,
       fixed,
       onClick,
@@ -391,9 +393,12 @@ export function useAutoComplete(
               },
             }),
         "aria-selected": values.includes(value),
+        "aria-disabled": disabled,
+        _disabled: { opacity: 0.4, cursor: "not-allowed" },
         onClick: e => {
           runIfFn(onClick, e);
-          selectItem(value);
+          if (!disabled) selectItem(value);
+          else inputRef.current?.focus();
         },
         onMouseOver: e => {
           runIfFn(onMouseOver, e);

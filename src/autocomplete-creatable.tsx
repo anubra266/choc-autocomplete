@@ -24,9 +24,6 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     }),
   }).item;
 
-  console.log(runIfFn(childrenProp, {
-    value: queryValue,
-  }));
   return autoCompleteProps.creatable ? (
     <Flex {...baseItemStyles} {...itemProps} {...rest}>
       {children || `Add ${query}`}

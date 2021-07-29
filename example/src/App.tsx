@@ -35,6 +35,9 @@ function App() {
                 {country}
               </AutoCompleteItem>
             ))}
+            <AutoCompleteItem value="a" disabled>
+              Disabled Item
+            </AutoCompleteItem>
             <AutoCompleteCreatable>
               {({ value }) => <span>Add {value} to List</span>}
             </AutoCompleteCreatable>

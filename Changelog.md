@@ -17,4 +17,5 @@ v4.0.0
 - `emptyState` can now be a function that is provided with the `inputValue`
 - new `AutoCompleteCreatable` Component in place of `creatable` prop for easier user customization. It takes a function child that exposes the current value, or just normal children. And it's accepts flexProps
 - use `_selected` pseudo prop to apply selected styles to items
+- add `disabled` prop to Items which can be styled with `_disabled` pseudo prop 
 - `onTagRemoved` method is called when a tag is removed in the `multiple` multi select mode.
