@@ -389,6 +389,185 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
 
+### **AutoComplete**
+
+Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
+
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+**NB:** None of the props passed to it are required.
+
+```ts
+export type UseAutoCompleteProps = Partial<{
+  closeOnBlur: boolean; //close suggestions when input is blurred - true
+  closeOnSelect: boolean; //close suggestions when a suggestions is selected - true
+  creatable: boolean; //Allow addition of arbitrary values not present in suggestions - false
+  defaultIsOpen: boolean; //Suggestions list is open by default -- false
+  emphasize: boolean | CSSObject; //Highlight matching characters in suggestions, you can pass the styles - false
+  emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>; //render message when no suggestions match query
+  filter: (query: string, itemValue: Item["value"]) => boolean; //custom filter function
+  focusInputOnSelect: boolean; //focus input after a suggestion is selected - true
+  freeSolo: boolean; //allow entering of any values
+  maxSuggestions: number; //limit number of suggestions in list
+  multiple: boolean; //allow tags multi selection - false
+  onChange: (value: string | Item["value"][]) => void; //function to run whenever autocomplete value(s) changes
+  onSelectOption: (params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void; //method to call whenever a suggestion is selected
+  onOptionFocus: (params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void;//method to call whenever a suggestion is focused
+  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void; //method to call whenever a tag is removed
+  openOnFocus: boolean; //open suggestions when input is focuses -false
+  rollNavigation: boolean; //allow keyboard navigation to switch to alternate ends when one end is reached
+  selectOnFocus: boolean; //select the text in input when it's focused. - false
+  shouldRenderSuggestions: (value: string) => boolean; //function to decide if suggestions should render, e.g. show suggestions only if there are at least two characters in the query value
+  suggestWhenEmpty: boolean; //show suggestions when input value is empty - false
+}>;
+}
+```
+
+### **AutoCompleteTag**
+
+Tags for multiple mode
+
+**AutoCompleteTag** composes [**Tag**](https://chakra-ui.com/docs/data-display/tag) so you can pass all Tag props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>label</td>
+    <td>
+
+    string
+
+  </td>
+    <td>Label that is displayed on the tag</td>
+    <td>Yes<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
+    <td>onRemove</td>
+    <td>
+
+```ts
+() => void
+```
+
+  </td>
+    <td>Method to remove the tag from selected values</td>
+    <td>Yes<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+ 
+</tbody>
+</table>
+
+### **AutoCompleteInput**
+
+Input for `AutoComplete` value.
+
+**AutoCompleteInput** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>children</td>
+    <td>
+
+```ts
+type children = MaybeRenderProp<{
+  tags: { label: string; onRemove: () => void }[];
+}>;
+```
+
+  </td>
+    <td>
+
+callback that returns `ReactNode` and is provided with tags in `multiple` mode
+e.g.
+
+```js
+<AutoCompleteInput variant="filled">
+  {({ tags }) =>
+    tags.map((tag, tid) => (
+      <AutoCompleteTag key={tid} label={tag.label} onRemove={tag.onRemove} />
+    ))
+  }
+</AutoCompleteInput>
+```
+
+  </td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+ 
+</tbody>
+</table>
+
+### **AutoCompleteList**
+
+Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
+
+**AutoCompleteList** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+### **AutoCompleteGroup**
+
+Wrapper for collections of `AutoCompleteItem`s
+
+**AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+<Table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>showDivider</td>
+    <td>boolean</td>
+    <td>If true, a divider is shown</td>
+    <td>No</td>
+    <td>false</td>
+  </tr>
+
+  <tr>
+    <td>dividerColor</td>
+    <td>string</td>
+    <td>Color for divider, if present</td>
+    <td>No</td>
+    <td>inherit</td>
+  </tr>
+</tbody>
+
+</table>
 ### **AutoCompleteItem**
 
 This Composes your suggestions

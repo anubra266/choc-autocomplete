@@ -21,7 +21,7 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus creatable>
+        <AutoComplete openOnFocus emphasize>
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             {countries.map((country, cid) => (
