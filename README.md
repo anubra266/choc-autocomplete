@@ -393,7 +393,9 @@ export default App;
 I know that title hardly expresses the point, but yeah, naming is tough. You might want your users to be able to add extra items when their options are not available in the provided options. e.g. adding a new tag to your Polywork profile. 
 
 First add the `creatable` prop to the `AutoComplete` component.
-Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer to the references for more info on this component
+Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer to the references for more info on this component.
+
+
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
 
