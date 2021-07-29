@@ -1,4 +1,5 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
+import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import { __DEV__, runIfFn } from "@chakra-ui/utils";
 
 import React from "react";
@@ -7,7 +8,7 @@ import { useAutoCompleteContext } from "./autocomplete-context";
 import { baseItemStyles } from "./autocomplete-item";
 
 interface AutoCompleteCreatableProps extends FlexProps {
-  children?: React.ReactNode;
+  children?: MaybeRenderProp<{ value: any }>;
 }
 
 export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
@@ -23,6 +24,9 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     }),
   }).item;
 
+  console.log(runIfFn(childrenProp, {
+    value: queryValue,
+  }));
   return autoCompleteProps.creatable ? (
     <Flex {...baseItemStyles} {...itemProps} {...rest}>
       {children || `Add ${query}`}

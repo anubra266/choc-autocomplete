@@ -385,6 +385,55 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
+## API Reference
+
+**NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
+
+### **AutoCompleteCreatable**
+
+Used with the `AutoComplete` component's `creatable` prop, to allow users enter arbitrary values, not available in the provided options.
+
+**AutoCompleteCreatable** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+
+It also accepts a function as its `children` prop which is provided with the current `inputValue`.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>children</td>
+    <td>
+
+```ts
+type children = MaybeRenderProp<{ value: any }>;
+```
+
+  </td>
+    <td>
+
+`ReactNode` or callback that returns `ReactNode` 
+e.g.
+```js
+<AutoCompleteCreatable>
+  {({ value }) => <span>Add {value} to List</span>}
+</AutoCompleteCreatable>
+```
+    
+  </td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+ 
+</tbody>
+</table>
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):

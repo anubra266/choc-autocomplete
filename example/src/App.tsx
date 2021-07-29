@@ -35,7 +35,9 @@ function App() {
                 {country}
               </AutoCompleteItem>
             ))}
-            <AutoCompleteCreatable />
+            <AutoCompleteCreatable>
+              {({ value }) => <span>Add {value} to List</span>}
+            </AutoCompleteCreatable>
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
