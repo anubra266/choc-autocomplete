@@ -119,7 +119,7 @@ export type UseAutoCompleteReturn = {
   query: string;
   setQuery: Dispatch<SetStateAction<any>>;
   tags: {
-    value: Item["value"];
+    label: Item["value"];
     onRemove: () => void;
   }[];
   values: Item["value"][];
@@ -134,17 +134,29 @@ export type UseAutoCompleteReturn = {
 export function useAutoComplete(
   autoCompleteProps: AutoCompleteProps
 ): UseAutoCompleteReturn {
-  const {
+  let {
     closeOnBlur = true,
-    closeOnSelect = true,
+    closeOnSelect,
     emphasize,
     emptyState = true,
+    freeSolo,
     maxSuggestions,
     defaultIsOpen,
-    freeSolo,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
   } = autoCompleteProps;
+
+  freeSolo = freeSolo
+    ? freeSolo
+    : autoCompleteProps.multiple
+    ? true
+    : autoCompleteProps.freeSolo;
+
+  closeOnSelect = closeOnSelect
+    ? closeOnSelect
+    : autoCompleteProps.multiple
+    ? false
+    : true;
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
   const children = runIfFn(autoCompleteProps.children, {
@@ -238,7 +250,7 @@ export function useAutoComplete(
 
   const tags = autoCompleteProps.multiple
     ? values.map(tag => ({
-        value: tag,
+        label: tag,
         onRemove: () => removeItem(tag),
       }))
     : [];
@@ -255,6 +267,7 @@ export function useAutoComplete(
         onClick: () => {
           inputRef?.current?.focus();
         },
+        tabIndex: 0,
         ...(autoCompleteProps.multiple && getMultipleWrapStyles(themeInput)),
       },
       input: {
@@ -266,7 +279,10 @@ export function useAutoComplete(
         onBlur: e => {
           runIfFn(onBlur);
           const listIsFocused = e.relatedTarget === listRef?.current;
-          if (!listIsFocused) {
+          const inputWrapperIsFocused = inputWrapperRef.current?.contains(
+            e.relatedTarget as any
+          );
+          if (!listIsFocused && !inputWrapperIsFocused) {
             if (closeOnBlur) onClose();
             if (!values.includes(e.target.value) && !freeSolo)
               setQuery(getLastItem(values) ?? "");
@@ -371,6 +387,7 @@ export function useAutoComplete(
                 __html: setEmphasis(itemChild, query),
               },
             }),
+        "aria-selected": values.includes(value),
         onClick: e => {
           runIfFn(onClick, e);
           selectItem(value);

@@ -1,20 +1,12 @@
-import {
-  Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Icon,
-  InputGroup,
-  InputRightElement,
-} from "@chakra-ui/react";
+import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteTag,
 } from "../../";
-import { FiChevronRight, FiChevronDown } from "react-icons/fi";
 
 function App() {
   const countries = [
@@ -29,30 +21,30 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus>
-          {({ isOpen }) => (
-            <>
-              <InputGroup>
-                <AutoCompleteInput variant="filled" placeholder="Search..." />
-                <InputRightElement
-                  children={
-                    <Icon as={isOpen ? FiChevronRight : FiChevronDown} />
-                  }
+        <AutoComplete openOnFocus multiple>
+          <AutoCompleteInput variant="filled">
+            {({ tags }) =>
+              tags.map((tag, tid) => (
+                <AutoCompleteTag
+                  key={tid}
+                  label={tag.label}
+                  onRemove={tag.onRemove}
                 />
-              </InputGroup>
-              <AutoCompleteList>
-                {countries.map((country, cid) => (
-                  <AutoCompleteItem
-                    key={`option-${cid}`}
-                    value={country}
-                    textTransform="capitalize"
-                  >
-                    {country}
-                  </AutoCompleteItem>
-                ))}
-              </AutoCompleteList>
-            </>
-          )}
+              ))
+            }
+          </AutoCompleteInput>
+          <AutoCompleteList>
+            {countries.map((country, cid) => (
+              <AutoCompleteItem
+                key={`option-${cid}`}
+                value={country}
+                textTransform="capitalize"
+                _selected={{ color: "red" }}
+              >
+                {country}
+              </AutoCompleteItem>
+            ))}
+          </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>
