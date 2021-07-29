@@ -2,10 +2,10 @@ import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import * as React from "react";
 import {
   AutoComplete,
+  AutoCompleteCreatable,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
-  AutoCompleteTag,
 } from "../../";
 
 function App() {
@@ -21,29 +21,21 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple>
-          <AutoCompleteInput variant="filled">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
+        <AutoComplete openOnFocus creatable>
+          <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem
                 key={`option-${cid}`}
                 value={country}
                 textTransform="capitalize"
-                _selected={{ color: "red" }}
+                _selected={{ bg: "whiteAlpha.50" }}
+                _focus={{ bg: "whiteAlpha.100" }}
               >
                 {country}
               </AutoCompleteItem>
             ))}
+            <AutoCompleteCreatable />
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>

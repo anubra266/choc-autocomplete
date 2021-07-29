@@ -43,6 +43,7 @@ import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
+  creatable: boolean;
   defaultIsOpen: boolean;
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
@@ -98,6 +99,7 @@ export type GroupReturnProps = {
 };
 
 export type UseAutoCompleteReturn = {
+  autoCompleteProps: AutoCompleteProps;
   children: React.ReactNode;
   filteredList: Item[];
   focusedValue: Item["value"];
@@ -137,6 +139,7 @@ export function useAutoComplete(
   let {
     closeOnBlur = true,
     closeOnSelect,
+    creatable,
     emphasize,
     emptyState = true,
     freeSolo,
@@ -436,7 +439,8 @@ export function useAutoComplete(
   };
 
   const getEmptyStateProps: UseAutoCompleteReturn["getEmptyStateProps"] = defaultEmptyState => {
-    if (filteredList.length < 1 && emptyState) {
+    const noSuggestions = filteredList.every(i => i.noFilter);
+    if (noSuggestions && emptyState && !creatable) {
       return typeof emptyState === "boolean"
         ? defaultEmptyState
         : runIfFn(emptyState, { query });
@@ -444,6 +448,7 @@ export function useAutoComplete(
   };
 
   return {
+    autoCompleteProps,
     children,
     filteredList,
     focusedValue,
