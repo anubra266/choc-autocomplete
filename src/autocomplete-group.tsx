@@ -7,7 +7,7 @@ import {
   FlexProps,
   forwardRef,
 } from "@chakra-ui/react";
-import { __DEV__ } from "@chakra-ui/utils";
+import { __DEV__, omit } from "@chakra-ui/utils";
 import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 
@@ -17,11 +17,11 @@ export interface AutoCompleteGroupProps extends BoxProps {
   dividerColor?: string;
 }
 
-// TODO show nothing when group is empty
-
 export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, "div">(
   (props, ref) => {
-    const { children, showDivider, ...rest } = props;
+    const { children, showDivider, ...restProps } = props;
+    const rest = omit(restProps, ["groupSibling"] as any);
+
     const { getGroupProps } = useAutoCompleteContext();
 
     const { group } = getGroupProps(props);
@@ -58,12 +58,16 @@ const baseTitleStyles: FlexProps = {
   textTransform: "uppercase",
 };
 
-const useDividerStyles = (props: AutoCompleteGroupProps) => {
+const useDividerStyles = (
+  props: AutoCompleteGroupProps & { groupSibling?: boolean }
+) => {
   const { getGroupProps } = useAutoCompleteContext();
+
+  const hasGroupSibling: unknown = props.groupSibling;
 
   const {
     divider: { hasFirstChild, hasLastChild },
-  } = getGroupProps(props);
+  } = getGroupProps(props as AutoCompleteGroupProps);
 
   const baseStyles: DividerProps = {
     my: 2,
@@ -77,7 +81,8 @@ const useDividerStyles = (props: AutoCompleteGroupProps) => {
   };
   const bottom = {
     ...baseStyles,
-    display: !props.showDivider || hasLastChild ? "none" : "",
+    display:
+      !props.showDivider || hasLastChild || hasGroupSibling ? "none" : "",
   };
 
   return { top, bottom };

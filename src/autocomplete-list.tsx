@@ -8,6 +8,7 @@ import { __DEV__ } from "@chakra-ui/utils";
 import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { EmptyState } from "./components/empty-state";
+import { siblingInfo } from "./helpers/list";
 
 export type AutoCompleteListProps = PopoverContentProps;
 
@@ -20,7 +21,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
 
     return (
       <PopoverContent ref={ref} {...baseStyles} {...listProps} {...rest}>
-        {children}
+        {siblingInfo(children)}
         <EmptyState />
       </PopoverContent>
     );

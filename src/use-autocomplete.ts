@@ -158,7 +158,7 @@ export function useAutoComplete(
   const [query, setQuery] = useState("");
   const [values, setValues] = useState<any[]>([]);
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
-    itemList[0].value
+    itemList[0]?.value
   );
 
   const filteredResults = itemList
@@ -340,6 +340,7 @@ export function useAutoComplete(
 
     return {
       width,
+      
     };
   };
 
