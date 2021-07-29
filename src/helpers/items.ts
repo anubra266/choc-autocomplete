@@ -11,7 +11,10 @@ export const setEmphasis = (children: any, query: string) => {
   }
   const newChildren = children
     .toString()
-    .replace(new RegExp(query, "gi"), (match: any) => `<mark>${match}</mark>`);
+    .replace(
+      new RegExp(escapeRegex(query), "gi"),
+      (match: any) => `<mark>${match}</mark>`
+    );
   return newChildren;
 };
 
@@ -44,3 +47,7 @@ export const defaultFilterMethod = (
     fuzzyScore(query, itemValue) >= 0.5
   );
 };
+
+function escapeRegex(string: string) {
+  return string.replace(/[-\/\\^$*+?.()|[\]{}]/g, "\\$&");
+}
