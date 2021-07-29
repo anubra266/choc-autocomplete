@@ -147,7 +147,11 @@ export function useAutoComplete(
   } = autoCompleteProps;
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
-  const children = runIfFn(autoCompleteProps.children);
+  const children = runIfFn(autoCompleteProps.children, {
+    isOpen,
+    onClose,
+    onOpen,
+  });
   const itemList: Item[] = getItemList(children);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -340,7 +344,6 @@ export function useAutoComplete(
 
     return {
       width,
-      
     };
   };
 
