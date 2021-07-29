@@ -48,8 +48,16 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
         });
     }, [isFocused]);
 
+    const { children, dangerouslySetInnerHTML, ...rest } = itemProps.item;
+
     return isValidSuggestion ? (
-      <Flex ref={ref} {...baseItemStyles} {...itemProps.item} />
+      <Flex ref={ref} {...baseItemStyles} {...rest}>
+        {children ? (
+          children
+        ) : (
+          <span dangerouslySetInnerHTML={dangerouslySetInnerHTML} />
+        )}
+      </Flex>
     ) : null;
   }
 );
@@ -65,9 +73,3 @@ export const baseItemStyles: FlexProps = {
   rounded: "md",
   cursor: "pointer",
 };
-
-//TODO
-// const disabledStyles: FlexProps = {
-//   pointerEvents: 'none',
-//   userSelect: 'none',
-// };
