@@ -408,6 +408,7 @@ export type UseAutoCompleteProps = Partial<{
   filter: (query: string, itemValue: Item["value"]) => boolean; //custom filter function
   focusInputOnSelect: boolean; //focus input after a suggestion is selected - true
   freeSolo: boolean; //allow entering of any values
+  maxSelections: number //limit possible number of tag selections in multiple mode
   maxSuggestions: number; //limit number of suggestions in list
   multiple: boolean; //allow tags multi selection - false
   onChange: (value: string | Item["value"][]) => void; //function to run whenever autocomplete value(s) changes
@@ -568,6 +569,7 @@ Wrapper for collections of `AutoCompleteItem`s
 </tbody>
 
 </table>
+
 ### **AutoCompleteItem**
 
 This Composes your suggestions

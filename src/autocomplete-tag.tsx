@@ -5,7 +5,7 @@ import React from "react";
 
 type AutoCompleteTagProps = {
   label: string;
-  onRemove?: () => {};
+  onRemove?: () => void;
 } & TagProps;
 
 export function AutoCompleteTag(props: AutoCompleteTagProps) {

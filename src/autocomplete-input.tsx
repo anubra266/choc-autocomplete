@@ -11,10 +11,10 @@ import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
-import { Item } from "./autocomplete-item";
+import { UseAutoCompleteReturn } from "./use-autocomplete";
 
 export interface AutoCompleteInputProps extends InputProps {
-  children?: MaybeRenderProp<{ tags: Item["value"][] }>;
+  children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
 }
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(

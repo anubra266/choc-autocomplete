@@ -6,6 +6,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteTag,
 } from "../../";
 
 function App() {
@@ -21,8 +22,18 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus emphasize>
-          <AutoCompleteInput variant="filled" />
+        <AutoComplete emphasize openOnFocus multiple maxSelections={2}>
+          <AutoCompleteInput variant="filled">
+            {({ tags }) =>
+              tags.map((tag, tid) => (
+                <AutoCompleteTag
+                  key={tid}
+                  label={tag.label}
+                  onRemove={tag.onRemove}
+                />
+              ))
+            }
+          </AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem

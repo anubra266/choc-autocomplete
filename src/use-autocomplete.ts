@@ -50,6 +50,7 @@ export type UseAutoCompleteProps = Partial<{
   filter: (query: string, itemValue: Item["value"]) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
+  maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
   onChange: (value: string | Item["value"][]) => void;
@@ -180,6 +181,8 @@ export function useAutoComplete(
     itemList[0]?.value
   );
 
+  const maxSelections = autoCompleteProps.maxSelections || values.length;
+
   const filteredResults = itemList
     .filter(
       i =>
@@ -225,7 +228,7 @@ export function useAutoComplete(
   }, [focusedValue]);
 
   const selectItem = (itemValue: Item["value"]) => {
-    if (!values.includes(itemValue))
+    if (!values.includes(itemValue) && values.length < maxSelections)
       setValues(v =>
         autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
       );
