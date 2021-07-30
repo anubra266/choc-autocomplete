@@ -397,40 +397,191 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
 **NB:** None of the props passed to it are required.
 
+<table>
+    <thead>
+        <tr>
+            <td>Prop</td>
+            <td>Type</td>
+            <td>Description</td>
+            <td>Default</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td>closeOnBlur</td>
+            <td>boolean</td>
+            <td>close suggestions when input is blurred </td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>closeOnSelect</td>
+            <td>boolean</td>
+            <td>close suggestions when a suggestions is selected</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>creatable</td>
+            <td>boolean</td>
+            <td>Allow addition of arbitrary values not present in suggestions</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>defaultIsOpen</td>
+            <td>boolean</td>
+            <td>Suggestions list is open by default</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>emphasize</td>
+            <td>boolean | CSSObject</td>
+            <td>Highlight matching characters in suggestions, you can pass the styles - false</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>emptyState</td>
+            <td>
+
 ```ts
-export type UseAutoCompleteProps = Partial<{
-  closeOnBlur: boolean; //close suggestions when input is blurred - true
-  closeOnSelect: boolean; //close suggestions when a suggestions is selected - true
-  creatable: boolean; //Allow addition of arbitrary values not present in suggestions - false
-  defaultIsOpen: boolean; //Suggestions list is open by default -- false
-  emphasize: boolean | CSSObject; //Highlight matching characters in suggestions, you can pass the styles - false
-  emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>; //render message when no suggestions match query
-  filter: (query: string, itemValue: Item["value"]) => boolean; //custom filter function
-  focusInputOnSelect: boolean; //focus input after a suggestion is selected - true
-  freeSolo: boolean; //allow entering of any values
-  maxSelections: number //limit possible number of tag selections in multiple mode
-  maxSuggestions: number; //limit number of suggestions in list
-  multiple: boolean; //allow tags multi selection - false
-  onChange: (value: string | Item["value"][]) => void; //function to run whenever autocomplete value(s) changes
-  onSelectOption: (params: {
-    optionValue: string;
-    selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
-  }) => boolean | void; //method to call whenever a suggestion is selected
-  onOptionFocus: (params: {
-    optionValue: string;
-    selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
-  }) => boolean | void;//method to call whenever a suggestion is focused
-  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void; //method to call whenever a tag is removed
-  openOnFocus: boolean; //open suggestions when input is focuses -false
-  rollNavigation: boolean; //allow keyboard navigation to switch to alternate ends when one end is reached
-  selectOnFocus: boolean; //select the text in input when it's focused. - false
-  shouldRenderSuggestions: (value: string) => boolean; //function to decide if suggestions should render, e.g. show suggestions only if there are at least two characters in the query value
-  suggestWhenEmpty: boolean; //show suggestions when input value is empty - false
-}>;
-}
+boolean | MaybeRenderProp<{ value: Item["value"] }>
 ```
+
+</td>
+            <td>render message when no suggestions match query</td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>filter</td>
+            <td>
+
+```ts
+(query: string, itemValue: Item["value"]) => boolean;
+```
+
+</td>
+            <td>custom filter function</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>focusInputOnSelect</td>
+            <td>boolean</td>
+            <td>focus input after a suggestion is selected </td>
+            <td>true</td>
+        </tr>
+        <tr>
+            <td>freeSolo</td>
+            <td>boolean</td>
+            <td>allow entering of any arbitrary values</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>maxSelections</td>
+            <td>number</td>
+            <td>limit possible number of tag selections in multiple mode</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>maxSuggestions</td>
+            <td>number</td>
+            <td>limit number of suggestions in list</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>multiple</td>
+            <td>boolean</td>
+            <td>allow tags multi selection</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>onChange</td>
+            <td>
+
+```ts
+(value: string | Item["value"][]) => void
+```
+
+</td>
+            <td>function to run whenever autocomplete value(s) changes</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>onSelectOption</td>
+            <td>
+            
+```ts
+(params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void
+```
+</td>
+            <td>method to call whenever a suggestion is selected</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>onOptionFocus</td>
+            <td>
+
+```ts
+(params: {
+    optionValue: string;
+    selectMethod: "mouse" | "keyboard" | null;
+    isNewInput: boolean;
+  }) => boolean | void
+```
+
+</td>
+            <td>method to call whenever a suggestion is focused</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>onTagRemoved</td>
+            <td>
+            
+```ts
+(removedTag: Item["value"], tags: Item["value"][]) => void
+```
+</td>
+            <td>method to call whenever a tag is removed</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>openOnFocus</td>
+            <td>boolean</td>
+            <td>open suggestions when input is focuses</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>rollNavigation</td>
+            <td>boolean</td>
+            <td>allow keyboard navigation to switch to alternate ends when one end is reached</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>selectOnFocus</td>
+            <td>boolean</td>
+            <td>select the text in input when it's focused</td>
+            <td>false</td>
+        </tr>
+        <tr>
+            <td>shouldRenderSuggestions</td>
+            <td>
+            
+```ts
+(value: string) => boolean
+```
+</td>
+            <td>function to decide if suggestions should render, e.g. show suggestions only if there are at least two characters in the query value</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>suggestWhenEmpty</td>
+            <td>boolean</td>
+            <td>show suggestions when input value is empty</td>
+            <td>false</td>
+        </tr>
+    </tbody>
+</table>
 
 ### **AutoCompleteTag**
 
