@@ -19,3 +19,6 @@ v4.0.0
 - use `_selected` pseudo prop to apply selected styles to items
 - add `disabled` prop to Items which can be styled with `_disabled` pseudo prop 
 - `onTagRemoved` method is called when a tag is removed in the `multiple` multi select mode.
+
+v4.1.0
+- ✨ Add `maxSelections` prop  9136eba
