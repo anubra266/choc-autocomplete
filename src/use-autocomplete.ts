@@ -181,7 +181,7 @@ export function useAutoComplete(
     itemList[0]?.value
   );
 
-  const maxSelections = autoCompleteProps.maxSelections || values.length;
+  const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
 
   const filteredResults = itemList
     .filter(
