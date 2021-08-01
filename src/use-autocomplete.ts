@@ -39,14 +39,13 @@ import {
 import { getMultipleWrapStyles } from "./helpers/input";
 import { AutoCompleteGroupProps } from "./autocomplete-group";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
-import { useParseDefaultValue } from "./helpers/useParseDefaultValue";
 
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
   creatable: boolean;
   defaultIsOpen: boolean;
-  defaultValue: Item["value"] | Item["value"][];
+  defaultTags: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (query: string, itemValue: Item["value"]) => boolean;
@@ -144,6 +143,7 @@ export function useAutoComplete(
     closeOnBlur = true,
     closeOnSelect,
     creatable,
+    defaultTags = [],
     emphasize,
     emptyState = true,
     freeSolo,
@@ -156,11 +156,6 @@ export function useAutoComplete(
   } = autoCompleteProps;
 
   closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
-
-  const defaultValue = useParseDefaultValue(
-    autoCompleteProps.defaultValue,
-    multiple
-  );
 
   freeSolo = freeSolo ? freeSolo : multiple ? true : autoCompleteProps.freeSolo;
 
@@ -179,12 +174,8 @@ export function useAutoComplete(
   const interactionRef = useRef<"mouse" | "keyboard" | null>(null);
 
   const [query, setQuery] = useState<string>("");
-  useEffect(() => {
-    const defaultQuery = multiple ? "" : defaultValue[0] ?? "";
-    setQuery(defaultQuery);
-  }, []);
 
-  const [values, setValues] = useState<any[]>(defaultValue);
+  const [values, setValues] = useState<any[]>(defaultTags);
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );
