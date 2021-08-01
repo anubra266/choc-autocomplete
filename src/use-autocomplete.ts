@@ -39,12 +39,14 @@ import {
 import { getMultipleWrapStyles } from "./helpers/input";
 import { AutoCompleteGroupProps } from "./autocomplete-group";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
+import { useParseDefaultValue } from "./helpers/useParseDefaultValue";
 
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
   creatable: boolean;
   defaultIsOpen: boolean;
+  defaultValue: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (query: string, itemValue: Item["value"]) => boolean;
@@ -147,22 +149,21 @@ export function useAutoComplete(
     freeSolo,
     isReadOnly,
     maxSuggestions,
+    multiple,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
   } = autoCompleteProps;
 
-  freeSolo = freeSolo
-    ? freeSolo
-    : autoCompleteProps.multiple
-    ? true
-    : autoCompleteProps.freeSolo;
+  closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
 
-  closeOnSelect = closeOnSelect
-    ? closeOnSelect
-    : autoCompleteProps.multiple
-    ? false
-    : true;
+  const defaultValue = useParseDefaultValue(
+    autoCompleteProps.defaultValue,
+    multiple
+  );
+
+  freeSolo = freeSolo ? freeSolo : multiple ? true : autoCompleteProps.freeSolo;
+
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
   const children = runIfFn(autoCompleteProps.children, {
@@ -177,8 +178,13 @@ export function useAutoComplete(
   const listRef = useRef<HTMLDivElement>(null);
   const interactionRef = useRef<"mouse" | "keyboard" | null>(null);
 
-  const [query, setQuery] = useState("");
-  const [values, setValues] = useState<any[]>([]);
+  const [query, setQuery] = useState<string>("");
+  useEffect(() => {
+    const defaultQuery = multiple ? "" : defaultValue[0] ?? "";
+    setQuery(defaultQuery);
+  }, []);
+
+  const [values, setValues] = useState<any[]>(defaultValue);
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );
@@ -215,10 +221,7 @@ export function useAutoComplete(
   }, [query]);
 
   useEffect(() => {
-    runIfFn(
-      autoCompleteProps.onChange,
-      autoCompleteProps.multiple ? values : values[0]
-    );
+    runIfFn(autoCompleteProps.onChange, multiple ? values : values[0]);
   }, [values]);
 
   useEffect(() => {
@@ -231,12 +234,10 @@ export function useAutoComplete(
 
   const selectItem = (itemValue: Item["value"]) => {
     if (!values.includes(itemValue) && values.length < maxSelections)
-      setValues(v =>
-        autoCompleteProps.multiple ? [...v, itemValue] : [itemValue]
-      );
+      setValues(v => (multiple ? [...v, itemValue] : [itemValue]));
 
     setQuery(itemValue);
-    if (autoCompleteProps.multiple) {
+    if (multiple) {
       setQuery("");
       inputRef.current?.focus();
     }
@@ -256,7 +257,7 @@ export function useAutoComplete(
     if (query === itemValue) setQuery("");
   };
 
-  const tags = autoCompleteProps.multiple
+  const tags = multiple
     ? values.map(tag => ({
         label: tag,
         onRemove: () => removeItem(tag),
@@ -276,7 +277,7 @@ export function useAutoComplete(
           inputRef?.current?.focus();
         },
         tabIndex: 0,
-        ...(autoCompleteProps.multiple && getMultipleWrapStyles(themeInput)),
+        ...(multiple && getMultipleWrapStyles(themeInput)),
       },
       input: {
         isReadOnly,
@@ -358,7 +359,7 @@ export function useAutoComplete(
           }
         },
         value: query,
-        variant: autoCompleteProps.multiple ? "unstyled" : variant,
+        variant: multiple ? "unstyled" : variant,
         ...rest,
       },
     };

@@ -432,6 +432,12 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>Suggestions list is open by default</td>
             <td>false</td>
         </tr>
+         <tr>
+            <td>defaultValue</td>
+            <td>any | Array</td>
+            <td>The default value of the array. Pass an array for multiple mode.</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
         <tr>
             <td>emphasize</td>
             <td>boolean | CSSObject</td>

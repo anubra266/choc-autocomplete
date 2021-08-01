@@ -22,7 +22,7 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete emphasize openOnFocus multiple isReadOnly>
+        <AutoComplete openOnFocus defaultValue={"nigeria"}>
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
