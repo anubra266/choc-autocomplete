@@ -18,18 +18,12 @@ function App() {
     "south korea",
   ];
 
-  const [value, setValue] = React.useState("nig");
-
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus>
-          <AutoCompleteInput
-            variant="filled"
-            value={value}
-            onChange={e => setValue(e.target.value)}
-          >
+        <AutoComplete openOnFocus creatable>
+          <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
                 <AutoCompleteTag
@@ -63,7 +57,6 @@ function App() {
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>
-      {value}
     </Flex>
   );
 }
