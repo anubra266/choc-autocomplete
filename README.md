@@ -475,6 +475,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>false</td>
         </tr>
         <tr>
+            <td>isReadOnly</td>
+            <td>boolean</td>
+            <td>Make the component read-only</td>
+            <td>false</td>
+        </tr>
+        <tr>
             <td>maxSelections</td>
             <td>number</td>
             <td>limit possible number of tag selections in multiple mode</td>

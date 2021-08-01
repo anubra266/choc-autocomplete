@@ -50,6 +50,7 @@ export type UseAutoCompleteProps = Partial<{
   filter: (query: string, itemValue: Item["value"]) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
+  isReadOnly: boolean;
   maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
@@ -144,6 +145,7 @@ export function useAutoComplete(
     emphasize,
     emptyState = true,
     freeSolo,
+    isReadOnly,
     maxSuggestions,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
@@ -277,9 +279,10 @@ export function useAutoComplete(
         ...(autoCompleteProps.multiple && getMultipleWrapStyles(themeInput)),
       },
       input: {
+        isReadOnly,
         onFocus: e => {
           runIfFn(onFocus);
-          if (autoCompleteProps.openOnFocus) onOpen();
+          if (autoCompleteProps.openOnFocus && !isReadOnly) onOpen();
           if (autoCompleteProps.selectOnFocus) e.target.select();
         },
         onBlur: e => {
@@ -397,7 +400,7 @@ export function useAutoComplete(
             }),
         "aria-selected": values.includes(value),
         "aria-disabled": disabled,
-        _disabled: { opacity: 0.4, cursor: "not-allowed" },
+        _disabled: { opacity: 0.4, cursor: "not-allowed", userSelect: "none" },
         onClick: e => {
           runIfFn(onClick, e);
           if (!disabled) selectItem(value);
