@@ -4,19 +4,36 @@ import { runIfFn } from "@chakra-ui/utils";
 import React from "react";
 
 type AutoCompleteTagProps = {
+  disabled?: boolean;
   label: string;
   onRemove?: () => void;
 } & TagProps;
 
 export function AutoCompleteTag(props: AutoCompleteTagProps) {
-  const { label, onRemove, ...rest } = props;
+  const { label, onRemove, disabled, ...rest } = props;
 
   return (
     <WrapItem>
-      <Tag borderRadius="md" fontWeight="normal" {...rest}>
+      <Tag
+        borderRadius="md"
+        fontWeight="normal"
+        {...(disabled && disabledStyles)}
+        {...rest}
+      >
         <TagLabel>{label}</TagLabel>
-        <TagCloseButton onClick={() => runIfFn(onRemove)} cursor="pointer" />
+        <TagCloseButton
+          onClick={() => !disabled && runIfFn(onRemove)}
+          cursor="pointer"
+          {...(disabled && disabledStyles)}
+        />
       </Tag>
     </WrapItem>
   );
 }
+
+const disabledStyles: TagProps = {
+  cursor: "text",
+  userSelect: "none",
+  opacity: 0.4,
+  _focus: { boxShadow: "none" },
+};

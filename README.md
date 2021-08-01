@@ -386,6 +386,7 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
 ### Codesandbox Link [Here](https://codesandbox.io/s/chakra-autocomplete-demo-elurs)
+
 ## API Reference
 
 **NB**: Feel free to request any additional `Prop` in [Issues](https://github.com/anubra266/choc-autocomplete/issues/new/).
@@ -613,6 +614,17 @@ Tags for multiple mode
   </tr>
 </thead>
 <tbody>
+ <tr>
+    <td>disabled</td>
+    <td>
+
+    string
+
+  </td>
+    <td>In the event that you need to lock certain tag so that they can't be removed in the interface, you can set the tags disabled.</td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
   <tr>
     <td>label</td>
     <td>

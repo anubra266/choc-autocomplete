@@ -22,7 +22,7 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus defaultValue={"nigeria"}>
+        <AutoComplete openOnFocus multiple defaultValue={["japan", "nigeria"]}>
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
@@ -30,6 +30,7 @@ function App() {
                   key={tid}
                   label={tag.label}
                   onRemove={tag.onRemove}
+                  disabled={tag.label === "japan"}
                 />
               ))
             }
