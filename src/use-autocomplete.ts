@@ -45,7 +45,7 @@ export type UseAutoCompleteProps = Partial<{
   closeOnSelect: boolean;
   creatable: boolean;
   defaultIsOpen: boolean;
-  defaultTags: Item["value"] | Item["value"][];
+  defaultValues: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (query: string, itemValue: Item["value"]) => boolean;
@@ -143,7 +143,7 @@ export function useAutoComplete(
     closeOnBlur = true,
     closeOnSelect,
     creatable,
-    defaultTags = [],
+    defaultValues = [],
     emphasize,
     emptyState = true,
     freeSolo,
@@ -175,7 +175,7 @@ export function useAutoComplete(
 
   const [query, setQuery] = useState<string>("");
 
-  const [values, setValues] = useState<any[]>(defaultTags);
+  const [values, setValues] = useState<any[]>(defaultValues);
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );

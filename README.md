@@ -434,9 +434,9 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>false</td>
         </tr>
          <tr>
-            <td>defaultTags</td>
+            <td>defaultValues</td>
             <td>Array</td>
-            <td>Used to predefine tags for the autocomplete component. Just pass an array of the values</td>
+            <td>Used to predefine tags, or value for the autocomplete component. Just pass an array of the values</td>
             <td>&mdash;&mdash;&mdash;</td>
         </tr>
         <tr>
