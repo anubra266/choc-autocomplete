@@ -13,7 +13,12 @@ interface AutoCompleteCreatableProps extends FlexProps {
 
 export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
   const { children: childrenProp, ...rest } = props;
-  const { autoCompleteProps, getItemProps, query } = useAutoCompleteContext();
+  const {
+    autoCompleteProps,
+    getItemProps,
+    query,
+    filteredList,
+  } = useAutoCompleteContext();
 
   const queryValue = <mark>{query}</mark>;
   const { children, ...itemProps } = getItemProps({
@@ -24,7 +29,11 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     }),
   }).item;
 
-  return autoCompleteProps.creatable && !isEmpty(query) ? (
+  const queryExistsInList = filteredList.some(i => i.value === query);
+  const showCreatable =
+    autoCompleteProps.creatable && !isEmpty(query) && !queryExistsInList;
+
+  return showCreatable ? (
     <Flex {...baseItemStyles} {...itemProps} {...rest}>
       {children || `Add ${query}`}
     </Flex>
