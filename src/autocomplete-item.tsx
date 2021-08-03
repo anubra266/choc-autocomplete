@@ -18,13 +18,6 @@ export interface AutoCompleteItemProps extends FlexProps {
   _fixed?: CSSObject;
 }
 
-export interface Item {
-  value: any;
-  fixed?: boolean;
-  disabled?: boolean;
-  noFilter?: boolean;
-}
-
 export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
   (props, forwardedRef) => {
     const {
