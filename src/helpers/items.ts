@@ -2,8 +2,8 @@ import { getChildrenDeep } from "react-nanny";
 import { pick, isEmpty } from "@chakra-ui/utils";
 import { ReactNode } from "react";
 import { FlexProps } from "@chakra-ui/react";
-import { Item } from "../autocomplete-item";
 import { fuzzyScore } from "./fuzzySearch";
+import { Item } from "../types";
 
 export const setEmphasis = (children: any, query: string) => {
   if (typeof children !== "string" || isEmpty(query)) {

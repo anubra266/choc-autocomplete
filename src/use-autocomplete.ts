@@ -113,7 +113,7 @@ export function useAutoComplete(
 
   useEffect(() => {
     runIfFn(autoCompleteProps.onChange, multiple ? values : values[0]);
-  }, [values]);
+  }, [values, autoCompleteProps.onChange, multiple]);
 
   useEffect(() => {
     runIfFn(autoCompleteProps.onOptionFocus, {
@@ -121,7 +121,7 @@ export function useAutoComplete(
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
-  }, [focusedValue]);
+  }, [focusedValue, autoCompleteProps.onOptionFocus]);
 
   const selectItem = (itemValue: Item["value"]) => {
     if (!values.includes(itemValue) && values.length < maxSelections)
@@ -258,8 +258,8 @@ export function useAutoComplete(
     };
   };
 
+  const dim = useDimensions(inputWrapperRef, true);
   const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
-    const dim = useDimensions(inputWrapperRef, true);
     const width = dim?.marginBox.width as number;
 
     return {

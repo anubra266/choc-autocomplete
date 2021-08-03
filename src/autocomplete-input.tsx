@@ -32,7 +32,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     useEffect(() => {
       setQuery(value ?? "");
-    }, [value]);
+    }, [value, setQuery]);
 
     const themeInput: any = useMultiStyleConfig("Input", {
       variant: props.variant,

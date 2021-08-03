@@ -39,7 +39,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
           behavior: "smooth",
           block: "center",
         });
-    }, [isFocused]);
+    }, [isFocused, interactionRef]);
 
     const { children, dangerouslySetInnerHTML, ...rest } = itemProps.item;
 
