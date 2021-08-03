@@ -11,7 +11,7 @@ import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
-import { UseAutoCompleteReturn } from "./use-autocomplete";
+import { UseAutoCompleteReturn } from "./types";
 
 export interface AutoCompleteInputProps extends InputProps {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
