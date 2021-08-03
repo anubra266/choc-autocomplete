@@ -9,6 +9,7 @@ import {
   getLastItem,
   getNextItem,
   getPrevItem,
+  isArray,
   isObject,
   isEmpty,
   isUndefined,
@@ -74,6 +75,13 @@ export function useAutoComplete(
   const [query, setQuery] = useState<string>("");
 
   const [values, setValues] = useState<any[]>(defaultValues);
+
+  useEffect(() => {
+    if (!multiple && isArray(defaultValues)) {
+      setQuery(defaultValues[0] as any);
+    }
+  }, []);
+
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );
