@@ -1,5 +1,6 @@
 import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
 import * as React from "react";
+import { useState } from "react";
 import {
   AutoComplete,
   AutoCompleteCreatable,
@@ -18,12 +19,18 @@ function App() {
     "south korea",
   ];
 
+  const [value, setValue] = useState("");
+
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus defaultValues={["india"]}>
-          <AutoCompleteInput variant="filled">
+        <AutoComplete openOnFocus>
+          <AutoCompleteInput
+            variant="filled"
+            value={value}
+            onChange={e => setValue(e.target.value)}
+          >
             {({ tags }) =>
               tags.map((tag, tid) => (
                 <AutoCompleteTag

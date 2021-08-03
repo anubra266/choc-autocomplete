@@ -9,7 +9,6 @@ import {
   getLastItem,
   getNextItem,
   getPrevItem,
-  isArray,
   isObject,
   isEmpty,
   isUndefined,
@@ -77,7 +76,7 @@ export function useAutoComplete(
   const [values, setValues] = useState<any[]>(defaultValues);
 
   useEffect(() => {
-    if (!multiple && isArray(defaultValues)) {
+    if (!multiple && !isEmpty(defaultValues)) {
       setQuery(defaultValues[0] as any);
     }
   }, []);
@@ -292,7 +291,6 @@ export function useAutoComplete(
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0 || listAll;
 
-    console.log(listAll);
     return {
       item: {
         ...(typeof itemChild !== "string" || !emphasize
