@@ -93,7 +93,12 @@ export function useAutoComplete(
     .filter(
       i =>
         i.fixed ||
-        runIfFn(autoCompleteProps.filter || defaultFilterMethod, query, i.value)
+        runIfFn(
+          autoCompleteProps.filter || defaultFilterMethod,
+          query,
+          i.value
+        ) ||
+        listAll
     )
     .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
 
@@ -289,7 +294,7 @@ export function useAutoComplete(
     } = props;
     const isFocused = value === focusedValue;
     const isValidSuggestion =
-      filteredList.findIndex(i => i.value === value) >= 0 || listAll;
+      filteredList.findIndex(i => i.value === value) >= 0;
 
     return {
       item: {
