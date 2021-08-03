@@ -1,13 +1,8 @@
 import {
-  BoxProps,
-  CSSObject,
-  FlexProps,
-  InputProps,
   useDimensions,
   useDisclosure,
   useUpdateEffect,
 } from "@chakra-ui/react";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import {
   callAll,
   getFirstItem,
@@ -19,17 +14,9 @@ import {
   isUndefined,
   runIfFn,
 } from "@chakra-ui/utils";
-import React, {
-  Dispatch,
-  SetStateAction,
-  useEffect,
-  useRef,
-  useState,
-} from "react";
+import { useEffect, useRef, useState } from "react";
 
-import { AutoCompleteInputProps } from "./autocomplete-input";
 import { AutoCompleteProps } from "./autocomplete";
-import { AutoCompleteItemProps, Item } from "./autocomplete-item";
 import {
   defaultFilterMethod,
   getFocusedStyles,
@@ -37,98 +24,8 @@ import {
   setEmphasis,
 } from "./helpers/items";
 import { getMultipleWrapStyles } from "./helpers/input";
-import { AutoCompleteGroupProps } from "./autocomplete-group";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
-
-export type UseAutoCompleteProps = Partial<{
-  closeOnBlur: boolean;
-  closeOnSelect: boolean;
-  creatable: boolean;
-  defaultIsOpen: boolean;
-  defaultValues: Item["value"] | Item["value"][];
-  emphasize: boolean | CSSObject;
-  emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
-  filter: (query: string, itemValue: Item["value"]) => boolean;
-  focusInputOnSelect: boolean;
-  freeSolo: boolean;
-  isReadOnly: boolean;
-  maxSelections: number;
-  maxSuggestions: number;
-  multiple: boolean;
-  onChange: (value: string | Item["value"][]) => void;
-  onSelectOption: (params: {
-    optionValue: string;
-    selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
-  }) => boolean | void;
-  onOptionFocus: (params: {
-    optionValue: string;
-    selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
-  }) => boolean | void;
-  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
-  openOnFocus: boolean;
-  rollNavigation: boolean;
-  selectOnFocus: boolean;
-  shouldRenderSuggestions: (value: string) => boolean;
-  suggestWhenEmpty: boolean;
-}>;
-
-export type InputReturnProps = {
-  wrapper: {
-    onClick: React.MouseEventHandler<HTMLDivElement>;
-    ref: React.RefObject<HTMLDivElement>;
-  };
-  input: InputProps;
-};
-
-export type ItemReturnProps = {
-  item: FlexProps;
-  root: {
-    isValidSuggestion: boolean;
-  };
-};
-
-export type ListReturnProps = {
-  width: number;
-};
-
-export type GroupReturnProps = {
-  divider: {
-    hasFirstChild: boolean;
-    hasLastChild: boolean;
-  };
-  group: BoxProps;
-};
-
-export type UseAutoCompleteReturn = {
-  autoCompleteProps: AutoCompleteProps;
-  children: React.ReactNode;
-  filteredList: Item[];
-  focusedValue: Item["value"];
-  getEmptyStateProps: (component: any) => any;
-  getGroupProps: (props: AutoCompleteGroupProps) => GroupReturnProps;
-  getInputProps: (
-    props: AutoCompleteInputProps,
-    themeInput?: any
-  ) => InputReturnProps;
-  getItemProps: (props: AutoCompleteItemProps) => ItemReturnProps;
-  getListProps: () => ListReturnProps;
-  inputRef: React.RefObject<HTMLInputElement>;
-  interactionRef: React.RefObject<"mouse" | "keyboard" | null>;
-  isOpen: boolean;
-  itemList: Item[];
-  listRef: React.RefObject<HTMLDivElement>;
-  onClose: () => void;
-  onOpen: () => void;
-  query: string;
-  setQuery: Dispatch<SetStateAction<any>>;
-  tags: {
-    label: Item["value"];
-    onRemove: () => void;
-  }[];
-  values: Item["value"][];
-};
+import { Item, UseAutoCompleteReturn } from "./types";
 
 /**
  * useAutoComplete that provides all the state and focus management logic
@@ -148,6 +45,7 @@ export function useAutoComplete(
     emptyState = true,
     freeSolo,
     isReadOnly,
+    listAllValuesOnFocus,
     maxSuggestions,
     multiple,
     defaultIsOpen,
@@ -179,6 +77,8 @@ export function useAutoComplete(
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );
+
+  const [listAll, setListAll] = useState(false);
 
   const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
 
@@ -276,6 +176,7 @@ export function useAutoComplete(
           runIfFn(onFocus);
           if (autoCompleteProps.openOnFocus && !isReadOnly) onOpen();
           if (autoCompleteProps.selectOnFocus) e.target.select();
+          if (listAllValuesOnFocus) setListAll(true);
         },
         onBlur: e => {
           runIfFn(onBlur);
@@ -300,6 +201,7 @@ export function useAutoComplete(
           )
             onOpen();
           else onClose();
+          setListAll(false);
         },
         onKeyDown: e => {
           runIfFn(onKeyDown, e);
@@ -380,7 +282,9 @@ export function useAutoComplete(
     } = props;
     const isFocused = value === focusedValue;
     const isValidSuggestion =
-      filteredList.findIndex(i => i.value === value) >= 0;
+      filteredList.findIndex(i => i.value === value) >= 0 || listAll;
+
+    console.log(listAll);
     return {
       item: {
         ...(typeof itemChild !== "string" || !emphasize
