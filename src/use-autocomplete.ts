@@ -52,6 +52,7 @@ export type UseAutoCompleteProps = Partial<{
   focusInputOnSelect: boolean;
   freeSolo: boolean;
   isReadOnly: boolean;
+  listAllValuesOnFocus: boolean;
   maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
@@ -148,6 +149,7 @@ export function useAutoComplete(
     emptyState = true,
     freeSolo,
     isReadOnly,
+    listAllValuesOnFocus,
     maxSuggestions,
     multiple,
     defaultIsOpen,
@@ -179,6 +181,8 @@ export function useAutoComplete(
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
   );
+
+  const [listAll, setListAll] = useState(false);
 
   const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
 
@@ -276,6 +280,7 @@ export function useAutoComplete(
           runIfFn(onFocus);
           if (autoCompleteProps.openOnFocus && !isReadOnly) onOpen();
           if (autoCompleteProps.selectOnFocus) e.target.select();
+          if (listAllValuesOnFocus) setListAll(true);
         },
         onBlur: e => {
           runIfFn(onBlur);
@@ -300,6 +305,7 @@ export function useAutoComplete(
           )
             onOpen();
           else onClose();
+          setListAll(false);
         },
         onKeyDown: e => {
           runIfFn(onKeyDown, e);
@@ -380,7 +386,9 @@ export function useAutoComplete(
     } = props;
     const isFocused = value === focusedValue;
     const isValidSuggestion =
-      filteredList.findIndex(i => i.value === value) >= 0;
+      filteredList.findIndex(i => i.value === value) >= 0 || listAll;
+
+    console.log(listAll);
     return {
       item: {
         ...(typeof itemChild !== "string" || !emphasize
