@@ -19,17 +19,17 @@ function App() {
     "south korea",
   ];
 
-  const [value, setValue] = useState("");
+  // const [value, setValue] = useState("");
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus listAllValuesOnFocus>
+        <AutoComplete openOnFocus listAllValuesOnFocus defaultValues={[undefined]}>
           <AutoCompleteInput
             variant="filled"
-            value={value}
-            onChange={e => setValue(e.target.value)}
+            // value={value}
+            // onChange={e => setValue(e.target.value)}
           >
             {({ tags }) =>
               tags.map((tag, tid) => (
