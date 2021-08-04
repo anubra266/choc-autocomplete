@@ -930,6 +930,33 @@ e.g.
  
 </tbody>
 </table>
+
+
+## Contribute
+
+- Clone this repository
+```sh
+git clone https://github.com/anubra266/choc-autocomplete.git
+```
+- Install all dependencies (with yarn)
+```sh
+yarn
+```
+- Install package example dependencies (with yarn)
+```sh
+cd example
+yarn
+```
+Start the package server, and the example server
+```sh
+# root directory
+yarn start
+
+# example directory with (cd example)
+yarn dev
+```
+
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
