@@ -103,7 +103,8 @@ export function useAutoComplete(
     .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
 
   // Add Creatable to Filtered List
-  const filteredList = [...filteredResults, { value: query, noFilter: true }];
+  const creatableArr: any = creatable ? [{ value: query, noFilter: true }] : [];
+  const filteredList = [...filteredResults, ...creatableArr];
 
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
@@ -222,7 +223,8 @@ export function useAutoComplete(
           const { key } = e;
           const focusedItem = filteredList[focusedIndex];
           if (key === "Enter") {
-            if (!focusedItem.disabled) selectItem(focusedItem.value);
+            if (focusedItem && !focusedItem?.disabled)
+              selectItem(focusedItem.value);
             else inputRef.current?.focus();
             e.preventDefault();
             return;
