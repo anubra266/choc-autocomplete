@@ -1,7 +1,7 @@
 import { WrapItem } from "@chakra-ui/layout";
 import { Tag, TagCloseButton, TagLabel, TagProps } from "@chakra-ui/tag";
 import { runIfFn } from "@chakra-ui/utils";
-import React from "react";
+import React, { memo } from "react";
 
 type AutoCompleteTagProps = {
   disabled?: boolean;
@@ -9,7 +9,7 @@ type AutoCompleteTagProps = {
   onRemove?: () => void;
 } & TagProps;
 
-export function AutoCompleteTag(props: AutoCompleteTagProps) {
+export const AutoCompleteTag = memo((props: AutoCompleteTagProps) => {
   const { label, onRemove, disabled, ...rest } = props;
 
   return (
@@ -29,7 +29,7 @@ export function AutoCompleteTag(props: AutoCompleteTagProps) {
       </Tag>
     </WrapItem>
   );
-}
+});
 
 const disabledStyles: TagProps = {
   cursor: "text",

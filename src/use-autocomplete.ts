@@ -126,7 +126,8 @@ export function useAutoComplete(
 
   useEffect(() => {
     runIfFn(autoCompleteProps.onChange, multiple ? values : values[0]);
-  }, [values, autoCompleteProps.onChange, multiple]);
+    console.log("values", values);
+  }, [values, multiple]);
 
   useEffect(() => {
     runIfFn(autoCompleteProps.onOptionFocus, {

@@ -25,11 +25,16 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus listAllValuesOnFocus>
+        <AutoComplete
+          openOnFocus
+          listAllValuesOnFocus
+          freeSolo
+          onChange={v => console.log(v)}
+        >
           <AutoCompleteInput
             variant="filled"
             // value={value}
-            // onChange={e => setValue(e.target.value)}
+            onChange={e => console.log("input", e.target.value)}
           >
             {({ tags }) =>
               tags.map((tag, tid) => (
