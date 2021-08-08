@@ -34,7 +34,7 @@ function App() {
           <AutoCompleteInput
             variant="filled"
             // value={value}
-            onChange={e => console.log("input", e.target.value)}
+            // onChange={e => console.log("input", e.target.value)}
           >
             {({ tags }) =>
               tags.map((tag, tid) => (
@@ -52,11 +52,12 @@ function App() {
               <AutoCompleteItem
                 key={`option-${cid}`}
                 value={country}
+                label={`Say ${country}`}
                 textTransform="capitalize"
                 _selected={{ bg: "whiteAlpha.50" }}
                 _focus={{ bg: "whiteAlpha.100" }}
               >
-                {country}
+                {`Say ${country}`}
               </AutoCompleteItem>
             ))}
             <AutoCompleteItem value="a" disabled>

@@ -96,7 +96,8 @@ export function useAutoComplete(
         runIfFn(
           autoCompleteProps.filter || defaultFilterMethod,
           query,
-          i.value
+          i.value,
+          i.label
         ) ||
         listAll
     )
@@ -104,7 +105,7 @@ export function useAutoComplete(
 
   // Add Creatable to Filtered List
   const creatableArr: any = creatable ? [{ value: query, noFilter: true }] : [];
-  const filteredList = [...filteredResults, ...creatableArr];
+  const filteredList: Item[] = [...filteredResults, ...creatableArr];
 
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
@@ -126,7 +127,6 @@ export function useAutoComplete(
 
   useEffect(() => {
     runIfFn(autoCompleteProps.onChange, multiple ? values : values[0]);
-    console.log("values", values);
   }, [values, multiple]);
 
   useEffect(() => {
@@ -141,7 +141,9 @@ export function useAutoComplete(
     if (!values.includes(itemValue) && values.length < maxSelections)
       setValues(v => (multiple ? [...v, itemValue] : [itemValue]));
 
-    setQuery(itemValue);
+    const itemLabel = filteredList.find(i => i.value === itemValue)?.label;
+
+    setQuery(itemLabel);
     if (multiple) {
       setQuery("");
       inputRef.current?.focus();

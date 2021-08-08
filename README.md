@@ -462,7 +462,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(query: string, itemValue: Item["value"]) => boolean;
+(query: string, itemValue: Item["value"], itemLabel: Item["label"]) => boolean;
 ```
 
 </td>
@@ -770,6 +770,13 @@ This Composes your suggestions
 </thead>
 <tbody>
   <tr>
+    <td>label</td>
+    <td>string</td>
+    <td>The label for the Option</td>
+    <td>no<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
     <td>value</td>
     <td>string</td>
     <td>The value of the Option</td>
@@ -931,23 +938,29 @@ e.g.
 </tbody>
 </table>
 
-
 ## Contribute
 
 - Clone this repository
+
 ```sh
 git clone https://github.com/anubra266/choc-autocomplete.git
 ```
+
 - Install all dependencies (with yarn)
+
 ```sh
 yarn
 ```
+
 - Install package example dependencies (with yarn)
+
 ```sh
 cd example
 yarn
 ```
+
 Start the package server, and the example server
+
 ```sh
 # root directory
 yarn start
@@ -955,7 +968,6 @@ yarn start
 # example directory with (cd example)
 yarn dev
 ```
-
 
 ## Contributors ✨
 

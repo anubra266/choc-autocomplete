@@ -12,6 +12,7 @@ import { useAutoCompleteContext } from "./autocomplete-context";
 
 export interface AutoCompleteItemProps extends FlexProps {
   value: string;
+  label?: string;
   fixed?: boolean;
   _focus?: CSSObject | any;
   disabled?: boolean;

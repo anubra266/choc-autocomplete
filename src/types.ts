@@ -9,6 +9,7 @@ import { AutoCompleteItemProps } from "./autocomplete-item";
 
 export interface Item {
   value: any;
+  label?: any;
   fixed?: boolean;
   disabled?: boolean;
   noFilter?: boolean;

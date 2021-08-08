@@ -25,7 +25,7 @@ export const getItemList = (children: ReactNode) => {
   );
 
   return itemChildren.map(item => {
-    return pick(item.props, ["value", "fixed", "disabled"]);
+    return pick(item.props, ["value", "label", "fixed", "disabled"]);
   });
 };
 
@@ -40,11 +40,14 @@ export const getFocusedStyles = (): FlexProps => {
 
 export const defaultFilterMethod = (
   query: string,
-  itemValue: Item["value"]
+  itemValue: Item["value"],
+  itemLabel: Item["label"]
 ) => {
   return (
     itemValue?.toLowerCase().indexOf(query?.toLowerCase()) >= 0 ||
-    fuzzyScore(query, itemValue) >= 0.5
+    itemLabel?.toLowerCase().indexOf(query?.toLowerCase()) >= 0 ||
+    fuzzyScore(query, itemValue) >= 0.5 ||
+    fuzzyScore(query, itemLabel) >= 0.5
   );
 };
 
