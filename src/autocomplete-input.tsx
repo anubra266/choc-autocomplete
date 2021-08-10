@@ -23,7 +23,6 @@ export interface AutoCompleteInputProps extends InputProps {
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
     const {
-      autoCompleteProps: { multiple },
       inputRef,
       getInputProps,
       setQuery,
@@ -44,15 +43,12 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const children = runIfFn(childrenProp, { tags });
 
-    const inputContent = <Input {...inputProps.input} ref={ref} />;
-    const multipleInputContent = (
+    return (
       <Wrap {...inputProps.wrapper}>
         {children}
-        <WrapItem as={Input} {...(inputProps.input as any)} />
+        <WrapItem as={Input} {...(inputProps.input as any)} ref={ref} />
       </Wrap>
     );
-
-    return multiple ? multipleInputContent : inputContent;
   }
 );
 

@@ -29,12 +29,13 @@ function App() {
           openOnFocus
           listAllValuesOnFocus
           freeSolo
-          multiple
+          selectOnFocus
+          // multiple
           onChange={v => console.log(v)}
         >
           <AutoCompleteInput
             variant="filled"
-            w="400px"
+            w="600px"
             // value={value}
             // onChange={e => console.log("input", e.target.value)}
           >

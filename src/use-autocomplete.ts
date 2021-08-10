@@ -193,7 +193,7 @@ export function useAutoComplete(
           inputRef?.current?.focus();
         },
         tabIndex: 0,
-        ...(multiple && getMultipleWrapStyles(themeInput)),
+        ...getMultipleWrapStyles(themeInput, multiple),
         ...wrapStyles,
       },
       input: {
