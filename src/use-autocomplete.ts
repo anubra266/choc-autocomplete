@@ -144,6 +144,7 @@ export function useAutoComplete(
     const itemLabel = filteredList.find(i => i.value === itemValue)?.label;
 
     setQuery(itemLabel);
+
     if (multiple) {
       setQuery("");
       inputRef.current?.focus();
@@ -268,7 +269,7 @@ export function useAutoComplete(
             callAll(onClose, e.preventDefault);
           }
         },
-        value: query,
+        value: query ?? "",
         variant: multiple ? "unstyled" : variant,
         ...rest,
       },
