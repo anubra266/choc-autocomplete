@@ -176,7 +176,15 @@ export function useAutoComplete(
     props,
     themeInput
   ) => {
-    const { onBlur, onChange, onFocus, onKeyDown, variant, ...rest } = props;
+    const {
+      onBlur,
+      onChange,
+      onFocus,
+      onKeyDown,
+      variant,
+      wrapStyles,
+      ...rest
+    } = props;
 
     return {
       wrapper: {
@@ -186,6 +194,7 @@ export function useAutoComplete(
         },
         tabIndex: 0,
         ...(multiple && getMultipleWrapStyles(themeInput)),
+        ...wrapStyles,
       },
       input: {
         isReadOnly,

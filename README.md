@@ -706,7 +706,13 @@ e.g.
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
- 
+ <tr>
+    <td>wrapStyles</td>
+    <td>CSSObject</td>
+    <td>Styles for the Input's wrapper in `multiple` mode </td>
+    <td>No</td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
 </tbody>
 </table>
 

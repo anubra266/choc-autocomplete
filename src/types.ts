@@ -1,4 +1,10 @@
-import { BoxProps, CSSObject, FlexProps, InputProps } from "@chakra-ui/react";
+import {
+  BoxProps,
+  CSSObject,
+  FlexProps,
+  InputProps,
+  WrapProps,
+} from "@chakra-ui/react";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -54,7 +60,7 @@ export type InputReturnProps = {
   wrapper: {
     onClick: React.MouseEventHandler<HTMLDivElement>;
     ref: React.RefObject<HTMLDivElement>;
-  };
+  } & WrapProps;
   input: InputProps;
 };
 
