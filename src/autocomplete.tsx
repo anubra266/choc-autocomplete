@@ -4,7 +4,7 @@ import { MaybeRenderProp } from "@chakra-ui/react-utils";
 
 import { AutoCompleteProvider } from "./autocomplete-context";
 import { useAutoComplete } from "./use-autocomplete";
-import { Box, forwardRef, Popover } from "@chakra-ui/react";
+import { chakra, forwardRef, Popover } from "@chakra-ui/react";
 import { UseAutoCompleteProps } from "./types";
 
 export type AutoCompleteChildProps = {
@@ -32,16 +32,17 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           placement="bottom"
           closeOnBlur={true}
         >
-          <Box
+          <chakra.div
             sx={{
               ".chakra-popover__popper": {
                 position: "unset !important",
               },
             }}
+            w="full"
             ref={ref}
           >
             {children}
-          </Box>
+          </chakra.div>
         </Popover>
       </AutoCompleteProvider>
     );
