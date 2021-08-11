@@ -22,3 +22,7 @@ v4.0.0
 
 v4.1.0
 - ✨ Add `maxSelections` prop  9136eba
+
+v4.5.3
+- 🐛 Patch Input width  eda5cdb
+- ✨ Return full item object in `AutoCompleteTags` callback  b81919b
