@@ -30,7 +30,7 @@ function App() {
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
-      <FormControl id="email" w="60">
+      <FormControl id="email" w="80">
         <FormLabel>Olympics Soccer Winner</FormLabel>
         <InputGroup>
           <AutoComplete

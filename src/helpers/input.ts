@@ -1,6 +1,5 @@
 export const getMultipleWrapStyles = (themeInput: any, multiple?: boolean) => ({
   ...(multiple && {
-    cursor: "text",
     ...themeInput.field,
     _focusWithin: themeInput.field._focus,
     pos: "relative",
@@ -9,6 +8,7 @@ export const getMultipleWrapStyles = (themeInput: any, multiple?: boolean) => ({
     py: 1.5,
     spacing: 3,
   }),
+  cursor: "text",
   h: "fit-content",
   // w: "full",
 });
