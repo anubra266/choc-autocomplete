@@ -159,15 +159,19 @@ export function useAutoComplete(
   };
 
   const removeItem = (itemValue: Item["value"]) => {
-    const newValues = values.filter(i => i !== itemValue);
-    setValues(newValues);
-    runIfFn(autoCompleteProps.onTagRemoved, itemValue, newValues);
+    setValues(prevValues => {
+      runIfFn(autoCompleteProps.onTagRemoved, itemValue, prevValues);
+      return prevValues.filter(i => i !== itemValue);
+    });
     if (query === itemValue) setQuery("");
   };
 
+  const getItemFromValue = (value: Item["value"]) =>
+    itemList.find(item => item.value === value);
+
   const tags = multiple
     ? values.map(tag => ({
-        label: tag,
+        ...getItemFromValue(tag),
         onRemove: () => removeItem(tag),
       }))
     : [];

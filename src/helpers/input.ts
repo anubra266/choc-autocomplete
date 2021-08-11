@@ -10,5 +10,5 @@ export const getMultipleWrapStyles = (themeInput: any, multiple?: boolean) => ({
     spacing: 3,
   }),
   h: "fit-content",
-  w: "fit-content",
+  // w: "full",
 });

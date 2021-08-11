@@ -5,6 +5,7 @@ import {
   InputProps,
   WrapProps,
 } from "@chakra-ui/react";
+import { Dict } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -105,9 +106,6 @@ export type UseAutoCompleteReturn = {
   onOpen: () => void;
   query: string;
   setQuery: Dispatch<SetStateAction<any>>;
-  tags: {
-    label: Item["value"];
-    onRemove: () => void;
-  }[];
+  tags: Dict[];
   values: Item["value"][];
 };

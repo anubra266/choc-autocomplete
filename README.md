@@ -682,7 +682,7 @@ Input for `AutoComplete` value.
 
 ```ts
 type children = MaybeRenderProp<{
-  tags: { label: string; onRemove: () => void }[];
+  tags: Item & { onRemove: () => void }[];
 }>;
 ```
 
