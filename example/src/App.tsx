@@ -38,7 +38,7 @@ function App() {
             listAllValuesOnFocus
             freeSolo
             selectOnFocus
-            multiple
+            // multiple
             onChange={v => console.log(v)}
           >
             <AutoCompleteInput
