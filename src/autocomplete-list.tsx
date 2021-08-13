@@ -4,7 +4,6 @@ import {
   PopoverContentProps,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { __DEV__ } from "@chakra-ui/utils";
 import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { EmptyState } from "./components/empty-state";
@@ -28,9 +27,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
   }
 );
 
-if (__DEV__) {
-  AutoCompleteList.displayName = "AutoCompleteList";
-}
+AutoCompleteList.displayName = "AutoCompleteList";
 
 const baseStyles: PopoverContentProps = {
   mt: "4",

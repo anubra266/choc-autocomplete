@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
-import { __DEV__, isEmpty, runIfFn } from "@chakra-ui/utils";
+import { isEmpty, runIfFn } from "@chakra-ui/utils";
 
 import React from "react";
 
@@ -40,6 +40,4 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
   ) : null;
 }
 
-if (__DEV__) {
-  AutoCompleteCreatable.displayName = "AutoCompleteCreatable";
-}
+AutoCompleteCreatable.displayName = "AutoCompleteCreatable";

@@ -5,7 +5,6 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { __DEV__ } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
@@ -56,9 +55,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
   }
 );
 
-if (__DEV__) {
-  AutoCompleteItem.displayName = "AutoCompleteItem";
-}
+AutoCompleteItem.displayName = "AutoCompleteItem";
 
 export const baseItemStyles: FlexProps = {
   mx: "2",

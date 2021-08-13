@@ -8,7 +8,7 @@ import {
   Wrap,
   WrapItem,
 } from "@chakra-ui/react";
-import { __DEV__, runIfFn } from "@chakra-ui/utils";
+import { runIfFn } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { useEffect } from "react";
 
@@ -52,8 +52,6 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   }
 );
 
-if (__DEV__) {
-  AutoCompleteInput.displayName = "Input";
-}
+AutoCompleteInput.displayName = "Input";
 
 AutoCompleteInput.id = "Input";

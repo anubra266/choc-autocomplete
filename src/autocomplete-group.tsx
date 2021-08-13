@@ -7,7 +7,7 @@ import {
   FlexProps,
   forwardRef,
 } from "@chakra-ui/react";
-import { __DEV__, omit } from "@chakra-ui/utils";
+import { omit } from "@chakra-ui/utils";
 import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 
@@ -44,10 +44,8 @@ export const AutoCompleteGroupTitle = forwardRef<FlexProps, "div">(
   }
 );
 
-if (__DEV__) {
-  AutoCompleteGroup.displayName = "AutoCompleteGroup";
-  AutoCompleteGroupTitle.displayName = "AutoCompleteGroupTitle";
-}
+AutoCompleteGroup.displayName = "AutoCompleteGroup";
+AutoCompleteGroupTitle.displayName = "AutoCompleteGroupTitle";
 
 const baseTitleStyles: FlexProps = {
   ml: 5,

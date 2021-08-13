@@ -1,5 +1,4 @@
 import React from "react";
-import { __DEV__ } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 
 import { AutoCompleteProvider } from "./autocomplete-context";
@@ -49,6 +48,4 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
   }
 );
 
-if (__DEV__) {
-  AutoComplete.displayName = "AutoComplete";
-}
+AutoComplete.displayName = "AutoComplete";
