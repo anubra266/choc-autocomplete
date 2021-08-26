@@ -345,7 +345,7 @@ function App() {
               tags.map((tag, tid) => (
                 <AutoCompleteTag
                   key={tid}
-                  label={tag.label}
+                  label={tag.value}
                   onRemove={tag.onRemove}
                 />
               ))
