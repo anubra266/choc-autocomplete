@@ -88,6 +88,7 @@ export type UseAutoCompleteReturn = {
   autoCompleteProps: AutoCompleteProps;
   children: React.ReactNode;
   filteredList: Item[];
+  filteredResults: Item[];
   focusedValue: Item["value"];
   getEmptyStateProps: (component: any) => any;
   getGroupProps: (props: AutoCompleteGroupProps) => GroupReturnProps;

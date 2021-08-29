@@ -17,7 +17,7 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     autoCompleteProps,
     getItemProps,
     query,
-    filteredList,
+    filteredResults,
   } = useAutoCompleteContext();
 
   const queryValue = <mark>{query}</mark>;
@@ -29,7 +29,7 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     }),
   }).item;
 
-  const queryExistsInList = filteredList.some(i => i.value === query);
+  const queryExistsInList = filteredResults.some(i => i.value === query);
   const showCreatable =
     autoCompleteProps.creatable && !isEmpty(query) && !queryExistsInList;
 

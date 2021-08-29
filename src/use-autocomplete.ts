@@ -388,6 +388,7 @@ export function useAutoComplete(
     autoCompleteProps,
     children,
     filteredList,
+    filteredResults,
     focusedValue,
     getEmptyStateProps,
     getGroupProps,
