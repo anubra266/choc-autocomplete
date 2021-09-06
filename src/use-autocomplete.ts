@@ -141,8 +141,10 @@ export function useAutoComplete(
     if (!values.includes(itemValue) && values.length < maxSelections)
       setValues(v => (multiple ? [...v, itemValue] : [itemValue]));
 
-    const itemLabel = filteredList.find(i => i.value === itemValue)?.label;
-
+    const itemLabelFromValue = filteredList.find(i => i.value === itemValue)
+      ?.label;
+    // use value if label is not available
+    const itemLabel = itemLabelFromValue || itemValue;
     setQuery(itemLabel);
 
     if (multiple) {
@@ -304,6 +306,7 @@ export function useAutoComplete(
       _focus,
       children: itemChild,
       disabled,
+      label,
       value,
       fixed,
       onClick,
@@ -314,14 +317,14 @@ export function useAutoComplete(
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
-
+    const itemLabel = itemChild || label || value;
     return {
       item: {
-        ...(typeof itemChild !== "string" || !emphasize
-          ? { children: itemChild }
+        ...(typeof itemLabel !== "string" || !emphasize
+          ? { children: itemLabel }
           : {
               dangerouslySetInnerHTML: {
-                __html: setEmphasis(itemChild, query),
+                __html: setEmphasis(itemLabel, query),
               },
             }),
         "aria-selected": values.includes(value),
