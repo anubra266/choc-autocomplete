@@ -1,5 +1,5 @@
 import { getChildrenDeep } from "react-nanny";
-import { pick, isEmpty } from "@chakra-ui/utils";
+import { pick, isDefined, isEmpty } from "@chakra-ui/utils";
 import { ReactNode } from "react";
 import { FlexProps } from "@chakra-ui/react";
 import { fuzzyScore } from "./fuzzySearch";
@@ -25,7 +25,10 @@ export const getItemList = (children: ReactNode) => {
   );
 
   return itemChildren.map(item => {
-    return pick(item.props, ["value", "label", "fixed", "disabled"]);
+    const itemObj = pick(item.props, ["value", "label", "fixed", "disabled"]);
+    return isDefined(itemObj.label)
+      ? itemObj
+      : { ...itemObj, label: item.value };
   });
 };
 

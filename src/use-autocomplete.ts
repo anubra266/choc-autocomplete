@@ -168,12 +168,9 @@ export function useAutoComplete(
     if (query === itemValue) setQuery("");
   };
 
-  const getItemFromValue = (value: Item["value"]) =>
-    itemList.find(item => item.value === value);
-
   const tags = multiple
     ? values.map(tag => ({
-        ...getItemFromValue(tag),
+        label: itemList.find(item => item.value === tag)?.label || tag,
         onRemove: () => removeItem(tag),
       }))
     : [];
