@@ -5,6 +5,7 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
+import { pick } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
@@ -29,7 +30,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     const ref = useMergeRefs(forwardedRef, itemRef);
 
     const itemProps = getItemProps(props);
-    const { isValidSuggestion } = itemProps.root;
+    const { isValidSuggestion, setItemList } = itemProps.root;
 
     const isFocused = focusedValue === props.value;
 
@@ -40,6 +41,13 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
           block: "center",
         });
     }, [isFocused, interactionRef]);
+
+    useEffect(() => {
+      setItemList((itemList: any) => [
+        ...itemList,
+        pick(props, ["value", "label", "fixed", "disabled"]),
+      ]);
+    }, []);
 
     const { children, dangerouslySetInnerHTML, ...rest } = itemProps.item;
 

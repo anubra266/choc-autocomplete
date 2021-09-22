@@ -6,5 +6,5 @@ export const [AutoCompleteProvider, useAutoCompleteContext] = createContext<
 >({
   name: "AutoCompleteContext",
   errorMessage:
-    "useAutoCompleteContext: `context` is undefined. Seems you forgot to wrap all autoomplete components within `<AutoComplete />`",
+    "useAutoCompleteContext: `context` is undefined. Seems you forgot to wrap all autocomplete components within `<AutoComplete />`",
 });

@@ -20,7 +20,6 @@ import { AutoCompleteProps } from "./autocomplete";
 import {
   defaultFilterMethod,
   getFocusedStyles,
-  getItemList,
   setEmphasis,
 } from "./helpers/items";
 import { getMultipleWrapStyles } from "./helpers/input";
@@ -64,7 +63,7 @@ export function useAutoComplete(
     onClose,
     onOpen,
   });
-  const itemList: Item[] = getItemList(children);
+  const [itemList, setItemList] = useState<Item[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
@@ -355,6 +354,7 @@ export function useAutoComplete(
       },
       root: {
         isValidSuggestion,
+        setItemList,
       },
     };
   };

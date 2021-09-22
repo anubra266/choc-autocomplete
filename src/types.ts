@@ -69,6 +69,7 @@ export type ItemReturnProps = {
   item: FlexProps;
   root: {
     isValidSuggestion: boolean;
+    setItemList: React.Dispatch<React.SetStateAction<Item[]>>;
   };
 };
 
