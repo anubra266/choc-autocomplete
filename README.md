@@ -776,6 +776,13 @@ This Composes your suggestions
 </thead>
 <tbody>
   <tr>
+    <td>groupId</td>
+    <td>string</td>
+    <td>The id of the group, if Item belongs to one. It's required if you need to wrap the items in an HOC.</td>
+    <td>no<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
     <td>label</td>
     <td>string</td>
     <td>The label for the Option</td>
