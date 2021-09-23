@@ -147,7 +147,7 @@ function App() {
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             {Object.entries(continents).map(([continent, countries], co_id) => (
-              <AutoCompleteGroup key={co_id} showDivider>
+              <AutoCompleteGroup key={co_id} id={continent} showDivider>
                 <AutoCompleteGroupTitle textTransform="capitalize">
                   {continent}
                 </AutoCompleteGroupTitle>
@@ -155,6 +155,7 @@ function App() {
                   <AutoCompleteItem
                     key={c_id}
                     value={country}
+                    groupId={continent}
                     textTransform="capitalize"
                   >
                     {country}
