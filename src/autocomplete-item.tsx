@@ -5,6 +5,7 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
+import { omit, pick } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
@@ -16,6 +17,7 @@ export interface AutoCompleteItemProps extends FlexProps {
   _focus?: CSSObject | any;
   disabled?: boolean;
   _fixed?: CSSObject;
+  groupId?: string;
 }
 
 export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
@@ -29,7 +31,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     const ref = useMergeRefs(forwardedRef, itemRef);
 
     const itemProps = getItemProps(props);
-    const { isValidSuggestion } = itemProps.root;
+    const { isValidSuggestion, setItemList } = itemProps.root;
 
     const isFocused = focusedValue === props.value;
 
@@ -41,7 +43,16 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
         });
     }, [isFocused, interactionRef]);
 
-    const { children, dangerouslySetInnerHTML, ...rest } = itemProps.item;
+    useEffect(() => {
+      setItemList((itemList: any) => [
+        ...itemList,
+        pick(props, ["value", "label", "fixed", "disabled", "groupId"]),
+      ]);
+    }, []);
+
+    const { children, dangerouslySetInnerHTML, ...restProps } = itemProps.item;
+
+    const rest = omit(restProps, ["groupId"] as any);
 
     return isValidSuggestion ? (
       <Flex ref={ref} {...baseItemStyles} {...rest}>

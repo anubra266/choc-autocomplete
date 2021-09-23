@@ -1,6 +1,4 @@
-import { getChildrenDeep } from "react-nanny";
-import { pick, isDefined, isEmpty } from "@chakra-ui/utils";
-import { ReactNode } from "react";
+import { isEmpty } from "@chakra-ui/utils";
 import { FlexProps } from "@chakra-ui/react";
 import { fuzzyScore } from "./fuzzySearch";
 import { Item } from "../types";
@@ -16,20 +14,6 @@ export const setEmphasis = (children: any, query: string) => {
       (match: any) => `<mark>${match}</mark>`
     );
   return newChildren;
-};
-
-export const getItemList = (children: ReactNode) => {
-  const itemChildren = getChildrenDeep(
-    children,
-    (child: any) => child?.type?.displayName === "AutoCompleteItem"
-  );
-
-  return itemChildren.map(item => {
-    const itemObj = pick(item.props, ["value", "label", "fixed", "disabled"]);
-    return isDefined(itemObj.label)
-      ? itemObj
-      : { ...itemObj, label: item.value };
-  });
 };
 
 export const getFocusedStyles = (): FlexProps => {

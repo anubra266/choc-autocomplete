@@ -12,52 +12,39 @@ import {
   AutoComplete,
   AutoCompleteCreatable,
   AutoCompleteInput,
+  AutoCompleteGroup,
   AutoCompleteItem,
   AutoCompleteList,
   AutoCompleteTag,
+  AutoCompleteGroupTitle,
 } from "../../";
 
+const countries = ["nigeria", "japan", "india", "united states", "south korea"];
+const continents = {
+  africa: ["nigeria", "south africa"],
+  asia: ["japan", "south korea"],
+  europe: ["united kingdom", "russia"],
+};
 function App() {
-  const countries = [
-    "nigeria",
-    "japan",
-    "india",
-    "united states",
-    "south korea",
-  ];
-
   // const [value, setValue] = useState("");
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple onChange={vals => console.log(vals)} creatable>
-          <AutoCompleteInput variant="filled">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
+        <AutoComplete openOnFocus>
+          <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
-            {countries.map((country, cid) => (
-              <AutoCompleteItem
-                key={`option-${cid}`}
-                value={country}
-                label={country}
-                textTransform="capitalize"
-                _selected={{ bg: "whiteAlpha.50" }}
-                _focus={{ bg: "whiteAlpha.100" }}
-              >
-                {country}
-              </AutoCompleteItem>
+            {Object.entries(continents).map(([continent, countries], co_id) => (
+              <AutoCompleteGroup key={co_id} showDivider id={continent}>
+                <AutoCompleteGroupTitle textTransform="capitalize">
+                  {continent}
+                </AutoCompleteGroupTitle>
+                {countries.map((country, c_id) => (
+                  <Country country={country} key={c_id} groupId={continent} />
+                ))}
+              </AutoCompleteGroup>
             ))}
-          <AutoCompleteCreatable />
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
@@ -67,3 +54,15 @@ function App() {
 }
 
 export default App;
+
+const Country = ({ country, groupId }: any) => {
+  return (
+    <AutoCompleteItem
+      value={country}
+      groupId={groupId}
+      textTransform="capitalize"
+    >
+      {country}
+    </AutoCompleteItem>
+  );
+};

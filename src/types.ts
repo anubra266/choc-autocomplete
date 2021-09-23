@@ -20,6 +20,7 @@ export interface Item {
   fixed?: boolean;
   disabled?: boolean;
   noFilter?: boolean;
+  groupId?: string;
 }
 
 export type UseAutoCompleteProps = Partial<{
@@ -69,6 +70,7 @@ export type ItemReturnProps = {
   item: FlexProps;
   root: {
     isValidSuggestion: boolean;
+    setItemList: React.Dispatch<React.SetStateAction<Item[]>>;
   };
 };
 

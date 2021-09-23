@@ -20,7 +20,6 @@ import { AutoCompleteProps } from "./autocomplete";
 import {
   defaultFilterMethod,
   getFocusedStyles,
-  getItemList,
   setEmphasis,
 } from "./helpers/items";
 import { getMultipleWrapStyles } from "./helpers/input";
@@ -64,7 +63,7 @@ export function useAutoComplete(
     onClose,
     onOpen,
   });
-  const itemList: Item[] = getItemList(children);
+  const [itemList, setItemList] = useState<Item[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
@@ -355,19 +354,20 @@ export function useAutoComplete(
       },
       root: {
         isValidSuggestion,
+        setItemList,
       },
     };
   };
 
   const getGroupProps: UseAutoCompleteReturn["getGroupProps"] = props => {
-    const hasItems = hasChildren(props.children, filteredList);
+    const hasItems = hasChildren(props, filteredList);
+    const lastItem = getLastItem(
+      filteredList.filter(i => isUndefined(i?.noFilter))
+    );
     return {
       divider: {
-        hasFirstChild: hasFirstItem(props.children, firstItem),
-        hasLastChild: hasLastItem(
-          props.children,
-          getLastItem(filteredList.filter(i => isUndefined(i?.noFilter)))
-        ),
+        hasFirstChild: hasFirstItem(props, firstItem!),
+        hasLastChild: hasLastItem(props, lastItem!),
       },
       group: {
         display: hasItems ? "initial" : "none",
