@@ -36,12 +36,12 @@ function App() {
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             {Object.entries(continents).map(([continent, countries], co_id) => (
-              <AutoCompleteGroup key={co_id} showDivider>
+              <AutoCompleteGroup key={co_id} showDivider id={continent}>
                 <AutoCompleteGroupTitle textTransform="capitalize">
                   {continent}
                 </AutoCompleteGroupTitle>
                 {countries.map((country, c_id) => (
-                  <Country country={country} key={c_id} />
+                  <Country country={country} key={c_id} groupId={continent} />
                 ))}
               </AutoCompleteGroup>
             ))}
@@ -55,9 +55,13 @@ function App() {
 
 export default App;
 
-const Country = ({ country }: any) => {
+const Country = ({ country, groupId }: any) => {
   return (
-    <AutoCompleteItem value={country} textTransform="capitalize">
+    <AutoCompleteItem
+      value={country}
+      groupId={groupId}
+      textTransform="capitalize"
+    >
       {country}
     </AutoCompleteItem>
   );

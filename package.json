@@ -69,7 +69,5 @@
     "tslib": "^2.3.0",
     "typescript": "^4.3.5"
   },
-  "dependencies": {
-    "react-nanny": "^2.9.0"
-  }
+  "dependencies": {}
 }

@@ -20,6 +20,7 @@ export interface Item {
   fixed?: boolean;
   disabled?: boolean;
   noFilter?: boolean;
+  groupId?: string;
 }
 
 export type UseAutoCompleteProps = Partial<{

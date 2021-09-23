@@ -360,14 +360,14 @@ export function useAutoComplete(
   };
 
   const getGroupProps: UseAutoCompleteReturn["getGroupProps"] = props => {
-    const hasItems = hasChildren(props.children, filteredList);
+    const hasItems = hasChildren(props, filteredList);
+    const lastItem = getLastItem(
+      filteredList.filter(i => isUndefined(i?.noFilter))
+    );
     return {
       divider: {
-        hasFirstChild: hasFirstItem(props.children, firstItem),
-        hasLastChild: hasLastItem(
-          props.children,
-          getLastItem(filteredList.filter(i => isUndefined(i?.noFilter)))
-        ),
+        hasFirstChild: hasFirstItem(props, firstItem!),
+        hasLastChild: hasLastItem(props, lastItem!),
       },
       group: {
         display: hasItems ? "initial" : "none",
