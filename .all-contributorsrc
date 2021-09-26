@@ -32,6 +32,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "Buupu",
+      "name": "Sammy Fattah",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26443341?v=4",
+      "profile": "https://github.com/Buupu",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
