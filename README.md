@@ -24,9 +24,7 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -340,10 +338,7 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete
-          openOnFocus
-          multiple
-          onChange={(vals) => console.log(vals)}
+        <AutoComplete openOnFocus multiple onChange={(vals) => console.log(vals)}
         >
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
