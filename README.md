@@ -178,7 +178,7 @@ export default App;
 
 ## Accessing the internal state
 
-To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen`, with the `onOpen` and `onClose` methods.
+To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen`, with the `onOpen`, `onClose` methods and the `tags` in multiple mode.
 
 ```js
 import {
