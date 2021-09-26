@@ -24,7 +24,9 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -338,7 +340,11 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple onChange={vals => console.log(vals)}>
+        <AutoComplete
+          openOnFocus
+          multiple
+          onChange={(vals) => console.log(vals)}
+        >
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
@@ -384,7 +390,7 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
-### Codesandbox Link [Here](https://codesandbox.io/s/chakra-autocomplete-demo-elurs)
+### Codesandbox Link [Here](https://githubbox.com/anubra266/choc-autocomplete/tree/main/demo)
 
 ## API Reference
 
