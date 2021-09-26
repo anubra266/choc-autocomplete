@@ -72,6 +72,6 @@ export const baseItemStyles: FlexProps = {
   mx: "2",
   px: "2",
   py: "2",
-  rounded: "md",
+  borderRadius: "md",
   cursor: "pointer",
 };
