@@ -5,6 +5,9 @@ import {
   FormLabel,
   InputGroup,
   InputRightElement,
+  Tag,
+  TagCloseButton,
+  TagLabel,
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useState } from "react";
@@ -32,20 +35,36 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus>
-          <AutoCompleteInput variant="filled" />
-          <AutoCompleteList>
-            {Object.entries(continents).map(([continent, countries], co_id) => (
-              <AutoCompleteGroup key={co_id} showDivider id={continent}>
-                <AutoCompleteGroupTitle textTransform="capitalize">
-                  {continent}
-                </AutoCompleteGroupTitle>
-                {countries.map((country, c_id) => (
-                  <Country country={country} key={c_id} groupId={continent} />
-                ))}
-              </AutoCompleteGroup>
-            ))}
-          </AutoCompleteList>
+        <AutoComplete openOnFocus multiple>
+          {({ tags }) => (
+            <>
+              {tags.map(tag => (
+                <Tag>
+                  <TagLabel>{tag.label}</TagLabel>
+                  <TagCloseButton onClick={() => tag.onRemove(tag)} />
+                </Tag>
+              ))}
+              <AutoCompleteInput variant="filled" />
+              <AutoCompleteList>
+                {Object.entries(continents).map(
+                  ([continent, countries], co_id) => (
+                    <AutoCompleteGroup key={co_id} showDivider id={continent}>
+                      <AutoCompleteGroupTitle textTransform="capitalize">
+                        {continent}
+                      </AutoCompleteGroupTitle>
+                      {countries.map((country, c_id) => (
+                        <Country
+                          country={country}
+                          key={c_id}
+                          groupId={continent}
+                        />
+                      ))}
+                    </AutoCompleteGroup>
+                  )
+                )}
+              </AutoCompleteList>
+            </>
+          )}
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>

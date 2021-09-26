@@ -58,11 +58,6 @@ export function useAutoComplete(
 
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
-  const children = runIfFn(autoCompleteProps.children, {
-    isOpen,
-    onClose,
-    onOpen,
-  });
   const [itemList, setItemList] = useState<Item[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -173,6 +168,13 @@ export function useAutoComplete(
         onRemove: () => removeItem(tag),
       }))
     : [];
+
+  const children = runIfFn(autoCompleteProps.children, {
+    isOpen,
+    onClose,
+    onOpen,
+    tags,
+  });
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
     props,

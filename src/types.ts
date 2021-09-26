@@ -86,9 +86,21 @@ export type GroupReturnProps = {
   group: BoxProps;
 };
 
+export type Tag = {
+  label: string;
+  onRemove: (tag: Tag) => void;
+};
+
+export type ChildRenderProp = {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
+  tags: Tag[];
+};
+
 export type UseAutoCompleteReturn = {
   autoCompleteProps: AutoCompleteProps;
-  children: React.ReactNode;
+  children: MaybeRenderProp<ChildRenderProp>;
   filteredList: Item[];
   filteredResults: Item[];
   focusedValue: Item["value"];

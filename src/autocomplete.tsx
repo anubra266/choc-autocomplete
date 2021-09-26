@@ -1,18 +1,12 @@
 import React from "react";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
 
 import { AutoCompleteProvider } from "./autocomplete-context";
 import { useAutoComplete } from "./use-autocomplete";
 import { chakra, forwardRef, Popover } from "@chakra-ui/react";
-import { UseAutoCompleteProps } from "./types";
+import { UseAutoCompleteProps, UseAutoCompleteReturn } from "./types";
 
-export type AutoCompleteChildProps = {
-  isOpen: boolean;
-  onClose: () => void;
-  onOpen: () => void;
-};
 export interface AutoCompleteProps extends UseAutoCompleteProps {
-  children: MaybeRenderProp<AutoCompleteChildProps>;
+  children: UseAutoCompleteReturn["children"];
 }
 
 export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
