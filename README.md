@@ -338,7 +338,7 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple onChange={(vals) => console.log(vals)}>
+        <AutoComplete openOnFocus multiple onChange={vals => console.log(vals)}>
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
