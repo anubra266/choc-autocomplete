@@ -40,7 +40,7 @@ export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, "div">(
 
 export const AutoCompleteGroupTitle = forwardRef<FlexProps, "div">(
   (props, ref) => {
-    return <Flex {...props} {...baseTitleStyles} ref={ref} />;
+    return <Flex {...baseTitleStyles} {...props} ref={ref} />;
   }
 );
 
