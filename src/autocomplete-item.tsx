@@ -5,17 +5,19 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
+import { isUndefined, omit } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 
 export interface AutoCompleteItemProps extends FlexProps {
-  value: string;
+  value: any;
   label?: string;
   fixed?: boolean;
   _focus?: CSSObject | any;
   disabled?: boolean;
   _fixed?: CSSObject;
+  getValue?: (item: AutoCompleteItemProps["value"]) => any;
 }
 
 export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
@@ -29,9 +31,9 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     const ref = useMergeRefs(forwardedRef, itemRef);
 
     const itemProps = getItemProps(props);
-    const { isValidSuggestion } = itemProps.root;
+    const { isValidSuggestion, value } = itemProps.root;
 
-    const isFocused = focusedValue === props.value;
+    const isFocused = focusedValue === value;
 
     useEffect(() => {
       if (isFocused && interactionRef.current === "keyboard")
@@ -41,7 +43,17 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
         });
     }, [isFocused, interactionRef]);
 
-    const { children, dangerouslySetInnerHTML, ...rest } = itemProps.item;
+    useEffect(() => {
+      if (typeof value !== "string") console.warn("wow");
+      if (typeof value !== "string" && isUndefined(props.getValue))
+        console.error(
+          "You must define the `getValue` prop, when an Item's value is not a string"
+        );
+    }, []);
+
+    const { children, dangerouslySetInnerHTML, ...restProps } = itemProps.item;
+
+    const rest = omit(restProps, ["groupId"] as any);
 
     return isValidSuggestion ? (
       <Flex ref={ref} {...baseItemStyles} {...rest}>

@@ -19,6 +19,7 @@ export interface Item {
   label?: any;
   fixed?: boolean;
   disabled?: boolean;
+  itemVal?: any;
   noFilter?: boolean;
 }
 
@@ -69,6 +70,7 @@ export type ItemReturnProps = {
   item: FlexProps;
   root: {
     isValidSuggestion: boolean;
+    value: AutoCompleteItemProps["value"];
   };
 };
 
