@@ -802,7 +802,7 @@ This Composes your suggestions
   </tr>
   <tr>
     <td>value</td>
-    <td>string</td>
+    <td>string or Object</td>
     <td>The value of the Option</td>
     <td>yes<br></td>
     <td>&mdash;&mdash;&mdash;</td>
