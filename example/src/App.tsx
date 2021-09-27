@@ -32,7 +32,12 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple onChange={vals => console.log(vals)} creatable>
+        <AutoComplete
+          openOnFocus
+          multiple
+          onChange={vals => console.log(vals)}
+          creatable
+        >
           <AutoCompleteInput variant="filled">
             {({ tags }) =>
               tags.map((tag, tid) => (
@@ -48,7 +53,8 @@ function App() {
             {countries.map((country, cid) => (
               <AutoCompleteItem
                 key={`option-${cid}`}
-                value={country}
+                value={{ id: cid, country: country }}
+                getValue={value => value.country}
                 label={country}
                 textTransform="capitalize"
                 _selected={{ bg: "whiteAlpha.50" }}
@@ -57,7 +63,7 @@ function App() {
                 {country}
               </AutoCompleteItem>
             ))}
-          <AutoCompleteCreatable />
+            <AutoCompleteCreatable />
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
