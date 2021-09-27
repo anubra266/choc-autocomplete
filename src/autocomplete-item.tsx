@@ -5,18 +5,19 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { omit, pick } from "@chakra-ui/utils";
+import { isUndefined, omit, pick } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 
 export interface AutoCompleteItemProps extends FlexProps {
-  value: string;
+  value: any;
   label?: string;
   fixed?: boolean;
   _focus?: CSSObject | any;
   disabled?: boolean;
   _fixed?: CSSObject;
+  getValue?: (item: AutoCompleteItemProps["value"]) => any;
   groupId?: string;
 }
 
@@ -31,9 +32,9 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     const ref = useMergeRefs(forwardedRef, itemRef);
 
     const itemProps = getItemProps(props);
-    const { isValidSuggestion, setItemList } = itemProps.root;
+    const { isValidSuggestion, setItemList, value } = itemProps.root;
 
-    const isFocused = focusedValue === props.value;
+    const isFocused = focusedValue === value;
 
     useEffect(() => {
       if (isFocused && interactionRef.current === "keyboard")
@@ -44,10 +45,17 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
     }, [isFocused, interactionRef]);
 
     useEffect(() => {
-      setItemList((itemList: any) => [
-        ...itemList,
-        pick(props, ["value", "label", "fixed", "disabled", "groupId"]),
-      ]);
+      const item = {
+        ...pick(props, ["label", "fixed", "disabled", "groupId"]),
+        itemVal: props.value,
+        value,
+      };
+      setItemList((itemList: any) => [...itemList, item]);
+      if (typeof value !== "string") console.warn("wow");
+      if (typeof value !== "string" && isUndefined(props.getValue))
+        console.error(
+          "You must define the `getValue` prop, when an Item's value is not a string"
+        );
     }, []);
 
     const { children, dangerouslySetInnerHTML, ...restProps } = itemProps.item;

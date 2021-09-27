@@ -775,6 +775,18 @@ This Composes your suggestions
 </thead>
 <tbody>
   <tr>
+    <td>getValue</td>
+    <td>(value:any) => any</td>
+    <td>A method used to determine the key that holds the value, when the value prop is an object</td>
+    <td>no<br></td>
+    <td>
+
+```js
+(val) => val
+```
+</td>
+  </tr>
+  <tr>
     <td>groupId</td>
     <td>string</td>
     <td>The id of the group, if Item belongs to one. It's required if you need to wrap the items in an HOC.</td>

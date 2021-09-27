@@ -38,8 +38,8 @@ function App() {
         <AutoComplete openOnFocus multiple>
           {({ tags }) => (
             <>
-              {tags.map(tag => (
-                <Tag>
+              {tags.map((tag, tid) => (
+                <Tag key={tid}>
                   <TagLabel>{tag.label}</TagLabel>
                   <TagCloseButton onClick={() => tag.onRemove(tag)} />
                 </Tag>
@@ -53,11 +53,15 @@ function App() {
                         {continent}
                       </AutoCompleteGroupTitle>
                       {countries.map((country, c_id) => (
-                        <Country
-                          country={country}
+                        <AutoCompleteItem
                           key={c_id}
+                          value={{ id: c_id, country: country }}
+                          getValue={value => value.country}
                           groupId={continent}
-                        />
+                          textTransform="capitalize"
+                        >
+                          {country}
+                        </AutoCompleteItem>
                       ))}
                     </AutoCompleteGroup>
                   )
@@ -73,15 +77,3 @@ function App() {
 }
 
 export default App;
-
-const Country = ({ country, groupId }: any) => {
-  return (
-    <AutoCompleteItem
-      value={country}
-      groupId={groupId}
-      textTransform="capitalize"
-    >
-      {country}
-    </AutoCompleteItem>
-  );
-};

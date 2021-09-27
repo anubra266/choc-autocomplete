@@ -25,6 +25,7 @@ import {
 import { getMultipleWrapStyles } from "./helpers/input";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
 import { Item, UseAutoCompleteReturn } from "./types";
+import { AutoCompleteItemProps } from "./autocomplete-item";
 
 /**
  * useAutoComplete that provides all the state and focus management logic
@@ -298,6 +299,9 @@ export function useAutoComplete(
     };
   };
 
+  const getDefItemValue = (item: AutoCompleteItemProps["value"]) =>
+    (typeof item === "string" ? item : item[Object.keys(item)[0]]).toString();
+
   const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
     const {
       _fixed,
@@ -305,13 +309,15 @@ export function useAutoComplete(
       children: itemChild,
       disabled,
       label,
-      value,
+      value: valueProp,
       fixed,
+      getValue = getDefItemValue,
       onClick,
       onMouseOver,
       sx,
       ...rest
     } = props;
+    const value = getValue(valueProp).toString();
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
@@ -357,6 +363,7 @@ export function useAutoComplete(
       root: {
         isValidSuggestion,
         setItemList,
+        value,
       },
     };
   };

@@ -19,6 +19,7 @@ export interface Item {
   label?: any;
   fixed?: boolean;
   disabled?: boolean;
+  itemVal?: any;
   noFilter?: boolean;
   groupId?: string;
 }
@@ -71,6 +72,7 @@ export type ItemReturnProps = {
   root: {
     isValidSuggestion: boolean;
     setItemList: React.Dispatch<React.SetStateAction<Item[]>>;
+    value: AutoCompleteItemProps["value"];
   };
 };
 
