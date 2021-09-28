@@ -527,7 +527,8 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             
 ```ts
 (params: {
-    optionValue: string;
+    optionValue: any;
+    optionLabel: string;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -543,6 +544,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 ```ts
 (params: {
     optionValue: string;
+    optionLabel: string;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void

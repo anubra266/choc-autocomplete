@@ -133,6 +133,7 @@ export function useAutoComplete(
   useEffect(() => {
     runIfFn(autoCompleteProps.onOptionFocus, {
       optionValue: focusedValue,
+      optionLabel: itemList.find(i => i.value === focusedValue)?.label,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
@@ -155,6 +156,7 @@ export function useAutoComplete(
     if (autoCompleteProps.focusInputOnSelect) inputRef.current?.focus();
     runIfFn(autoCompleteProps.onSelectOption, {
       optionValue: itemValue,
+      optionLabel: itemLabel,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
