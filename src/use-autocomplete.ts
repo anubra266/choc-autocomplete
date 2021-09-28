@@ -125,23 +125,26 @@ export function useAutoComplete(
   }, [values, multiple]);
 
   useEffect(() => {
+    const focusedItem = itemList.find(i => i.value === focusedValue);
     runIfFn(autoCompleteProps.onOptionFocus, {
       optionValue: focusedValue,
-      optionLabel: itemList.find(i => i.value === focusedValue)?.label,
+      optionLabel: focusedItem?.label,
+      itemValue: focusedItem?.itemVal,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
   }, [focusedValue, autoCompleteProps.onOptionFocus]);
 
-  const selectItem = (itemValue: Item["value"]) => {
-    if (!values.includes(itemValue) && values.length < maxSelections)
-      setValues(v => (multiple ? [...v, itemValue] : [itemValue]));
+  const selectItem = (optionValue: Item["value"]) => {
+    if (!values.includes(optionValue) && values.length < maxSelections)
+      setValues(v => (multiple ? [...v, optionValue] : [optionValue]));
 
-    const itemLabelFromValue = filteredList.find(i => i.value === itemValue)
-      ?.label;
+    const option = filteredList.find(i => i.value === optionValue);
+
+    const optionLabelFromValue = option?.label;
     // use value if label is not available
-    const itemLabel = itemLabelFromValue || itemValue;
-    setQuery(itemLabel);
+    const optionLabel = optionLabelFromValue || optionValue;
+    setQuery(optionLabel);
 
     if (multiple) {
       setQuery("");
@@ -149,8 +152,9 @@ export function useAutoComplete(
     }
     if (autoCompleteProps.focusInputOnSelect) inputRef.current?.focus();
     runIfFn(autoCompleteProps.onSelectOption, {
-      optionValue: itemValue,
-      optionLabel: itemLabel,
+      optionValue: optionValue,
+      optionLabel: optionLabel,
+      itemValue: option?.itemVal,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
