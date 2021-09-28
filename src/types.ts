@@ -42,12 +42,14 @@ export type UseAutoCompleteProps = Partial<{
   multiple: boolean;
   onChange: (value: string | Item["value"][]) => void;
   onSelectOption: (params: {
-    optionValue: string;
+    optionValue: any;
+    optionLabel: string;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
-    optionValue: string;
+    optionValue: any;
+    optionLabel: string;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
