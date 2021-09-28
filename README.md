@@ -24,7 +24,9 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -460,7 +462,8 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(query: string, itemValue: Item["value"], itemLabel: Item["label"]) => boolean;
+(query: string, optionValue: Item["value"], optionLabel: Item["label"]) =>
+  boolean;
 ```
 
 </td>
@@ -514,7 +517,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(value: string | Item["value"][]) => void
+(value: string | Item["value"][], itemValue: any) => void
 ```
 
 </td>
@@ -529,6 +532,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 (params: {
     optionValue: any;
     optionLabel: string;
+    itemValue: any;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -545,6 +549,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 (params: {
     optionValue: string;
     optionLabel: string;
+    itemValue: any;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -559,7 +564,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
             
 ```ts
-(removedTag: Item["value"], tags: Item["value"][]) => void
+(removedTag: Item["value"],itemValue: any, tags: Item["value"][]) => void
 ```
 </td>
             <td>method to call whenever a tag is removed</td>
@@ -783,8 +788,9 @@ This Composes your suggestions
     <td>
 
 ```js
-(val) => val
+val => val;
 ```
+
 </td>
   </tr>
   <tr>

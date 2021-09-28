@@ -31,7 +31,11 @@ export type UseAutoCompleteProps = Partial<{
   defaultValues: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
-  filter: (query: string, itemValue: Item["value"]) => boolean;
+  filter: (
+    query: string,
+    optionValue: Item["value"],
+    optionLabel: Item["label"]
+  ) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
   isReadOnly: boolean;
@@ -39,20 +43,26 @@ export type UseAutoCompleteProps = Partial<{
   maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
-  onChange: (value: string | Item["value"][]) => void;
+  onChange: (value: string | Item["value"][], itemValue: any) => void;
   onSelectOption: (params: {
-    optionValue: any;
-    optionLabel: string;
+    optionValue: Item["value"];
+    optionLabel: Item["label"];
+    itemValue: any;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
-    optionValue: any;
-    optionLabel: string;
+    optionValue: Item["value"];
+    optionLabel: Item["label"];
+    itemValue: any;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
-  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
+  onTagRemoved: (
+    removedTag: Item["value"],
+    itemValue: any,
+    tags: Item["value"][]
+  ) => void;
   openOnFocus: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
