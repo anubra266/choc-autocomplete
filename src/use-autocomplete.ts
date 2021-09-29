@@ -127,7 +127,15 @@ export function useAutoComplete(
   }, [query]);
 
   useEffect(() => {
-    runIfFn(autoCompleteProps.onChange, multiple ? values : values[0]);
+    const item = filteredList.find(opt => opt.value === values[0]);
+    const items = values.map(val =>
+      filteredList.find(opt => opt.value === val)
+    );
+    runIfFn(
+      autoCompleteProps.onChange,
+      multiple ? values : values[0],
+      multiple ? items : item
+    );
   }, [values, multiple]);
 
   useEffect(() => {
@@ -135,7 +143,7 @@ export function useAutoComplete(
     runIfFn(autoCompleteProps.onOptionFocus, {
       optionValue: focusedValue,
       optionLabel: focusedItem?.label,
-      itemValue: focusedItem?.itemVal,
+      item: focusedItem!,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
@@ -160,7 +168,7 @@ export function useAutoComplete(
     runIfFn(autoCompleteProps.onSelectOption, {
       optionValue: optionValue,
       optionLabel: optionLabel,
-      itemValue: option?.itemVal,
+      item: option!,
       selectMethod: interactionRef.current,
       isNewInput: false,
     });
@@ -169,7 +177,8 @@ export function useAutoComplete(
 
   const removeItem = (itemValue: Item["value"]) => {
     setValues(prevValues => {
-      runIfFn(autoCompleteProps.onTagRemoved, itemValue, prevValues);
+      const item = itemList.find(opt => opt.value === itemValue);
+      runIfFn(autoCompleteProps.onTagRemoved, itemValue, item, prevValues);
       return prevValues.filter(i => i !== itemValue);
     });
     if (query === itemValue) setQuery("");

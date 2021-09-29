@@ -43,24 +43,27 @@ export type UseAutoCompleteProps = Partial<{
   maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
-  onChange: (value: string | Item["value"][], itemValue: any) => void;
+  onChange: (
+    value: Item["value"] | Item["value"][],
+    item: Item | Item[]
+  ) => void;
   onSelectOption: (params: {
     optionValue: Item["value"];
     optionLabel: Item["label"];
-    itemValue: any;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
     optionValue: Item["value"];
     optionLabel: Item["label"];
-    itemValue: any;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onTagRemoved: (
     removedTag: Item["value"],
-    itemValue: any,
+    item: Item,
     tags: Item["value"][]
   ) => void;
   openOnFocus: boolean;

@@ -517,7 +517,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(value: string | Item["value"][], itemValue: any) => void
+(value: string | Item["value"][], item: Item| Item[]) => void
 ```
 
 </td>
@@ -532,7 +532,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 (params: {
     optionValue: any;
     optionLabel: string;
-    itemValue: any;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -549,7 +549,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 (params: {
     optionValue: string;
     optionLabel: string;
-    itemValue: any;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -564,7 +564,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
             
 ```ts
-(removedTag: Item["value"],itemValue: any, tags: Item["value"][]) => void
+(removedTag: Item["value"],item: Item, tags: Item["value"][]) => void
 ```
 </td>
             <td>method to call whenever a tag is removed</td>
