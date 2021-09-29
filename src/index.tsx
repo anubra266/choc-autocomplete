@@ -1,4 +1,5 @@
 export * from "./autocomplete";
+export * from "./autocomplete-context";
 export * from "./autocomplete-creatable";
 export * from "./autocomplete-group";
 export * from "./autocomplete-input";
