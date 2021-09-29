@@ -178,6 +178,11 @@ export function useAutoComplete(
     if (query === itemValue) setQuery("");
   };
 
+  const resetItems = (focusInput?: boolean) => {
+    setValues([]);
+    if (focusInput) inputRef.current?.focus();
+  };
+
   const tags = multiple
     ? values.map(tag => ({
         label: itemList.find(item => item.value === tag)?.label || tag,
@@ -190,6 +195,8 @@ export function useAutoComplete(
     onClose,
     onOpen,
     tags,
+    removeItem,
+    resetItems,
   });
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (

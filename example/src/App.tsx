@@ -1,4 +1,5 @@
 import {
+  Button,
   Flex,
   FormControl,
   FormHelperText,
@@ -36,7 +37,7 @@ function App() {
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
         <AutoComplete openOnFocus multiple>
-          {({ tags }) => (
+          {({ resetItems, tags }) => (
             <>
               {tags.map((tag, tid) => (
                 <Tag key={tid}>
@@ -44,6 +45,7 @@ function App() {
                   <TagCloseButton onClick={() => tag.onRemove(tag)} />
                 </Tag>
               ))}
+              <Button onClick={() => resetItems(false)}>Reset</Button>
               <AutoCompleteInput variant="filled" />
               <AutoCompleteList>
                 {Object.entries(continents).map(

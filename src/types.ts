@@ -112,6 +112,8 @@ export type ChildRenderProp = {
   isOpen: boolean;
   onClose: () => void;
   onOpen: () => void;
+  removeItem: (itemValue: Item["value"]) => void;
+  resetItems: (focusInput: boolean) => void;
   tags: Tag[];
 };
 
