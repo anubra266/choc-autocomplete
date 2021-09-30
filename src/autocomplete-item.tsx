@@ -5,7 +5,7 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { isUndefined, omit, pick } from "@chakra-ui/utils";
+import { omit, pick } from "@chakra-ui/utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
@@ -51,13 +51,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
         value,
       };
       setItemList((itemList: any) => [...itemList, item]);
-      if (typeof value !== "string") console.warn("wow");
-      if (typeof value !== "string" && isUndefined(props.getValue))
-        console.error(
-          "You must define the `getValue` prop, when an Item's value is not a string"
-        );
     }, []);
-
     const { children, dangerouslySetInnerHTML, ...restProps } = itemProps.item;
 
     const rest = omit(restProps, ["groupId"] as any);

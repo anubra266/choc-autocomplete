@@ -183,6 +183,10 @@ export function useAutoComplete(
     if (focusInput) inputRef.current?.focus();
   };
 
+  //! console.log(values[0]);
+  // console.log(itemList);
+  // console.log(itemList.find(item => item.value === values[0]));
+
   const tags = multiple
     ? values.map(tag => ({
         label: itemList.find(item => item.value === tag)?.label || tag,
@@ -339,7 +343,7 @@ export function useAutoComplete(
       sx,
       ...rest
     } = props;
-    const value = getValue(valueProp).toString();
+    const value = getValue(valueProp)?.toString();
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;

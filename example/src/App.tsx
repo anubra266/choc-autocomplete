@@ -36,7 +36,11 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple>
+        <AutoComplete
+          openOnFocus
+          multiple
+          defaultValues={["africa-nigeria", "asia-japan"]}
+        >
           {({ resetItems, tags }) => (
             <>
               {tags.map((tag, tid) => (
@@ -57,8 +61,8 @@ function App() {
                       {countries.map((country, c_id) => (
                         <AutoCompleteItem
                           key={c_id}
-                          value={{ id: c_id, country: country }}
-                          getValue={value => value.country}
+                          label={country}
+                          value={`${continent}-${c_id}`}
                           groupId={continent}
                           textTransform="capitalize"
                         >
