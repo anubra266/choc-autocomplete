@@ -458,6 +458,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>render message when no suggestions match query</td>
             <td>true</td>
         </tr>
+         <tr>
+            <td>emptyStateLabel</td>
+            <td>string</td>
+            <td>Message shown for emptyState</td>
+            <td>"No options found!"</td>
+        </tr>
         <tr>
             <td>filter</td>
             <td>
