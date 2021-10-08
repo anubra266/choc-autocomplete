@@ -32,6 +32,7 @@ export type UseAutoCompleteProps = Partial<{
   defaultValues: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
+  emptyStateLabel: string
   filter: (
     query: string,
     optionValue: Item["value"],
@@ -123,6 +124,7 @@ export type UseAutoCompleteReturn = {
   filteredList: Item[];
   filteredResults: Item[];
   focusedValue: Item["value"];
+  emptyStateLabel: string
   getEmptyStateProps: (component: any) => any;
   getGroupProps: (props: AutoCompleteGroupProps) => GroupReturnProps;
   getInputProps: (

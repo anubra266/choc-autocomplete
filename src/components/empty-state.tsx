@@ -3,10 +3,10 @@ import React from "react";
 import { useAutoCompleteContext } from "../autocomplete-context";
 
 export const EmptyState = (props: BoxProps) => {
-  const { getEmptyStateProps } = useAutoCompleteContext();
+  const { getEmptyStateProps, emptyStateLabel } = useAutoCompleteContext();
 
   const emptyState = getEmptyStateProps(
-    <Flex {...emptyStyles}>No options found!</Flex>
+    <Flex {...emptyStyles}>{emptyStateLabel}</Flex>
   );
 
   return <Box {...props}>{emptyState}</Box>;
