@@ -19,7 +19,9 @@ export interface Item {
   label?: any;
   fixed?: boolean;
   disabled?: boolean;
+  itemVal?: any;
   noFilter?: boolean;
+  groupId?: string;
 }
 
 export type UseAutoCompleteProps = Partial<{
@@ -30,7 +32,11 @@ export type UseAutoCompleteProps = Partial<{
   defaultValues: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
-  filter: (query: string, itemValue: Item["value"]) => boolean;
+  filter: (
+    query: string,
+    optionValue: Item["value"],
+    optionLabel: Item["label"]
+  ) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
   isReadOnly: boolean;
@@ -38,18 +44,29 @@ export type UseAutoCompleteProps = Partial<{
   maxSelections: number;
   maxSuggestions: number;
   multiple: boolean;
-  onChange: (value: string | Item["value"][]) => void;
+  onChange: (
+    value: Item["value"] | Item["value"][],
+    item: Item | Item[]
+  ) => void;
   onSelectOption: (params: {
-    optionValue: string;
+    optionValue: Item["value"];
+    optionLabel: Item["label"];
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
-    optionValue: string;
+    optionValue: Item["value"];
+    optionLabel: Item["label"];
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
-  onTagRemoved: (removedTag: Item["value"], tags: Item["value"][]) => void;
+  onTagRemoved: (
+    removedTag: Item["value"],
+    item: Item,
+    tags: Item["value"][]
+  ) => void;
   openOnFocus: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
@@ -69,6 +86,8 @@ export type ItemReturnProps = {
   item: FlexProps;
   root: {
     isValidSuggestion: boolean;
+    setItemList: React.Dispatch<React.SetStateAction<Item[]>>;
+    value: AutoCompleteItemProps["value"];
   };
 };
 
@@ -84,9 +103,23 @@ export type GroupReturnProps = {
   group: BoxProps;
 };
 
+export type Tag = {
+  label: string;
+  onRemove: (tag: Tag) => void;
+};
+
+export type ChildRenderProp = {
+  isOpen: boolean;
+  onClose: () => void;
+  onOpen: () => void;
+  removeItem: (itemValue: Item["value"]) => void;
+  resetItems: (focusInput: boolean) => void;
+  tags: Tag[];
+};
+
 export type UseAutoCompleteReturn = {
   autoCompleteProps: AutoCompleteProps;
-  children: React.ReactNode;
+  children: MaybeRenderProp<ChildRenderProp>;
   filteredList: Item[];
   filteredResults: Item[];
   focusedValue: Item["value"];

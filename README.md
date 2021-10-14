@@ -25,7 +25,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-3-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -147,7 +147,7 @@ function App() {
           <AutoCompleteInput variant="filled" />
           <AutoCompleteList>
             {Object.entries(continents).map(([continent, countries], co_id) => (
-              <AutoCompleteGroup key={co_id} showDivider>
+              <AutoCompleteGroup key={co_id} id={continent} showDivider>
                 <AutoCompleteGroupTitle textTransform="capitalize">
                   {continent}
                 </AutoCompleteGroupTitle>
@@ -155,6 +155,7 @@ function App() {
                   <AutoCompleteItem
                     key={c_id}
                     value={country}
+                    groupId={continent}
                     textTransform="capitalize"
                   >
                     {country}
@@ -177,7 +178,7 @@ export default App;
 
 ## Accessing the internal state
 
-To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen`, with the `onOpen` and `onClose` methods.
+To access the internal state of the `AutoComplete`, use a function as children (commonly known as a render prop). You'll get access to the internal state `isOpen`, with the `onOpen`, `onClose`, `removeItem`, `resetItems` methods and the `tags` in multiple mode.
 
 ```js
 import {
@@ -385,7 +386,7 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
-### Codesandbox Link [Here](https://codesandbox.io/s/chakra-autocomplete-demo-elurs)
+### Codesandbox Link [Here](https://githubbox.com/anubra266/choc-autocomplete/tree/main/demo)
 
 ## API Reference
 
@@ -462,7 +463,8 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(query: string, itemValue: Item["value"], itemLabel: Item["label"]) => boolean;
+(query: string, optionValue: Item["value"], optionLabel: Item["label"]) =>
+  boolean;
 ```
 
 </td>
@@ -516,7 +518,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
 
 ```ts
-(value: string | Item["value"][]) => void
+(value: string | Item["value"][], item: Item| Item[]) => void
 ```
 
 </td>
@@ -529,7 +531,9 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             
 ```ts
 (params: {
-    optionValue: string;
+    optionValue: any;
+    optionLabel: string;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -545,6 +549,8 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 ```ts
 (params: {
     optionValue: string;
+    optionLabel: string;
+    item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
@@ -559,7 +565,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>
             
 ```ts
-(removedTag: Item["value"], tags: Item["value"][]) => void
+(removedTag: Item["value"],item: Item, tags: Item["value"][]) => void
 ```
 </td>
             <td>method to call whenever a tag is removed</td>
@@ -776,6 +782,26 @@ This Composes your suggestions
 </thead>
 <tbody>
   <tr>
+    <td>getValue</td>
+    <td>(value:any) => any</td>
+    <td>A method used to determine the key that holds the value, when the value prop is an object</td>
+    <td>no<br></td>
+    <td>
+
+```js
+val => val;
+```
+
+</td>
+  </tr>
+  <tr>
+    <td>groupId</td>
+    <td>string</td>
+    <td>The id of the group, if Item belongs to one. It's required if you need to wrap the items in an HOC.</td>
+    <td>no<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  <tr>
     <td>label</td>
     <td>string</td>
     <td>The label for the Option</td>
@@ -784,7 +810,7 @@ This Composes your suggestions
   </tr>
   <tr>
     <td>value</td>
-    <td>string</td>
+    <td>string or Object</td>
     <td>The value of the Option</td>
     <td>yes<br></td>
     <td>&mdash;&mdash;&mdash;</td>
@@ -987,6 +1013,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://anubra266.tk"><img src="https://avatars.githubusercontent.com/u/30869823?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abraham</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=anubra266" title="Code">💻</a></td>
     <td align="center"><a href="http://margalit.com.au"><img src="https://avatars.githubusercontent.com/u/2268424?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sam Margalit</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=margalit" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/gepd"><img src="https://avatars.githubusercontent.com/u/7091609?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gepd</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gepd" title="Code">💻</a> <a href="https://github.com/anubra266/choc-autocomplete/issues?q=author%3Agepd" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://github.com/Buupu"><img src="https://avatars.githubusercontent.com/u/26443341?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sammy Fattah</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=Buupu" title="Code">💻</a></td>
   </tr>
 </table>
 
