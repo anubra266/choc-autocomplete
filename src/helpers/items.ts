@@ -4,6 +4,10 @@ import { ReactNode } from "react";
 import { FlexProps } from "@chakra-ui/react";
 import { fuzzyScore } from "./fuzzySearch";
 import { Item } from "../types";
+import { AutoCompleteItemProps } from "../autocomplete-item";
+
+export const getDefItemValue = (item: AutoCompleteItemProps["value"]) =>
+  (typeof item === "string" ? item : item[Object.keys(item)[0]]).toString();
 
 export const setEmphasis = (children: any, query: string) => {
   if (typeof children !== "string" || isEmpty(query)) {
@@ -26,9 +30,12 @@ export const getItemList = (children: ReactNode) => {
 
   return itemChildren.map(item => {
     const itemObj = pick(item.props, ["value", "label", "fixed", "disabled"]);
-    return isDefined(itemObj.label)
+    const { getValue = getDefItemValue } = item.props;
+    const value = getValue(itemObj.value);
+    const finObj = isDefined(itemObj.label)
       ? itemObj
-      : { ...itemObj, label: item.value };
+      : { ...itemObj, label: value };
+    return { ...finObj, value };
   });
 };
 

@@ -19,6 +19,7 @@ import { useEffect, useRef, useState } from "react";
 import { AutoCompleteProps } from "./autocomplete";
 import {
   defaultFilterMethod,
+  getDefItemValue,
   getFocusedStyles,
   getItemList,
   setEmphasis,
@@ -26,7 +27,6 @@ import {
 import { getMultipleWrapStyles } from "./helpers/input";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
 import { Item, UseAutoCompleteReturn } from "./types";
-import { AutoCompleteItemProps } from "./autocomplete-item";
 
 /**
  * useAutoComplete that provides all the state and focus management logic
@@ -297,9 +297,6 @@ export function useAutoComplete(
       width,
     };
   };
-
-  const getDefItemValue = (item: AutoCompleteItemProps["value"]) =>
-    (typeof item === "string" ? item : item[Object.keys(item)[0]]).toString();
 
   const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
     const {
