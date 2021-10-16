@@ -5,7 +5,6 @@ import {
   InputProps,
   WrapProps,
 } from "@chakra-ui/react";
-import { Dict } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -64,14 +63,21 @@ export type UseAutoCompleteProps = Partial<{
   onTagRemoved: (
     removedTag: Item["value"],
     item: Item,
-    tags: Item["value"][]
+    tags: ItemTag[]
   ) => void;
+  onReady: (params: OnReadyProps) => void;
   openOnFocus: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
   shouldRenderSuggestions: (value: string) => boolean;
   suggestWhenEmpty: boolean;
 }>;
+
+export type ItemTag = { label: any; onRemove: () => void };
+
+export type OnReadyProps = {
+  tags: ItemTag[];
+};
 
 export type InputReturnProps = {
   wrapper: {
@@ -123,7 +129,16 @@ export type UseAutoCompleteReturn = {
   onClose: () => void;
   onOpen: () => void;
   query: string;
+  removeItem: (focusInput?: boolean | undefined) => void;
+  resetItems: (focusInput?: boolean | undefined) => void;
   setQuery: Dispatch<SetStateAction<any>>;
-  tags: Dict[];
+  tags: ItemTag[];
   values: Item["value"][];
 };
+
+export type AutoCompleteRefMethods =
+  | {
+      removeItem: (focusInput?: boolean | undefined) => void;
+      resetItems: (focusInput?: boolean | undefined) => void;
+    }
+  | undefined;
