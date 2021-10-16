@@ -385,6 +385,13 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
+### Autocomplete methods
+Assign a ref to the `AutoComplete` component and call the available methods with:
+```js
+ref.current?.resetItems()
+ref.current?.removeItem(itemValue)
+```
+
 ### Codesandbox Link [Here](https://githubbox.com/anubra266/choc-autocomplete/tree/main/demo)
 
 ## API Reference
@@ -557,6 +564,17 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 
 </td>
             <td>method to call whenever a suggestion is focused</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
+            <td>onReady</td>
+            <td>
+            
+```ts
+(props:{tags:ItemTag[]}) => void
+```
+</td>
+            <td>method that exposes variables used in component</td>
             <td>&mdash;&mdash;&mdash;</td>
         </tr>
         <tr>

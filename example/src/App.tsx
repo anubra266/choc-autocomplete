@@ -1,8 +1,10 @@
 import {
+  Button,
   Flex,
   FormControl,
   FormHelperText,
   FormLabel,
+  HStack,
   InputGroup,
   InputRightElement,
 } from "@chakra-ui/react";
@@ -14,7 +16,9 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
+  AutoCompleteRefMethods,
   AutoCompleteTag,
+  ItemTag,
 } from "../../";
 
 function App() {
@@ -26,29 +30,38 @@ function App() {
     "south korea",
   ];
 
-  // const [value, setValue] = useState("");
+  const [tags, setTags] = useState<ItemTag[]>([]);
+  // const [reset, setReset] = useState<any>();
+  // let reset;
+
+  const ref = React.useRef<AutoCompleteRefMethods>();
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
+        <Button onClick={() => ref.current?.resetItems}>Reset</Button>
         <AutoComplete
           openOnFocus
+          defaultValues={["nigeria", "japan", "india"]}
+          ref={ref}
           multiple
-          onChange={vals => console.log(vals)}
+          onChange={console.log}
           creatable
+          onReady={({ tags }) => {
+            setTags(tags);
+          }}
         >
-          <AutoCompleteInput variant="filled">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
+          <HStack>
+            {tags.map((tag, tid) => (
+              <AutoCompleteTag
+                key={tid}
+                label={tag.label}
+                onRemove={tag.onRemove}
+              />
+            ))}
+          </HStack>
+          <AutoCompleteInput variant="filled"></AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem

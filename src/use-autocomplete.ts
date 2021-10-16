@@ -49,6 +49,7 @@ export function useAutoComplete(
     listAllValuesOnFocus,
     maxSuggestions,
     multiple,
+    onReady,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
@@ -184,12 +185,21 @@ export function useAutoComplete(
     if (query === itemValue) setQuery("");
   };
 
+  const resetItems = (focusInput?: boolean) => {
+    setValues([]);
+    if (focusInput) inputRef.current?.focus();
+  };
+
   const tags = multiple
     ? values.map(tag => ({
         label: itemList.find(item => item.value === tag)?.label || tag,
         onRemove: () => removeItem(tag),
       }))
     : [];
+
+  useEffect(() => {
+    runIfFn(onReady, { tags });
+  }, [values]);
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
     props,
@@ -328,7 +338,7 @@ export function useAutoComplete(
       sx,
       ...rest
     } = props;
-    const value = getValue(valueProp).toString();
+    const value = getValue(valueProp)?.toString();
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
@@ -422,6 +432,8 @@ export function useAutoComplete(
     onClose,
     onOpen,
     query,
+    removeItem,
+    resetItems,
     setQuery,
     tags,
     values,
