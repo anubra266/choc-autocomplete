@@ -228,13 +228,13 @@ export function useAutoComplete(
       input: {
         isReadOnly,
         onFocus: e => {
-          runIfFn(onFocus);
+          runIfFn(onFocus, e);
           if (autoCompleteProps.openOnFocus && !isReadOnly) onOpen();
           if (autoCompleteProps.selectOnFocus) e.target.select();
           if (listAllValuesOnFocus) setListAll(true);
         },
         onBlur: e => {
-          runIfFn(onBlur);
+          runIfFn(onBlur, e);
           const listIsFocused = e.relatedTarget === listRef?.current;
           const inputWrapperIsFocused = inputWrapperRef.current?.contains(
             e.relatedTarget as any
