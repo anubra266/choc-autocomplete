@@ -22,45 +22,13 @@ import {
 } from "../../";
 
 function App() {
-  const countries = [
-    "nigeria",
-    "japan",
-    "india",
-    "united states",
-    "south korea",
-  ];
-
-  const [tags, setTags] = useState<ItemTag[]>([]);
-  // const [reset, setReset] = useState<any>();
-  // let reset;
-
-  const ref = React.useRef<AutoCompleteRefMethods>();
+  const countries: any[] = [];
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <Button onClick={() => ref.current?.resetItems}>Reset</Button>
-        <AutoComplete
-          openOnFocus
-          defaultValues={["nigeria", "japan", "india"]}
-          ref={ref}
-          multiple
-          onChange={console.log}
-          creatable
-          onReady={({ tags }) => {
-            setTags(tags);
-          }}
-        >
-          <HStack>
-            {tags.map((tag, tid) => (
-              <AutoCompleteTag
-                key={tid}
-                label={tag.label}
-                onRemove={tag.onRemove}
-              />
-            ))}
-          </HStack>
+        <AutoComplete onChange={console.log} creatable>
           <AutoCompleteInput variant="filled"></AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (

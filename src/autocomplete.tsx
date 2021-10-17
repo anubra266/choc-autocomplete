@@ -13,7 +13,7 @@ export type AutoCompleteChildProps = {
 };
 export interface AutoCompleteProps extends UseAutoCompleteProps {
   children: MaybeRenderProp<AutoCompleteChildProps>;
-  ref: React.RefObject<AutoCompleteRefMethods>;
+  ref?: React.RefObject<AutoCompleteRefMethods>;
 }
 
 export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
