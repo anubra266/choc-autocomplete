@@ -22,13 +22,19 @@ import {
 } from "../../";
 
 function App() {
-  const countries: any[] = [];
+  const countries = ["nigeria", "japan"];
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete onChange={console.log}>
+        <AutoComplete
+          onChange={a => console.log(a)}
+          // defaultValue="japan"
+          defaultValues={["japan"]}
+          selectOnFocus
+          openOnFocus
+        >
           <AutoCompleteInput variant="filled"></AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (

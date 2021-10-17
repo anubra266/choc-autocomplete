@@ -27,6 +27,7 @@ export type UseAutoCompleteProps = Partial<{
   closeOnSelect: boolean;
   creatable: boolean;
   defaultIsOpen: boolean;
+  defaultValue: Item["value"];
   defaultValues: Item["value"] | Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
