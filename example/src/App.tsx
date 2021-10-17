@@ -28,14 +28,13 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete onChange={console.log} creatable>
+        <AutoComplete onChange={console.log}>
           <AutoCompleteInput variant="filled"></AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem
                 key={`option-${cid}`}
-                value={{ id: cid, country: country }}
-                getValue={value => value.country}
+                value={country}
                 label={country}
                 textTransform="capitalize"
                 _selected={{ bg: "whiteAlpha.50" }}
