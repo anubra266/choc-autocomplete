@@ -30,12 +30,18 @@ function App() {
     "south korea",
   ];
 
+  const [value, setValue] = useState("japan");
+
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
         <AutoComplete
-          onChange={a => console.log(a)}
+          value={value}
+          onChange={a => {
+            console.log(a);
+            setValue(a);
+          }}
           // defaultValue="japan"
           // multiple
           listAllValuesOnFocus

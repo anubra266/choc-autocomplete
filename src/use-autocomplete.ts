@@ -77,28 +77,8 @@ export function useAutoComplete(
   const listRef = useRef<HTMLDivElement>(null);
   const interactionRef = useRef<"mouse" | "keyboard" | null>(null);
 
-  const [query, setQuery] = useState<string>("");
-
-  // const [values, setValues] = useState<any[]>(defaultValues);
-
-  const [values, setValues] = useControllableState({
-    value: valuesProp,
-    // onChange,
-  });
-
-  useEffect(() => {
-    if (!multiple && !isEmpty(defaultValues)) {
-      setQuery(defaultValues[0] as any);
-    }
-  }, []);
-
-  const [focusedValue, setFocusedValue] = useState<Item["value"]>(
-    itemList[0]?.value
-  );
-
   const [listAll, setListAll] = useState(false);
-
-  const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
+  const [query, setQuery] = useState<string>("");
 
   const filteredResults = itemList
     .filter(
@@ -120,6 +100,34 @@ export function useAutoComplete(
     : [];
   const filteredList = [...filteredResults, ...creatableArr];
 
+  const [values, setValues] = useControllableState({
+    defaultValue: defaultValues,
+    value: valuesProp,
+    onChange: (values: any[]) => {
+      const item = filteredList.find(opt => opt.value === values[0]);
+      const items = values.map(val =>
+        filteredList.find(opt => opt.value === val)
+      );
+      runIfFn(
+        autoCompleteProps.onChange,
+        multiple ? values : values[0],
+        multiple ? items : item
+      );
+    },
+  });
+
+  useEffect(() => {
+    if (!multiple && !isEmpty(defaultValues)) {
+      setQuery(defaultValues[0] as any);
+    }
+  }, []);
+
+  const [focusedValue, setFocusedValue] = useState<Item["value"]>(
+    itemList[0]?.value
+  );
+
+  const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
+
   const focusedIndex = filteredList.findIndex(i => i.value === focusedValue);
   const nextItem = getNextItem(
     focusedIndex,
@@ -137,18 +145,6 @@ export function useAutoComplete(
   useUpdateEffect(() => {
     setFocusedValue(firstItem?.value);
   }, [query]);
-
-  useEffect(() => {
-    const item = filteredList.find(opt => opt.value === values[0]);
-    const items = values.map(val =>
-      filteredList.find(opt => opt.value === val)
-    );
-    runIfFn(
-      autoCompleteProps.onChange,
-      multiple ? values : values[0],
-      multiple ? items : item
-    );
-  }, [values, multiple]);
 
   useEffect(() => {
     const focusedItem = itemList.find(i => i.value === focusedValue);
@@ -318,7 +314,7 @@ export function useAutoComplete(
             callAll(onClose, e.preventDefault);
           }
         },
-        value: query ?? "",
+        value: query || values[0] || "",
         variant: multiple ? "unstyled" : variant,
         ...rest,
       },
