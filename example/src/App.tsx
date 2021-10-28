@@ -22,7 +22,13 @@ import {
 } from "../../";
 
 function App() {
-  const countries = ["nigeria", "japan"];
+  const countries = [
+    "nigeria",
+    "japan",
+    "india",
+    "united states",
+    "south korea",
+  ];
 
   return (
     <Flex pt="48" justify="center" align="center" w="full" direction="column">
@@ -31,11 +37,23 @@ function App() {
         <AutoComplete
           onChange={a => console.log(a)}
           // defaultValue="japan"
-          defaultValues={["japan"]}
+          // multiple
+          listAllValuesOnFocus
+          // defaultValues={["japan"]}
           selectOnFocus
           openOnFocus
         >
-          <AutoCompleteInput variant="filled"></AutoCompleteInput>
+          <AutoCompleteInput variant="filled">
+            {({ tags }) =>
+              tags.map((tag, tid) => (
+                <AutoCompleteTag
+                  key={tid}
+                  label={tag.label}
+                  onRemove={tag.onRemove}
+                />
+              ))
+            }
+          </AutoCompleteInput>
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem
