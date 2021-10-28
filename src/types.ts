@@ -72,6 +72,8 @@ export type UseAutoCompleteProps = Partial<{
   selectOnFocus: boolean;
   shouldRenderSuggestions: (value: string) => boolean;
   suggestWhenEmpty: boolean;
+  value: Item["value"];
+  values: Item["value"][];
 }>;
 
 export type ItemTag = { label: any; onRemove: () => void };
@@ -120,7 +122,10 @@ export type UseAutoCompleteReturn = {
     props: AutoCompleteInputProps,
     themeInput?: any
   ) => InputReturnProps;
-  getItemProps: (props: AutoCompleteItemProps) => ItemReturnProps;
+  getItemProps: (
+    props: AutoCompleteItemProps,
+    creatable?: boolean
+  ) => ItemReturnProps;
   getListProps: () => ListReturnProps;
   inputRef: React.RefObject<HTMLInputElement>;
   interactionRef: React.RefObject<"mouse" | "keyboard" | null>;

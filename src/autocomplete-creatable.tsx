@@ -21,13 +21,16 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
   } = useAutoCompleteContext();
 
   const queryValue = <mark>{query}</mark>;
-  const { children, ...itemProps } = getItemProps({
-    ...props,
-    value: query,
-    children: runIfFn(childrenProp, {
-      value: queryValue,
-    }),
-  }).item;
+  const { children, ...itemProps } = getItemProps(
+    {
+      ...props,
+      value: query,
+      children: runIfFn(childrenProp, {
+        value: queryValue,
+      }),
+    },
+    true
+  ).item;
 
   const queryExistsInList = filteredResults.some(i => i.value === query);
   const showCreatable =

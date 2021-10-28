@@ -2,6 +2,7 @@ import {
   useDimensions,
   useDisclosure,
   useUpdateEffect,
+  useControllableState,
 } from "@chakra-ui/react";
 import {
   callAll,
@@ -54,6 +55,8 @@ export function useAutoComplete(
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
+    value,
+    values: valuesProp = [...(multiple ? [] : [value])],
   } = autoCompleteProps;
 
   closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
@@ -76,7 +79,12 @@ export function useAutoComplete(
 
   const [query, setQuery] = useState<string>("");
 
-  const [values, setValues] = useState<any[]>(defaultValues);
+  // const [values, setValues] = useState<any[]>(defaultValues);
+
+  const [values, setValues] = useControllableState({
+    value: valuesProp,
+    // onChange,
+  });
 
   useEffect(() => {
     if (!multiple && !isEmpty(defaultValues)) {
@@ -326,7 +334,10 @@ export function useAutoComplete(
     };
   };
 
-  const getItemProps: UseAutoCompleteReturn["getItemProps"] = props => {
+  const getItemProps: UseAutoCompleteReturn["getItemProps"] = (
+    props,
+    creatable
+  ) => {
     const {
       _fixed,
       _focus,
@@ -341,7 +352,7 @@ export function useAutoComplete(
       sx,
       ...rest
     } = props;
-    const value = getValue(valueProp)?.toString();
+    const value = creatable ? valueProp : getValue(valueProp)?.toString();
     const isFocused = value === focusedValue;
     const isValidSuggestion =
       filteredList.findIndex(i => i.value === value) >= 0;
