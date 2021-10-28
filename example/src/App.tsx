@@ -39,7 +39,6 @@ function App() {
         <AutoComplete
           value={value}
           onChange={a => {
-            console.log(a);
             setValue(a);
           }}
           // defaultValue="japan"

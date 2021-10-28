@@ -386,10 +386,12 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
 ### Autocomplete methods
+
 Assign a ref to the `AutoComplete` component and call the available methods with:
+
 ```js
-ref.current?.resetItems()
-ref.current?.removeItem(itemValue)
+ref.current?.resetItems();
+ref.current?.removeItem(itemValue);
 ```
 
 ### Codesandbox Link [Here](https://githubbox.com/anubra266/choc-autocomplete/tree/main/demo)
@@ -622,6 +624,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>boolean</td>
             <td>show suggestions when input value is empty</td>
             <td>false</td>
+        </tr>
+        <tr>
+            <td>value</td>
+            <td>any</td>
+            <td>value of the component in the controlled state</td>
+            <td>---</td>
         </tr>
     </tbody>
 </table>
