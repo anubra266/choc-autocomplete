@@ -48,18 +48,19 @@ function App() {
           listAllValuesOnFocus
           selectOnFocus
           openOnFocus
+          // multiple
         >
           <InputGroup>
-            <AutoCompleteInput variant="filled" w="48">
-              {({ tags }) =>
-                tags.map((tag, tid) => (
+            <AutoCompleteInput variant="filled" w="60">
+              {({ tags }) => {
+                return tags.map((tag, tid) => (
                   <AutoCompleteTag
                     key={tid}
                     label={tag.label}
                     onRemove={tag.onRemove}
                   />
-                ))
-              }
+                ));
+              }}
             </AutoCompleteInput>
             <InputRightElement>
               <Spinner />
@@ -70,7 +71,7 @@ function App() {
               <AutoCompleteItem
                 key={`option-${cid}`}
                 value={country}
-                label={country}
+                // label={country}
                 textTransform="capitalize"
                 _selected={{ bg: "whiteAlpha.50" }}
                 _focus={{ bg: "whiteAlpha.100" }}

@@ -50,7 +50,7 @@ export function useAutoComplete(
     maxSuggestions,
     multiple,
     defaultValue,
-    defaultValues = defaultValue ? [defaultValue] : [""],
+    defaultValues = defaultValue ? [defaultValue] : [],
     onReady,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
@@ -214,7 +214,7 @@ export function useAutoComplete(
           inputRef?.current?.focus();
         },
         tabIndex: 0,
-        ...getMultipleWrapStyles(themeInput),
+        ...getMultipleWrapStyles(themeInput, multiple),
         ...rest,
       },
       input: {
