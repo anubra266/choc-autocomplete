@@ -50,13 +50,13 @@ export function useAutoComplete(
     maxSuggestions,
     multiple,
     defaultValue,
-    defaultValues = defaultValue ? [defaultValue] : undefined,
+    defaultValues = defaultValue ? [defaultValue] : [""],
     onReady,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
     value,
-    values: valuesProp = value ? [value] : defaultValues ? undefined : [],
+    values: valuesProp = value ? [value] : undefined,
   } = autoCompleteProps;
   closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
 
@@ -83,7 +83,7 @@ export function useAutoComplete(
   else if (!isUndefined(defaultValues)) defaultQuery = defaultValues[0];
   else if (!isUndefined(valuesProp)) defaultQuery = valuesProp[0];
 
-  const [query, setQuery] = useState<string>(defaultQuery);
+  const [query, setQuery] = useState<string>(defaultQuery ?? "");
   const filteredResults = itemList
     .filter(
       i =>
@@ -154,8 +154,9 @@ export function useAutoComplete(
   }, [focusedValue, autoCompleteProps.onOptionFocus]);
 
   const selectItem = (optionValue: Item["value"]) => {
-    if (!values.includes(optionValue) && values.length < maxSelections)
+    if (!values.includes(optionValue) && values.length < maxSelections) {
       setValues(v => (multiple ? [...v, optionValue] : [optionValue]));
+    }
 
     const option = filteredList.find(i => i.value === optionValue);
 

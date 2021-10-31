@@ -38,12 +38,12 @@ function App() {
     <Flex pt="48" justify="center" align="center" w="full">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <Button onClick={() => setValue('')}>Reset</Button>
+        <Button onClick={() => setValue("")}>Reset</Button>
         <AutoComplete
-          value={value}
-          freeSolo
+          // value={value}
+          // freeSolo
           onChange={a => {
-            setValue(a);
+            // setValue(a);
           }}
           listAllValuesOnFocus
           selectOnFocus
