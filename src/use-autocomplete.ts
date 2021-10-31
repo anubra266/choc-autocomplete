@@ -300,7 +300,8 @@ export function useAutoComplete(
           }
         },
         value: query,
-        variant: "unstyled",
+        variant: multiple ? "unstyled" : variant,
+        ...rest,
       },
     };
   };
