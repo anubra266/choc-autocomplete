@@ -539,8 +539,6 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             
 ```ts
 (params: {
-    optionValue: any;
-    optionLabel: string;
     item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
@@ -556,8 +554,6 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 
 ```ts
 (params: {
-    optionValue: string;
-    optionLabel: string;
     item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
@@ -737,13 +733,7 @@ e.g.
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
- <tr>
-    <td>wrapStyles</td>
-    <td>CSSObject</td>
-    <td>Styles for the Input's wrapper in `multiple` mode </td>
-    <td>No</td>
-    <td>&mdash;&mdash;&mdash;</td>
-  </tr>
+
 </tbody>
 </table>
 

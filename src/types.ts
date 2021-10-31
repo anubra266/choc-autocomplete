@@ -28,7 +28,7 @@ export type UseAutoCompleteProps = Partial<{
   creatable: boolean;
   defaultIsOpen: boolean;
   defaultValue: Item["value"];
-  defaultValues: Item["value"] | Item["value"][];
+  defaultValues: Item["value"][];
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (
@@ -48,15 +48,11 @@ export type UseAutoCompleteProps = Partial<{
     item: Item | Item[]
   ) => void;
   onSelectOption: (params: {
-    optionValue: Item["value"];
-    optionLabel: Item["label"];
     item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
-    optionValue: Item["value"];
-    optionLabel: Item["label"];
     item: Item;
     selectMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;

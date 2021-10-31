@@ -6,6 +6,7 @@ import {
   FormLabel,
   HStack,
   InputGroup,
+  Spinner,
   InputRightElement,
 } from "@chakra-ui/react";
 import * as React from "react";
@@ -30,35 +31,40 @@ function App() {
     "south korea",
   ];
 
-  const [value, setValue] = useState("japan");
+  const [value, setValue] = useState<string | null>("japan");
+  const [valueM, setValueM] = useState([]);
 
   return (
-    <Flex pt="48" justify="center" align="center" w="full" direction="column">
+    <Flex pt="48" justify="center" align="center" w="full">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
+        <Button onClick={() => setValue('')}>Reset</Button>
         <AutoComplete
           value={value}
+          freeSolo
           onChange={a => {
             setValue(a);
           }}
-          // defaultValue="japan"
-          // multiple
           listAllValuesOnFocus
-          // defaultValues={["japan"]}
           selectOnFocus
           openOnFocus
         >
-          <AutoCompleteInput variant="filled">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
+          <InputGroup>
+            <AutoCompleteInput variant="filled" w="48">
+              {({ tags }) =>
+                tags.map((tag, tid) => (
+                  <AutoCompleteTag
+                    key={tid}
+                    label={tag.label}
+                    onRemove={tag.onRemove}
+                  />
+                ))
+              }
+            </AutoCompleteInput>
+            <InputRightElement>
+              <Spinner />
+            </InputRightElement>
+          </InputGroup>
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem
@@ -77,6 +83,60 @@ function App() {
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+      {/* ///////////////////////////////////////////////// */}
+
+      {/* <FormControl id="email" w="60">
+        <FormLabel>Olympics Soccer Winner</FormLabel>
+        <AutoComplete
+          values={valueM}
+          onChange={a => {
+            setValueM(a);
+          }}
+          multiple
+          listAllValuesOnFocus
+          selectOnFocus
+          openOnFocus
+        >
+          <InputGroup>
+            <AutoCompleteInput variant="filled" w="48">
+              {({ tags }) =>
+                tags.map((tag, tid) => (
+                  <AutoCompleteTag
+                    key={tid}
+                    label={tag.label}
+                    onRemove={tag.onRemove}
+                  />
+                ))
+              }
+            </AutoCompleteInput>
+            <InputRightElement>
+              <Spinner />
+            </InputRightElement>
+          </InputGroup>
+          <AutoCompleteList>
+            {countries.map((country, cid) => (
+              <AutoCompleteItem
+                key={`option-${cid}`}
+                value={country}
+                label={country}
+                textTransform="capitalize"
+                _selected={{ bg: "whiteAlpha.50" }}
+                _focus={{ bg: "whiteAlpha.100" }}
+              >
+                {country}
+              </AutoCompleteItem>
+            ))}
+            <AutoCompleteCreatable />
+          </AutoCompleteList>
+        </AutoComplete>
+        <FormHelperText>Who do you support.</FormHelperText>
+      </FormControl> */}
     </Flex>
   );
 }

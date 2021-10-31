@@ -50,15 +50,14 @@ export function useAutoComplete(
     maxSuggestions,
     multiple,
     defaultValue,
-    defaultValues = [...(multiple ? [] : [defaultValue])],
+    defaultValues = defaultValue ? [defaultValue] : undefined,
     onReady,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
     value,
-    values: valuesProp = [...(multiple ? [] : [value])],
+    values: valuesProp = value ? [value] : defaultValues ? undefined : [],
   } = autoCompleteProps;
-
   closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
 
   freeSolo = freeSolo ? freeSolo : multiple ? true : autoCompleteProps.freeSolo;
@@ -78,8 +77,13 @@ export function useAutoComplete(
   const interactionRef = useRef<"mouse" | "keyboard" | null>(null);
 
   const [listAll, setListAll] = useState(false);
-  const [query, setQuery] = useState<string>("");
 
+  let defaultQuery = "";
+  if (multiple) defaultQuery = "";
+  else if (!isUndefined(defaultValues)) defaultQuery = defaultValues[0];
+  else if (!isUndefined(valuesProp)) defaultQuery = valuesProp[0];
+
+  const [query, setQuery] = useState<string>(defaultQuery);
   const filteredResults = itemList
     .filter(
       i =>
@@ -98,29 +102,23 @@ export function useAutoComplete(
   const creatableArr: Item[] = creatable
     ? [{ value: query, noFilter: true }]
     : [];
-  const filteredList = [...filteredResults, ...creatableArr];
 
+  const filteredList = [...filteredResults, ...creatableArr];
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues,
     value: valuesProp,
-    onChange: (values: any[]) => {
-      const item = filteredList.find(opt => opt.value === values[0]);
-      const items = values.map(val =>
+    onChange: (newValues: any[]) => {
+      const item = filteredList.find(opt => opt.value === newValues[0]);
+      const items = newValues.map(val =>
         filteredList.find(opt => opt.value === val)
       );
       runIfFn(
         autoCompleteProps.onChange,
-        multiple ? values : values[0],
+        multiple ? newValues : newValues[0],
         multiple ? items : item
       );
     },
   });
-
-  useEffect(() => {
-    if (!multiple && !isEmpty(defaultValues)) {
-      setQuery(defaultValues[0] as any);
-    }
-  }, []);
 
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     itemList[0]?.value
@@ -149,8 +147,6 @@ export function useAutoComplete(
   useEffect(() => {
     const focusedItem = itemList.find(i => i.value === focusedValue);
     runIfFn(autoCompleteProps.onOptionFocus, {
-      optionValue: focusedValue,
-      optionLabel: focusedItem?.label,
       item: focusedItem!,
       selectMethod: interactionRef.current,
       isNewInput: false,
@@ -163,19 +159,11 @@ export function useAutoComplete(
 
     const option = filteredList.find(i => i.value === optionValue);
 
-    const optionLabelFromValue = option?.label;
-    // use value if label is not available
-    const optionLabel = optionLabelFromValue || optionValue;
-    setQuery(optionLabel);
-
     if (multiple) {
-      setQuery("");
       inputRef.current?.focus();
     }
     if (autoCompleteProps.focusInputOnSelect) inputRef.current?.focus();
     runIfFn(autoCompleteProps.onSelectOption, {
-      optionValue: optionValue,
-      optionLabel: optionLabel,
       item: option!,
       selectMethod: interactionRef.current,
       isNewInput: false,
@@ -206,21 +194,17 @@ export function useAutoComplete(
 
   useEffect(() => {
     runIfFn(onReady, { tags });
+
+    const item = filteredList.find(opt => opt.value === values[0]);
+    const optionLabel = item?.label || item?.value;
+    setQuery(() => (multiple ? "" : optionLabel ?? ""));
   }, [values]);
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
     props,
     themeInput
   ) => {
-    const {
-      onBlur,
-      onChange,
-      onFocus,
-      onKeyDown,
-      variant,
-      wrapStyles,
-      ...rest
-    } = props;
+    const { onBlur, onChange, onFocus, onKeyDown, variant, ...rest } = props;
 
     return {
       wrapper: {
@@ -229,8 +213,8 @@ export function useAutoComplete(
           inputRef?.current?.focus();
         },
         tabIndex: 0,
-        ...getMultipleWrapStyles(themeInput, multiple),
-        ...wrapStyles,
+        ...getMultipleWrapStyles(themeInput),
+        ...rest,
       },
       input: {
         isReadOnly,
@@ -314,9 +298,8 @@ export function useAutoComplete(
             callAll(onClose, e.preventDefault);
           }
         },
-        value: query || values[0] || "",
-        variant: multiple ? "unstyled" : variant,
-        ...rest,
+        value: query,
+        variant: "unstyled",
       },
     };
   };
