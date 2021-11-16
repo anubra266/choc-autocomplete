@@ -8,6 +8,7 @@ import {
   InputGroup,
   Spinner,
   InputRightElement,
+  Input,
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useState } from "react";
@@ -39,9 +40,15 @@ function App() {
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
         <Button onClick={() => setValue("")}>Reset</Button>
+        <Input />
+        <Input />
+        <Input />
+        <Input />
         <AutoComplete
           // value={value}
           // freeSolo
+
+          defaultValue="japan"
           onChange={a => {
             // setValue(a);
           }}
@@ -51,7 +58,7 @@ function App() {
           // multiple
         >
           <InputGroup>
-            <AutoCompleteInput variant="filled" w="60">
+            <AutoCompleteInput variant="filled" w="80">
               {({ tags }) => {
                 return tags.map((tag, tid) => (
                   <AutoCompleteTag
@@ -82,6 +89,8 @@ function App() {
             <AutoCompleteCreatable />
           </AutoCompleteList>
         </AutoComplete>
+        <Button onClick={() => setValue("")}>Reset</Button>
+
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>
       {/* ///////////////////////////////////////////////// */}
