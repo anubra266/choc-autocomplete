@@ -58,7 +58,7 @@ function App() {
           // multiple
         >
           <InputGroup>
-            <AutoCompleteInput variant="filled" w="80">
+            <AutoCompleteInput variant="filled" w="60">
               {({ tags }) => {
                 return tags.map((tag, tid) => (
                   <AutoCompleteTag
@@ -69,9 +69,9 @@ function App() {
                 ));
               }}
             </AutoCompleteInput>
-            <InputRightElement>
+            {/* <InputRightElement>
               <Spinner />
-            </InputRightElement>
+            </InputRightElement> */}
           </InputGroup>
           <AutoCompleteList>
             {countries.map((country, cid) => (

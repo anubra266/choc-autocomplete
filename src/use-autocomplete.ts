@@ -309,7 +309,7 @@ export function useAutoComplete(
   const dim = useDimensions(inputWrapperRef, true);
   const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
     const width = dim?.marginBox.width as number;
-
+    console.log(dim);
     return {
       width,
     };

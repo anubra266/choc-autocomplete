@@ -3,7 +3,7 @@ import {
   forwardRef,
   Input,
   InputProps,
-  // useMergeRefs,
+  useMergeRefs,
   useMultiStyleConfig,
   Wrap,
   WrapItem,
@@ -30,14 +30,16 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const themeInput: any = useMultiStyleConfig("Input", props);
 
-    const inputProps = getInputProps(rest, themeInput);
+    const { wrapper, input: inputProps } = getInputProps(rest, themeInput);
+    const { ref: wrapperRef, ...wrapperProps } = wrapper;
+    const ref = useMergeRefs(forwardedRef, wrapperRef);
 
     const children = runIfFn(childrenProp, { tags });
 
     return (
-      <Wrap {...inputProps.wrapper} ref={forwardedRef}>
+      <Wrap {...wrapperProps} ref={ref}>
         {children}
-        <WrapItem as={Input} {...(inputProps.input as any)} ref={inputRef} />
+        <WrapItem as={Input} {...(inputProps as any)} ref={inputRef} />
       </Wrap>
     );
   }
