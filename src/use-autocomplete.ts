@@ -213,7 +213,6 @@ export function useAutoComplete(
         onClick: () => {
           inputRef?.current?.focus();
         },
-        tabIndex: 0,
         ...getMultipleWrapStyles(themeInput, multiple),
         ...rest,
       },
@@ -279,7 +278,8 @@ export function useAutoComplete(
 
           if (key === "Tab") {
             setFocusedValue(nextItem?.value);
-            e.preventDefault();
+
+            if (isOpen) e.preventDefault();
             return;
           }
 
