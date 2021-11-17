@@ -39,89 +39,22 @@ function App() {
     { label: "japan", value: "five" },
   ];
 
-  const [value, setValue] = useState<string | null>("japan");
-  const [valueM, setValueM] = useState(["two"]);
+  const [valueM, setValueM] = useState<string[]>(["one", "two"]);
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
-      {/* <FormControl id="email" w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
-        <Button onClick={() => setValue("")}>Reset</Button>
-        <Input />
-        <Input />
-        <Input />
-        <Input />
-        <AutoComplete
-          // value={value}
-          // freeSolo
-
-          defaultValue="japan"
-          onChange={a => {
-            // setValue(a);
-          }}
-          listAllValuesOnFocus
-          selectOnFocus
-          openOnFocus
-          // multiple
-        >
-          <InputGroup>
-            <AutoCompleteInput variant="filled" w="60">
-              {({ tags }) => {
-                return tags.map((tag, tid) => (
-                  <AutoCompleteTag
-                    key={tid}
-                    label={tag.label}
-                    onRemove={tag.onRemove}
-                  />
-                ));
-              }}
-            </AutoCompleteInput>
-            <InputRightElement>
-              <Spinner />
-            </InputRightElement>
-          </InputGroup>
-          <AutoCompleteList>
-            {countries.map((country, cid) => (
-              <AutoCompleteItem
-                key={`option-${cid}`}
-                value={country}
-                // label={country}
-                textTransform="capitalize"
-                _selected={{ bg: "whiteAlpha.50" }}
-                _focus={{ bg: "whiteAlpha.100" }}
-              >
-                {country}
-              </AutoCompleteItem>
-            ))}
-            <AutoCompleteCreatable />
-          </AutoCompleteList>
-        </AutoComplete>
-        <Button onClick={() => setValue("")}>Reset</Button>
-
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl> */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-      {/* ///////////////////////////////////////////////// */}
-
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
         <Button onClick={() => setValueM([])}>Reset</Button>
         <AutoComplete
           values={valueM}
-          onChange={a => {
-            setValueM(a);
-          }}
-          multiple
-          listAllValuesOnFocus
-          selectOnFocus
+          onChange={setValueM}
           openOnFocus
+          rollNavigation
+          listAllValuesOnFocus
+          multiple
         >
-          <InputGroup>
+          {/* <InputGroup> */}
             <AutoCompleteInput variant="filled" w="48">
               {({ tags }) =>
                 tags.map((tag, tid) => (
@@ -133,9 +66,9 @@ function App() {
                 ))
               }
             </AutoCompleteInput>
-            <InputRightElement>
+            {/* <InputRightElement>
               <Spinner />
-            </InputRightElement>
+            </InputRightElement> */}
           </InputGroup>
           <AutoCompleteList>
             {options.map(option => (

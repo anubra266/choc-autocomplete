@@ -56,7 +56,11 @@ export function useAutoComplete(
     shouldRenderSuggestions = () => true,
     suggestWhenEmpty,
     value,
-    values: valuesProp = value ? [value] : undefined,
+    values: valuesProp = value
+      ? typeof value === "string"
+        ? [value]
+        : [...value]
+      : undefined,
   } = autoCompleteProps;
   closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
 
