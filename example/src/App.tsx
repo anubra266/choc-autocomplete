@@ -39,37 +39,39 @@ function App() {
     { label: "japan", value: "five" },
   ];
 
-  const [valueM, setValueM] = useState<string[]>(["one", "two"]);
+  const [valueM, setValueM] = useState("");
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <Button onClick={() => setValueM([])}>Reset</Button>
+        {/* <Button onClick={() => setValueM([])}>Reset</Button> */}
         <AutoComplete
-          values={valueM}
+          onCreateOption={({ item }) => console.log(item)}
+          value={valueM}
           onChange={setValueM}
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
-          multiple
+          creatable
+          // multiple
         >
           {/* <InputGroup> */}
-            <AutoCompleteInput variant="filled" w="48">
-              {({ tags }) =>
-                tags.map((tag, tid) => (
-                  <AutoCompleteTag
-                    key={tid}
-                    label={tag.label}
-                    onRemove={tag.onRemove}
-                  />
-                ))
-              }
-            </AutoCompleteInput>
-            {/* <InputRightElement>
+          <AutoCompleteInput variant="filled" w="48">
+            {({ tags }) =>
+              tags.map((tag, tid) => (
+                <AutoCompleteTag
+                  key={tid}
+                  label={tag.label}
+                  onRemove={tag.onRemove}
+                />
+              ))
+            }
+          </AutoCompleteInput>
+          {/* <InputRightElement>
               <Spinner />
             </InputRightElement> */}
-          </InputGroup>
+          {/* </InputGroup> */}
           <AutoCompleteList>
             {options.map(option => (
               <AutoCompleteItem

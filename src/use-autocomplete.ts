@@ -15,6 +15,8 @@ import {
   isUndefined,
   runIfFn,
 } from "@chakra-ui/utils";
+import { omit } from "@chakra-ui/utils";
+
 import { useEffect, useRef, useState } from "react";
 
 import { AutoCompleteProps } from "./autocomplete";
@@ -104,7 +106,7 @@ export function useAutoComplete(
 
   // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable
-    ? [{ value: query, noFilter: true }]
+    ? [{ value: query, noFilter: true, creatable: true }]
     : [];
 
   const filteredList = [...filteredResults, ...creatableArr];
@@ -152,8 +154,8 @@ export function useAutoComplete(
     const focusedItem = itemList.find(i => i.value === focusedValue);
     runIfFn(autoCompleteProps.onOptionFocus, {
       item: focusedItem!,
-      selectMethod: interactionRef.current,
-      isNewInput: false,
+      focusMethod: interactionRef.current,
+      isNewInput: focusedItem?.creatable,
     });
   }, [focusedValue, autoCompleteProps.onOptionFocus]);
 
@@ -171,8 +173,18 @@ export function useAutoComplete(
     runIfFn(autoCompleteProps.onSelectOption, {
       item: option!,
       selectMethod: interactionRef.current,
-      isNewInput: false,
+      isNewInput: option?.creatable,
     });
+    if (option?.creatable) {
+      runIfFn(autoCompleteProps.onCreateOption, {
+        item: omit(option!, ["noFilter"]),
+        selectMethod: interactionRef.current,
+      });
+    }
+    console.log(option);
+    const optionLabel = option?.label || option?.value;
+    setQuery(() => (multiple ? "" : optionLabel ?? ""));
+
     if (closeOnSelect) onClose();
   };
 
@@ -199,10 +211,6 @@ export function useAutoComplete(
 
   useEffect(() => {
     runIfFn(onReady, { tags });
-
-    const item = filteredList.find(opt => opt.value === values[0]);
-    const optionLabel = item?.label || item?.value;
-    setQuery(() => (multiple ? "" : optionLabel ?? ""));
   }, [values]);
 
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
@@ -243,7 +251,7 @@ export function useAutoComplete(
         onChange: e => {
           const newValue = e.target.value;
           runIfFn(onChange, e);
-          setQuery(e.target.value);
+          setQuery(newValue);
           const queryIsEmpty = isEmpty(newValue);
           if (
             runIfFn(shouldRenderSuggestions, newValue) &&

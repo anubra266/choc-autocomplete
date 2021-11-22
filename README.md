@@ -555,7 +555,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
 ```ts
 (params: {
     item: Item;
-    selectMethod: "mouse" | "keyboard" | null;
+    focusMethod: "mouse" | "keyboard" | null;
     isNewInput: boolean;
   }) => boolean | void
 ```

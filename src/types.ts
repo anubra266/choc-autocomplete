@@ -20,6 +20,7 @@ export interface Item {
   disabled?: boolean;
   itemVal?: any;
   noFilter?: boolean;
+  creatable?: boolean;
 }
 
 export type UseAutoCompleteProps = Partial<{
@@ -47,15 +48,19 @@ export type UseAutoCompleteProps = Partial<{
     value: Item["value"] | Item["value"][],
     item: Item | Item[]
   ) => void;
+  onCreateOption: (params: {
+    item: Item;
+    selectMethod: "mouse" | "keyboard" | null;
+  }) => boolean | void;
   onSelectOption: (params: {
     item: Item;
     selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
+    isNewInput?: boolean;
   }) => boolean | void;
   onOptionFocus: (params: {
     item: Item;
-    selectMethod: "mouse" | "keyboard" | null;
-    isNewInput: boolean;
+    focusMethod: "mouse" | "keyboard" | null;
+    isNewInput?: boolean;
   }) => boolean | void;
   onTagRemoved: (
     removedTag: Item["value"],
