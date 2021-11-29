@@ -181,7 +181,7 @@ export function useAutoComplete(
         selectMethod: interactionRef.current,
       });
     }
-    console.log(option);
+
     const optionLabel = option?.label || option?.value;
     setQuery(() => (multiple ? "" : optionLabel ?? ""));
 
