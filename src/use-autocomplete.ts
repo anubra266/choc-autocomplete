@@ -56,6 +56,7 @@ export function useAutoComplete(
     onReady,
     defaultIsOpen,
     shouldRenderSuggestions = () => true,
+    submitKeys = [],
     suggestWhenEmpty,
     value,
     values: valuesProp = value
@@ -271,7 +272,7 @@ export function useAutoComplete(
 
           const { key } = e;
           const focusedItem = filteredList[focusedIndex];
-          if (key === "Enter") {
+          if (["Enter", ...submitKeys].includes(key)) {
             if (focusedItem && !focusedItem?.disabled)
               selectItem(focusedItem?.value);
             else inputRef.current?.focus();
