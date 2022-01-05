@@ -40,13 +40,17 @@ function App() {
   ];
 
   const [valueM, setValueM] = useState("");
+  const ref = React.useRef<AutoCompleteRefMethods>();
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        {/* <Button onClick={() => setValueM([])}>Reset</Button> */}
+        <Button onClick={() => ref.current?.removeItem("three", true)}>
+          Reset
+        </Button>
         <AutoComplete
+          ref={ref}
           onCreateOption={({ item }) => console.log(item)}
           value={valueM}
           onChange={setValueM}
@@ -54,7 +58,7 @@ function App() {
           rollNavigation
           listAllValuesOnFocus
           creatable
-          // multiple
+          multiple
         >
           {/* <InputGroup> */}
           <AutoCompleteInput variant="filled" w="48">

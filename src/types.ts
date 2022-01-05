@@ -136,8 +136,8 @@ export type UseAutoCompleteReturn = {
   onClose: () => void;
   onOpen: () => void;
   query: string;
-  removeItem: (focusInput?: boolean | undefined) => void;
-  resetItems: (focusInput?: boolean | undefined) => void;
+  removeItem: (valueToRemove?: Item["value"], focusInput?: boolean) => void;
+  resetItems: (focusInput?: boolean) => void;
   setQuery: Dispatch<SetStateAction<any>>;
   tags: ItemTag[];
   values: Item["value"][];
@@ -145,7 +145,7 @@ export type UseAutoCompleteReturn = {
 
 export type AutoCompleteRefMethods =
   | {
-      removeItem: (focusInput?: boolean | undefined) => void;
-      resetItems: (focusInput?: boolean | undefined) => void;
+      removeItem: UseAutoCompleteReturn["removeItem"];
+      resetItems: UseAutoCompleteReturn["resetItems"];
     }
   | undefined;

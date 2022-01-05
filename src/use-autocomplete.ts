@@ -188,13 +188,17 @@ export function useAutoComplete(
     if (closeOnSelect) onClose();
   };
 
-  const removeItem = (itemValue: Item["value"]) => {
+  const removeItem: UseAutoCompleteReturn["removeItem"] = (
+    itemValue,
+    focusInput
+  ) => {
     setValues(prevValues => {
       const item = itemList.find(opt => opt.value === itemValue);
       runIfFn(autoCompleteProps.onTagRemoved, itemValue, item, prevValues);
       return prevValues.filter(i => i !== itemValue);
     });
     if (query === itemValue) setQuery("");
+    if (focusInput) inputRef.current?.focus();
   };
 
   const resetItems = (focusInput?: boolean) => {
