@@ -616,6 +616,19 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>&mdash;&mdash;&mdash;</td>
         </tr>
         <tr>
+            <td>submitKeys;
+</td>
+            <td>
+
+```ts
+string[]
+```
+
+</td>
+            <td>show suggestions when input value is empty</td>
+            <td>false</td>
+        </tr>
+         <tr>
             <td>suggestWhenEmpty</td>
             <td>boolean</td>
             <td>show suggestions when input value is empty</td>

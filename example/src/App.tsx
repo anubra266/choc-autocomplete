@@ -59,6 +59,7 @@ function App() {
           listAllValuesOnFocus
           creatable
           multiple
+          submitKeys={[" "]}
         >
           {/* <InputGroup> */}
           <AutoCompleteInput variant="filled" w="48">

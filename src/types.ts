@@ -72,6 +72,7 @@ export type UseAutoCompleteProps = Partial<{
   rollNavigation: boolean;
   selectOnFocus: boolean;
   shouldRenderSuggestions: (value: string) => boolean;
+  submitKeys: string[];
   suggestWhenEmpty: boolean;
   value: Item["value"];
   values: Item["value"][];
