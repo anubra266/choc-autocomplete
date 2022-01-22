@@ -32,14 +32,14 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const { wrapper, input: inputProps } = getInputProps(rest, themeInput);
     const { ref: wrapperRef, ...wrapperProps } = wrapper;
-    const ref = useMergeRefs(forwardedRef, wrapperRef);
+    const ref = useMergeRefs(forwardedRef, inputRef);
 
     const children = runIfFn(childrenProp, { tags });
 
     return (
-      <Wrap {...wrapperProps} ref={ref}>
+      <Wrap {...wrapperProps} ref={wrapperRef}>
         {children}
-        <WrapItem as={Input} {...(inputProps as any)} ref={inputRef} />
+        <WrapItem as={Input} {...(inputProps as any)} ref={ref} />
       </Wrap>
     );
   }
