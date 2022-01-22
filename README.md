@@ -593,12 +593,6 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>false</td>
         </tr>
         <tr>
-            <td>ref</td>
-            <td>RefObject<HTMLInputElement></td>
-            <td>provides a ref to the input element so the value can be referenced in additional contexts</td>
-            <td>&mdash;&mdash;&mdash;</td>
-        </tr>
-        <tr>
             <td>rollNavigation</td>
             <td>boolean</td>
             <td>allow keyboard navigation to switch to alternate ends when one end is reached</td>
@@ -749,6 +743,20 @@ e.g.
 ```
 
   </td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
+  
+  <tr>
+    <td>ref</td>
+    <td>
+
+```js 
+RefObject<HTMLInputElement>
+```
+
+  </td>
+    <td>provides a ref to the input element so the value can be referenced in additional contexts</td>
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
