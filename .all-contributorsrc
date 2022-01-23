@@ -32,6 +32,15 @@
         "code",
         "bug"
       ]
+    },
+    {
+      "login": "SpencerKaiser",
+      "name": "Spencer Kaiser",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6445731?v=4",
+      "profile": "https://www.linkedin.com/in/spencerkaiser",
+      "contributions": [
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
