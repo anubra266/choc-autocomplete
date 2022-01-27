@@ -24,9 +24,7 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-
 [![All Contributors](https://img.shields.io/badge/all_contributors-4-orange.svg?style=flat-square)](#contributors-)
-
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -746,6 +744,20 @@ e.g.
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
+  
+  <tr>
+    <td>ref</td>
+    <td>
+
+```js 
+RefObject<HTMLInputElement>
+```
+
+  </td>
+    <td>provides a ref to the input element so the value can be referenced in additional contexts</td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
 
 </tbody>
 </table>
@@ -1034,6 +1046,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://anubra266.tk"><img src="https://avatars.githubusercontent.com/u/30869823?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abraham</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=anubra266" title="Code">💻</a></td>
     <td align="center"><a href="http://margalit.com.au"><img src="https://avatars.githubusercontent.com/u/2268424?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sam Margalit</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=margalit" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/gepd"><img src="https://avatars.githubusercontent.com/u/7091609?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gepd</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gepd" title="Code">💻</a> <a href="https://github.com/anubra266/choc-autocomplete/issues?q=author%3Agepd" title="Bug reports">🐛</a></td>
+    <td align="center"><a href="https://www.linkedin.com/in/spencerkaiser"><img src="https://avatars.githubusercontent.com/u/6445731?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Spencer Kaiser</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=SpencerKaiser" title="Documentation">📖</a></td>
   </tr>
 </table>
 
