@@ -593,7 +593,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
           <td>restoreOnBlur</td>
           <td>boolean</td>
-          <td>if false, clearly the value of the input field will also clear the selected option</td>
+          <td>if false, clearing the value of the input field will also clear the selected option</td>
           <td>true</td>
         </tr>
         <tr>
