@@ -55,6 +55,7 @@ export function useAutoComplete(
     defaultValues = defaultValue ? [defaultValue] : [],
     onReady,
     defaultIsOpen,
+    restoreOnBlurIfEmpty = true,
     shouldRenderSuggestions = () => true,
     submitKeys = [],
     suggestWhenEmpty,
@@ -249,8 +250,19 @@ export function useAutoComplete(
           );
           if (!listIsFocused && !inputWrapperIsFocused) {
             if (closeOnBlur) onClose();
-            if (!values.includes(e.target.value) && !freeSolo)
-              setQuery(getLastItem(values) ?? "");
+            if (
+              !values.includes(e.target.value) &&
+              !freeSolo &&
+              restoreOnBlurIfEmpty
+            ) {
+              const latestValue = getLastItem(values);
+              const latestValueItem = itemList.find(
+                i => i.value === latestValue
+              );
+              const latestValueLabel =
+                latestValueItem?.label || latestValueItem?.value || "";
+              setQuery(latestValueLabel);
+            }
           }
         },
         onChange: e => {

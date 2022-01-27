@@ -69,6 +69,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => void;
   onReady: (params: OnReadyProps) => void;
   openOnFocus: boolean;
+  restoreOnBlurIfEmpty: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
   shouldRenderSuggestions: (value: string) => boolean;

@@ -58,8 +58,9 @@ function App() {
           rollNavigation
           listAllValuesOnFocus
           creatable
-          multiple
-          submitKeys={[" "]}
+          // multiple
+          // submitKeys={[" "]}
+          restoreOnBlurIfEmpty={false}
         >
           {/* <InputGroup> */}
           <AutoCompleteInput variant="filled" w="48">
