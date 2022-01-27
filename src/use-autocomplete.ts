@@ -55,7 +55,7 @@ export function useAutoComplete(
     defaultValues = defaultValue ? [defaultValue] : [],
     onReady,
     defaultIsOpen,
-    restoreOnBlurIfEmpty = true,
+    restoreOnBlurIfEmpty = !freeSolo,
     shouldRenderSuggestions = () => true,
     submitKeys = [],
     suggestWhenEmpty,
@@ -250,11 +250,7 @@ export function useAutoComplete(
           );
           if (!listIsFocused && !inputWrapperIsFocused) {
             if (closeOnBlur) onClose();
-            if (
-              !values.includes(e.target.value) &&
-              !freeSolo &&
-              restoreOnBlurIfEmpty
-            ) {
+            if (!values.includes(e.target.value) && restoreOnBlurIfEmpty) {
               const latestValue = getLastItem(values);
               const latestValueItem = itemList.find(
                 i => i.value === latestValue
