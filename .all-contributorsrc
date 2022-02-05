@@ -41,6 +41,15 @@
       "contributions": [
         "doc"
       ]
+    },
+    {
+      "login": "jcdogo",
+      "name": "jcdogo",
+      "avatar_url": "https://avatars.githubusercontent.com/u/70533701?v=4",
+      "profile": "https://github.com/jcdogo",
+      "contributions": [
+        "code"
+      ]
     }
   ],
   "contributorsPerLine": 7,
