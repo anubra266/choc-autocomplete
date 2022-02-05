@@ -22,7 +22,7 @@ export const setEmphasis = (children: any, query: string) => {
   return newChildren;
 };
 
-export const getItemList = (children: ReactNode) => {
+export const getItemList = (children: ReactNode): Item[] => {
   const itemChildren = getChildrenDeep(
     children,
     (child: any) => child?.type?.displayName === "AutoCompleteItem"
@@ -35,7 +35,7 @@ export const getItemList = (children: ReactNode) => {
     const finObj = isDefined(itemObj.label)
       ? itemObj
       : { ...itemObj, label: value };
-    return { ...finObj, value };
+    return { ...finObj, value, originalValue: itemObj.value };
   });
 };
 
