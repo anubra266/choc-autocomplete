@@ -21,6 +21,7 @@ export interface Item {
   itemVal?: any;
   noFilter?: boolean;
   creatable?: boolean;
+  originalValue?: any;
 }
 
 export type UseAutoCompleteProps = Partial<{
