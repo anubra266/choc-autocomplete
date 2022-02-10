@@ -314,6 +314,7 @@ export function useAutoComplete(
               }
               e.preventDefault();
             }
+
             return;
           }
 
@@ -340,9 +341,12 @@ export function useAutoComplete(
     };
   };
 
-  const dim = useDimensions(inputWrapperRef, true);
+  const wrapperDim = useDimensions(inputWrapperRef, true);
+  const inputDim = useDimensions(inputRef, true);
   const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
-    const width = dim?.marginBox.width as number;
+    const width = autoCompleteProps.multiple
+      ? (wrapperDim?.marginBox.width as number)
+      : (inputDim?.marginBox.width as number);
     return {
       width,
     };
