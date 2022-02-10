@@ -153,6 +153,10 @@ export function useAutoComplete(
   }, [query]);
 
   useEffect(() => {
+    if (!isOpen) setFocusedValue(itemList[0]?.value);
+  }, [isOpen]);
+
+  useEffect(() => {
     const focusedItem = itemList.find(i => i.value === focusedValue);
     runIfFn(autoCompleteProps.onOptionFocus, {
       item: focusedItem!,
@@ -304,7 +308,12 @@ export function useAutoComplete(
           if (key === "Tab") {
             setFocusedValue(nextItem?.value);
 
-            if (isOpen) e.preventDefault();
+            if (isOpen) {
+              if (focusedItem.value === lastItem?.value) {
+                console.log("last");
+              }
+              e.preventDefault();
+            }
             return;
           }
 
