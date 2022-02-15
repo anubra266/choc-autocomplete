@@ -96,6 +96,7 @@ export function useAutoComplete(
     .filter(
       i =>
         i.fixed ||
+        i.alwaysShow ||
         runIfFn(
           autoCompleteProps.filter || defaultFilterMethod,
           query,
@@ -104,7 +105,7 @@ export function useAutoComplete(
         ) ||
         listAll
     )
-    .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
+    .filter((i, index) => (maxSuggestions ? i.alwaysShow || index < maxSuggestions : true));
 
   // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable
