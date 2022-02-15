@@ -14,6 +14,7 @@ export interface AutoCompleteItemProps extends FlexProps {
   value: any;
   label?: string;
   fixed?: boolean;
+  alwaysShow?: boolean;
   _focus?: CSSObject | any;
   disabled?: boolean;
   _fixed?: CSSObject;
