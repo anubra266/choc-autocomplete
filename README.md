@@ -861,17 +861,6 @@ val => val;
     boolean
 
 </td>
-    <td>Make an item visible at all times, regardless of filtering</td>
-    <td>No</td>
-    <td>&mdash;&mdash;&mdash;</td>
-</tr>
-<tr>
-    <td>alwaysShow</td>
-    <td>
-
-    boolean
-
-</td>
     <td>Make an item visible at all times, regardless of filtering or maxSuggestions</td>
     <td>No</td>
     <td>&mdash;&mdash;&mdash;</td>
