@@ -104,7 +104,7 @@ export function useAutoComplete(
         ) ||
         listAll
     )
-    .filter((_, index) => (maxSuggestions ? index < maxSuggestions : true));
+    .filter((i, index) => (maxSuggestions ? i.fixed || index < maxSuggestions : true));
 
   // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable
