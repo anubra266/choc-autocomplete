@@ -24,7 +24,7 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
-[![All Contributors](https://img.shields.io/badge/all_contributors-5-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-6-orange.svg?style=flat-square)](#contributors-)
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -1054,6 +1054,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/gepd"><img src="https://avatars.githubusercontent.com/u/7091609?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gepd</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gepd" title="Code">💻</a> <a href="https://github.com/anubra266/choc-autocomplete/issues?q=author%3Agepd" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/spencerkaiser"><img src="https://avatars.githubusercontent.com/u/6445731?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Spencer Kaiser</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=SpencerKaiser" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/jcdogo"><img src="https://avatars.githubusercontent.com/u/70533701?v=4?s=100" width="100px;" alt=""/><br /><sub><b>jcdogo</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=jcdogo" title="Code">💻</a></td>
+    <td align="center"><a href="https://github.com/daliudzius"><img src="https://avatars.githubusercontent.com/u/46355846?v=4?s=100" width="100px;" alt=""/><br /><sub><b>daliudzius</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=daliudzius" title="Code">💻</a></td>
   </tr>
 </table>
 
