@@ -35,7 +35,6 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
 
   const queryExistsInList = filteredResults.some(i => i.value === query);
   const showWhenEmpty = isEmpty(query) ? alwaysDisplay : true;
-  console.log("showWhenEmpty :>> ", showWhenEmpty);
   const showCreatable =
     autoCompleteProps.creatable && showWhenEmpty && !queryExistsInList;
 
