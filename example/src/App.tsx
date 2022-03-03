@@ -66,6 +66,7 @@ function App() {
         >
           <AutoCompleteInput variant="filled" w="48" />
           <AutoCompleteList>
+            {null}
             <AutoCompleteCreatable alwaysDisplay />
             {options.map(option => (
               <AutoCompleteItem
