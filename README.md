@@ -1005,6 +1005,25 @@ e.g.
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
+
+  <tr>
+    <td>alwaysDisplay</td>
+    <td>
+
+```ts
+boolean
+```
+
+  </td>
+    <td>
+
+When true, `AutoCompleteCreatable` is shown even when the `AutoCompleteInput` is empty
+
+ 
+  </td>
+    <td>No<br></td>
+    <td>&mdash;&mdash;&mdash;</td>
+  </tr>
  
 </tbody>
 </table>
