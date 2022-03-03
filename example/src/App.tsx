@@ -64,23 +64,9 @@ function App() {
           // submitKeys={[" "]}
           // restoreOnBlurIfEmpty={false}
         >
-          <InputGroup>
-            <AutoCompleteInput variant="filled" w="48">
-              {({ tags }) =>
-                tags.map((tag, tid) => (
-                  <AutoCompleteTag
-                    key={tid}
-                    label={tag.label}
-                    onRemove={tag.onRemove}
-                  />
-                ))
-              }
-            </AutoCompleteInput>
-            <InputRightElement>
-              <Spinner />
-            </InputRightElement>
-          </InputGroup>
+          <AutoCompleteInput variant="filled" w="48" />
           <AutoCompleteList>
+            <AutoCompleteCreatable alwaysDisplay />
             {options.map(option => (
               <AutoCompleteItem
                 key={`option-${option.value}`}
@@ -89,56 +75,10 @@ function App() {
                 textTransform="capitalize"
               />
             ))}
-            <AutoCompleteCreatable />
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
       </FormControl>
-      <Button onClick={() => ref.current?.removeItem("three", true)}>
-        Focus
-      </Button>
-      <AutoComplete
-        ref={ref}
-        onCreateOption={({ item }) => console.log(item)}
-        value={valueM}
-        onChange={setValueM}
-        openOnFocus
-        rollNavigation
-        listAllValuesOnFocus
-        creatable
-        freeSolo
-        multiple
-        // submitKeys={[" "]}
-        // restoreOnBlurIfEmpty={false}
-      >
-        <InputGroup>
-          <AutoCompleteInput variant="filled" w="48">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
-          <InputRightElement>
-            <Spinner />
-          </InputRightElement>
-        </InputGroup>
-        <AutoCompleteList>
-          {options.map(option => (
-            <AutoCompleteItem
-              key={`option-${option.value}`}
-              value={`${option.value}`}
-              label={option.label}
-              textTransform="capitalize"
-            />
-          ))}
-          <AutoCompleteCreatable />
-        </AutoCompleteList>
-      </AutoComplete>
     </Flex>
   );
 }

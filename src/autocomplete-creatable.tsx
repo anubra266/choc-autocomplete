@@ -9,10 +9,11 @@ import { baseItemStyles } from "./autocomplete-item";
 
 interface AutoCompleteCreatableProps extends FlexProps {
   children?: MaybeRenderProp<{ value: any }>;
+  alwaysDisplay?: boolean;
 }
 
 export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
-  const { children: childrenProp, ...rest } = props;
+  const { alwaysDisplay, children: childrenProp, ...rest } = props;
   const {
     autoCompleteProps,
     getItemProps,
@@ -33,8 +34,10 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
   ).item;
 
   const queryExistsInList = filteredResults.some(i => i.value === query);
+  const showWhenEmpty = isEmpty(query) ? alwaysDisplay : true;
+  console.log("showWhenEmpty :>> ", showWhenEmpty);
   const showCreatable =
-    autoCompleteProps.creatable && !isEmpty(query) && !queryExistsInList;
+    autoCompleteProps.creatable && showWhenEmpty && !queryExistsInList;
 
   return showCreatable ? (
     <Flex {...baseItemStyles} {...itemProps} {...rest}>
