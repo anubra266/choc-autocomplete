@@ -60,7 +60,7 @@ function App() {
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
-          creatable
+          // creatable
           freeSolo
           // multiple
           // submitKeys={[" "]}
@@ -68,14 +68,16 @@ function App() {
         >
           <AutoCompleteInput variant="filled" w="48" />
           <AutoCompleteList>
-            {null}
             <AutoCompleteCreatable alwaysDisplay />
             <AutoCompleteGroup>
-              <AutoCompleteGroupTitle>Wow</AutoCompleteGroupTitle>
+              <AutoCompleteGroupTitle textTransform="capitalize">
+                Wow
+              </AutoCompleteGroupTitle>
               {options.map(option => (
                 <AutoCompleteItem
                   key={`option-${option.value}`}
-                  value={`${option.value}`}
+                  value={{ title: `${option.value}` }}
+                  // getValue={a => a.title}
                   label={option.label}
                   textTransform="capitalize"
                 />

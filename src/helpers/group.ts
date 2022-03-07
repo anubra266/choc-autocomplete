@@ -1,6 +1,7 @@
-import { isDefined } from "@chakra-ui/utils";
+import { isDefined, runIfFn } from "@chakra-ui/utils";
 import { getChildDeep } from "react-nanny";
 import { ReactNode } from "react";
+import { getDefItemValue } from "./items";
 
 export const hasFirstItem = (children: ReactNode, firstItem: any) => {
   const result = getChildDeep(
@@ -24,10 +25,12 @@ export const hasLastItem = (children: ReactNode, lastItem: any) => {
 
 export const hasChildren = (children: any, filteredList: any[]) => {
   return isDefined(
-    getChildDeep(
-      children,
-      (child: any) =>
-        filteredList.findIndex(i => i.value === child.props?.value) >= 0
-    )
+    getChildDeep(children, (child: any) => {
+      const value = runIfFn(
+        child.props?.getValue || getDefItemValue,
+        child.props?.value || {}
+      );
+      return filteredList.some(i => i.value === value);
+    })
   );
 };
