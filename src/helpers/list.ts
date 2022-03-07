@@ -3,6 +3,7 @@ import React from "react";
 const VALID_AUTOCOMPLETE_LIST_CHILDREN = [
   "AutoCompleteGroup",
   "AutoCompleteItem",
+  "AutoCompleteCreatable",
 ];
 
 export const siblingInfo = (children: React.ReactNode) => {

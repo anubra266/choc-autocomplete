@@ -20,6 +20,8 @@ import {
   AutoCompleteList,
   AutoCompleteRefMethods,
   AutoCompleteTag,
+  AutoCompleteGroup,
+  AutoCompleteGroupTitle,
   ItemTag,
 } from "../../";
 
@@ -58,7 +60,7 @@ function App() {
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
-          // creatable
+          creatable
           freeSolo
           // multiple
           // submitKeys={[" "]}
@@ -68,14 +70,17 @@ function App() {
           <AutoCompleteList>
             {null}
             <AutoCompleteCreatable alwaysDisplay />
-            {options.map(option => (
-              <AutoCompleteItem
-                key={`option-${option.value}`}
-                value={`${option.value}`}
-                label={option.label}
-                textTransform="capitalize"
-              />
-            ))}
+            <AutoCompleteGroup>
+              <AutoCompleteGroupTitle>Wow</AutoCompleteGroupTitle>
+              {options.map(option => (
+                <AutoCompleteItem
+                  key={`option-${option.value}`}
+                  value={`${option.value}`}
+                  label={option.label}
+                  textTransform="capitalize"
+                />
+              ))}
+            </AutoCompleteGroup>
             <span>Damn</span>
           </AutoCompleteList>
         </AutoComplete>
