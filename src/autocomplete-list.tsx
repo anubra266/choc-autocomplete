@@ -17,11 +17,13 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
     const { listRef, getListProps } = useAutoCompleteContext();
     const ref = useMergeRefs(forwardedRef, listRef);
     const listProps = getListProps();
+    const [autoCompleteItems, nonAutoCompleteItems] = siblingInfo(children);
 
     return (
       <PopoverContent ref={ref} {...baseStyles} {...listProps} {...rest}>
-        {siblingInfo(children)}
+        {autoCompleteItems}
         <EmptyState />
+        {nonAutoCompleteItems}
       </PopoverContent>
     );
   }

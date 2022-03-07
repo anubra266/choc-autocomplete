@@ -58,7 +58,7 @@ function App() {
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
-          creatable
+          // creatable
           freeSolo
           // multiple
           // submitKeys={[" "]}
@@ -76,6 +76,7 @@ function App() {
                 textTransform="capitalize"
               />
             ))}
+            <span>Damn</span>
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>
