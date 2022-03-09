@@ -40,6 +40,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
+  gutter: number;
   isReadOnly: boolean;
   listAllValuesOnFocus: boolean;
   maxSelections: number;
