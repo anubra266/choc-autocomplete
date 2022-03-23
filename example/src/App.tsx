@@ -44,14 +44,15 @@ function App() {
   const [value, setValue] = useState("");
   const [valueM, setValueM] = useState([]);
   const ref = React.useRef<AutoCompleteRefMethods>();
+  React.useEffect(() => {
+    console.log("value :>> ", value);
+  }, [value]);
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
       <FormControl id="email" w="60">
         <FormLabel>Olympics Soccer Winner</FormLabel>
-        <Button onClick={() => ref.current?.removeItem("three", true)}>
-          Reset
-        </Button>
+        <Button onClick={() => setValue("")}>Reset</Button>
         <AutoComplete
           ref={ref}
           onCreateOption={({ item }) => console.log(item)}

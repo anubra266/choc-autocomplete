@@ -26,7 +26,6 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
       onOpen,
       resetItems,
       removeItem,
-      autoCompleteProps,
     } = context;
 
     useImperativeHandle(ref, () => ({
@@ -44,7 +43,6 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           autoFocus={false}
           placement="bottom"
           closeOnBlur={true}
-          gutter={autoCompleteProps.gutter}
         >
           <chakra.div
             sx={{
