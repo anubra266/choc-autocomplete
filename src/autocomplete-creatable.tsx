@@ -21,13 +21,12 @@ export function AutoCompleteCreatable(props: AutoCompleteCreatableProps) {
     filteredResults,
   } = useAutoCompleteContext();
 
-  const queryValue = <mark>{query}</mark>;
   const { children, ...itemProps } = getItemProps(
     {
       ...props,
       value: query,
       children: runIfFn(childrenProp, {
-        value: queryValue,
+        value: query,
       }),
     },
     true
