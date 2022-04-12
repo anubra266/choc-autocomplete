@@ -24,7 +24,9 @@
 <a><img alt="GitHub Repo stars" src="https://img.shields.io/github/stars/anubra266/choc-autocomplete?logo=github&style=for-the-badge">
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+
 [![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
 </a>
@@ -446,6 +448,12 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>Used to predefine tags, or value for the autocomplete component. Just pass an array of the values</td>
             <td>&mdash;&mdash;&mdash;</td>
         </tr>
+         <tr>
+            <td>disableFilter</td>
+            <td>boolean</td>
+            <td>disables filtering when set to true</td>
+            <td>false</td>
+        </tr>
         <tr>
             <td>emphasize</td>
             <td>boolean | CSSObject</td>
@@ -755,7 +763,7 @@ e.g.
     <td>ref</td>
     <td>
 
-```js 
+```js
 RefObject<HTMLInputElement>
 ```
 
@@ -1011,7 +1019,7 @@ e.g.
     <td>
 
 ```ts
-boolean
+boolean;
 ```
 
   </td>
@@ -1019,7 +1027,6 @@ boolean
 
 When true, `AutoCompleteCreatable` is shown even when the `AutoCompleteInput` is empty
 
- 
   </td>
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>

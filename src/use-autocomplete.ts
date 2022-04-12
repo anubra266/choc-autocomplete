@@ -55,6 +55,7 @@ export function useAutoComplete(
     defaultValues = defaultValue ? [defaultValue] : [],
     onReady,
     defaultIsOpen,
+    disableFilter,
     restoreOnBlurIfEmpty = !freeSolo,
     shouldRenderSuggestions = () => true,
     submitKeys = [],
@@ -92,21 +93,23 @@ export function useAutoComplete(
   else if (!isUndefined(valuesProp)) defaultQuery = valuesProp[0];
 
   const [query, setQuery] = useState<string>(defaultQuery ?? "");
-  const filteredResults = itemList
-    .filter(
-      i =>
-        i.fixed ||
-        runIfFn(
-          autoCompleteProps.filter || defaultFilterMethod,
-          query,
-          i.value,
-          i.label
-        ) ||
-        listAll
-    )
-    .filter((i, index) =>
-      maxSuggestions ? i.fixed || index < maxSuggestions : true
-    );
+  const filteredResults = disableFilter
+    ? itemList
+    : itemList
+        .filter(
+          i =>
+            i.fixed ||
+            runIfFn(
+              autoCompleteProps.filter || defaultFilterMethod,
+              query,
+              i.value,
+              i.label
+            ) ||
+            listAll
+        )
+        .filter((i, index) =>
+          maxSuggestions ? i.fixed || index < maxSuggestions : true
+        );
 
   // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable

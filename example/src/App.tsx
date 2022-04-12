@@ -61,6 +61,7 @@ function App() {
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
+          disableFilter
           // creatable
           freeSolo
           // multiple

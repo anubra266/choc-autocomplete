@@ -31,6 +31,7 @@ export type UseAutoCompleteProps = Partial<{
   defaultIsOpen: boolean;
   defaultValue: Item["value"];
   defaultValues: Item["value"][];
+  disableFilter: boolean;
   emphasize: boolean | CSSObject;
   emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
   filter: (
