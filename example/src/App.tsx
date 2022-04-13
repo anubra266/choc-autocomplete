@@ -61,7 +61,6 @@ function App() {
           openOnFocus
           rollNavigation
           listAllValuesOnFocus
-          disableFilter
           // creatable
           freeSolo
           // multiple
@@ -85,7 +84,7 @@ function App() {
                 />
               ))}
             </AutoCompleteGroup>
-            <span>Damn</span>
+            <Button>Damn</Button>
           </AutoCompleteList>
         </AutoComplete>
         <FormHelperText>Who do you support.</FormHelperText>

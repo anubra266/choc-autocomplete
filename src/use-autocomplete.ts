@@ -253,7 +253,10 @@ export function useAutoComplete(
         },
         onBlur: e => {
           runIfFn(onBlur, e);
-          const listIsFocused = e.relatedTarget === listRef?.current;
+
+          const listIsFocused =
+            e.relatedTarget === listRef?.current ||
+            listRef.current?.contains(e.relatedTarget as any);
           const inputWrapperIsFocused = inputWrapperRef.current?.contains(
             e.relatedTarget as any
           );
