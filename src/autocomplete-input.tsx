@@ -31,7 +31,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     // const ref = useMergeRefs(forwardedRef, inputRef);
 
-    const { children: childrenProp, ...rest } = props;
+    const { children: childrenProp, isInvalid, ...rest } = props;
 
     const themeInput: any = useMultiStyleConfig("Input", props);
 
@@ -41,7 +41,9 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const children = runIfFn(childrenProp, { tags });
 
-    const simpleInput = <Input {...(inputProps as any)} ref={ref} />;
+    const simpleInput = (
+      <Input isInvalid={isInvalid} {...(inputProps as any)} ref={ref} />
+    );
 
     const multipleInput = (
       <Wrap {...wrapperProps} ref={wrapperRef}>
