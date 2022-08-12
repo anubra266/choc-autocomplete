@@ -1,8 +1,8 @@
 import {
-  CSSObject,
   forwardRef,
   Input,
   InputProps,
+  SystemStyleObject,
   useMergeRefs,
   useMultiStyleConfig,
   Wrap,
@@ -15,9 +15,9 @@ import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { UseAutoCompleteReturn } from "./types";
 
-export interface AutoCompleteInputProps extends InputProps {
+export interface AutoCompleteInputProps extends Omit<InputProps, 'children'> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
-  wrapStyles?: CSSObject;
+  wrapStyles?: SystemStyleObject;
 }
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
