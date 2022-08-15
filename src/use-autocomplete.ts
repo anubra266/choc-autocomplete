@@ -228,6 +228,7 @@ export function useAutoComplete(
     runIfFn(onReady, { tags });
   }, [values]);
 
+  // @ts-ignore
   const getInputProps: UseAutoCompleteReturn["getInputProps"] = (
     props,
     themeInput
@@ -446,6 +447,7 @@ export function useAutoComplete(
     if (noSuggestions && emptyState && !creatable) {
       return typeof emptyState === "boolean"
         ? defaultEmptyState
+        // @ts-ignore
         : runIfFn(emptyState, { query });
     }
   };

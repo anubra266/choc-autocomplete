@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from "react-dom/client";
 import { ChakraProvider, extendTheme } from "@chakra-ui/react";
 import App from "./app";
 
@@ -25,9 +25,8 @@ const config = {
 };
 const theme = extendTheme({ colors, config });
 
-ReactDOM.render(
+createRoot(rootElement).render(
   <ChakraProvider theme={theme}>
     <App />
-  </ChakraProvider>,
-  rootElement
+  </ChakraProvider>
 );

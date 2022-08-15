@@ -1,5 +1,5 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import { createRoot } from 'react-dom/client';
 import { ChakraProvider, extendTheme, ThemeConfig } from "@chakra-ui/react";
 
 import "./index.css";
@@ -26,11 +26,11 @@ const config: ThemeConfig = {
 
 const theme = extendTheme({ colors, config });
 
-ReactDOM.render(
+// @ts-expect-error element is always defined
+createRoot(document.getElementById("root")).render(
   <React.StrictMode>
     <ChakraProvider theme={theme}>
       <App />
     </ChakraProvider>
-  </React.StrictMode>,
-  document.getElementById("root")
-);
+  </React.StrictMode>
+)
