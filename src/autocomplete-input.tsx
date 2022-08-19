@@ -15,7 +15,7 @@ import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { UseAutoCompleteReturn } from "./types";
 
-export interface AutoCompleteInputProps extends Omit<InputProps, 'children'> {
+export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
   wrapStyles?: SystemStyleObject;
 }

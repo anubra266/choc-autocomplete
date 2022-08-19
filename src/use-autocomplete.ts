@@ -447,8 +447,8 @@ export function useAutoComplete(
     if (noSuggestions && emptyState && !creatable) {
       return typeof emptyState === "boolean"
         ? defaultEmptyState
-        // @ts-ignore
-        : runIfFn(emptyState, { query });
+        : // @ts-ignore
+          runIfFn(emptyState, { query });
     }
   };
 

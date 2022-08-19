@@ -7,7 +7,7 @@ import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { baseItemStyles } from "./autocomplete-item";
 
-interface AutoCompleteCreatableProps extends Omit<FlexProps, 'children'> {
+interface AutoCompleteCreatableProps extends Omit<FlexProps, "children"> {
   children?: MaybeRenderProp<{ value: any }>;
   alwaysDisplay?: boolean;
 }
