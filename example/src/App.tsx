@@ -23,7 +23,7 @@ import {
   AutoCompleteGroup,
   AutoCompleteGroupTitle,
   ItemTag,
-} from "../../";
+} from "../../src/index";
 
 function App() {
   const countries = [

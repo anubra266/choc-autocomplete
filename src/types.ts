@@ -1,8 +1,8 @@
 import {
   BoxProps,
-  CSSObject,
   FlexProps,
   InputProps,
+  SystemStyleObject,
   WrapProps,
 } from "@chakra-ui/react";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
@@ -32,8 +32,8 @@ export type UseAutoCompleteProps = Partial<{
   defaultValue: Item["value"];
   defaultValues: Item["value"][];
   disableFilter: boolean;
-  emphasize: boolean | CSSObject;
-  emptyState: boolean | MaybeRenderProp<{ value: Item["value"] }>;
+  emphasize: boolean | SystemStyleObject;
+  emptyState: boolean | MaybeRenderProp<{ query: Item["value"] }>;
   filter: (
     query: string,
     optionValue: Item["value"],
