@@ -74,7 +74,9 @@
     "vite": "3.0.8"
   },
   "dependencies": {
+    "@chakra-ui/layout": "^2.1.5",
     "@chakra-ui/react-utils": "^2.0.5",
+    "@chakra-ui/tag": "^2.0.8",
     "@chakra-ui/utils": "^2.0.8",
     "react-nanny": "2.14.0"
   }

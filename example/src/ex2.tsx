@@ -5,7 +5,7 @@ import {
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList
-} from "../../";
+} from "../../src/index";
 import { nanoid } from "nanoid";
 
 export function makeId() {

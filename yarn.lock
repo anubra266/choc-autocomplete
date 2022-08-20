@@ -1163,7 +1163,7 @@
     "@chakra-ui/react-utils" "2.0.5"
     "@chakra-ui/utils" "2.0.8"
 
-"@chakra-ui/layout@2.1.5":
+"@chakra-ui/layout@2.1.5", "@chakra-ui/layout@^2.1.5":
   version "2.1.5"
   resolved "https://registry.yarnpkg.com/@chakra-ui/layout/-/layout-2.1.5.tgz#f307a23580de6cf04758be8e22fcb9507277186d"
   integrity sha512-8qZwqgmY3itr+DfCXCxgEIwdy8GHKgAxojhIo7Exnu7GLHZhCcQ9Le4lVlHW3pK8Wy2wg3dPUX+APoMGkUcBsg==
@@ -1511,7 +1511,7 @@
     "@chakra-ui/react-utils" "2.0.5"
     "@chakra-ui/utils" "2.0.8"
 
-"@chakra-ui/tag@2.0.8":
+"@chakra-ui/tag@2.0.8", "@chakra-ui/tag@^2.0.8":
   version "2.0.8"
   resolved "https://registry.yarnpkg.com/@chakra-ui/tag/-/tag-2.0.8.tgz#0c15e457f470eb8088d0bad584eb6dd942889e4c"
   integrity sha512-TfAehlhq+peluH2xsj5KS43IggFRHX8m7FyewdRuacL6ZOCQW3qDtJpTP/hF2maqavIgdzdWN87Y6gbtnS4Kqw==
