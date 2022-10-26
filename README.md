@@ -772,6 +772,20 @@ RefObject<HTMLInputElement>
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
+  <tr>
+    <td>hidePlaceholder</td>
+    <td>boolean</td>
+    <td>hides the placeholder when children is not an empty array. intended usage for
+
+```js
+<AutoComplete multiple creatable />
+```
+
+  </td>
+    <td>No<br></td>
+    <td>false</td>
+
+  </tr>
 
 </tbody>
 </table>

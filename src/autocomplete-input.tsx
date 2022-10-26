@@ -18,6 +18,7 @@ import { UseAutoCompleteReturn } from "./types";
 export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
   wrapStyles?: SystemStyleObject;
+  hidePlaceholder?: boolean;
 }
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
@@ -31,15 +32,29 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     // const ref = useMergeRefs(forwardedRef, inputRef);
 
-    const { children: childrenProp, isInvalid, ...rest } = props;
+    const {
+      children: childrenProp,
+      isInvalid,
+      hidePlaceholder,
+      ...rest
+    } = props;
 
     const themeInput: any = useMultiStyleConfig("Input", props);
 
-    const { wrapper, input: inputProps } = getInputProps(rest, themeInput);
+    let { wrapper, input: inputProps } = getInputProps(rest, themeInput);
     const { ref: wrapperRef, ...wrapperProps } = wrapper;
     const ref = useMergeRefs(forwardedRef, inputRef);
 
     const children = runIfFn(childrenProp, { tags });
+    if (hidePlaceholder) {
+      inputProps = {
+        ...inputProps,
+        placeholder:
+          Array.isArray(children) && children.length
+            ? undefined
+            : inputProps.placeholder,
+      };
+    }
 
     const simpleInput = (
       <Input isInvalid={isInvalid} {...(inputProps as any)} ref={ref} />
