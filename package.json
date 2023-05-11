@@ -23,7 +23,7 @@
     "@chakra-ui/react": "^2.2.8",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
-    "framer-motion": "^6 || 7",
+    "framer-motion": "^8",
     "react": "^18.2.0"
   },
   "husky": {
@@ -55,9 +55,9 @@
   ],
   "devDependencies": {
     "@babel/core": "^7.18.10",
-    "@chakra-ui/react": "^2.2.8",
-    "@emotion/react": "^11.10.0",
-    "@emotion/styled": "^11.10.0",
+    "@chakra-ui/react": "^2.5.5",
+    "@emotion/react": "^11.10.6",
+    "@emotion/styled": "^11.10.6",
     "@size-limit/preset-small-lib": "^5.0.1",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
