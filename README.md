@@ -637,8 +637,8 @@ string[]
 ```
 
 </td>
-            <td>show suggestions when input value is empty</td>
-            <td>false</td>
+            <td>A list of <a href="https://developer.mozilla.org/en-US/docs/Web/API/UI_Events/Keyboard_event_key_values">KeyboardEvent: key values</a>, except for the "Enter" key, that trigger the click event of the currently selected Item.</td>
+            <td>&mdash;&mdash;&mdash;</td>
         </tr>
          <tr>
             <td>suggestWhenEmpty</td>
