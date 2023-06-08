@@ -9,11 +9,17 @@ import { useAutoCompleteContext } from "./autocomplete-context";
 import { EmptyState } from "./components/empty-state";
 import { siblingInfo } from "./helpers/list";
 
-export type AutoCompleteListProps = PopoverContentProps;
+export interface AdditionalAutoCompleteListProps {
+  renderCustomEmptyState?: () => React.ReactNode;
+  children?: React.ReactNode;
+}
+
+export type AutoCompleteListProps = PopoverContentProps &
+  AdditionalAutoCompleteListProps;
 
 export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
   (props, forwardedRef) => {
-    const { children, ...rest } = props;
+    const { renderCustomEmptyState, children, ...rest } = props;
     const { listRef, getListProps } = useAutoCompleteContext();
     const ref = useMergeRefs(forwardedRef, listRef);
     const listProps = getListProps();
@@ -22,7 +28,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
     return (
       <PopoverContent ref={ref} {...baseStyles} {...listProps} {...rest}>
         {autoCompleteItems}
-        <EmptyState />
+        {renderCustomEmptyState ? renderCustomEmptyState() : <EmptyState />}
         {nonAutoCompleteItems}
       </PopoverContent>
     );
