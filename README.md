@@ -1086,7 +1086,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 
 <table>
   <tr>
-    <td align="center"><a href="https://github.com/maiconcarraro"><img src="[https://avatars.githubusercontent.com/u/30869823?v=4?s=100](https://c10.patreonusercontent.com/4/patreon-media/p/user/4451675/01b8f310a4984d1381da608bd35e9ad9/eyJ3IjoyMDB9/1.jpeg?token-time=2145916800&token-hash=T6zSZihEz07bSD-P5bDQOvSM8zq62M59NPdHr1mpMqg%3D)" width="100px;" alt=""/><br /><sub><b>Maicon Carraro</b></sub></a></td>
+    <td align="center"><a href="https://github.com/maiconcarraro"><img src="https://c10.patreonusercontent.com/4/patreon-media/p/user/4451675/01b8f310a4984d1381da608bd35e9ad9/eyJ3IjoyMDB9/1.jpeg" width="100px;" alt=""/><br /><sub><b>Maicon Carraro</b></sub></a></td>
   </tr>
 </table>
 
