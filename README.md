@@ -1080,6 +1080,16 @@ yarn start
 yarn dev
 ```
 
+## Sponsors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/maiconcarraro"><img src="[https://avatars.githubusercontent.com/u/30869823?v=4?s=100](https://c10.patreonusercontent.com/4/patreon-media/p/user/4451675/01b8f310a4984d1381da608bd35e9ad9/eyJ3IjoyMDB9/1.jpeg?token-time=2145916800&token-hash=T6zSZihEz07bSD-P5bDQOvSM8zq62M59NPdHr1mpMqg%3D)" width="100px;" alt=""/><br /><sub><b>Maicon Carraro</b></sub></a></td>
+  </tr>
+</table>
+
 ## Contributors ✨
 
 Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
@@ -1089,7 +1099,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
 <!-- markdownlint-disable -->
 <table>
   <tr>
-    <td align="center"><a href="https://anubra266.tk"><img src="https://avatars.githubusercontent.com/u/30869823?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Abraham</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=anubra266" title="Code">💻</a></td>
+    <td align="center"><a href="https://anubra266.tk"><img src="https://avatars.githubusercontent.com/u/30869823?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Maicon Carraro</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=anubra266" title="Code">💻</a></td>
     <td align="center"><a href="http://margalit.com.au"><img src="https://avatars.githubusercontent.com/u/2268424?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Sam Margalit</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=margalit" title="Documentation">📖</a></td>
     <td align="center"><a href="https://github.com/gepd"><img src="https://avatars.githubusercontent.com/u/7091609?v=4?s=100" width="100px;" alt=""/><br /><sub><b>gepd</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gepd" title="Code">💻</a> <a href="https://github.com/anubra266/choc-autocomplete/issues?q=author%3Agepd" title="Bug reports">🐛</a></td>
     <td align="center"><a href="https://www.linkedin.com/in/spencerkaiser"><img src="https://avatars.githubusercontent.com/u/6445731?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Spencer Kaiser</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=SpencerKaiser" title="Documentation">📖</a></td>
