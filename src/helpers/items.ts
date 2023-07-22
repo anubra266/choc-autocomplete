@@ -7,7 +7,7 @@ import { Item } from "../types";
 import { AutoCompleteItemProps } from "../autocomplete-item";
 
 export const getDefItemValue = (item: AutoCompleteItemProps["value"]) =>
-  (typeof item === "string" ? item : item[Object.keys(item)[0]])?.toString();
+  (typeof item === "string" || typeof item === "number" ? item : item[Object.keys(item)[0]])?.toString();
 
 export const setEmphasis = (children: any, query: string) => {
   if (typeof children !== "string" || isEmpty(query)) {

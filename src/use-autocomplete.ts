@@ -118,7 +118,7 @@ export function useAutoComplete(
 
   const filteredList = [...filteredResults, ...creatableArr];
   const [values, setValues] = useControllableState({
-    defaultValue: defaultValues,
+    defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
     onChange: (newValues: any[]) => {
       const item = filteredList.find(opt => opt.value === newValues[0]);
@@ -219,7 +219,7 @@ export function useAutoComplete(
 
   const tags = multiple
     ? values.map(tag => ({
-        label: itemList.find(item => item.value === tag)?.label || tag,
+        label: itemList.find(item => item.value === tag?.toString())?.label || tag,
         onRemove: () => removeItem(tag),
       }))
     : [];
