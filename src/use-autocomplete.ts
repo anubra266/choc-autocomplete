@@ -5,7 +5,6 @@ import {
   useControllableState,
 } from "@chakra-ui/react";
 import {
-  callAll,
   getFirstItem,
   getLastItem,
   getNextItem,
@@ -302,24 +301,29 @@ export function useAutoComplete(
           }
 
           if (key === "ArrowDown") {
-            setFocusedValue(nextItem?.value);
+            if(!isOpen)
+              onOpen();
+            else 
+              setFocusedValue(nextItem?.value);
             e.preventDefault();
             return;
           }
 
           if (key === "ArrowUp") {
-            setFocusedValue(prevItem?.value);
+            if(!isOpen)
+              onOpen();
+            else
+              setFocusedValue(prevItem?.value);
 
             e.preventDefault();
             return;
           }
 
           if (key === "Tab") {
-            setFocusedValue(nextItem?.value);
-
-            if (isOpen) {
-              e.preventDefault();
-            }
+            if (focusedItem && !focusedItem?.disabled)
+              selectItem(focusedItem?.value);
+            else 
+              onClose();
 
             return;
           }
@@ -337,7 +341,8 @@ export function useAutoComplete(
           }
 
           if (key === "Escape") {
-            callAll(onClose, e.preventDefault);
+            onClose();
+            e.preventDefault();
           }
         },
         value: query,
