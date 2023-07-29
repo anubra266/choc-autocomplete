@@ -24,6 +24,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
       isOpen,
       onClose,
       onOpen,
+      placement, 
       resetItems,
       removeItem,
     } = context;
@@ -41,15 +42,10 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           onClose={onClose}
           onOpen={onOpen}
           autoFocus={false}
-          placement="bottom"
+          placement={placement}
           closeOnBlur={true}
         >
           <chakra.div
-            sx={{
-              ".chakra-popover__popper": {
-                position: "unset !important",
-              },
-            }}
             w="full"
             ref={ref}
           >
