@@ -41,6 +41,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
+  isLoading: boolean,
   isReadOnly: boolean;
   listAllValuesOnFocus: boolean;
   maxSelections: number;
@@ -135,6 +136,7 @@ export type UseAutoCompleteReturn = {
   inputRef: React.RefObject<HTMLInputElement>;
   interactionRef: React.RefObject<"mouse" | "keyboard" | null>;
   isOpen: boolean;
+  isLoading: boolean;
   itemList: Item[];
   listRef: React.RefObject<HTMLDivElement>;
   onClose: () => void;

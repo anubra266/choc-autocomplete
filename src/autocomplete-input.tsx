@@ -2,6 +2,9 @@ import {
   forwardRef,
   Input,
   InputProps,
+  InputGroup, 
+  InputRightElement, 
+  Spinner,
   SystemStyleObject,
   useMergeRefs,
   useMultiStyleConfig,
@@ -19,7 +22,21 @@ export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
   wrapStyles?: SystemStyleObject;
   hidePlaceholder?: boolean;
+  loadingIcon?: React.ReactNode
 }
+
+const AutoCompleteInputComponent = forwardRef(
+  (props, forwardedRef) => {
+    const { isLoading } = useAutoCompleteContext();
+
+    return <InputGroup>
+    <Input {...props} ref={forwardedRef} />
+    { isLoading && <InputRightElement>
+      { props.loadingIcon || <Spinner /> }
+    </InputRightElement> }
+  </InputGroup>;
+  }
+)
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
@@ -57,13 +74,13 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
     }
 
     const simpleInput = (
-      <Input isInvalid={isInvalid} {...(inputProps as any)} ref={ref} />
+      <AutoCompleteInputComponent isInvalid={isInvalid} {...(inputProps as any)} ref={ref} />
     );
 
     const multipleInput = (
       <Wrap {...wrapperProps} ref={wrapperRef}>
         {children}
-        <WrapItem as={Input} {...(inputProps as any)} ref={ref} />
+        <WrapItem as={AutoCompleteInputComponent} {...(inputProps as any)} ref={ref} />
       </Wrap>
     );
 
