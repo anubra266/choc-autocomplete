@@ -4,6 +4,7 @@ import {
   InputProps,
   SystemStyleObject,
   WrapProps,
+  PlacementWithLogical
 } from "@chakra-ui/react";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
@@ -71,6 +72,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => void;
   onReady: (params: OnReadyProps) => void;
   openOnFocus: boolean;
+  placement: PlacementWithLogical;
   restoreOnBlurIfEmpty: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
@@ -139,6 +141,7 @@ export type UseAutoCompleteReturn = {
   listRef: React.RefObject<HTMLDivElement>;
   onClose: () => void;
   onOpen: () => void;
+  placement: PlacementWithLogical;
   query: string;
   removeItem: (valueToRemove?: Item["value"], focusInput?: boolean) => void;
   resetItems: (focusInput?: boolean) => void;
