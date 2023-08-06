@@ -45,7 +45,6 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
 AutoCompleteList.displayName = "AutoCompleteList";
 
 const baseStyles: PopoverContentProps = {
-  mt: "4",
   py: "4",
   opacity: "0",
   bg: "#232934",
@@ -53,7 +52,6 @@ const baseStyles: PopoverContentProps = {
   maxH: "350px",
   border: "none",
   shadow: "base",
-  pos: "absolute",
   zIndex: "popover",
   overflowY: "auto",
 

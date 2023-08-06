@@ -605,6 +605,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>false</td>
         </tr>
         <tr>
+            <td>placement</td>
+            <td>PlacementWithLogical</td>
+            <td>where autocomplete list will display.  Accepts any valid value from <a href="https://chakra-ui.com/docs/components/popover#popover-placements">Popover</a> component</td>
+            <td>bottom</td>
+        </tr>
+        <tr>
           <td>restoreOnBlurIfEmpty</td>
           <td>boolean</td>
           <td>if false, clearing the value of the input field will also clear the selected option</td>

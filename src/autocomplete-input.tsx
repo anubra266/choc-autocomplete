@@ -9,7 +9,8 @@ import {
   useMergeRefs,
   useMultiStyleConfig,
   Wrap,
-  WrapItem,
+  WrapItem, 
+  PopoverAnchor
 } from "@chakra-ui/react";
 import { runIfFn } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
@@ -84,7 +85,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       </Wrap>
     );
 
-    return <>{autoCompleteProps.multiple ? multipleInput : simpleInput}</>;
+    return <PopoverAnchor>{autoCompleteProps.multiple ? multipleInput : simpleInput}</PopoverAnchor>;
   }
 );
 
