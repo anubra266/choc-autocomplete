@@ -1,7 +1,9 @@
 import {
+  Center, 
   forwardRef,
   PopoverContent,
   PopoverContentProps,
+  Spinner, 
   useMergeRefs,
 } from "@chakra-ui/react";
 import React from "react";
@@ -9,21 +11,32 @@ import { useAutoCompleteContext } from "./autocomplete-context";
 import { EmptyState } from "./components/empty-state";
 import { siblingInfo } from "./helpers/list";
 
-export type AutoCompleteListProps = PopoverContentProps;
+export interface AutoCompleteListProps extends PopoverContentProps {
+  loadingState?: React.ReactNode
+};
 
 export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
   (props, forwardedRef) => {
     const { children, ...rest } = props;
-    const { listRef, getListProps } = useAutoCompleteContext();
+    const { listRef, getListProps, isLoading } = useAutoCompleteContext();
     const ref = useMergeRefs(forwardedRef, listRef);
     const listProps = getListProps();
     const [autoCompleteItems, nonAutoCompleteItems] = siblingInfo(children);
 
     return (
       <PopoverContent ref={ref} {...baseStyles} {...listProps} {...rest}>
-        {autoCompleteItems}
-        <EmptyState />
-        {nonAutoCompleteItems}
+        { isLoading && (
+          <Center>
+            { props.loadingState || <Spinner size="md" /> }
+          </Center>
+        )}
+        { !isLoading && (
+          <>
+            {autoCompleteItems}
+            <EmptyState />
+            {nonAutoCompleteItems}
+          </> 
+        )}
       </PopoverContent>
     );
   }

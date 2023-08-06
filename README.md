@@ -503,6 +503,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>Make the component read-only</td>
             <td>false</td>
         </tr>
+        <tr>
+            <td>isLoading</td>
+            <td>boolean</td>
+            <td>Display loading animation on both the input and list elements</td>
+            <td>false</td>
+        </tr>
          <tr>
             <td>listAllValuesOnFocus</td>
             <td>boolean</td>
@@ -792,6 +798,17 @@ RefObject<HTMLInputElement>
     <td>false</td>
 
   </tr>
+  <tr>
+    <td>loadingIcon</td>
+    <td>
+
+    React.ReactNode | JSX
+
+  </td>
+  <td>Element that will be displayed when isLoading is true</td>
+  <td>No</td>
+  <td><a href="https://chakra-ui.com/docs/components/spinner">Spinner</a> from Chakra-UI</td>
+  </tr>
 
 </tbody>
 </table>
@@ -801,6 +818,27 @@ RefObject<HTMLInputElement>
 Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 
 **AutoCompleteList** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+
+<table>
+<thead>
+  <tr>
+    <th>Prop<br></th>
+    <th>Type</th>
+    <th>Description</th>
+    <th>Required</th>
+    <th>Default</th>
+  </tr>
+</thead>
+<tbody>
+  <tr>
+    <td>loadingState</td>
+    <td>React.ReactNode | JSX</td>
+    <td>Content displayed in list while isLoading is true.  Content will be centered</td>
+    <td>No</td>
+    <td><a href="https://chakra-ui.com/docs/components/spinner">Spinner</a> from Chakra-UI with an md size</td>
+  </tr>
+</tbody>
+</table>
 
 ### **AutoCompleteGroup**
 
