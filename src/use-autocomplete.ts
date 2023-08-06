@@ -1,9 +1,9 @@
 import {
-  useDimensions,
   useDisclosure,
   useUpdateEffect,
   useControllableState,
 } from "@chakra-ui/react";
+import { useSize } from "@chakra-ui/react-use-size"
 import {
   getFirstItem,
   getLastItem,
@@ -353,12 +353,12 @@ export function useAutoComplete(
     };
   };
 
-  const wrapperDim = useDimensions(inputWrapperRef, true);
-  const inputDim = useDimensions(inputRef, true);
+  const wrapperDim = useSize(inputWrapperRef);
+  const inputDim = useSize(inputRef);
   const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
     const width = autoCompleteProps.multiple
-      ? (wrapperDim?.marginBox.width as number)
-      : (inputDim?.marginBox.width as number);
+      ? (wrapperDim?.width as number)
+      : (inputDim?.width as number);
     return {
       width,
     };
