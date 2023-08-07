@@ -17,7 +17,7 @@ export interface AutoCompleteListProps extends PopoverContentProps {
 
 export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
   (props, forwardedRef) => {
-    const { children, ...rest } = props;
+    const { children, loadingState, ...rest } = props;
     const { listRef, getListProps, isLoading } = useAutoCompleteContext();
     const ref = useMergeRefs(forwardedRef, listRef);
     const listProps = getListProps();
@@ -27,7 +27,7 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
       <PopoverContent ref={ref} {...baseStyles} {...listProps} {...rest}>
         { isLoading && (
           <Center>
-            { props.loadingState || <Spinner size="md" /> }
+            { loadingState || <Spinner size="md" /> }
           </Center>
         )}
         { !isLoading && (

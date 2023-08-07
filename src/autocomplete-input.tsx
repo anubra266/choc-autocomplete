@@ -29,11 +29,12 @@ export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
 const AutoCompleteInputComponent = forwardRef(
   (props, forwardedRef) => {
     const { isLoading } = useAutoCompleteContext();
+    const { loadingIcon, ...inputProps } = props;
 
     return <InputGroup>
-    <Input {...props} ref={forwardedRef} />
+    <Input {...inputProps} ref={forwardedRef} />
     { isLoading && <InputRightElement>
-      { props.loadingIcon || <Spinner /> }
+      { loadingIcon || <Spinner /> }
     </InputRightElement> }
   </InputGroup>;
   }
