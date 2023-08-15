@@ -71,7 +71,7 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^4.7.4",
-    "vite": "3.0.8"
+    "vite": "3.2.7"
   },
   "dependencies": {
     "@chakra-ui/layout": "^2.1.5",
