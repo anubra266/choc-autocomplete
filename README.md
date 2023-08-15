@@ -385,6 +385,18 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
+### Loading State
+
+Need to pull data from API, but don't want your users to see a blank screen?  You can enable the loading state by passing the `isLoading` prop to `AutoComplete`.  By doing this, 2 other props will be enabled
+
+1. `loadingIcon` on `AutoCompleteInput` will display some sort of loading icon on the right side of the input.  By default, a `Spinner` will be displayed, but you can pass in any custom element to be rendered
+
+2. `loadingState` on `AutoCompleteList` can display custom loading content when `isLoading` is `true`.  All content will be rendered in the center of the list.  By default, a `Spinner` will be displayed, but you can pass in any custom element to be rendered.
+
+Best practice is to combine `setTimeout` and `useEffect` to create a debounce effect.  This will prevent un-necessary API calls if your user types relatively quickly.
+
+A working code demo can be found [here](https://codesandbox.io/s/choc-ui-chakra-autocomplete-loading-tfc8jz)
+
 ### Autocomplete methods
 
 Assign a ref to the `AutoComplete` component and call the available methods with:
