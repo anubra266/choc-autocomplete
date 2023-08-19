@@ -1,11 +1,19 @@
-import { defineConfig } from 'vite';
+import { defineConfig } from 'vite'
 import path from 'path';
 import react from '@vitejs/plugin-react';
+import dts from 'vite-plugin-dts';
+import tsConfigPaths from 'vite-tsconfig-paths';
 
 import { peerDependencies as externals, name } from './package.json';
 
-module.exports = defineConfig({
-  plugins: [react()],
+module.exports = defineConfig(() => ({
+  plugins: [
+    react(),
+    tsConfigPaths(),
+    dts({
+      include: ['src/', 'src/components/'],
+    }),
+  ],
   build: {
     lib: {
       entry: path.resolve(__dirname, './src/index.tsx'),
@@ -15,12 +23,6 @@ module.exports = defineConfig({
     },
     rollupOptions: {
       external: Object.keys(externals),
-      output: {
-        globals: {
-          react: 'React',
-          reactDom: 'reactDom',
-        },
-      },
     },
   },
-});
+}));
