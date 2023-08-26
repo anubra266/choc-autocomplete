@@ -440,7 +440,7 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>closeOnSelect</td>
             <td>boolean</td>
             <td>close suggestions when a suggestions is selected</td>
-            <td>true</td>
+            <td>true when multiple=false, false when multiple=true</td>
         </tr>
         <tr>
             <td>creatable</td>

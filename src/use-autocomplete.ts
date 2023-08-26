@@ -41,7 +41,6 @@ export function useAutoComplete(
 ): UseAutoCompleteReturn {
   let {
     closeOnBlur = true,
-    closeOnSelect,
     creatable,
     emphasize,
     emptyState = true,
@@ -50,6 +49,7 @@ export function useAutoComplete(
     listAllValuesOnFocus,
     maxSuggestions,
     multiple,
+    closeOnSelect = multiple ? false : true,
     defaultValue,
     defaultValues = defaultValue ? [defaultValue] : [],
     onReady,
@@ -68,7 +68,6 @@ export function useAutoComplete(
         : [...value]
       : undefined,
   } = autoCompleteProps;
-  closeOnSelect = closeOnSelect ? closeOnSelect : multiple ? false : true;
 
   freeSolo = freeSolo ? freeSolo : multiple ? true : autoCompleteProps.freeSolo;
 
