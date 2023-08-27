@@ -44,6 +44,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           autoFocus={false}
           placement={placement}
           closeOnBlur={true}
+          matchWidth={true}
         >
           <chakra.div
             w="full"
