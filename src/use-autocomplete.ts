@@ -3,7 +3,6 @@ import {
   useUpdateEffect,
   useControllableState,
 } from "@chakra-ui/react";
-import { useSize } from "@chakra-ui/react-use-size"
 import {
   getFirstItem,
   getLastItem,
@@ -353,17 +352,6 @@ export function useAutoComplete(
     };
   };
 
-  const wrapperDim = useSize(inputWrapperRef);
-  const inputDim = useSize(inputRef);
-  const getListProps: UseAutoCompleteReturn["getListProps"] = () => {
-    const width = autoCompleteProps.multiple
-      ? (wrapperDim?.width as number)
-      : (inputDim?.width as number);
-    return {
-      width,
-    };
-  };
-
   const getItemProps: UseAutoCompleteReturn["getItemProps"] = (
     props,
     creatable
@@ -467,7 +455,6 @@ export function useAutoComplete(
     getGroupProps,
     getInputProps,
     getItemProps,
-    getListProps,
     inputRef,
     interactionRef,
     isLoading, 
