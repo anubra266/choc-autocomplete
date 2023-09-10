@@ -68,6 +68,35 @@
       "contributions": [
         "code"
       ]
+    }, 
+    {
+      "login": "Richi2293",
+      "name": "Riccardo Lorenzi",
+      "avatar_url": "https://avatars.githubusercontent.com/u/5848941?v=4",
+      "profile": "https://riccardolorenzi.com/",
+      "contributions": [
+        "bug"
+      ]
+    }, 
+    {
+      "login": "MathisFederico",
+      "name": "Mathis Federico",
+      "avatar_url": "https://avatars.githubusercontent.com/u/60117466?v=4",
+      "profile": "https://github.com/MathisFederico",
+      "contributions": [
+        "bug"
+      ]
+    }, 
+    {
+      "login": "Kysluss",
+      "name": "Kyle Slusser",
+      "avatar_url": "https://avatars.githubusercontent.com/u/29052043?v=4",
+      "profile": "https://github.com/Kysluss",
+      "contributions": [
+        "bug", 
+        "code", 
+        "doc"
+      ]
     }
   ],
   "contributorsPerLine": 7,
