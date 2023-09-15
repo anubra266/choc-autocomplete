@@ -9,21 +9,16 @@
     "@choc-ui/chakra-autocomplete": "latest",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
-    "af-virtual-scroll": "2.7.9",
-    "faker": "5.5.3",
     "framer-motion": "latest",
     "react": "18.2.0",
-    "react-dom": "18.2.0",
-    "react-scripts": "4.0.2"
+    "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "typescript": "3.3.3"
+    "typescript": "^4.7.4", 
+    "vite": "^3.2.7"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "dev": "vite"
   },
   "browserslist": [
     ">0.2%",
