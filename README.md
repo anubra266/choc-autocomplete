@@ -1163,6 +1163,13 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/daliudzius"><img src="https://avatars.githubusercontent.com/u/46355846?v=4?s=100" width="100px;" alt=""/><br /><sub><b>daliudzius</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=daliudzius" title="Code">💻</a></td>
     <td align="center"><a href="https://fabien0102.com"><img src="https://avatars.githubusercontent.com/u/1761469?v=4?s=100" width="100px;" alt=""/><br /><sub><b>Fabien BERNARD</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=fabien0102" title="Code">💻</a></td>
   </tr>
+  <tr>
+    <td align="center"><a href="https://riccardolorenzi.com/"><img src="https://avatars.githubusercontent.com/u/5848941?v=4" width="100px;" alt=""/><br /><sub><b>Riccardo Lorenzi</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=Richi2293" title="Bug fixes">🐛</a></td>
+    <td align="center"><a href="https://github.com/MathisFederico"><img src="https://avatars.githubusercontent.com/u/60117466?v=4" width="100px;" alt=""/><br /><sub><b>Mathis Federico</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=MathisFederico" title="Bug">🐛</a></td>
+    <td align="center"><a href="https://github.com/Kysluss"><img src="https://avatars.githubusercontent.com/u/29052043?v=4" width="100px;" alt=""/><br /><sub><b>Kyle Slusser</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=Kysluss" title="Code">💻🐛</a></td>
+    <td align="center"><a href="https://github.com/sakerhetspolisen"><img src="https://avatars.githubusercontent.com/u/68159964?v=4" width="100px;" alt=""/><br /><sub><b>Karl F. Sellergren</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=sakerhetspolisen" title="Code">🐛🔧</a></td>
+
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
