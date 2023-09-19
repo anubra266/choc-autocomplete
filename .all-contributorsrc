@@ -97,6 +97,15 @@
         "code", 
         "doc"
       ]
+    }, 
+    {
+      "login": "sakerhetspolisen",
+      "name": "Karl F. Sellergren",
+      "avatar_url": "https://avatars.githubusercontent.com/u/68159964?v=4",
+      "profile": "https://github.com/sakerhetspolisen",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
