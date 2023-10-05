@@ -14,7 +14,7 @@ import {
 } from "@chakra-ui/react";
 import { runIfFn } from "@chakra-ui/utils";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
-import React from "react";
+import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { UseAutoCompleteReturn } from "./types";
@@ -47,6 +47,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       inputRef,
       getInputProps,
       tags,
+      setQuery
     } = useAutoCompleteContext();
 
     // const ref = useMergeRefs(forwardedRef, inputRef);
@@ -57,6 +58,14 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       hidePlaceholder,
       ...rest
     } = props;
+
+    const { value } = rest;
+
+    useEffect(() => {
+      if(value !== undefined && (typeof value === 'string' || value instanceof String)) {
+        setQuery(value);
+      }
+    }, [value]);
 
     const themeInput: any = useMultiStyleConfig("Input", props);
 
