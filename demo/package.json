@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@chakra-ui/react": "latest",
-    "@choc-ui/chakra-autocomplete": "latest",
+    "@choc-ui/chakra-autocomplete": "^5.2.8",
     "@emotion/react": "latest",
     "@emotion/styled": "latest",
     "framer-motion": "latest",
@@ -14,7 +14,7 @@
     "react-dom": "18.2.0"
   },
   "devDependencies": {
-    "typescript": "^4.7.4", 
+    "typescript": "^4.7.4",
     "vite": "^3.2.7"
   },
   "scripts": {
