@@ -37,7 +37,11 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "react-nanny": "2.15.0"
+    "@size-limit/esbuild": "11.0.0",
+    "@size-limit/esbuild-why": "11.0.0",
+    "@size-limit/file": "11.0.0",
+    "react-nanny": "2.15.0",
+    "size-limit": "11.0.0"
   },
   "husky": {
     "hooks": {
@@ -58,11 +62,11 @@
   },
   "size-limit": [
     {
-      "path": "dist/chakra-autocomplete.cjs.production.min.js",
+      "path": "./dist/index.es.js",
       "limit": "10 KB"
     },
     {
-      "path": "dist/chakra-autocomplete.esm.js",
+      "path": "./dist/index.js",
       "limit": "10 KB"
     }
   ],
@@ -71,7 +75,6 @@
     "@chakra-ui/react": "^2.5.5",
     "@emotion/react": "^11.10.6",
     "@emotion/styled": "^11.10.6",
-    "@size-limit/preset-small-lib": "^10.0.2",
     "@types/react": "^18.0.17",
     "@types/react-dom": "^18.0.6",
     "@vitejs/plugin-react": "^4.0.4",
@@ -80,7 +83,6 @@
     "husky": "^8.0.3",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
-    "size-limit": "^10.0.2",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^5.2.2",
