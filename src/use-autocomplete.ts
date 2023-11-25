@@ -320,7 +320,7 @@ export function useAutoComplete(
           }
 
           if (key === "Tab") {
-            if (focusedItem && !focusedItem?.disabled)
+            if (isOpen && focusedItem && !focusedItem?.disabled)
               selectItem(focusedItem?.value);
             else 
               onClose();
