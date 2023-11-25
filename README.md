@@ -1168,6 +1168,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/MathisFederico"><img src="https://avatars.githubusercontent.com/u/60117466?v=4" width="100px;" alt=""/><br /><sub><b>Mathis Federico</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=MathisFederico" title="Bug">🐛</a></td>
     <td align="center"><a href="https://github.com/Kysluss"><img src="https://avatars.githubusercontent.com/u/29052043?v=4" width="100px;" alt=""/><br /><sub><b>Kyle Slusser</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=Kysluss" title="Code">💻🐛</a></td>
     <td align="center"><a href="https://github.com/sakerhetspolisen"><img src="https://avatars.githubusercontent.com/u/68159964?v=4" width="100px;" alt=""/><br /><sub><b>Karl F. Sellergren</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=sakerhetspolisen" title="Code">🐛🔧</a></td>
+    <td align="center"><a href="https://github.com/JedBh"><img src="https://avatars.githubusercontent.com/u/44101778?v=4" width="100px;" alt=""/><br /><sub><b>Jedediah Benhod</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=sakerhetspolisen" title="Code">🐛</a></td>
+    <td align="center"><a href="https://github.com/Janekk"><img src="https://avatars.githubusercontent.com/u/6827881?v=4" width="100px;" alt=""/><br /><sub><b>Janusz Kacalak</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=sakerhetspolisen" title="Code">🐛</a></td>
 
   </tr>
 </table>

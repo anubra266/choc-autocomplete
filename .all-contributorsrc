@@ -106,6 +106,24 @@
       "contributions": [
         "bug"
       ]
+    }, 
+    {
+      "login": "JedBh",
+      "name": "Jedediah Benhod",
+      "avatar_url": "https://avatars.githubusercontent.com/u/44101778?v=4",
+      "profile": "https://github.com/JedBh",
+      "contributions": [
+        "bug"
+      ]
+    }, 
+    {
+      "login": "Janekk",
+      "name": "Janusz Kacalak",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6827881?v=4",
+      "profile": "https://github.com/Janekk",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
