@@ -86,7 +86,7 @@
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^5.2.2",
-    "vite": "^4.4.9",
+    "vite": "^4.5.1",
     "vite-plugin-dts": "^3.5.2",
     "vite-plugin-linter": "^2.0.5",
     "vite-tsconfig-paths": "^4.2.0"
