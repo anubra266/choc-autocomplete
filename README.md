@@ -468,7 +468,7 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
         </tr>
         <tr>
             <td>emphasize</td>
-            <td>boolean | CSSObject</td>
+            <td>boolean | SystemStyleObject</td>
             <td>Highlight matching characters in suggestions, you can pass the styles - false</td>
             <td>false</td>
         </tr>
@@ -945,11 +945,7 @@ val => val;
 </tr>
 <tr>
     <td>_fixed</td>
-    <td>
-
-    CSSObject
-
-</td>
+    <td>SystemStyleObject</td>
     <td>Styles for fixed Itemm</td>
     <td>No</td>
     <td>
@@ -982,11 +978,7 @@ val => val;
 </tr>
 <tr>
     <td>_disabled</td>
-    <td>
-
-    CSSObject
-
-</td>
+    <td>SystemStyleObject</td>
     <td>Styles for disabled Item(s)</td>
     <td>No</td>
     <td>
@@ -1001,11 +993,7 @@ val => val;
 </tr>
 <tr>
     <td>_selected</td>
-    <td>
-
-    CSSObject
-
-</td>
+    <td>SystemStyleObject</td>
     <td>Styles for selected Item(s)</td>
     <td>No</td>
     <td>
@@ -1020,11 +1008,7 @@ val => val;
 </tr>
 <tr>
     <td>_focus</td>
-    <td>
-
-    CSSObject
-
-</td>
+    <td>SystemStyleObject</td>
     <td>Styles for focused Item</td>
     <td>No</td>
     <td>

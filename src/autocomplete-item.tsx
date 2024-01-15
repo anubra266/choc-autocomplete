@@ -1,5 +1,5 @@
 import {
-  CSSObject,
+  SystemStyleObject,
   Flex,
   FlexProps,
   forwardRef,
@@ -14,9 +14,9 @@ export interface AutoCompleteItemProps extends FlexProps {
   value: any;
   label?: string;
   fixed?: boolean;
-  _focus?: CSSObject | any;
+  _focus?: SystemStyleObject | any;
   disabled?: boolean;
-  _fixed?: CSSObject;
+  _fixed?: SystemStyleObject;
   getValue?: (item: AutoCompleteItemProps["value"]) => any;
 }
 
