@@ -293,7 +293,7 @@ export function useAutoComplete(
           const { key } = e;
           const focusedItem = filteredList[focusedIndex];
           if (["Enter", ...submitKeys].includes(key)) {
-            if (focusedItem && !focusedItem?.disabled)
+            if (focusedItem && !focusedItem?.disabled && isOpen)
               selectItem(focusedItem?.value);
             else inputRef.current?.focus();
             e.preventDefault();
