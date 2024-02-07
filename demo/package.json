@@ -7,15 +7,15 @@
   "dependencies": {
     "@chakra-ui/react": "2.8.2",
     "@choc-ui/chakra-autocomplete": "latest",
-    "@emotion/react": "latest",
+    "@emotion/react": "11.11.3",
     "@emotion/styled": "latest",
-    "framer-motion": "10.16.16",
+    "framer-motion": "11.0.3",
     "react": "18.2.0",
     "react-dom": "18.2.0"
   },
   "devDependencies": {
     "typescript": "^5.3.3",
-    "vite": "^5.0.8"
+    "vite": "^5.0.12"
   },
   "scripts": {
     "dev": "vite"
