@@ -1,23 +1,25 @@
 import {
+  useControllableState,
   useDisclosure,
   useUpdateEffect,
-  useControllableState,
 } from "@chakra-ui/react";
 import {
   getFirstItem,
   getLastItem,
   getNextItem,
   getPrevItem,
-  isObject,
   isEmpty,
+  isObject,
   isUndefined,
+  omit,
   runIfFn,
 } from "@chakra-ui/utils";
-import { omit } from "@chakra-ui/utils";
 
 import { useEffect, useRef, useState } from "react";
 
 import { AutoCompleteProps } from "./autocomplete";
+import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
+import { getMultipleWrapStyles } from "./helpers/input";
 import {
   defaultFilterMethod,
   getDefItemValue,
@@ -25,8 +27,6 @@ import {
   getItemList,
   setEmphasis,
 } from "./helpers/items";
-import { getMultipleWrapStyles } from "./helpers/input";
-import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
 import { Item, UseAutoCompleteReturn } from "./types";
 
 /**
@@ -39,6 +39,7 @@ export function useAutoComplete(
   autoCompleteProps: AutoCompleteProps
 ): UseAutoCompleteReturn {
   let {
+    prefocusFirstItem = true,
     closeOnBlur = true,
     creatable,
     emphasize,
@@ -54,8 +55,8 @@ export function useAutoComplete(
     onReady,
     defaultIsOpen,
     disableFilter,
-    isLoading = false, 
-    placement = "bottom", 
+    isLoading = false,
+    placement = "bottom",
     restoreOnBlurIfEmpty = !freeSolo,
     shouldRenderSuggestions = () => true,
     submitKeys = [],
@@ -133,7 +134,9 @@ export function useAutoComplete(
   });
 
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
-    itemList[0]?.value
+    prefocusFirstItem
+      ? itemList[0]?.value
+      : null
   );
 
   const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
@@ -152,12 +155,27 @@ export function useAutoComplete(
   const firstItem = getFirstItem(filteredList);
   const lastItem = getLastItem(filteredList);
 
+  const isFocusedValueNotInList = !filteredList.some(
+    i => i.value === focusedValue
+  );
+
+  useEffect(() => {
+    if (isFocusedValueNotInList)
+      setFocusedValue(
+        prefocusFirstItem
+          ? itemList[0]?.value
+          : null
+      );
+  }, [isFocusedValueNotInList])
+
   useUpdateEffect(() => {
-    setFocusedValue(firstItem?.value);
+    if (prefocusFirstItem)
+      setFocusedValue(firstItem?.value);
   }, [query]);
 
   useEffect(() => {
-    if (!isOpen) setFocusedValue(itemList[0]?.value);
+    if (!isOpen && prefocusFirstItem)
+      setFocusedValue(itemList[0]?.value);
   }, [isOpen]);
 
   useEffect(() => {
@@ -303,7 +321,7 @@ export function useAutoComplete(
           if (key === "ArrowDown") {
             if(!isOpen)
               onOpen();
-            else 
+            else
               setFocusedValue(nextItem?.value);
             e.preventDefault();
             return;
@@ -322,7 +340,7 @@ export function useAutoComplete(
           if (key === "Tab") {
             if (isOpen && focusedItem && !focusedItem?.disabled)
               selectItem(focusedItem?.value);
-            else 
+            else
               onClose();
 
             return;
@@ -457,13 +475,13 @@ export function useAutoComplete(
     getItemProps,
     inputRef,
     interactionRef,
-    isLoading, 
+    isLoading,
     isOpen,
     itemList,
     listRef,
     onClose,
     onOpen,
-    placement, 
+    placement,
     query,
     removeItem,
     resetItems,
