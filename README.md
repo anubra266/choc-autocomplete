@@ -32,7 +32,7 @@
 </a>
     <br />
     AutoComplete Component for the <a href="https://chakra-ui.com">Chakra UI</a> Library.</em>
-    
+
   </sup>
   <br />
   <br />
@@ -454,6 +454,12 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>Suggestions list is open by default</td>
             <td>false</td>
         </tr>
+        <tr>
+            <td>prefocusFirstItem</td>
+            <td>boolean</td>
+            <td>Should prefocus first item intially, on query change, on open, and on filter out of current focused item</td>
+            <td>true</td>
+        </tr>
          <tr>
             <td>defaultValues</td>
             <td>Array</td>
@@ -560,7 +566,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
             <td>onSelectOption</td>
             <td>
-            
+
 ```ts
 (params: {
     item: Item;
@@ -591,7 +597,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
             <td>onReady</td>
             <td>
-            
+
 ```ts
 (props:{tags:ItemTag[]}) => void
 ```
@@ -602,7 +608,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
             <td>onTagRemoved</td>
             <td>
-            
+
 ```ts
 (removedTag: Item["value"],item: Item, tags: Item["value"][]) => void
 ```
@@ -643,7 +649,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
             <td>shouldRenderSuggestions</td>
             <td>
-            
+
 ```ts
 (value: string) => boolean
 ```
@@ -731,7 +737,7 @@ Tags for multiple mode
     <td>Yes<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
- 
+
 </tbody>
 </table>
 
@@ -782,7 +788,7 @@ e.g.
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
-  
+
   <tr>
     <td>ref</td>
     <td>
@@ -1020,7 +1026,7 @@ val => val;
 ```
 
 </td>
-</tr> 
+</tr>
 </tbody>
 </table>
 
@@ -1085,7 +1091,7 @@ When true, `AutoCompleteCreatable` is shown even when the `AutoCompleteInput` is
     <td>No<br></td>
     <td>&mdash;&mdash;&mdash;</td>
   </tr>
- 
+
 </tbody>
 </table>
 
