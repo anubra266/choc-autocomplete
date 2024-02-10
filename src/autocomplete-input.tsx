@@ -47,7 +47,9 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       inputRef,
       getInputProps,
       tags,
-      setQuery
+      setQuery, 
+      value, 
+      itemList
     } = useAutoCompleteContext();
 
     // const ref = useMergeRefs(forwardedRef, inputRef);
@@ -59,13 +61,23 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       ...rest
     } = props;
 
-    const { value } = rest;
+    const { value: inputValue } = rest;
 
     useEffect(() => {
       if(value !== undefined && (typeof value === 'string' || value instanceof String)) {
-        setQuery(value);
+        const item = itemList.find(l => l.value === value);
+
+        const newQuery = item === undefined ? value : item.label;
+
+        setQuery(newQuery);
       }
     }, [value]);
+
+    useEffect(() => {
+      if(inputValue !== undefined && (typeof inputValue === 'string' || inputValue instanceof String)) {
+        setQuery(inputValue);
+      }
+    }, [inputValue]);
 
     const themeInput: any = useMultiStyleConfig("Input", props);
 

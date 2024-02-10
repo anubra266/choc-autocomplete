@@ -487,6 +487,7 @@ export function useAutoComplete(
     resetItems,
     setQuery,
     tags,
+    value, 
     values,
   };
 }
