@@ -2,16 +2,16 @@ import {
   BoxProps,
   FlexProps,
   InputProps,
+  PlacementWithLogical,
   SystemStyleObject,
-  WrapProps,
-  PlacementWithLogical
+  WrapProps
 } from "@chakra-ui/react";
 import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
 
+import { AutoCompleteProps } from "./autocomplete";
 import { AutoCompleteGroupProps } from "./autocomplete-group";
 import { AutoCompleteInputProps } from "./autocomplete-input";
-import { AutoCompleteProps } from "./autocomplete";
 import { AutoCompleteItemProps } from "./autocomplete-item";
 
 export interface Item {
@@ -28,6 +28,7 @@ export interface Item {
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
+  prefocusFirstItem: boolean
   creatable: boolean;
   defaultIsOpen: boolean;
   defaultValue: Item["value"];
