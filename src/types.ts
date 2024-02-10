@@ -149,6 +149,7 @@ export type UseAutoCompleteReturn = {
   resetItems: (focusInput?: boolean) => void;
   setQuery: Dispatch<SetStateAction<any>>;
   tags: ItemTag[];
+  value: Item["value"];
   values: Item["value"][];
 };
 
