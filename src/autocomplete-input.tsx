@@ -67,7 +67,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       if(value !== undefined && (typeof value === 'string' || value instanceof String)) {
         const item = itemList.find(l => l.value === value);
 
-        const newQuery = item === undefined ? '' : item.label;
+        const newQuery = item === undefined ? value : item.label;
 
         setQuery(newQuery);
       }
