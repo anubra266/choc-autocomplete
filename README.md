@@ -385,7 +385,7 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
-### Loading State
+## Loading State
 
 Need to pull data from API, but don't want your users to see a blank screen?  You can enable the loading state by passing the `isLoading` prop to `AutoComplete`.  By doing this, 2 other props will be enabled
 
@@ -397,7 +397,7 @@ Best practice is to combine `setTimeout` and `useEffect` to create a debounce ef
 
 A working code demo can be found [here](https://codesandbox.io/s/choc-ui-chakra-autocomplete-loading-tfc8jz)
 
-### Autocomplete methods
+## Autocomplete methods
 
 Assign a ref to the `AutoComplete` component and call the available methods with:
 
