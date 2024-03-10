@@ -25,7 +25,7 @@
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 
-[![All Contributors](https://img.shields.io/badge/all_contributors-7-orange.svg?style=flat-square)](#contributors-)
+[![All Contributors](https://img.shields.io/badge/all_contributors-15-orange.svg?style=flat-square)](#contributors-)
 
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
@@ -385,7 +385,7 @@ Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer 
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
-### Loading State
+## Loading State
 
 Need to pull data from API, but don't want your users to see a blank screen?  You can enable the loading state by passing the `isLoading` prop to `AutoComplete`.  By doing this, 2 other props will be enabled
 
@@ -397,7 +397,13 @@ Best practice is to combine `setTimeout` and `useEffect` to create a debounce ef
 
 A working code demo can be found [here](https://codesandbox.io/s/choc-ui-chakra-autocomplete-loading-tfc8jz)
 
-### Autocomplete methods
+## Integration with Form Libraries
+
+It is relatively easy to integrate with form libaries such as `React Hook Form`, `Formik`, and others.  Working examples can be found in the `demos` folder of this repo.  See the [Contributing](#contribute) section of this doc on how to clone and set it up for testing.
+
+Does your favorite form library not have a working example?  Submit a PR to get it added and help others using this library quickly get up and running.
+
+## Autocomplete methods
 
 Assign a ref to the `AutoComplete` component and call the available methods with:
 
