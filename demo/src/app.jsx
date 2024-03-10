@@ -7,6 +7,7 @@ import CustomRender from "./custom-render";
 import WithIcon from "./with-icon";
 import MultiSelect from "./multi-select";
 import ReactHookForm from "./react-hook-form";
+import Formik from "./formik";
 
 export default function App() {
   return (
@@ -23,6 +24,7 @@ export default function App() {
       <WithIcon />
       <MultiSelect />
       <ReactHookForm />
+      <Formik />
     </Stack>
   );
 }
