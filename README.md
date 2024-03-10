@@ -397,6 +397,12 @@ Best practice is to combine `setTimeout` and `useEffect` to create a debounce ef
 
 A working code demo can be found [here](https://codesandbox.io/s/choc-ui-chakra-autocomplete-loading-tfc8jz)
 
+## Integration with Form Libraries
+
+It is relatively easy to integrate with form libaries such as `React Hook Form`, `Formik`, and others.  Working examples can be found in the `demos` folder of this repo.  See the [Contributing](#contribute) section of this doc on how to clone and set it up for testing.
+
+Does your favorite form library not have a working example?  Submit a PR to get it added and help others using this library quickly get up and running.
+
 ## Autocomplete methods
 
 Assign a ref to the `AutoComplete` component and call the available methods with:
