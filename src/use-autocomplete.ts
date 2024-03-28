@@ -225,7 +225,11 @@ export function useAutoComplete(
       runIfFn(autoCompleteProps.onTagRemoved, itemValue, item, prevValues);
       return prevValues.filter(i => i !== itemValue);
     });
-    if (query === itemValue) setQuery("");
+
+    const item = itemList.find(opt => opt.value === itemValue);
+    const itemLabel = item?.label || item?.value;
+    
+    if (query === itemLabel) setQuery("");
     if (focusInput) inputRef.current?.focus();
   };
 
