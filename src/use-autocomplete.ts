@@ -188,11 +188,14 @@ export function useAutoComplete(
   }, [focusedValue, autoCompleteProps.onOptionFocus]);
 
   const selectItem = (optionValue: Item["value"]) => {
+    const option = filteredList.find(i => i.value === optionValue);
+
+    const optionLabel = option?.label || option?.value;
+    setQuery(() => (multiple ? "" : optionLabel ?? ""));
+
     if (!values.includes(optionValue) && values.length < maxSelections) {
       setValues(v => (multiple ? [...v, optionValue] : [optionValue]));
     }
-
-    const option = filteredList.find(i => i.value === optionValue);
 
     if (multiple) {
       inputRef.current?.focus();
@@ -210,9 +213,6 @@ export function useAutoComplete(
       });
     }
 
-    const optionLabel = option?.label || option?.value;
-    setQuery(() => (multiple ? "" : optionLabel ?? ""));
-
     if (closeOnSelect) onClose();
   };
 
@@ -228,7 +228,7 @@ export function useAutoComplete(
 
     const item = itemList.find(opt => opt.value === itemValue);
     const itemLabel = item?.label || item?.value;
-    
+
     if (query === itemLabel) setQuery("");
     if (focusInput) inputRef.current?.focus();
   };
