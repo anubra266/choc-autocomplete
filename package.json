@@ -1,10 +1,10 @@
 {
-  "version": "5.3.1",
+  "version": "5.4.0",
   "license": "MIT",
   "main": "./dist/index.js",
   "types": "./dist/index.d.ts",
   "module": "./dist/index.es.js",
-  "type": "module", 
+  "type": "module",
   "files": [
     "dist"
   ],
