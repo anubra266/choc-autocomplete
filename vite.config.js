@@ -6,7 +6,7 @@ import tsConfigPaths from 'vite-tsconfig-paths';
 
 import { peerDependencies as externals, name } from './package.json';
 
-module.exports = defineConfig(() => ({
+export default defineConfig(() => ({
   plugins: [
     react(),
     tsConfigPaths(),
