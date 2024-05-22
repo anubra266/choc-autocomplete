@@ -34,16 +34,6 @@
     AutoComplete Component for the <a href="https://chakra-ui.com">Chakra UI</a> Library.</em>
 
   </sup>
-  <br />
-  <br />
-  <br />
-  <br />
-  <pre>npm i <a href="https://www.npmjs.com/package/@choc-ui/chakra-autocomplete">@choc-ui/chakra-autocomplete</a></pre>
-  <br />
-  <br />
-  <br />
-  <br />
-  <br />
 </div>
 
 ## Install
