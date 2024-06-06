@@ -34,6 +34,8 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
       removeItem,
     }));
 
+    const { matchWidth = true } = context.autoCompleteProps;
+
     return (
       <AutoCompleteProvider value={context}>
         <Popover
@@ -44,7 +46,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           autoFocus={false}
           placement={placement}
           closeOnBlur={true}
-          matchWidth={true}
+          matchWidth={matchWidth}
         >
           <chakra.div
             w="full"
