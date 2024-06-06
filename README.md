@@ -529,6 +529,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>Show all suggestions when user focuses the input, while it's not empty.</td>
             <td>false</td>
         </tr>
+         <tr>
+            <td>matchWidth</td>
+            <td>boolean</td>
+            <td>Chakra UI Popover.matchWidth property to match the popover content's width to the width of the container</td>
+            <td>true</td>
+        </tr>
         <tr>
             <td>maxSelections</td>
             <td>number</td>
