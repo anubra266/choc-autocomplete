@@ -39,7 +39,7 @@ export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
       if (isFocused && interactionRef.current === "keyboard")
         itemRef?.current?.scrollIntoView({
           behavior: "smooth",
-          block: "center",
+          block: "nearest",
         });
     }, [isFocused, interactionRef]);
 
