@@ -179,6 +179,12 @@ export function useAutoComplete(
   }, [isOpen]);
 
   useEffect(() => {
+    if(isOpen && listAllValuesOnFocus) {
+      setListAll(true);
+    }
+  }, [isOpen, listAllValuesOnFocus, setListAll]);
+
+  useEffect(() => {
     const focusedItem = itemList.find(i => i.value === focusedValue);
     runIfFn(autoCompleteProps.onOptionFocus, {
       item: focusedItem!,
