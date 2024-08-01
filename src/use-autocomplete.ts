@@ -171,7 +171,7 @@ export function useAutoComplete(
   useUpdateEffect(() => {
     if (prefocusFirstItem)
       setFocusedValue(firstItem?.value);
-  }, [query]);
+  }, [query, firstItem]);
 
   useEffect(() => {
     if (!isOpen && prefocusFirstItem)
