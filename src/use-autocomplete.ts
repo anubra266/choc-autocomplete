@@ -15,7 +15,7 @@ import {
   runIfFn,
 } from "@chakra-ui/utils";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 
 import { AutoCompleteProps } from "./autocomplete";
 import { hasChildren, hasFirstItem, hasLastItem } from "./helpers/group";
@@ -78,7 +78,7 @@ export function useAutoComplete(
     onClose,
     onOpen,
   });
-  const itemList: Item[] = getItemList(children);
+  const itemList: Item[] = useMemo(() => getItemList(children), [children]);
 
   const inputRef = useRef<HTMLInputElement>(null);
   const inputWrapperRef = useRef<HTMLDivElement>(null);
@@ -93,7 +93,8 @@ export function useAutoComplete(
   else if (!isUndefined(valuesProp)) defaultQuery = valuesProp[0];
 
   const [query, setQuery] = useState<string>(defaultQuery ?? "");
-  const filteredResults = disableFilter
+  const filteredResults = useMemo(() => 
+    disableFilter
     ? itemList
     : itemList
         .filter(
@@ -109,14 +110,14 @@ export function useAutoComplete(
         )
         .filter((i, index) =>
           maxSuggestions ? i.fixed || index < maxSuggestions : true
-        );
+        ), [query, itemList, listAll, maxSuggestions, disableFilter]);
 
   // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable
     ? [{ value: query, noFilter: true, creatable: true }]
     : [];
 
-  const filteredList = [...filteredResults, ...creatableArr];
+  const filteredList = useMemo(() => [...filteredResults, ...creatableArr], [filteredResults, creatableArr]);
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
