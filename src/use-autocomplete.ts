@@ -73,11 +73,11 @@ export function useAutoComplete(
 
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
-  const children = runIfFn(autoCompleteProps.children, {
+  const children = useMemo(() => runIfFn(autoCompleteProps.children, {
     isOpen,
     onClose,
     onOpen,
-  });
+  }), [autoCompleteProps.children, isOpen]);
   const itemList: Item[] = useMemo(() => getItemList(children), [children]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -112,12 +112,14 @@ export function useAutoComplete(
           maxSuggestions ? i.fixed || index < maxSuggestions : true
         ), [query, itemList, listAll, maxSuggestions, disableFilter]);
 
-  // Add Creatable to Filtered List
-  const creatableArr: Item[] = creatable
-    ? [{ value: query, noFilter: true, creatable: true }]
-    : [];
+  const filteredList = useMemo(() => {
+    // Add Creatable to Filtered List
+    const creatableArr: Item[] = creatable
+      ? [{ value: query, noFilter: true, creatable: true }]
+      : [];
 
-  const filteredList = useMemo(() => [...filteredResults, ...creatableArr], [filteredResults, creatableArr]);
+    return [...filteredResults, ...creatableArr]
+  }, [filteredResults]);
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
