@@ -112,14 +112,14 @@ export function useAutoComplete(
           maxSuggestions ? i.fixed || index < maxSuggestions : true
         ), [query, itemList, listAll, maxSuggestions, disableFilter]);
 
-  const filteredList = useMemo(() => {
     // Add Creatable to Filtered List
-    const creatableArr: Item[] = creatable
-      ? [{ value: query, noFilter: true, creatable: true }]
-      : [];
+  const creatableArr: Item[] = creatable
+    ? [{ value: query, noFilter: true, creatable: true }]
+    : [];
 
+  const filteredList = useMemo(() => {
     return [...filteredResults, ...creatableArr]
-  }, [filteredResults]);
+  }, [filteredResults, creatableArr]);
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
