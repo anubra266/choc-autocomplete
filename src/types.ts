@@ -30,6 +30,7 @@ export type UseAutoCompleteProps = Partial<{
   closeOnSelect: boolean;
   prefocusFirstItem: boolean
   creatable: boolean;
+  defaultEmptyStateProps: FlexProps;
   defaultIsOpen: boolean;
   defaultValue: Item["value"];
   defaultValues: Item["value"][];
@@ -123,6 +124,7 @@ export type GroupReturnProps = {
 export type UseAutoCompleteReturn = {
   autoCompleteProps: AutoCompleteProps;
   children: React.ReactNode;
+  defaultEmptyStateProps: FlexProps, 
   filteredList: Item[];
   filteredResults: Item[];
   focusedValue: Item["value"];
