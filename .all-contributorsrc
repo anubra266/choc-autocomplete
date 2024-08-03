@@ -153,6 +153,16 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "gbermudez1992",
+      "name": "Gustavo Bermúdez",
+      "avatar_url": "https://avatars.githubusercontent.com/u/84212735?v=4",
+      "profile": "https://github.com/gbermudez1992",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
