@@ -475,6 +475,12 @@ Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
             <td>false</td>
         </tr>
         <tr>
+            <td>defaultEmptyStateProps</td>
+            <td>FlexProps</td>
+            <td>Props to pass into the `Flex` component when using the default empty state.  Does not apply when you supply your own custom `emptyState`</td>
+            <td>&mdash;&mdash;&mdash;</td>
+        </tr>
+        <tr>
             <td>emptyState</td>
             <td>
 
