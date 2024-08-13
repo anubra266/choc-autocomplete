@@ -101,7 +101,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
     );
 
     const multipleInput = (
-      <Wrap {...wrapperProps} ref={wrapperRef}>
+      <Wrap aria-invalid={isInvalid} {...wrapperProps} ref={wrapperRef}>
         {children}
         <WrapItem as={AutoCompleteInputComponent} {...(inputProps as any)} ref={ref} />
       </Wrap>
