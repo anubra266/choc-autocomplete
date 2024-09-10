@@ -138,11 +138,10 @@ export function useAutoComplete(
   });
 
   useEffect(() => {
-    if(filteredList.length === 0 && !emptyState) {
+    if(filteredList.length === 0 && !emptyState && isOpen) {
       onClose();
     }
-
-  }, [filteredList.length]);
+  }, [filteredList.length, emptyState, isOpen]);
 
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     prefocusFirstItem
