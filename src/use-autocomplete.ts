@@ -137,6 +137,12 @@ export function useAutoComplete(
     },
   });
 
+  useEffect(() => {
+    if(filteredList.length === 0 && !emptyState && isOpen) {
+      onClose();
+    }
+  }, [filteredList.length, emptyState, isOpen]);
+
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     prefocusFirstItem
       ? itemList[0]?.value
@@ -476,6 +482,7 @@ export function useAutoComplete(
         : runIfFn(emptyState, { query });
     }
   };
+
 
   return {
     autoCompleteProps,
