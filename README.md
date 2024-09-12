@@ -1174,6 +1174,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/chrisregner"><img src="https://avatars.githubusercontent.com/u/26005158?v=4" width="100px;" alt=""/><br /><sub><b>Christopher Regner</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=chrisregner" title="Code">📖🐛</a></td>
     <td align="center"><a href="https://github.com/EinarSnorrason"><img src="https://avatars.githubusercontent.com/u/31321506?v=4" width="100px;" alt=""/><br /><sub><b>EinarSnorrason</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=EinarSnorrason" title="Code">💻🐛🔧</a></td>
     <td align="center"><a href="https://github.com/gbermudez1992"><img src="https://avatars.githubusercontent.com/u/84212735?v=4" width="100px;" alt=""/><br /><sub><b>gbermudez1992</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gbermudez1992" title="Code">💻🐛🔧</a></td>
+    <td align="center"><a href="https://github.com/ido213"><img src="https://avatars.githubusercontent.com/u/163876909?v=4" width="100px;" alt=""/><br /><sub><b>ido213</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=ido213" title="Code">💻🐛🔧</a></td>
   </tr>
 </table>
 

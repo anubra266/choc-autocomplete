@@ -163,6 +163,16 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "ido213",
+      "name": "ido213",
+      "avatar_url": "https://avatars.githubusercontent.com/u/163876909?v=4",
+      "profile": "https://github.com/ido213",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
