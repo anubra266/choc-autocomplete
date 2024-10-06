@@ -1,10 +1,13 @@
 import React, { useImperativeHandle } from "react";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
 
 import { AutoCompleteProvider } from "./autocomplete-context";
 import { useAutoComplete } from "./use-autocomplete";
 import { chakra, forwardRef, Popover } from "@chakra-ui/react";
-import { AutoCompleteRefMethods, UseAutoCompleteProps } from "./types";
+import {
+  AutoCompleteRefMethods,
+  UseAutoCompleteProps,
+  MaybeRenderProp,
+} from "./types";
 
 export type AutoCompleteChildProps = {
   isOpen: boolean;
@@ -24,7 +27,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
       isOpen,
       onClose,
       onOpen,
-      placement, 
+      placement,
       resetItems,
       removeItem,
     } = context;
@@ -48,10 +51,7 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
           closeOnBlur={true}
           matchWidth={matchWidth}
         >
-          <chakra.div
-            w="full"
-            ref={ref}
-          >
+          <chakra.div w="full" ref={ref}>
             {children}
           </chakra.div>
         </Popover>

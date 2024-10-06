@@ -13,7 +13,7 @@ import {
   isUndefined,
   omit,
   runIfFn,
-} from "@chakra-ui/utils";
+} from "./utils";
 
 import { useEffect, useMemo, useRef, useState } from "react";
 
@@ -44,7 +44,7 @@ export function useAutoComplete(
     creatable,
     emphasize,
     emptyState = true,
-    defaultEmptyStateProps = {}, 
+    defaultEmptyStateProps = {},
     freeSolo,
     isReadOnly,
     listAllValuesOnFocus,
@@ -74,11 +74,15 @@ export function useAutoComplete(
 
   const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
 
-  const children = useMemo(() => runIfFn(autoCompleteProps.children, {
-    isOpen,
-    onClose,
-    onOpen,
-  }), [autoCompleteProps.children, isOpen]);
+  const children = useMemo(
+    () =>
+      runIfFn(autoCompleteProps.children, {
+        isOpen,
+        onClose,
+        onOpen,
+      }),
+    [autoCompleteProps.children, isOpen]
+  );
   const itemList: Item[] = useMemo(() => getItemList(children), [children]);
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -94,41 +98,45 @@ export function useAutoComplete(
   else if (!isUndefined(valuesProp)) defaultQuery = valuesProp[0];
 
   const [query, setQuery] = useState<string>(defaultQuery ?? "");
-  const filteredResults = useMemo(() => 
-    disableFilter
-    ? itemList
-    : itemList
-        .filter(
-          i =>
-            i.fixed ||
-            runIfFn(
-              autoCompleteProps.filter || defaultFilterMethod,
-              query,
-              i.value,
-              i.label
-            ) ||
-            listAll
-        )
-        .filter((i, index) =>
-          maxSuggestions ? i.fixed || index < maxSuggestions : true
-        ), [query, itemList, listAll, maxSuggestions, disableFilter]);
+  const filteredResults = useMemo(
+    () =>
+      disableFilter
+        ? itemList
+        : itemList
+            .filter(
+              i =>
+                i.fixed ||
+                runIfFn(
+                  autoCompleteProps.filter || defaultFilterMethod,
+                  query,
+                  i.value,
+                  i.label
+                ) ||
+                listAll
+            )
+            .filter((i, index) =>
+              maxSuggestions ? i.fixed || index < maxSuggestions : true
+            ),
+    [query, itemList, listAll, maxSuggestions, disableFilter]
+  );
 
-    // Add Creatable to Filtered List
+  // Add Creatable to Filtered List
   const creatableArr: Item[] = creatable
     ? [{ value: query, noFilter: true, creatable: true }]
     : [];
 
   const filteredList = useMemo(() => {
-    return [...filteredResults, ...creatableArr]
+    return [...filteredResults, ...creatableArr];
   }, [filteredResults, creatableArr]);
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
     onChange: (newValues: any[]) => {
       const item = filteredList.find(opt => opt.value === newValues[0]);
+      if (!item) return;
       const items = newValues.map(val =>
         filteredList.find(opt => opt.value === val)
-      );
+      ) as Item[];
       runIfFn(
         autoCompleteProps.onChange,
         multiple ? newValues : newValues[0],
@@ -138,15 +146,13 @@ export function useAutoComplete(
   });
 
   useEffect(() => {
-    if(filteredList.length === 0 && !emptyState && isOpen) {
+    if (filteredList.length === 0 && !emptyState && isOpen) {
       onClose();
     }
   }, [filteredList.length, emptyState, isOpen]);
 
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
-    prefocusFirstItem
-      ? itemList[0]?.value
-      : null
+    prefocusFirstItem ? itemList[0]?.value : null
   );
 
   const maxSelections = autoCompleteProps.maxSelections || values.length + 1;
@@ -171,25 +177,19 @@ export function useAutoComplete(
 
   useEffect(() => {
     if (isFocusedValueNotInList)
-      setFocusedValue(
-        prefocusFirstItem
-          ? itemList[0]?.value
-          : null
-      );
-  }, [isFocusedValueNotInList])
+      setFocusedValue(prefocusFirstItem ? itemList[0]?.value : null);
+  }, [isFocusedValueNotInList]);
 
   useUpdateEffect(() => {
-    if (prefocusFirstItem)
-      setFocusedValue(firstItem?.value);
+    if (prefocusFirstItem) setFocusedValue(firstItem?.value);
   }, [query, firstItem?.value]);
 
   useEffect(() => {
-    if (!isOpen && prefocusFirstItem)
-      setFocusedValue(itemList[0]?.value);
+    if (!isOpen && prefocusFirstItem) setFocusedValue(itemList[0]?.value);
   }, [isOpen]);
 
   useEffect(() => {
-    if(isOpen && listAllValuesOnFocus) {
+    if (isOpen && listAllValuesOnFocus) {
       setListAll(true);
     }
   }, [isOpen, listAllValuesOnFocus, setListAll]);
@@ -238,6 +238,8 @@ export function useAutoComplete(
   ) => {
     setValues(prevValues => {
       const item = itemList.find(opt => opt.value === itemValue);
+      if (!item) return prevValues;
+
       runIfFn(autoCompleteProps.onTagRemoved, itemValue, item, prevValues);
       return prevValues.filter(i => i !== itemValue);
     });
@@ -256,7 +258,8 @@ export function useAutoComplete(
 
   const tags = multiple
     ? values.map(tag => ({
-        label: itemList.find(item => item.value === tag?.toString())?.label || tag,
+        label:
+          itemList.find(item => item.value === tag?.toString())?.label || tag,
         onRemove: () => removeItem(tag),
       }))
     : [];
@@ -339,19 +342,15 @@ export function useAutoComplete(
           }
 
           if (key === "ArrowDown") {
-            if(!isOpen)
-              onOpen();
-            else
-              setFocusedValue(nextItem?.value);
+            if (!isOpen) onOpen();
+            else setFocusedValue(nextItem?.value);
             e.preventDefault();
             return;
           }
 
           if (key === "ArrowUp") {
-            if(!isOpen)
-              onOpen();
-            else
-              setFocusedValue(prevItem?.value);
+            if (!isOpen) onOpen();
+            else setFocusedValue(prevItem?.value);
 
             e.preventDefault();
             return;
@@ -360,8 +359,7 @@ export function useAutoComplete(
           if (key === "Tab") {
             if (isOpen && focusedItem && !focusedItem?.disabled)
               selectItem(focusedItem?.value);
-            else
-              onClose();
+            else onClose();
 
             return;
           }
@@ -483,14 +481,13 @@ export function useAutoComplete(
     }
   };
 
-
   return {
     autoCompleteProps,
     children,
     filteredList,
     filteredResults,
     focusedValue,
-    defaultEmptyStateProps, 
+    defaultEmptyStateProps,
     getEmptyStateProps,
     getGroupProps,
     getInputProps,
@@ -509,7 +506,7 @@ export function useAutoComplete(
     resetItems,
     setQuery,
     tags,
-    value, 
+    value,
     values,
   };
 }
