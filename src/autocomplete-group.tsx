@@ -7,7 +7,7 @@ import {
   FlexProps,
   forwardRef,
 } from "@chakra-ui/react";
-import { omit } from "@chakra-ui/utils";
+import { omit } from "./utils";
 import React from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 

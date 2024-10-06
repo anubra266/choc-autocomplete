@@ -4,15 +4,20 @@ import {
   InputProps,
   PlacementWithLogical,
   SystemStyleObject,
-  WrapProps
+  WrapProps,
 } from "@chakra-ui/react";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
 import React, { Dispatch, SetStateAction } from "react";
 
 import { AutoCompleteProps } from "./autocomplete";
 import { AutoCompleteGroupProps } from "./autocomplete-group";
 import { AutoCompleteInputProps } from "./autocomplete-input";
 import { AutoCompleteItemProps } from "./autocomplete-item";
+
+export type Dict<T = any> = Record<string, T>;
+
+export type MaybeRenderProp<P> =
+  | React.ReactNode
+  | ((props: P) => React.ReactNode);
 
 export interface Item {
   value: any;
@@ -28,7 +33,7 @@ export interface Item {
 export type UseAutoCompleteProps = Partial<{
   closeOnBlur: boolean;
   closeOnSelect: boolean;
-  prefocusFirstItem: boolean
+  prefocusFirstItem: boolean;
   creatable: boolean;
   defaultEmptyStateProps: FlexProps;
   defaultIsOpen: boolean;
@@ -44,7 +49,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => boolean;
   focusInputOnSelect: boolean;
   freeSolo: boolean;
-  isLoading: boolean,
+  isLoading: boolean;
   isReadOnly: boolean;
   listAllValuesOnFocus: boolean;
   matchWidth: boolean;
@@ -124,7 +129,7 @@ export type GroupReturnProps = {
 export type UseAutoCompleteReturn = {
   autoCompleteProps: AutoCompleteProps;
   children: React.ReactNode;
-  defaultEmptyStateProps: FlexProps, 
+  defaultEmptyStateProps: FlexProps;
   filteredList: Item[];
   filteredResults: Item[];
   focusedValue: Item["value"];

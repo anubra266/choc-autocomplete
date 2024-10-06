@@ -5,7 +5,7 @@ import {
   forwardRef,
   useMergeRefs,
 } from "@chakra-ui/react";
-import { isUndefined, omit } from "@chakra-ui/utils";
+import { isUndefined, omit } from "./utils";
 import React, { useEffect, useRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";

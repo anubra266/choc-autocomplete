@@ -1,4 +1,4 @@
-import { isDefined, runIfFn } from "@chakra-ui/utils";
+import { isDefined, runIfFn } from "../utils";
 import { getChildDeep } from "react-nanny";
 import { ReactNode } from "react";
 import { getDefItemValue } from "./items";

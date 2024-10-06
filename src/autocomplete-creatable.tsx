@@ -1,6 +1,6 @@
 import { Flex, FlexProps } from "@chakra-ui/react";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
-import { isEmpty, runIfFn } from "@chakra-ui/utils";
+import { MaybeRenderProp } from "./types";
+import { isEmpty, runIfFn } from "./utils";
 
 import React from "react";
 

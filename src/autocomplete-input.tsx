@@ -2,43 +2,42 @@ import {
   forwardRef,
   Input,
   InputProps,
-  InputGroup, 
-  InputRightElement, 
+  InputGroup,
+  InputRightElement,
   Spinner,
   SystemStyleObject,
   useMergeRefs,
   useMultiStyleConfig,
   Wrap,
-  WrapItem, 
-  PopoverAnchor
+  WrapItem,
+  PopoverAnchor,
 } from "@chakra-ui/react";
-import { runIfFn } from "@chakra-ui/utils";
-import { MaybeRenderProp } from "@chakra-ui/react-utils";
+import { runIfFn } from "./utils";
 import React, { useEffect } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
-import { UseAutoCompleteReturn } from "./types";
+import { MaybeRenderProp, UseAutoCompleteReturn } from "./types";
 
 export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
   wrapStyles?: SystemStyleObject;
   hidePlaceholder?: boolean;
-  loadingIcon?: React.ReactNode
+  loadingIcon?: React.ReactNode;
 }
 
-const AutoCompleteInputComponent = forwardRef(
-  (props, forwardedRef) => {
-    const { isLoading } = useAutoCompleteContext();
-    const { loadingIcon, ...inputProps } = props;
+const AutoCompleteInputComponent = forwardRef((props, forwardedRef) => {
+  const { isLoading } = useAutoCompleteContext();
+  const { loadingIcon, ...inputProps } = props;
 
-    return <InputGroup>
-    <Input {...inputProps} ref={forwardedRef} />
-    { isLoading && <InputRightElement>
-      { loadingIcon || <Spinner /> }
-    </InputRightElement> }
-  </InputGroup>;
-  }
-)
+  return (
+    <InputGroup>
+      <Input {...inputProps} ref={forwardedRef} />
+      {isLoading && (
+        <InputRightElement>{loadingIcon || <Spinner />}</InputRightElement>
+      )}
+    </InputGroup>
+  );
+});
 
 export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
   (props, forwardedRef) => {
@@ -47,9 +46,9 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       inputRef,
       getInputProps,
       tags,
-      setQuery, 
-      value, 
-      itemList
+      setQuery,
+      value,
+      itemList,
     } = useAutoCompleteContext();
 
     // const ref = useMergeRefs(forwardedRef, inputRef);
@@ -64,7 +63,10 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
     const { value: inputValue } = rest;
 
     useEffect(() => {
-      if(value !== undefined && (typeof value === 'string' || value instanceof String)) {
+      if (
+        value !== undefined &&
+        (typeof value === "string" || value instanceof String)
+      ) {
         const item = itemList.find(l => l.value === value);
 
         const newQuery = item === undefined ? value : item.label;
@@ -74,7 +76,10 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
     }, [value]);
 
     useEffect(() => {
-      if(inputValue !== undefined && (typeof inputValue === 'string' || inputValue instanceof String)) {
+      if (
+        inputValue !== undefined &&
+        (typeof inputValue === "string" || inputValue instanceof String)
+      ) {
         setQuery(inputValue);
       }
     }, [inputValue]);
@@ -97,17 +102,29 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
     }
 
     const simpleInput = (
-      <AutoCompleteInputComponent isInvalid={isInvalid} {...(inputProps as any)} ref={ref} />
+      <AutoCompleteInputComponent
+        isInvalid={isInvalid}
+        {...(inputProps as any)}
+        ref={ref}
+      />
     );
 
     const multipleInput = (
       <Wrap aria-invalid={isInvalid} {...wrapperProps} ref={wrapperRef}>
         {children}
-        <WrapItem as={AutoCompleteInputComponent} {...(inputProps as any)} ref={ref} />
+        <WrapItem
+          as={AutoCompleteInputComponent}
+          {...(inputProps as any)}
+          ref={ref}
+        />
       </Wrap>
     );
 
-    return <PopoverAnchor>{autoCompleteProps.multiple ? multipleInput : simpleInput}</PopoverAnchor>;
+    return (
+      <PopoverAnchor>
+        {autoCompleteProps.multiple ? multipleInput : simpleInput}
+      </PopoverAnchor>
+    );
   }
 );
 

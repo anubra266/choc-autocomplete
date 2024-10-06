@@ -30,8 +30,6 @@
   },
   "peerDependencies": {
     "@chakra-ui/react": "^2.5.5",
-    "@chakra-ui/react-utils": "^2.0.5",
-    "@chakra-ui/utils": "^2.0.8",
     "@emotion/react": "^11.10.0",
     "@emotion/styled": "^11.10.0",
     "framer-motion": ">7.6.14",
