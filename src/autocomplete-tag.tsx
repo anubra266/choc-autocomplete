@@ -1,6 +1,6 @@
 import { WrapItem } from "@chakra-ui/layout";
 import { Tag, TagCloseButton, TagLabel, TagProps } from "@chakra-ui/tag";
-import { runIfFn } from "@chakra-ui/utils";
+import { runIfFn } from "./utils";
 import React, { memo } from "react";
 
 type AutoCompleteTagProps = {
