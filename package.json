@@ -36,11 +36,7 @@
     "react": "^18.2.0"
   },
   "dependencies": {
-    "@size-limit/esbuild": "11.1.5",
-    "@size-limit/esbuild-why": "11.1.5",
-    "@size-limit/file": "11.1.5",
-    "react-nanny": "2.15.0",
-    "size-limit": "11.1.5"
+    "react-nanny": "2.15.0"
   },
   "husky": {
     "hooks": {
@@ -74,6 +70,9 @@
     "@chakra-ui/react": "^2.8.2",
     "@emotion/react": "^11.11.3",
     "@emotion/styled": "^11.10.6",
+    "@size-limit/esbuild": "11.1.5",
+    "@size-limit/esbuild-why": "11.1.5",
+    "@size-limit/file": "11.1.5",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
     "@vitejs/plugin-react": "^4.2.1",
@@ -82,6 +81,7 @@
     "husky": "^9.1.6",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
+    "size-limit": "11.1.5",
     "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^5.3.3",
