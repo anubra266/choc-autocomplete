@@ -173,6 +173,16 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "aeons",
+      "name": "Bjørn Madsen",
+      "avatar_url": "https://avatars.githubusercontent.com/u/1432894?v=4",
+      "profile": "https://github.com/aeons",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
