@@ -1,5 +1,5 @@
-import { WrapItem } from "@chakra-ui/layout";
-import { Tag, TagCloseButton, TagLabel, TagProps } from "@chakra-ui/tag";
+import { WrapItem } from "@chakra-ui/react";
+import { Tag, TagCloseButton, TagLabel, TagProps } from "@chakra-ui/react";
 import { runIfFn } from "./utils";
 import React, { memo } from "react";
 

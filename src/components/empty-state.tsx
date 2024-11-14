@@ -1,4 +1,4 @@
-import { Box, BoxProps, Flex, FlexProps } from "@chakra-ui/layout";
+import { Box, BoxProps, Flex, FlexProps } from "@chakra-ui/react";
 import React from "react";
 import { useAutoCompleteContext } from "../autocomplete-context";
 
