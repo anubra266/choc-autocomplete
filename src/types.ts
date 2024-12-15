@@ -4,7 +4,6 @@ import {
   InputProps,
   PlacementWithLogical,
   SystemStyleObject,
-  WrapProps,
 } from "@chakra-ui/react";
 import React, { Dispatch, SetStateAction } from "react";
 
@@ -102,7 +101,7 @@ export type InputReturnProps = {
   wrapper: {
     onClick: React.MouseEventHandler<HTMLDivElement>;
     ref: React.RefObject<HTMLDivElement>;
-  } & WrapProps;
+  } & BoxProps;
   input: InputProps;
 };
 
