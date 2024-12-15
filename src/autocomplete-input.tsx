@@ -1,22 +1,18 @@
 import {
-  forwardRef,
   Input,
   InputProps,
-  InputGroup,
-  InputRightElement,
   Spinner,
   SystemStyleObject,
-  useMergeRefs,
-  useMultiStyleConfig,
-  Wrap,
-  WrapItem,
-  PopoverAnchor,
+  //useMultiStyleConfig,
+  Box,
 } from "@chakra-ui/react";
-import { runIfFn } from "./utils";
-import React, { useEffect } from "react";
+import { PopoverAnchor } from "@chakra-ui/react";
+import { omit, runIfFn, useMergeRefs } from "./utils";
+import { useEffect, forwardRef } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 import { MaybeRenderProp, UseAutoCompleteReturn } from "./types";
+import { InputGroup } from "./components/ui/input-group";
 
 export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   children?: MaybeRenderProp<{ tags: UseAutoCompleteReturn["tags"] }>;
@@ -25,21 +21,26 @@ export interface AutoCompleteInputProps extends Omit<InputProps, "children"> {
   loadingIcon?: React.ReactNode;
 }
 
-const AutoCompleteInputComponent = forwardRef((props, forwardedRef) => {
+const AutoCompleteInputComponent = forwardRef<HTMLInputElement, AutoCompleteInputProps>((props, forwardedRef) => {
   const { isLoading } = useAutoCompleteContext();
-  const { loadingIcon, ...inputProps } = props;
+  const { loadingIcon, ...restProps } = props;
 
-  return (
-    <InputGroup>
-      <Input {...inputProps} ref={forwardedRef} />
-      {isLoading && (
-        <InputRightElement>{loadingIcon || <Spinner />}</InputRightElement>
-      )}
-    </InputGroup>
-  );
+  const inputProps = omit(restProps, ['children', 'wrapStyles', 'hidePlaceholder']);
+
+  const inputElement = <Input {...inputProps} ref={forwardedRef} />;
+
+  if(isLoading) {
+    return (
+      <InputGroup endElement={loadingIcon || <Spinner />}>
+        {inputElement}
+      </InputGroup>
+    );
+  }
+
+  return inputElement;
 });
 
-export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
+export const AutoCompleteInput = forwardRef<HTMLInputElement, AutoCompleteInputProps>(
   (props, forwardedRef) => {
     const {
       autoCompleteProps,
@@ -55,7 +56,6 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const {
       children: childrenProp,
-      isInvalid,
       hidePlaceholder,
       ...rest
     } = props;
@@ -84,7 +84,7 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
       }
     }, [inputValue]);
 
-    const themeInput: any = useMultiStyleConfig("Input", props);
+    const themeInput: any = {};//useMultiStyleConfig("Input", props);
 
     let { wrapper, input: inputProps } = getInputProps(rest, themeInput);
     const { ref: wrapperRef, ...wrapperProps } = wrapper;
@@ -103,21 +103,20 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 
     const simpleInput = (
       <AutoCompleteInputComponent
-        isInvalid={isInvalid}
         {...(inputProps as any)}
         ref={ref}
       />
     );
 
     const multipleInput = (
-      <Wrap aria-invalid={isInvalid} {...wrapperProps} ref={wrapperRef}>
+      <Box {...wrapperProps} ref={wrapperRef}>
         {children}
-        <WrapItem
+        <Box
           as={AutoCompleteInputComponent}
           {...(inputProps as any)}
           ref={ref}
         />
-      </Wrap>
+      </Box>
     );
 
     return (
@@ -129,5 +128,3 @@ export const AutoCompleteInput = forwardRef<AutoCompleteInputProps, "input">(
 );
 
 AutoCompleteInput.displayName = "Input";
-
-AutoCompleteInput.id = "Input";

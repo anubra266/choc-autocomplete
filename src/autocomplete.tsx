@@ -1,8 +1,9 @@
-import React, { useImperativeHandle } from "react";
+import React, { useImperativeHandle, forwardRef } from "react";
 
 import { AutoCompleteProvider } from "./autocomplete-context";
 import { useAutoComplete } from "./use-autocomplete";
-import { chakra, forwardRef, Popover } from "@chakra-ui/react";
+import { chakra } from "@chakra-ui/react";
+import { PopoverRoot } from "./components/ui/popover";
 import {
   AutoCompleteRefMethods,
   UseAutoCompleteProps,
@@ -19,7 +20,7 @@ export interface AutoCompleteProps extends UseAutoCompleteProps {
   ref?: React.RefObject<AutoCompleteRefMethods>;
 }
 
-export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
+export const AutoComplete = forwardRef<AutoCompleteRefMethods, AutoCompleteProps>(
   (props, ref) => {
     const context = useAutoComplete(props);
     const {
@@ -41,20 +42,16 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
 
     return (
       <AutoCompleteProvider value={context}>
-        <Popover
-          isLazy
-          isOpen={isOpen}
-          onClose={onClose}
-          onOpen={onOpen}
+        <PopoverRoot
+          open={isOpen}
           autoFocus={false}
-          placement={placement}
-          closeOnBlur={true}
-          matchWidth={matchWidth}
+          positioning={{placement, sameWidth: matchWidth}} 
+          present={isOpen}
         >
           <chakra.div w="full" ref={ref}>
             {children}
           </chakra.div>
-        </Popover>
+        </PopoverRoot>
       </AutoCompleteProvider>
     );
   }
