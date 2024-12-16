@@ -22,7 +22,7 @@ export default defineConfig(() => ({
       formats: ['cjs', 'es'],
     },
     rollupOptions: {
-      external: Object.keys(externals),
+      external: ["react/jsx-runtime", ...Object.keys(externals)],
     },
   },
 }));
