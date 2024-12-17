@@ -6,7 +6,7 @@
   "main": "src/index.js",
   "dependencies": {
     "@chakra-ui/react": "2.8.2",
-    "@choc-ui/chakra-autocomplete": "^5.4.0",
+    "@choc-ui/chakra-autocomplete": "^5.8.0",
     "@emotion/react": "11.11.3",
     "@emotion/styled": "^11.11.5",
     "formik": "^2.4.5",
