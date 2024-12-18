@@ -20,7 +20,8 @@ export default function Page() {
       <AutoComplete
         openOnFocus
         rollNavigation
-        listAllValuesOnFocus>
+        listAllValuesOnFocus 
+        closeOnBlur={false}>
           <AutoCompleteInput variant="subtle" />
           <AutoCompleteList>
             {options.map(option => (

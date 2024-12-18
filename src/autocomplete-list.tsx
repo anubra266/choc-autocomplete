@@ -23,7 +23,7 @@ export const AutoCompleteList = forwardRef<HTMLDivElement, AutoCompleteListProps
     const [autoCompleteItems, nonAutoCompleteItems] = siblingInfo(children);
 
     return (
-      <PopoverContent>
+      <PopoverContent portalled={true}>
         <PopoverBody ref={ref} w='inherit' {...baseStyles} {...rest}>
           { isLoading && (
             <Center>

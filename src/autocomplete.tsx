@@ -43,15 +43,10 @@ export const AutoComplete = forwardRef<AutoCompleteRefMethods, AutoCompleteProps
     return (
       <AutoCompleteProvider value={context}>
         <PopoverRoot
-          //lazyMount 
-          //unmountOnExit 
           open={isOpen}
-          //onClose={onClose}
-          //onOpen={onOpen}
           autoFocus={false}
-          positioning={{placement, sameWidth: matchWidth}}
-          //closeOnBlur={true}
-          //matchWidth={matchWidth}
+          positioning={{placement, sameWidth: matchWidth}} 
+          present={isOpen}
         >
           <chakra.div w="full" ref={ref}>
             {children}
