@@ -2,11 +2,9 @@ import {
   SystemStyleObject,
   Flex,
   FlexProps,
-  forwardRef,
-  useMergeRefs,
 } from "@chakra-ui/react";
-import { isUndefined, omit } from "./utils";
-import React, { useEffect, useRef } from "react";
+import { isUndefined, omit, useMergeRefs } from "./utils";
+import { useEffect, useRef, forwardRef, } from "react";
 
 import { useAutoCompleteContext } from "./autocomplete-context";
 
@@ -20,7 +18,7 @@ export interface AutoCompleteItemProps extends FlexProps {
   getValue?: (item: AutoCompleteItemProps["value"]) => any;
 }
 
-export const AutoCompleteItem = forwardRef<AutoCompleteItemProps, "div">(
+export const AutoCompleteItem = forwardRef<HTMLDivElement, AutoCompleteItemProps>(
   (props, forwardedRef) => {
     const {
       focusedValue,

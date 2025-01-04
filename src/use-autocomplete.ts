@@ -1,7 +1,6 @@
 import {
   useControllableState,
-  useDisclosure,
-  useUpdateEffect,
+  useDisclosure
 } from "@chakra-ui/react";
 import {
   getFirstItem,
@@ -72,16 +71,16 @@ export function useAutoComplete(
 
   freeSolo = freeSolo ? freeSolo : multiple ? true : autoCompleteProps.freeSolo;
 
-  const { isOpen, onClose, onOpen } = useDisclosure({ defaultIsOpen });
+  const { open, onClose, onOpen } = useDisclosure({ open: defaultIsOpen });
 
   const children = useMemo(
     () =>
       runIfFn(autoCompleteProps.children, {
-        isOpen,
+        isOpen: open,
         onClose,
         onOpen,
       }),
-    [autoCompleteProps.children, isOpen]
+    [autoCompleteProps.children, open]
   );
   const itemList: Item[] = useMemo(() => getItemList(children), [children]);
 
@@ -146,10 +145,10 @@ export function useAutoComplete(
   });
 
   useEffect(() => {
-    if (filteredList.length === 0 && !emptyState && isOpen) {
+    if (filteredList.length === 0 && !emptyState && open) {
       onClose();
     }
-  }, [filteredList.length, emptyState, isOpen]);
+  }, [filteredList.length, emptyState, open]);
 
   const [focusedValue, setFocusedValue] = useState<Item["value"]>(
     prefocusFirstItem ? itemList[0]?.value : null
@@ -180,19 +179,19 @@ export function useAutoComplete(
       setFocusedValue(prefocusFirstItem ? itemList[0]?.value : null);
   }, [isFocusedValueNotInList]);
 
-  useUpdateEffect(() => {
+  useEffect(() => {
     if (prefocusFirstItem) setFocusedValue(firstItem?.value);
-  }, [query, firstItem?.value]);
+  }, [prefocusFirstItem, setFocusedValue, query, firstItem?.value]);
 
   useEffect(() => {
-    if (!isOpen && prefocusFirstItem) setFocusedValue(itemList[0]?.value);
-  }, [isOpen]);
+    if (!open && prefocusFirstItem) setFocusedValue(itemList[0]?.value);
+  }, [open]);
 
   useEffect(() => {
-    if (isOpen && listAllValuesOnFocus) {
+    if (open && listAllValuesOnFocus) {
       setListAll(true);
     }
-  }, [isOpen, listAllValuesOnFocus, setListAll]);
+  }, [open, listAllValuesOnFocus, setListAll]);
 
   useEffect(() => {
     const focusedItem = itemList.find(i => i.value === focusedValue);
@@ -281,7 +280,7 @@ export function useAutoComplete(
         onClick: () => {
           inputRef?.current?.focus();
         },
-        ...getMultipleWrapStyles(themeInput, multiple),
+        //...getMultipleWrapStyles(themeInput, multiple),
         ...rest,
       },
       input: {
@@ -334,7 +333,7 @@ export function useAutoComplete(
           const { key } = e;
           const focusedItem = filteredList[focusedIndex];
           if (["Enter", ...submitKeys].includes(key)) {
-            if (focusedItem && !focusedItem?.disabled && isOpen)
+            if (focusedItem && !focusedItem?.disabled && open)
               selectItem(focusedItem?.value);
             else inputRef.current?.focus();
             e.preventDefault();
@@ -342,14 +341,14 @@ export function useAutoComplete(
           }
 
           if (key === "ArrowDown") {
-            if (!isOpen) onOpen();
+            if (!open) onOpen();
             else setFocusedValue(nextItem?.value);
             e.preventDefault();
             return;
           }
 
           if (key === "ArrowUp") {
-            if (!isOpen) onOpen();
+            if (!open) onOpen();
             else setFocusedValue(prevItem?.value);
 
             e.preventDefault();
@@ -357,7 +356,7 @@ export function useAutoComplete(
           }
 
           if (key === "Tab") {
-            if (isOpen && focusedItem && !focusedItem?.disabled)
+            if (open && focusedItem && !focusedItem?.disabled)
               selectItem(focusedItem?.value);
             else onClose();
 
@@ -403,7 +402,7 @@ export function useAutoComplete(
       getValue = getDefItemValue,
       onClick,
       onMouseOver,
-      sx,
+      //sx,
       ...rest
     } = props;
     const value = creatable ? valueProp : getValue(valueProp)?.toString();
@@ -423,7 +422,7 @@ export function useAutoComplete(
         "aria-selected": values.includes(value),
         "aria-disabled": disabled,
         _disabled: { opacity: 0.4, cursor: "not-allowed", userSelect: "none" },
-        onClick: e => {
+        onMouseDown: e => {
           runIfFn(onClick, e);
           if (!disabled) selectItem(value);
           else inputRef.current?.focus();
@@ -434,7 +433,7 @@ export function useAutoComplete(
           interactionRef.current = "mouse";
         },
         sx: {
-          ...sx,
+          //...sx,
           mark: {
             color: "inherit",
             bg: "transparent",
@@ -495,7 +494,7 @@ export function useAutoComplete(
     inputRef,
     interactionRef,
     isLoading,
-    isOpen,
+    isOpen: open,
     itemList,
     listRef,
     onClose,

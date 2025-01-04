@@ -1,14 +1,13 @@
 import {
   Box,
   BoxProps,
-  Divider,
-  DividerProps,
+  Separator,
+  SeparatorProps,
   Flex,
   FlexProps,
-  forwardRef,
 } from "@chakra-ui/react";
 import { omit } from "./utils";
-import React from "react";
+import { forwardRef } from "react";
 import { useAutoCompleteContext } from "./autocomplete-context";
 
 export interface AutoCompleteGroupProps extends BoxProps {
@@ -17,7 +16,7 @@ export interface AutoCompleteGroupProps extends BoxProps {
   dividerColor?: string;
 }
 
-export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, "div">(
+export const AutoCompleteGroup = forwardRef<HTMLDivElement, AutoCompleteGroupProps>(
   (props, ref) => {
     const { children, showDivider, ...restProps } = props;
     const rest = omit(restProps, ["groupSibling"] as any);
@@ -30,15 +29,15 @@ export const AutoCompleteGroup = forwardRef<AutoCompleteGroupProps, "div">(
 
     return (
       <Box ref={ref} {...group} {...rest}>
-        <Divider {...dividerStyles.top} />
+        <Separator {...dividerStyles.top} />
         {children}
-        <Divider {...dividerStyles.bottom} />
+        <Separator {...dividerStyles.bottom} />
       </Box>
     );
   }
 );
 
-export const AutoCompleteGroupTitle = forwardRef<FlexProps, "div">(
+export const AutoCompleteGroupTitle = forwardRef<HTMLDivElement, FlexProps>(
   (props, ref) => {
     return <Flex {...baseTitleStyles} {...props} ref={ref} />;
   }
@@ -67,7 +66,7 @@ const useDividerStyles = (
     divider: { hasFirstChild, hasLastChild },
   } = getGroupProps(props as AutoCompleteGroupProps);
 
-  const baseStyles: DividerProps = {
+  const baseStyles: SeparatorProps = {
     my: 2,
     borderColor: props.dividerColor,
   };
