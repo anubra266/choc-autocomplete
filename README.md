@@ -36,6 +36,18 @@
   </sup>
 </div>
 
+## Chakra V3 and V2 Support
+
+AutoComplete Version 6+ supports [Chakra UI V3](https://www.chakra-ui.com/).  If you are using [Chakra UI V2](https://v2.chakra-ui.com/), please continue to use the current choc-autocomplete v5.X.  We will continue to try and support Chakra V2 but will eventually be removed once V3 becomes more widely adopted.
+
+For help migrating from Chakra UI V2 to V3, please see their [migration guide](https://chakra-ui.com/docs/get-started/migration)
+
+The public API of the AutoComplete components have not changed with this migration.
+
+## Known issues with Chakra V3
+
+There is only 1 known display issue with Chakra V3.  When using the `multiple` prop, it is no longer possible to replicate the same styling to the `Box` wrapper as what the underlying `Input` is using.  We are still looking into ways to resolve this, but neither the Chakra nor next-themes teams have published guidance on this yet. 
+
 ## Install
 
 ```bash
@@ -59,8 +71,7 @@ yarn add @choc-ui/chakra-autocomplete
 ### Basic Usage
 
 ```js
-import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import * as React from "react";
+import { Flex, Field } from "@chakra-ui/react";
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -79,10 +90,10 @@ function App() {
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
-      <FormControl w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
+      <Field.Root w="60">
+        <Field.Label>Olympics Soccer Winner</Field.Label>
         <AutoComplete openOnFocus>
-          <AutoCompleteInput variant="filled" />
+          <AutoCompleteInput variant="subtle" />
           <AutoCompleteList>
             {countries.map((country, cid) => (
               <AutoCompleteItem
@@ -95,8 +106,8 @@ function App() {
             ))}
           </AutoCompleteList>
         </AutoComplete>
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl>
+        <Field.HelperText>Who do you support.</Field.HelperText>
+      </Field.Root>
     </Flex>
   );
 }
@@ -111,8 +122,7 @@ export default App;
 You can create groups with the `AutoCompleteGroup` Component, and add a title with the `AutoCompleteGroupTitle` component.
 
 ```js
-import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import * as React from "react";
+import React from "react";
 import {
   AutoComplete,
   AutoCompleteGroup,
@@ -121,46 +131,41 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
+import { Stack, Text } from "@chakra-ui/react";
 
-function App() {
+export default function App() {
   const continents = {
     africa: ["nigeria", "south africa"],
     asia: ["japan", "south korea"],
     europe: ["united kingdom", "russia"],
   };
-
   return (
-    <Flex pt="48" justify="center" align="center" w="full">
-      <FormControl w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus>
-          <AutoCompleteInput variant="filled" />
-          <AutoCompleteList>
-            {Object.entries(continents).map(([continent, countries], co_id) => (
-              <AutoCompleteGroup key={co_id} showDivider>
-                <AutoCompleteGroupTitle textTransform="capitalize">
-                  {continent}
-                </AutoCompleteGroupTitle>
-                {countries.map((country, c_id) => (
-                  <AutoCompleteItem
-                    key={c_id}
-                    value={country}
-                    textTransform="capitalize"
-                  >
-                    {country}
-                  </AutoCompleteItem>
-                ))}
-              </AutoCompleteGroup>
-            ))}
-          </AutoCompleteList>
-        </AutoComplete>
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl>
-    </Flex>
+    <Stack direction="column">
+      <Text>Group </Text>
+      <AutoComplete openOnFocus>
+        <AutoCompleteInput placeholder="Search..." variant="subtle" />
+        <AutoCompleteList>
+          {Object.entries(continents).map(([continent, countries], co_id) => (
+            <AutoCompleteGroup key={co_id} showDivider>
+              <AutoCompleteGroupTitle textTransform="capitalize">
+                {continent}
+              </AutoCompleteGroupTitle>
+              {countries.map((country, c_id) => (
+                <AutoCompleteItem
+                  key={c_id}
+                  value={country}
+                  textTransform="capitalize"
+                >
+                  {country}
+                </AutoCompleteItem>
+              ))}
+            </AutoCompleteGroup>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
+    </Stack>
   );
 }
-
-export default App;
 ```
 
 <img width="661" alt="CleanShot 2021-07-29 at 01 18 47@2x" src="https://user-images.githubusercontent.com/30869823/127412483-89639ae2-34a7-4f59-9da0-287cd83cd035.png">
@@ -172,12 +177,8 @@ To access the internal state of the `AutoComplete`, use a function as children (
 ```js
 import {
   Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Icon,
-  InputGroup,
-  InputRightElement,
+  Field, 
+  Icon
 } from "@chakra-ui/react";
 import * as React from "react";
 import {
@@ -187,6 +188,7 @@ import {
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
 import { FiChevronRight, FiChevronDown } from "react-icons/fi";
+import { InputGroup } from "./components/ui/input-group";
 
 function App() {
   const countries = [
@@ -199,18 +201,15 @@ function App() {
 
   return (
     <Flex pt="48" justify="center" align="center" w="full">
-      <FormControl w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
+      <Field.Root w="60">
+        <Field.Label>Olympics Soccer Winner</Field.Label>
         <AutoComplete openOnFocus>
           {({ isOpen }) => (
             <>
-              <InputGroup>
-                <AutoCompleteInput variant="filled" placeholder="Search..." />
-                <InputRightElement
-                  children={
-                    <Icon as={isOpen ? FiChevronRight : FiChevronDown} />
-                  }
-                />
+              <InputGroup 
+                endElement={<Icon>{isOpen ? <FiChevronRight /> : <FiChevronDown />}</Icon>}
+              >
+                <AutoCompleteInput variant="subtle" placeholder="Search..." />
               </InputGroup>
               <AutoCompleteList>
                 {countries.map((country, cid) => (
@@ -226,8 +225,8 @@ function App() {
             </>
           )}
         </AutoComplete>
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl>
+        <Field.HelperText>Who do you support.</Field.HelperText>
+      </Field.Root>
     </Flex>
   );
 }
@@ -242,41 +241,37 @@ export default App;
 You can Render whatever you want. The `AutoComplete` Items are regular `Chakra` Boxes.
 
 ```js
-import {
-  Avatar,
-  Flex,
-  FormControl,
-  FormHelperText,
-  FormLabel,
-  Text,
-} from "@chakra-ui/react";
-import * as React from "react";
+import React from "react";
 import {
   AutoComplete,
+  AutoCompleteGroup,
   AutoCompleteInput,
   AutoCompleteItem,
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
+import { Stack, Text } from "@chakra-ui/react";
+import { Avatar } from "./components/ui/avatar";
 
-function App() {
-  const people = [
+export default function App() {
+  const europeans = [
     { name: "Dan Abramov", image: "https://bit.ly/dan-abramov" },
     { name: "Kent Dodds", image: "https://bit.ly/kent-c-dodds" },
-    { name: "Segun Adebayo", image: "https://bit.ly/sage-adebayo" },
-    { name: "Prosper Otemuyiwa", image: "https://bit.ly/prosper-baba" },
     { name: "Ryan Florence", image: "https://bit.ly/ryan-florence" },
   ];
-
+  const nigerians = [
+    { name: "Segun Adebayo", image: "https://bit.ly/sage-adebayo" },
+    { name: "Prosper Otemuyiwa", image: "https://bit.ly/prosper-baba" },
+  ];
   return (
-    <Flex pt="48" justify="center" align="center" w="full" direction="column">
-      <FormControl id="email" w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus>
-          <AutoCompleteInput variant="filled" />
-          <AutoCompleteList>
-            {people.map((person, oid) => (
+    <Stack direction="column">
+      <Text>Custom Render </Text>
+      <AutoComplete rollNavigation>
+        <AutoCompleteInput variant="subtle" placeholder="Search..." />
+        <AutoCompleteList>
+          <AutoCompleteGroup title="Nigerians" showDivider>
+            {nigerians.map((person, oid) => (
               <AutoCompleteItem
-                key={`option-${oid}`}
+                key={`nigeria-${oid}`}
                 value={person.name}
                 textTransform="capitalize"
                 align="center"
@@ -285,15 +280,26 @@ function App() {
                 <Text ml="4">{person.name}</Text>
               </AutoCompleteItem>
             ))}
-          </AutoCompleteList>
-        </AutoComplete>
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl>
-    </Flex>
+          </AutoCompleteGroup>
+          <AutoCompleteGroup title="Europeans" showDivider>
+            {europeans.map((person, oid) => (
+              <AutoCompleteItem
+                key={`europe-${oid}`}
+                value={person.name}
+                textTransform="capitalize"
+                align="center"
+              >
+                <Avatar size="sm" name={person.name} src={person.image} />
+                <Text ml="4">{person.name}</Text>
+              </AutoCompleteItem>
+            ))}
+          </AutoCompleteGroup>
+        </AutoCompleteList>
+      </AutoComplete>
+    </Stack>
   );
 }
 
-export default App;
 ```
 
 <img width="541" alt="CleanShot 2021-07-29 at 01 35 03@2x" src="https://user-images.githubusercontent.com/30869823/127413575-9cea8ee8-3fd3-4720-8d87-7e1f996144be.png">
@@ -305,9 +311,10 @@ The `onChange` prop now returns an array of the chosen `values`
 
 Now you can map the tags with the `AutoCompleteTag` component or any other component of your choice. The `label` and the `onRemove` method are now exposed.
 
+**Important** - With Chakra UI V3, it is no longer possible to replicate the same styling to the `Box` wrapper as what the underlying `Input` is using.  We are still looking into ways to resolve this, but neither the Chakra nor next-themes teams have published guidance on this yet. 
+
 ```js
-import { Flex, FormControl, FormHelperText, FormLabel } from "@chakra-ui/react";
-import * as React from "react";
+import React from "react";
 import {
   AutoComplete,
   AutoCompleteInput,
@@ -315,8 +322,9 @@ import {
   AutoCompleteList,
   AutoCompleteTag,
 } from "@choc-ui/chakra-autocomplete";
+import { Stack, Text } from "@chakra-ui/react";
 
-function App() {
+export default function App() {
   const countries = [
     "nigeria",
     "japan",
@@ -324,44 +332,38 @@ function App() {
     "united states",
     "south korea",
   ];
-
   return (
-    <Flex pt="48" justify="center" align="center" w="full" direction="column">
-      <FormControl id="email" w="60">
-        <FormLabel>Olympics Soccer Winner</FormLabel>
-        <AutoComplete openOnFocus multiple onChange={vals => console.log(vals)}>
-          <AutoCompleteInput variant="filled">
-            {({ tags }) =>
-              tags.map((tag, tid) => (
-                <AutoCompleteTag
-                  key={tid}
-                  label={tag.label}
-                  onRemove={tag.onRemove}
-                />
-              ))
-            }
-          </AutoCompleteInput>
-          <AutoCompleteList>
-            {countries.map((country, cid) => (
-              <AutoCompleteItem
-                key={`option-${cid}`}
-                value={country}
-                textTransform="capitalize"
-                _selected={{ bg: "whiteAlpha.50" }}
-                _focus={{ bg: "whiteAlpha.100" }}
-              >
-                {country}
-              </AutoCompleteItem>
-            ))}
-          </AutoCompleteList>
-        </AutoComplete>
-        <FormHelperText>Who do you support.</FormHelperText>
-      </FormControl>
-    </Flex>
+    <Stack direction="column">
+      <Text>Multi select with tags</Text>
+      <AutoComplete openOnFocus multiple onChange={(vals) => console.log(vals)}>
+        <AutoCompleteInput placeholder="Search..." variant="subtle">
+          {({ tags }) =>
+            tags.map((tag, tid) => (
+              <AutoCompleteTag
+                key={tid}
+                label={tag.label}
+                onRemove={tag.onRemove}
+              />
+            ))
+          }
+        </AutoCompleteInput>
+        <AutoCompleteList>
+          {countries.map((country, cid) => (
+            <AutoCompleteItem
+              key={`option-${cid}`}
+              value={country}
+              textTransform="capitalize"
+              _selected={{ bg: "whiteAlpha.50" }}
+              _focus={{ bg: "whiteAlpha.100" }}
+            >
+              {country}
+            </AutoCompleteItem>
+          ))}
+        </AutoCompleteList>
+      </AutoComplete>
+    </Stack>
   );
 }
-
-export default App;
 ```
 
 ![Kapture 2021-07-29 at 02 05 53](https://user-images.githubusercontent.com/30869823/127415996-09a5df7c-a356-4a22-ad9c-60d09963cfc6.gif)
@@ -372,6 +374,59 @@ I know that title hardly expresses the point, but yeah, naming is tough. You mig
 
 First add the `creatable` prop to the `AutoComplete` component.
 Then add the `AutoCompleteCreatable` component to the bottom of the list. Refer to the references for more info on this component.
+
+```js
+import React from "react";
+import {
+  AutoComplete,
+  AutoCompleteCreatable,
+  AutoCompleteInput,
+  AutoCompleteItem,
+  AutoCompleteList,
+  AutoCompleteTag,
+} from "@choc-ui/chakra-autocomplete";
+import { Stack, Text } from "@chakra-ui/react";
+
+export default function App() {
+  const options = ["apple", "appoint", "zap", "cap", "japan"];
+  return (
+    <Stack direction="column">
+      <Text>Creatable </Text>
+      <AutoComplete multiple rollNavigation creatable>
+        <AutoCompleteInput
+          variant="subtle"
+          placeholder="Search basic..."
+          autoFocus
+        >
+          {({ tags }) =>
+            tags.map((tag, tid) => (
+              <AutoCompleteTag
+                key={tid}
+                label={tag.value}
+                onRemove={tag.onRemove}
+                disabled={tag.label === "japan"}
+              />
+            ))
+          }
+        </AutoCompleteInput>
+        <AutoCompleteList>
+          {options.map((option, oid) => (
+            <AutoCompleteItem
+              key={`option-${oid}`}
+              value={option}
+              textTransform="capitalize"
+            >
+              {option}
+            </AutoCompleteItem>
+          ))}
+          <AutoCompleteCreatable />
+        </AutoCompleteList>
+      </AutoComplete>
+    </Stack>
+  );
+}
+
+```
 
 <img width="517" alt="CleanShot 2021-07-29 at 02 29 20@2x" src="https://user-images.githubusercontent.com/30869823/127417453-e78b9b48-26e8-4ff0-a264-1d6bb4717ab0.png">
 
@@ -412,7 +467,7 @@ ref.current?.removeItem(itemValue);
 
 Wrapper and Provider for `AutoCompleteInput` and `AutoCompleteList`
 
-**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+**AutoComplete** composes [**Box**](https://chakra-ui.com/docs/components/box) so you can pass all Box props to change its style.
 
 **NB:** None of the props passed to it are required.
 
@@ -538,7 +593,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
          <tr>
             <td>matchWidth</td>
             <td>boolean</td>
-            <td>Chakra UI Popover.matchWidth property to match the popover content's width to the width of the container</td>
+            <td>Chakra UI <a href="https://chakra-ui.com/docs/components/popover#same-width">Popover.positioning.sameWidth</a> property to match the popover content's width to the width of the container</td>
             <td>true</td>
         </tr>
         <tr>
@@ -633,7 +688,7 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         <tr>
             <td>placement</td>
             <td>PlacementWithLogical</td>
-            <td>where autocomplete list will display.  Accepts any valid value from <a href="https://chakra-ui.com/docs/components/popover#popover-placements">Popover</a> component</td>
+            <td>where autocomplete list will display.  Accepts any valid value from <a href="https://chakra-ui.com/docs/components/popover#placement">Popover</a> component</td>
             <td>bottom</td>
         </tr>
         <tr>
@@ -697,7 +752,7 @@ string[]
 
 Tags for multiple mode
 
-**AutoCompleteTag** composes [**Tag**](https://chakra-ui.com/docs/data-display/tag) so you can pass all Tag props to change its style.
+**AutoCompleteTag** composes [**Tag**](https://chakra-ui.com/docs/components/tag) so you can pass all Tag props to change its style.
 
 <table>
 <thead>
@@ -753,7 +808,7 @@ Tags for multiple mode
 
 Input for `AutoComplete` value.
 
-**AutoCompleteInput** composes [**Input**](https://chakra-ui.com/docs/form/input) so you can pass all Input props to change its style.
+**AutoCompleteInput** composes [**Input**](https://chakra-ui.com/docs/components/input) so you can pass all Input props to change its style.
 
 <table>
 <thead>
@@ -783,7 +838,7 @@ callback that returns `ReactNode` and is provided with tags in `multiple` mode
 e.g.
 
 ```js
-<AutoCompleteInput variant="filled">
+<AutoCompleteInput variant="subtle">
   {({ tags }) =>
     tags.map((tag, tid) => (
       <AutoCompleteTag key={tid} label={tag.label} onRemove={tag.onRemove} />
@@ -843,7 +898,7 @@ RefObject<HTMLInputElement>
 
 Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 
-**AutoCompleteList** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+**AutoCompleteList** composes [**Box**](https://chakra-ui.com/docs/components/box) so you can pass all Box props to change its style.
 
 <table>
 <thead>
@@ -870,7 +925,7 @@ Wrapper for `AutoCompleteGroup` and `AutoCompleteItem`
 
 Wrapper for collections of `AutoCompleteItem`s
 
-**AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/layout/box) so you can pass all Box props to change its style.
+**AutoCompleteGroup** composes [**Box**](https://chakra-ui.com/docs/components/box) so you can pass all Box props to change its style.
 
 <Table>
 <thead>
@@ -906,7 +961,7 @@ Wrapper for collections of `AutoCompleteItem`s
 
 This Composes your suggestions
 
-**AutoCompleteItem** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+**AutoCompleteItem** composes [**Flex**](https://chakra-ui.com/docs/components/flex) so you can pass all Flex props to change its style.
 
 <table>
 <thead>
@@ -1042,7 +1097,7 @@ val => val;
 
 Used with the `AutoComplete` component's `creatable` prop, to allow users enter arbitrary values, not available in the provided options.
 
-**AutoCompleteCreatable** composes [**Flex**](https://chakra-ui.com/docs/layout/flex) so you can pass all Flex props to change its style.
+**AutoCompleteCreatable** composes [**Flex**](https://chakra-ui.com/docs/components/flex) so you can pass all Flex props to change its style.
 
 It also accepts a function as its `children` prop which is provided with the current `inputValue`.
 
