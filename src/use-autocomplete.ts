@@ -381,7 +381,8 @@ export function useAutoComplete(
           }
         },
         value: query,
-        variant: multiple ? "unstyled" : variant,
+        //variant: multiple ? "unstyled" : variant,
+        variant, 
         ...rest,
       },
     };

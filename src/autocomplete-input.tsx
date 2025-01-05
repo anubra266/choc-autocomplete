@@ -111,11 +111,7 @@ export const AutoCompleteInput = forwardRef<HTMLInputElement, AutoCompleteInputP
     const multipleInput = (
       <Box {...wrapperProps} ref={wrapperRef}>
         {children}
-        <Box
-          as={AutoCompleteInputComponent}
-          {...(inputProps as any)}
-          ref={ref}
-        />
+        {simpleInput}
       </Box>
     );
 
