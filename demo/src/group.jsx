@@ -19,7 +19,7 @@ export default function App() {
     <Stack direction="column">
       <Text>Group </Text>
       <AutoComplete openOnFocus>
-        <AutoCompleteInput placeholder="Search..." variant="filled" />
+        <AutoCompleteInput placeholder="Search..." variant="subtle" />
         <AutoCompleteList>
           {Object.entries(continents).map(([continent, countries], co_id) => (
             <AutoCompleteGroup key={co_id} showDivider>

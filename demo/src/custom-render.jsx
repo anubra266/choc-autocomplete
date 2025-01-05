@@ -6,7 +6,8 @@ import {
   AutoCompleteItem,
   AutoCompleteList,
 } from "@choc-ui/chakra-autocomplete";
-import { Avatar, Stack, Text } from "@chakra-ui/react";
+import { Stack, Text } from "@chakra-ui/react";
+import { Avatar } from "./components/ui/avatar";
 
 export default function App() {
   const europeans = [
@@ -22,7 +23,7 @@ export default function App() {
     <Stack direction="column">
       <Text>Custom Render </Text>
       <AutoComplete rollNavigation>
-        <AutoCompleteInput variant="filled" placeholder="Search..." />
+        <AutoCompleteInput variant="subtle" placeholder="Search..." />
         <AutoCompleteList>
           <AutoCompleteGroup title="Nigerians" showDivider>
             {nigerians.map((person, oid) => (

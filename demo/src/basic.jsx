@@ -14,7 +14,7 @@ export default function App() {
       <Text>Basic </Text>
       <AutoComplete rollNavigation>
         <AutoCompleteInput
-          variant="filled"
+          variant="subtle"
           placeholder="Search basic..."
           autoFocus
         />

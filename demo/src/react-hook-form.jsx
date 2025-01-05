@@ -2,9 +2,7 @@ import {
   Box,
   Button,
   Center,
-  FormControl,
-  FormHelperText,
-  FormLabel,
+  Field, 
   Heading,
 } from "@chakra-ui/react";
 import * as React from "react";
@@ -44,8 +42,8 @@ function ReactHookFormExample() {
         Change Value To four
       </Button>
       <form onSubmit={handleSubmit(onSubmit)}>
-        <FormControl>
-          <FormLabel>Olympics Soccer Winner</FormLabel>
+        <Field.Root>
+          <Field.Label>Olympics Soccer Winner</Field.Label>
           <AutoComplete
             onChange={val => setValue("team", val)}
             openOnFocus
@@ -54,7 +52,7 @@ function ReactHookFormExample() {
             freeSolo
             value={value}
           >
-            <AutoCompleteInput variant="filled" name={name} onBlur={onBlur} />
+            <AutoCompleteInput variant="subtle" name={name} onBlur={onBlur} />
             <AutoCompleteList>
               <AutoCompleteGroup>
                 {options.map(option => (
@@ -70,8 +68,8 @@ function ReactHookFormExample() {
               </AutoCompleteGroup>
             </AutoCompleteList>
           </AutoComplete>
-          <FormHelperText>Who do you support.</FormHelperText>
-        </FormControl>
+          <Field.HelperText>Who do you support.</Field.HelperText>
+        </Field.Root>
         <Center>
           <Button type="submit">Submit</Button>
         </Center>

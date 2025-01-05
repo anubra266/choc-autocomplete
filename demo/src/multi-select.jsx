@@ -20,7 +20,7 @@ export default function App() {
     <Stack direction="column">
       <Text>Multi select with tags</Text>
       <AutoComplete openOnFocus multiple onChange={(vals) => console.log(vals)}>
-        <AutoCompleteInput placeholder="Search..." variant="filled">
+        <AutoCompleteInput placeholder="Search..." variant="subtle">
           {({ tags }) =>
             tags.map((tag, tid) => (
               <AutoCompleteTag

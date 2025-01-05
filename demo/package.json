@@ -5,12 +5,12 @@
   "keywords": [],
   "main": "src/index.js",
   "dependencies": {
-    "@chakra-ui/react": "2.8.2",
-    "@choc-ui/chakra-autocomplete": "^5.8.0",
-    "@emotion/react": "11.11.3",
-    "@emotion/styled": "^11.11.5",
+    "@chakra-ui/react": "^3.2.3",
+    "@choc-ui/chakra-autocomplete": "6.0.0-alpha.1",
+    "@emotion/react": "^11.14.0",
     "formik": "^2.4.5",
     "framer-motion": "11.0.3",
+    "next-themes": "^0.4.4",
     "react": "18.2.0",
     "react-dom": "18.2.0",
     "react-hook-form": "^7.50.1"

@@ -2,9 +2,7 @@ import {
   Box,
   Button,
   Center,
-  FormControl,
-  FormHelperText,
-  FormLabel,
+  Field, 
   Heading,
 } from "@chakra-ui/react";
 import * as React from "react";
@@ -42,8 +40,8 @@ function FormikExample() {
             </Button>
 
             <form onSubmit={handleSubmit}>
-              <FormControl>
-                <FormLabel>Olympics Soccer Winner</FormLabel>
+              <Field.Root>
+                <Field.Label>Olympics Soccer Winner</Field.Label>
                 <AutoComplete
                   onChange={val => setFieldValue("team", val)}
                   openOnFocus
@@ -53,7 +51,7 @@ function FormikExample() {
                   value={other.values.team}
                 >
                   <AutoCompleteInput
-                    variant="filled"
+                    variant="subtle"
                     name={name}
                     onBlur={handleBlur}
                   />
@@ -72,8 +70,8 @@ function FormikExample() {
                     </AutoCompleteGroup>
                   </AutoCompleteList>
                 </AutoComplete>
-                <FormHelperText>Who do you support.</FormHelperText>
-              </FormControl>
+                <Field.HelperText>Who do you support.</Field.HelperText>
+              </Field.Root>
               <Center>
                 <Button type="submit">Submit</Button>
               </Center>

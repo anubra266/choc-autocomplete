@@ -16,7 +16,7 @@ export default function App() {
       <Text>Creatable </Text>
       <AutoComplete multiple rollNavigation creatable>
         <AutoCompleteInput
-          variant="filled"
+          variant="subtle"
           placeholder="Search basic..."
           autoFocus
         >
