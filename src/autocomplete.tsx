@@ -44,8 +44,8 @@ export const AutoComplete = forwardRef<AutoCompleteProps, "div">(
         <Popover
           isLazy
           isOpen={isOpen}
-          onClose={onClose}
-          onOpen={onOpen}
+          //onClose={onClose}
+          //onOpen={onOpen}
           autoFocus={false}
           placement={placement}
           closeOnBlur={true}
