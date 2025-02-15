@@ -237,8 +237,15 @@ export function useAutoComplete(
     focusInput
   ) => {
     setValues(prevValues => {
-      const item = itemList.find(opt => opt.value === itemValue);
-      if (!item) return prevValues;
+      let item = itemList.find(opt => opt.value === itemValue);
+
+      if(!item && creatable === true) {
+        item = {label: itemValue, value: itemValue};
+      }
+      
+      if (!item) {
+        return prevValues;
+      }
 
       runIfFn(autoCompleteProps.onTagRemoved, itemValue, item, prevValues);
       return prevValues.filter(i => i !== itemValue);
