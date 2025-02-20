@@ -1231,6 +1231,8 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/gbermudez1992"><img src="https://avatars.githubusercontent.com/u/84212735?v=4" width="100px;" alt=""/><br /><sub><b>gbermudez1992</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=gbermudez1992" title="Code">💻🐛🔧</a></td>
     <td align="center"><a href="https://github.com/ido213"><img src="https://avatars.githubusercontent.com/u/163876909?v=4" width="100px;" alt=""/><br /><sub><b>ido213</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=ido213" title="Code">💻🐛🔧</a></td>
     <td align="center"><a href="https://github.com/aeons"><img src="https://avatars.githubusercontent.com/u/1432894?v=4" width="100px;" alt=""/><br /><sub><b>Bjørn Madsen</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=aeons" title="Code">🐛</a></td>
+    <td align="center"><a href="https://github.com/SupremeTechnopriest"><img src="https://avatars.githubusercontent.com/u/2261598?v=4" width="100px;" alt=""/><br /><sub><b>Randy Lebeau</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=SupremeTechnopriest" title="Code">🐛</a></td>
+    <td align="center"><a href="https://github.com/jayveebustarde"><img src="https://avatars.githubusercontent.com/u/26862076?v=4" width="100px;" alt=""/><br /><sub><b>Jayvee Bustarde</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=jayveebustarde" title="Code">🐛🔧</a></td>
   </tr>
 </table>
 

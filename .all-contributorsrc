@@ -183,6 +183,25 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "SupremeTechnopriest",
+      "name": "Randy Lebeau",
+      "avatar_url": "https://avatars.githubusercontent.com/u/2261598?v=4",
+      "profile": "https://github.com/SupremeTechnopriest",
+      "contributions": [
+        "bug"
+      ]
+    }, 
+    {
+      "login": "jayveebustarde",
+      "name": "Jayvee Bustarde",
+      "avatar_url": "https://avatars.githubusercontent.com/u/26862076?v=4",
+      "profile": "https://github.com/jayveebustarde",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
