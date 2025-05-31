@@ -131,7 +131,7 @@ export function useAutoComplete(
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
     onChange: (newValues: any[]) => {
-      const item = filteredList.find(opt => opt.value === newValues[0]);
+      const item = filteredList.find(opt => opt.value === newValues.at(-1));
       if (!item) return;
       const items = newValues.map(val =>
         filteredList.find(opt => opt.value === val)
@@ -241,7 +241,7 @@ export function useAutoComplete(
       if(!item && creatable === true) {
         item = {label: itemValue, value: itemValue};
       }
-      
+
       if (!item) {
         return prevValues;
       }
@@ -389,7 +389,7 @@ export function useAutoComplete(
         },
         value: query,
         //variant: multiple ? "unstyled" : variant,
-        variant, 
+        variant,
         ...rest,
       },
     };
