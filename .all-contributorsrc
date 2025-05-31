@@ -202,6 +202,16 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "zanctor",
+      "name": "Ihor Zinchenko",
+      "avatar_url": "https://avatars.githubusercontent.com/u/11874442?v=4",
+      "profile": "https://github.com/zanctor",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,

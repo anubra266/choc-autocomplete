@@ -1234,6 +1234,9 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
     <td align="center"><a href="https://github.com/SupremeTechnopriest"><img src="https://avatars.githubusercontent.com/u/2261598?v=4" width="100px;" alt=""/><br /><sub><b>Randy Lebeau</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=SupremeTechnopriest" title="Code">🐛</a></td>
     <td align="center"><a href="https://github.com/jayveebustarde"><img src="https://avatars.githubusercontent.com/u/26862076?v=4" width="100px;" alt=""/><br /><sub><b>Jayvee Bustarde</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=jayveebustarde" title="Code">🐛🔧</a></td>
   </tr>
+  <tr>
+  <td align="center"><a href="https://github.com/zanctor"><img src="https://avatars.githubusercontent.com/u/11874442?v=4" width="100px;" alt=""/><br /><sub><b>Ihor Zinchenko</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=zanctor" title="Code">🐛🔧</a></td>
+  </tr>
 </table>
 
 <!-- markdownlint-restore -->
