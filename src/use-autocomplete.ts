@@ -128,6 +128,11 @@ export function useAutoComplete(
   const filteredList = useMemo(() => {
     return [...filteredResults, ...creatableArr];
   }, [filteredResults, creatableArr]);
+
+  const allItemsIncludingCreatable = useMemo(() => {
+    return [...itemList, ...creatableArr];
+  }, [itemList, creatableArr]);
+
   const [values, setValues] = useControllableState({
     defaultValue: defaultValues.map(v => v?.toString()),
     value: valuesProp,
@@ -135,7 +140,7 @@ export function useAutoComplete(
       const item = filteredList.find(opt => opt.value === newValues.at(-1));
       if (!item) return;
       const items = newValues.map(val =>
-        filteredList.find(opt => opt.value === val)
+        allItemsIncludingCreatable.find(opt => opt.value === val)
       ) as Item[];
       runIfFn(
         autoCompleteProps.onChange,
