@@ -3,6 +3,7 @@ import {
   forwardRef,
   PopoverContent,
   PopoverContentProps,
+  Portal,
   Spinner, 
   useMergeRefs,
 } from "@chakra-ui/react";
@@ -23,20 +24,22 @@ export const AutoCompleteList = forwardRef<AutoCompleteListProps, "div">(
     const [autoCompleteItems, nonAutoCompleteItems] = siblingInfo(children);
 
     return (
-      <PopoverContent ref={ref} w='inherit' {...baseStyles} {...rest}>
-        { isLoading && (
-          <Center>
-            { loadingState || <Spinner size="md" /> }
-          </Center>
-        )}
-        { !isLoading && (
-          <>
-            {autoCompleteItems}
-            <EmptyState />
-            {nonAutoCompleteItems}
-          </> 
-        )}
-      </PopoverContent>
+      <Portal appendToParentPortal={false}>
+        <PopoverContent ref={ref} w='inherit' {...baseStyles} {...rest}>
+          { isLoading && (
+            <Center>
+              { loadingState || <Spinner size="md" /> }
+            </Center>
+          )}
+          { !isLoading && (
+            <>
+              {autoCompleteItems}
+              <EmptyState />
+              {nonAutoCompleteItems}
+            </>
+          )}
+        </PopoverContent>
+      </Portal>
     );
   }
 );
