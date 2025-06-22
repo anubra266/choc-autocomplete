@@ -159,10 +159,10 @@
     csstype "3.1.3"
     fast-safe-stringify "2.1.1"
 
-"@choc-ui/chakra-autocomplete@6":
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.1.1.tgz#d82b6f76de21ebcb883d3983870f5c6e6ad75167"
-  integrity sha512-nye5QOO1iWwNOF/EeLiBmWjqTOo33SULwGpMSJPElXuCQSrsWmsu+Tk7v36gy34aAiS367OorwyqSyRO1A7uKA==
+"@choc-ui/chakra-autocomplete@^6.0.0":
+  version "6.1.3"
+  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.1.3.tgz#2cc566236e708cefcaa9e1d073e1134817531daa"
+  integrity sha512-lyZf1oTia1PTzaKQ7ZpQaGYpMG9Tm8A0ASd75QcVf+QmPY1HBSj5OMLJ29LSsZNIg9so9EGPvQl5d8QKyCn70A==
   dependencies:
     next-themes "^0.4.3"
     react-icons "^5.3.0"
