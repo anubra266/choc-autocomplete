@@ -38,7 +38,7 @@
 
 ## Chakra V3 and V2 Support
 
-AutoComplete Version 6+ supports [Chakra UI V3](https://www.chakra-ui.com/).  If you are using [Chakra UI V2](https://v2.chakra-ui.com/), please continue to use the current choc-autocomplete v5.X.  We will continue to try and support Chakra V2 but will eventually be removed once V3 becomes more widely adopted.
+AutoComplete Version 6+ supports [Chakra UI V3](https://www.chakra-ui.com/).  If you are using [Chakra UI V2](https://v2.chakra-ui.com/), please continue to use the current choc-autocomplete v5.X [documentation here](https://github.com/anubra266/choc-autocomplete/tree/v5).  We will continue to try and support Chakra V2 but will eventually be removed once V3 becomes more widely adopted.
 
 For help migrating from Chakra UI V2 to V3, please see their [migration guide](https://chakra-ui.com/docs/get-started/migration)
 
