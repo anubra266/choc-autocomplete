@@ -889,9 +889,9 @@
   integrity sha512-KmKDg01SrQ7VbTD3+cPWf/UfpF5MSwm3v7MWi0n5t8HnnadT13MF0MJCDSXbBWnzLv1ZKJ6zlyAOeARWX+DpjQ==
 
 "@choc-ui/chakra-autocomplete@^5.8.0":
-  version "5.8.3"
-  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-5.8.3.tgz#6c0a6d902a8a45d7c3452dbecd579fb2ef6ad27d"
-  integrity sha512-lA7fgWSsl4FE+/G3/17v2U3p47tFoZsAv9HFPPMsvCXzejSLHH7CEGYEIYYljiNH4OJFpTGpQ56jWV8V0iFrBw==
+  version "5.9.0"
+  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-5.9.0.tgz#a871557c5cf5e050942b66524f46965f0ebaef60"
+  integrity sha512-knk3LP3mrw8AmhXvTVNGbNE7a1Muex9PojTjYqJ8U6FYfubxFjdh5igpoSXKf3gItP0I0LeBa4Ic0z6tCfi1rQ==
   dependencies:
     react-nanny "2.15.0"
 
