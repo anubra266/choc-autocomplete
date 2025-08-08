@@ -116,7 +116,7 @@ export const AutoCompleteInput = forwardRef<HTMLInputElement, AutoCompleteInputP
     );
 
     return (
-      <PopoverAnchor>
+      <PopoverAnchor w="full">
         {autoCompleteProps.multiple ? multipleInput : simpleInput}
       </PopoverAnchor>
     );
