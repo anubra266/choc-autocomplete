@@ -1236,6 +1236,7 @@ Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/d
   </tr>
   <tr>
   <td align="center"><a href="https://github.com/zanctor"><img src="https://avatars.githubusercontent.com/u/11874442?v=4" width="100px;" alt=""/><br /><sub><b>Ihor Zinchenko</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=zanctor" title="Code">🐛🔧</a></td>
+  <td align="center"><a href="https://github.com/bwalendz"><img src="https://avatars.githubusercontent.com/u/6239158?v=4" width="100px;" alt=""/><br /><sub><b>Brian Walendzinski</b></sub></a><br /><a href="https://github.com/anubra266/choc-autocomplete/commits?author=bwalendz" title="Code">🐛🔧</a></td>
   </tr>
 </table>
 

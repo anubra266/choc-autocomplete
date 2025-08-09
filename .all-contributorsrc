@@ -212,6 +212,16 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "bwalendz",
+      "name": "Brian Walendzinski",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6239158?v=4",
+      "profile": "https://github.com/bwalendz",
+      "contributions": [
+        "code", 
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
