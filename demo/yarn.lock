@@ -161,9 +161,9 @@
     fast-safe-stringify "2.1.1"
 
 "@choc-ui/chakra-autocomplete@^6.0.0":
-  version "6.1.3"
-  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.1.3.tgz#2cc566236e708cefcaa9e1d073e1134817531daa"
-  integrity sha512-lyZf1oTia1PTzaKQ7ZpQaGYpMG9Tm8A0ASd75QcVf+QmPY1HBSj5OMLJ29LSsZNIg9so9EGPvQl5d8QKyCn70A==
+  version "6.1.4"
+  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.1.4.tgz#cbade2ff7e5937c26325a106f82af4e3e90c500a"
+  integrity sha512-qs5Z9VMA/m+F2jaFtXq9pCFObqC6nvS7aq4F7QLVMtcnO5+gSap9ftVjKvfShEwo7iE4b8LmF8y3uSfGEtakfg==
   dependencies:
     next-themes "^0.4.3"
     react-icons "^5.3.0"
