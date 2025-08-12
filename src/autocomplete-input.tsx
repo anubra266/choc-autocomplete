@@ -31,7 +31,7 @@ const AutoCompleteInputComponent = forwardRef<HTMLInputElement, AutoCompleteInpu
 
   if(isLoading) {
     return (
-      <InputGroup endElement={loadingIcon || <Spinner />}>
+      <InputGroup w="full" endElement={loadingIcon || <Spinner />}>
         {inputElement}
       </InputGroup>
     );
