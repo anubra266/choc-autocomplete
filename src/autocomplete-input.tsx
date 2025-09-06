@@ -27,17 +27,17 @@ const AutoCompleteInputComponent = forwardRef<HTMLInputElement, AutoCompleteInpu
 
   const inputProps = omit(restProps, ['children', 'wrapStyles', 'hidePlaceholder']);
 
-  const inputElement = <Input {...inputProps} ref={forwardedRef} />;
+  let endElement = undefined;
 
-  if(isLoading) {
-    return (
-      <InputGroup w="full" endElement={loadingIcon || <Spinner />}>
-        {inputElement}
-      </InputGroup>
-    );
+  if (isLoading) {
+    endElement = loadingIcon ? loadingIcon : <Spinner />;
   }
 
-  return inputElement;
+  return (
+    <InputGroup w="full" endElement={<>{endElement}</>}>
+      <Input {...inputProps} ref={forwardedRef} />
+    </InputGroup>
+  );
 });
 
 export const AutoCompleteInput = forwardRef<HTMLInputElement, AutoCompleteInputProps>(
