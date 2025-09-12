@@ -296,7 +296,7 @@ export function useAutoComplete(
         ...rest,
       },
       input: {
-        isReadOnly,
+        readOnly: isReadOnly,
         onFocus: e => {
           runIfFn(onFocus, e);
           if (autoCompleteProps.openOnFocus && !isReadOnly) onOpen();
