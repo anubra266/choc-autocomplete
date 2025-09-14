@@ -49,6 +49,7 @@ export type UseAutoCompleteProps = Partial<{
   focusInputOnSelect: boolean;
   freeSolo: boolean;
   isLoading: boolean;
+  isPortalled: boolean;
   isReadOnly: boolean;
   listAllValuesOnFocus: boolean;
   matchWidth: boolean;
