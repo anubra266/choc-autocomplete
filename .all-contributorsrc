@@ -222,6 +222,15 @@
         "code", 
         "bug"
       ]
+    }, 
+    {
+      "login": "NoFr1ends",
+      "name": "Lynx",
+      "avatar_url": "https://avatars.githubusercontent.com/u/6075580?v=4",
+      "profile": "https://github.com/NoFr1ends",
+      "contributions": [
+        "bug"
+      ]
     }
   ],
   "contributorsPerLine": 7,
