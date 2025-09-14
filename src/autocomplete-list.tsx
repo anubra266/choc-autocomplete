@@ -18,12 +18,12 @@ export interface AutoCompleteListProps extends PopoverBodyProps {
 export const AutoCompleteList = forwardRef<HTMLDivElement, AutoCompleteListProps>(
   (props, forwardedRef) => {
     const { children, loadingState, ...rest } = props;
-    const { listRef, isLoading } = useAutoCompleteContext();
+    const { listRef, isLoading, autoCompleteProps: { isPortalled } } = useAutoCompleteContext();
     const ref = useMergeRefs(forwardedRef, listRef);
     const [autoCompleteItems, nonAutoCompleteItems] = siblingInfo(children);
 
     return (
-      <PopoverContent width="auto">
+      <PopoverContent width="auto" portalled={isPortalled}>
         <PopoverBody ref={ref} w='inherit' {...baseStyles} {...rest}>
           { isLoading && (
             <Center>

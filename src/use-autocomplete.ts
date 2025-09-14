@@ -57,6 +57,7 @@ export function useAutoComplete(
     disableFilter,
     isLoading = false,
     placement = "bottom",
+    isPortalled = true,
     restoreOnBlurIfEmpty = !freeSolo,
     shouldRenderSuggestions = () => true,
     submitKeys = [],
