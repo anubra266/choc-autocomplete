@@ -584,6 +584,12 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
             <td>Display loading animation on both the input and list elements</td>
             <td>false</td>
         </tr>
+        <tr>
+            <td>isPortalled</td>
+            <td>boolean</td>
+            <td>Determines if the popover content should be rendered in a <a href="https://chakra-ui.com/docs/components/portal">Portal</a>. Set to false to render content in DOM hierarchy.<br /><br />Useful when rendering inside of a Dialog</td>
+            <td>true</td>
+        </tr>
          <tr>
             <td>listAllValuesOnFocus</td>
             <td>boolean</td>
