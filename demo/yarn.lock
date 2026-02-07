@@ -171,9 +171,9 @@
     csstype "^3.2.3"
 
 "@choc-ui/chakra-autocomplete@^6.0.0":
-  version "6.2.1"
-  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.2.1.tgz#f24a93e7fd92697cf9b1ca96ff145082d130c3fd"
-  integrity sha512-FGElM4ji0hoiUQYkP33AffpfIZF3NWVcO1mvUvjMTGQewRUxpTnhGJr5dY8yRrzaZUGq9EHc2mI1ikXrX3HzkQ==
+  version "6.2.2"
+  resolved "https://registry.yarnpkg.com/@choc-ui/chakra-autocomplete/-/chakra-autocomplete-6.2.2.tgz#3958c588053e576ddb049dc728f212abb88217e8"
+  integrity sha512-Ub1pwBGn9rT/t6m81mJ9lrcbFAUwSzHKIrIPNG+9sU6qrH4q2tRTDYKJBMie5D2Lpw3WKLuvIIR2BdO026GI2w==
   dependencies:
     next-themes "^0.4.3"
     react-icons "^5.3.0"
