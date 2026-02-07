@@ -1296,13 +1296,6 @@
     "@zag-js/types" "1.33.1"
     "@zag-js/utils" "1.33.1"
 
-"@zag-js/scroll-snap@1.33.1":
-  version "1.33.1"
-  resolved "https://registry.yarnpkg.com/@zag-js/scroll-snap/-/scroll-snap-1.33.1.tgz#1ca9ba73c580ed27cc4c218fe073375f8fd9c506"
-  integrity sha512-GLEb+YJj800ia2zyTFxVZomQ1cFSShazUQ/1uAxX0Lj7+aZK88cZhIn7AI0+yBXTPBS0zrZDhBPsGEDQX+Q9Fw==
-  dependencies:
-    "@zag-js/dom-query" "1.33.1"
-
 "@zag-js/select@1.33.1":
   version "1.33.1"
   resolved "https://registry.yarnpkg.com/@zag-js/select/-/select-1.33.1.tgz#3632487869b7164f6d61c5bdc8bed2e86c38d730"
@@ -1962,10 +1955,10 @@ uqr@0.1.2:
   resolved "https://registry.yarnpkg.com/uqr/-/uqr-0.1.2.tgz#5c6cd5dcff9581f9bb35b982cb89e2c483a41d7d"
   integrity sha512-MJu7ypHq6QasgF5YRTjqscSzQp/W11zoUk6kvmlH+fmWEs63Y0Eib13hYFwAzagRJcVY8WVnlV+eBDUGMJ5IbA==
 
-vite-tsconfig-paths@^5.1.4:
-  version "5.1.4"
-  resolved "https://registry.yarnpkg.com/vite-tsconfig-paths/-/vite-tsconfig-paths-5.1.4.tgz#d9a71106a7ff2c1c840c6f1708042f76a9212ed4"
-  integrity sha512-cYj0LRuLV2c2sMqhqhGpaO3LretdtMn/BVX4cPLanIZuwwrkVl+lK84E/miEXkCHWXuq65rhNN4rXsBcOB3S4w==
+vite-tsconfig-paths@^6.1.0:
+  version "6.1.0"
+  resolved "https://registry.yarnpkg.com/vite-tsconfig-paths/-/vite-tsconfig-paths-6.1.0.tgz#8c3b9ecb676571f7c8f7849d92cd7de3b50faf75"
+  integrity sha512-kpd3sY9glHIDaq4V/Tlc1Y8WaKtutoc3B525GHxEVKWX42FKfQsXvjFOemu1I8VIN8pNbrMLWVTbW79JaRUxKg==
   dependencies:
     debug "^4.1.1"
     globrex "^0.1.2"
