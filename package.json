@@ -23,8 +23,8 @@
   "scripts": {
     "start": "vite watch",
     "build": "vite build",
-    "test": "tsdx test --passWithNoTests",
-    "lint": "tsdx lint",
+    "test": "vitest run",
+    "lint": "eslint . --ext .ts,.tsx",
     "size": "size-limit",
     "analyze": "size-limit --why"
   },
@@ -40,7 +40,7 @@
   },
   "husky": {
     "hooks": {
-      "pre-commit": "tsdx lint"
+      "pre-commit": "eslint . --ext .ts,.tsx"
     }
   },
   "prettier": {
@@ -71,19 +71,27 @@
     "@size-limit/esbuild": "12.0.0",
     "@size-limit/esbuild-why": "12.0.0",
     "@size-limit/file": "12.0.0",
+    "@testing-library/dom": "^10.4.0",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.1.0",
     "@types/react": "^18.2.55",
     "@types/react-dom": "^18.2.18",
+    "@typescript-eslint/eslint-plugin": "^8.24.1",
+    "@typescript-eslint/parser": "^8.24.1",
     "@vitejs/plugin-react": "^5.0.0",
+    "eslint": "^9.21.0",
+    "eslint-plugin-react-hooks": "^5.1.0",
     "husky": "^9.1.6",
+    "jsdom": "^25.0.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "size-limit": "12.0.0",
-    "tsdx": "^0.14.1",
     "tslib": "^2.3.0",
     "typescript": "^5.3.3",
     "vite": "^7.1.0",
     "vite-plugin-dts": "^4.2.2",
     "vite-plugin-linter": "^3.0.0",
-    "vite-tsconfig-paths": "^6.1.0"
+    "vite-tsconfig-paths": "^6.1.0",
+    "vitest": "^3.0.7"
   }
 }
