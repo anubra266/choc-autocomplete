@@ -2,9 +2,9 @@ import {
   BoxProps,
   FlexProps,
   InputProps,
-  PlacementWithLogical,
   SystemStyleObject,
 } from "@chakra-ui/react";
+import { type Placement } from "@floating-ui/dom";
 import React, { Dispatch, SetStateAction } from "react";
 
 import { AutoCompleteProps } from "./autocomplete";
@@ -81,7 +81,7 @@ export type UseAutoCompleteProps = Partial<{
   ) => void;
   onReady: (params: OnReadyProps) => void;
   openOnFocus: boolean;
-  placement: PlacementWithLogical;
+  placement: Placement;
   restoreOnBlurIfEmpty: boolean;
   rollNavigation: boolean;
   selectOnFocus: boolean;
@@ -151,7 +151,7 @@ export type UseAutoCompleteReturn = {
   listRef: React.RefObject<HTMLDivElement>;
   onClose: () => void;
   onOpen: () => void;
-  placement: PlacementWithLogical;
+  placement: Placement;
   query: string;
   removeItem: (valueToRemove?: Item["value"], focusInput?: boolean) => void;
   resetItems: (focusInput?: boolean) => void;

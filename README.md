@@ -693,8 +693,8 @@ boolean | MaybeRenderProp<{ value: Item["value"] }>
         </tr>
         <tr>
             <td>placement</td>
-            <td>PlacementWithLogical</td>
-            <td>where autocomplete list will display.  Accepts any valid value from <a href="https://chakra-ui.com/docs/components/popover#placement">Popover</a> component</td>
+            <td>Placement</td>
+            <td>where autocomplete list will display. Accepts standard Floating UI placement values: <code>top</code>, <code>bottom</code>, <code>left</code>, <code>right</code>, or with alignments like <code>top-start</code>, <code>bottom-end</code>, etc.</td>
             <td>bottom</td>
         </tr>
         <tr>
