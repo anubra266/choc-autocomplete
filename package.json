@@ -47,7 +47,8 @@
     "printWidth": 80,
     "semi": true,
     "singleQuote": false,
-    "trailingComma": "es5"
+    "trailingComma": "es5",
+    "endOfLine": "auto"
   },
   "name": "@choc-ui/chakra-autocomplete",
   "author": "anubra266",
@@ -80,9 +81,11 @@
     "@typescript-eslint/parser": "^8.24.1",
     "@vitejs/plugin-react": "^5.0.0",
     "eslint": "^9.21.0",
+    "eslint-plugin-prettier": "^5.5.5",
     "eslint-plugin-react-hooks": "^5.1.0",
     "husky": "^9.1.6",
     "jsdom": "^25.0.1",
+    "prettier": "^3.8.1",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "size-limit": "12.0.0",
