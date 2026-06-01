@@ -95,6 +95,6 @@
     "vite-plugin-dts": "^4.2.2",
     "vite-plugin-linter": "^3.0.0",
     "vite-tsconfig-paths": "^6.1.0",
-    "vitest": "^3.0.7"
+    "vitest": "^4.1.0"
   }
 }
